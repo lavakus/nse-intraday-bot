@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSE Intraday Bot — Dashboard</title>
+<meta http-equiv="refresh" content="60">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0d0d0d; color:#e0e0e0; font-family:'Segoe UI',sans-serif; padding:20px; }
+
+  h1 { color:#f0f0f0; font-size:22px; margin-bottom:4px; }
+  .subtitle { color:#888; font-size:13px; margin-bottom:24px; }
+
+  /* SUMMARY CARDS */
+  .cards { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px; }
+  .card  { background:#1a1a1a; border:1px solid #2a2a2a; border-radius:10px;
+           padding:16px 22px; min-width:140px; flex:1; }
+  .card .label { font-size:12px; color:#888; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
+  .card .value { font-size:28px; font-weight:700; }
+  .card.green .value { color:#00c87a; }
+  .card.red   .value { color:#ff4d4d; }
+  .card.blue  .value { color:#4da6ff; }
+  .card.gold  .value { color:#ffd700; }
+  .card.white .value { color:#f0f0f0; }
+
+  /* TABLE */
+  .table-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  thead th { background:#1a1a1a; color:#888; padding:10px 12px;
+             text-align:left; text-transform:uppercase;
+             font-size:11px; letter-spacing:0.8px; border-bottom:1px solid #2a2a2a; }
+  tbody tr { border-bottom:1px solid #1e1e1e; transition:background 0.15s; }
+  tbody tr:hover { background:#181818; }
+  tbody td { padding:11px 12px; vertical-align:middle; }
+
+  /* STATUS BADGES */
+  .badge { display:inline-block; padding:3px 10px; border-radius:20px;
+           font-size:11px; font-weight:600; letter-spacing:0.5px; }
+  .badge.target  { background:#0d3b26; color:#00c87a; border:1px solid #00c87a55; }
+  .badge.sl      { background:#3b0d0d; color:#ff4d4d; border:1px solid #ff4d4d55; }
+  .badge.open    { background:#1a2d3b; color:#4da6ff; border:1px solid #4da6ff55; }
+
+  /* DIRECTION */
+  .buy  { color:#00c87a; font-weight:700; }
+  .sell { color:#ff4d4d; font-weight:700; }
+
+  /* PNL */
+  .pnl-pos { color:#00c87a; font-weight:600; }
+  .pnl-neg { color:#ff4d4d; font-weight:600; }
+  .pnl-na  { color:#555; }
+
+  /* SCORE BAR */
+  .score-bar { display:flex; align-items:center; gap:8px; }
+  .bar-bg    { background:#2a2a2a; border-radius:4px; height:6px; width:60px; }
+  .bar-fill  { height:6px; border-radius:4px; background:linear-gradient(90deg,#ffd700,#00c87a); }
+
+  /* REASONS TOOLTIP */
+  .reasons { font-size:11px; color:#555; margin-top:3px; }
+
+  .refresh-note { color:#444; font-size:11px; margin-top:20px; text-align:right; }
+
+  /* HEADER ROW */
+  .header-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+  .live-dot { display:inline-block; width:8px; height:8px; background:#00c87a;
+              border-radius:50%; margin-right:6px; animation:pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .no-data { text-align:center; padding:60px; color:#444; font-size:16px; }
+</style>
+</head>
+<body>
+
+<div class="header-row">
+  <div>
+    <h1><span class="live-dot"></span>NSE Intraday Bot — Signal Dashboard</h1>
+    <div class="subtitle">Auto-refreshes every 60 seconds &nbsp;|&nbsp; All times IST &nbsp;|&nbsp; Threshold: 9.0+/10</div>
+  </div>
+  <div style="color:#555;font-size:12px;">{{ now }}</div>
+</div>
+
+<!-- SUMMARY CARDS -->
+<div class="cards">
+  <div class="card white">
+    <div class="label">Total Alerts</div>
+    <div class="value">{{ summary.total }}</div>
+  </div>
+  <div class="card green">
+    <div class="label">Target Hit</div>
+    <div class="value">{{ summary.wins }}</div>
+  </div>
+  <div class="card red">
+    <div class="label">SL Hit</div>
+    <div class="value">{{ summary.losses }}</div>
+  </div>
+  <div class="card blue">
+    <div class="label">Open</div>
+    <div class="value">{{ summary.open }}</div>
+  </div>
+  <div class="card gold">
+    <div class="label">Win Rate</div>
+    <div class="value">{{ summary.win_rate }}%</div>
+  </div>
+  <div class="card {% if summary.total_pnl >= 0 %}green{% else %}red{% endif %}">
+    <div class="label">Total P&L (pts)</div>
+    <div class="value">{% if summary.total_pnl >= 0 %}+{% endif %}{{ summary.total_pnl }}</div>
+  </div>
+</div>
+
+<!-- SIGNALS TABLE -->
+<div class="table-wrap">
+{% if signals %}
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Date / Time</th>
+      <th>Stock</th>
+      <th>Action</th>
+      <th>Score</th>
+      <th>Entry</th>
+      <th>Target</th>
+      <th>SL</th>
+      <th>R:R</th>
+      <th>Live Price</th>
+      <th>Status</th>
+      <th>P&L pts</th>
+      <th>P&L %</th>
+      <th>Signals Confirmed</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for s in signals|reverse %}
+  <tr>
+    <td style="color:#444">{{ s.id }}</td>
+    <td style="color:#666;white-space:nowrap">{{ s.datetime }}</td>
+    <td style="font-weight:700;color:#f0f0f0">{{ s.symbol }}</td>
+    <td class="{% if s.direction == 'LONG' %}buy{% else %}sell{% endif %}">
+      {{ 'BUY' if s.direction == 'LONG' else 'SELL' }}
+    </td>
+    <td>
+      <div class="score-bar">
+        <span style="font-weight:600;color:#ffd700">{{ s.score }}</span>
+        <div class="bar-bg"><div class="bar-fill" style="width:{{ (s.score/10*100)|int }}%"></div></div>
+      </div>
+    </td>
+    <td>Rs {{ s.entry }}</td>
+    <td style="color:#00c87a">Rs {{ s.target }}</td>
+    <td style="color:#ff4d4d">Rs {{ s.sl }}</td>
+    <td style="color:#888">1:{{ s.rr }}</td>
+    <td style="color:#4da6ff">
+      {% if s.exit_price %}Rs {{ s.exit_price }}{% else %}-{% endif %}
+    </td>
+    <td>
+      {% if s.status == 'TARGET HIT' %}
+        <span class="badge target">TARGET HIT</span>
+      {% elif s.status == 'SL HIT' %}
+        <span class="badge sl">SL HIT</span>
+      {% else %}
+        <span class="badge open">OPEN</span>
+      {% endif %}
+    </td>
+    <td class="{% if s.pnl_pts is not none and s.pnl_pts >= 0 %}pnl-pos{% elif s.pnl_pts is not none %}pnl-neg{% else %}pnl-na{% endif %}">
+      {% if s.pnl_pts is not none %}
+        {% if s.pnl_pts >= 0 %}+{% endif %}{{ s.pnl_pts }}
+      {% else %}-{% endif %}
+    </td>
+    <td class="{% if s.pnl_pct is not none and s.pnl_pct >= 0 %}pnl-pos{% elif s.pnl_pct is not none %}pnl-neg{% else %}pnl-na{% endif %}">
+      {% if s.pnl_pct is not none %}
+        {% if s.pnl_pct >= 0 %}+{% endif %}{{ s.pnl_pct }}%
+      {% else %}-{% endif %}
+    </td>
+    <td>
+      <div style="font-size:11px;color:#666;max-width:280px">
+        {{ s.reasons | join(' · ') if s.reasons else '-' }}
+      </div>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="no-data">
+  No signals yet.<br>
+  <span style="font-size:13px;color:#333">Alerts will appear here automatically when the bot fires during market hours.</span>
+</div>
+{% endif %}
+</div>
+
+<div class="refresh-note">Page auto-refreshes every 60 seconds. Status updates live from NSE prices.</div>
+
+</body>
+</html>
