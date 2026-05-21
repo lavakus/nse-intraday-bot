@@ -1,0 +1,33 @@
+name: NSE Intraday Bot
+
+on:
+  schedule:
+    # Runs every 5 min, Mon-Fri, 3:45 AM to 10:05 AM UTC
+    # = 9:15 AM to 3:35 PM IST (NSE market hours)
+    - cron: "*/5 4-10 * * 1-5"
+  workflow_dispatch:   # allows manual trigger from GitHub UI
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run NSE scan and alert
+        env:
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          STRONG_SCORE:     "9.0"
+        run: python run_scan.py
