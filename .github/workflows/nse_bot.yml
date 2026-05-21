@@ -2,7 +2,7 @@ name: NSE Intraday Bot
 
 on:
   schedule:
-    - cron: "*/5 4-10 * * 1-5"
+        - cron: "*/5 3-10 * * 1-5"
   workflow_dispatch:
 
 env:
