@@ -3,6 +3,7 @@ Flask web dashboard — shows all past signals with live status.
 Run with:  python dashboard.py
 Then open: http://localhost:5000
 """
+import os
 from flask import Flask, render_template
 from signal_logger import get_all, get_summary
 from datetime import datetime, timezone, timedelta
@@ -39,8 +40,9 @@ def api_signals():
 
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
     print("=" * 50)
     print("  NSE Intraday Bot — Dashboard")
-    print("  Open: http://localhost:5000")
+    print(f"  Open: http://localhost:{port}")
     print("=" * 50)
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=False)

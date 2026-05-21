@@ -107,6 +107,16 @@ def main():
     strong.sort(key=lambda x: x["score"], reverse=True)
     print(f"\nResult: {len(strong)} strong signal(s)")
 
+    # ── LOG SIGNALS TO JSON (persisted in repo via git commit) ────
+    try:
+        from signal_logger import log_signal, update_statuses
+        update_statuses()          # refresh status of any already-open trades
+        for s in strong[:10]:
+            log_signal(s)
+        print(f"[LOG] {len(strong)} signal(s) written to signals_log.json")
+    except Exception as e:
+        print(f"[LOG ERROR] {e}")
+
     if strong:
         send(f"NSE SCAN — {len(strong)} strong setup(s) found (score {THRESHOLD}+/10)")
         time.sleep(1)

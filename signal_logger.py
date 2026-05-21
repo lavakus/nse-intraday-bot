@@ -7,15 +7,30 @@ from datetime import datetime
 
 LOG_FILE = "signals_log.json"
 
+# When running on Render (no local file), fetch from GitHub raw URL
+GITHUB_RAW = os.environ.get(
+    "SIGNALS_JSON_URL",
+    "https://raw.githubusercontent.com/lavakus/nse-intraday-bot/main/signals_log.json"
+)
+
 
 def _load() -> list:
-    if not os.path.exists(LOG_FILE):
-        return []
+    # 1) Try local file first (local dev + GitHub Actions)
+    if os.path.exists(LOG_FILE):
+        try:
+            with open(LOG_FILE, "r") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    # 2) Fallback: fetch from GitHub (Render / any remote host)
     try:
-        with open(LOG_FILE, "r") as f:
-            return json.load(f)
+        import requests as _req
+        r = _req.get(GITHUB_RAW, timeout=10)
+        if r.status_code == 200:
+            return r.json()
     except Exception:
-        return []
+        pass
+    return []
 
 
 def _save(data: list):
