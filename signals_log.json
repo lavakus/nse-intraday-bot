@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "datetime": "2026-05-22 06:50",
+    "date": "2026-05-22",
+    "symbol": "PGEL",
+    "direction": "LONG",
+    "score": 9.0,
+    "entry": 476.2,
+    "target": 480.33,
+    "sl": 474.13,
+    "rr": 2.0,
+    "rsi": 67.7,
+    "vwap": 472.03,
+    "vol_ratio": 3.4,
+    "reasons": [
+      "Supertrend BULLISH (5m+15m)",
+      "Above ORB High",
+      "Above VWAP (472.0)",
+      "EMA stack bullish (5m+15m)",
+      "RSI 68 bullish zone",
+      "Volume 3.4x spike",
+      "Above PDH 475.0"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  }
+]
