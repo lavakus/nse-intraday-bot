@@ -22,9 +22,9 @@
       "Volume 3.4x spike",
       "Above PDH 475.0"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 471.0,
+    "pnl_pts": -5.2,
+    "pnl_pct": -1.09
   }
 ]
