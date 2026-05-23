@@ -1,82 +1,95 @@
 """
-Notifier — Desktop + Telegram fire TOGETHER.
-Rule: Desktop only shows if Telegram send succeeds (ok=True).
-Both carry identical content so user sees the same alert on both.
+Notifier — Telegram alerts for SMC + ICT signals.
 """
-import threading
 import requests
 from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 
 BASE = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
-# ── SHARED MESSAGE BUILDER ─────────────────────────────────────
+
+# ── MESSAGE BUILDER ────────────────────────────────────────────
+
 def _message(sig: dict) -> str:
-    action = "BUY" if sig["direction"] == "LONG" else "SELL"
-    bar    = "#" * int(sig["score"]) + "." * (10 - int(sig["score"]))
-    lines  = [
-        f"*** NSE INTRADAY ALERT ***",
+    action   = sig.get("signal", "BUY" if sig.get("direction") == "LONG" else "SELL")
+    score    = sig.get("score", 0)
+    pct      = sig.get("score_pct", round(score / 150 * 100, 1))
+    strength = sig.get("signal_strength", "GOOD")
+    kz       = sig.get("kill_zone", "?")
+    ph       = sig.get("phase_scores", {})
+    tp       = sig.get("trade_params", {})
+    entry    = tp.get("entry", sig.get("entry", "?"))
+    sl       = tp.get("sl",    sig.get("sl",    "?"))
+    t1       = tp.get("t1",    sig.get("t1",    "?"))
+    t2       = tp.get("t2",    sig.get("t2",    "?"))
+    rr       = tp.get("rr_ratio", sig.get("rr", "?"))
+    sl_pct   = tp.get("sl_pct", "?")
+    chk      = sig.get("must_have_checklist", {})
+
+    bar = "#" * int(score // 15) + "." * (10 - int(score // 15))
+
+    lines = [
+        f"*** NSE INTRADAY  —  {action} SIGNAL ***",
         f"",
-        f"Stock  : {sig['symbol']}",
-        f"Action : {action}",
-        f"Score  : {sig['score']}/10  [{bar}]",
+        f"Stock     : {sig['symbol']}",
+        f"Direction : {action}",
+        f"Score     : {score}/150  ({pct}%)  [{bar}]",
+        f"Strength  : {strength}",
+        f"Kill Zone : {kz}",
         f"",
-        f"Entry  : Rs {sig['entry']}",
-        f"Target : Rs {sig['target']}",
-        f"SL     : Rs {sig['sl']}",
-        f"R:R    : 1 : {sig['rr']}",
+        f"--- TRADE PARAMETERS ---",
+        f"Entry  : Rs {entry}",
+        f"SL     : Rs {sl}  ({sl_pct}%)",
+        f"T1     : Rs {t1}  (50% partial exit)",
+        f"T2     : Rs {t2}  (full target)",
+        f"R:R    : 1:{rr}",
         f"",
-        f"RSI    : {sig['rsi']}",
-        f"VWAP   : Rs {sig['vwap']}",
-        f"Volume : {sig['vol_ratio']}x average",
+        f"--- PHASE SCORES ---",
+        f"SMC Structure  : {ph.get('smc_structure', '?')}/60",
+        f"ICT Time/Price : {ph.get('ict_time_price', '?')}/40",
+        f"Price Action   : {ph.get('price_action', '?')}/27",
+        f"Boosters       : {ph.get('boosters', '?')}/23",
         f"",
-        f"Signals confirmed:",
+        f"--- MUST-HAVE CHECKLIST ---",
+        f"{'OK' if chk.get('bos_or_choch_15min') else 'XX'}  BOS/CHOCH on 15min",
+        f"{'OK' if chk.get('order_block_valid')   else 'XX'}  Unmitigated Order Block",
+        f"{'OK' if chk.get('liquidity_sweep')     else 'XX'}  Liquidity Sweep",
+        f"{'OK' if chk.get('inside_kill_zone')    else 'XX'}  Inside Kill Zone",
+        f"",
+        f"--- CONFIRMED SIGNALS ---",
     ] + [f"  + {r}" for r in sig.get("reasons", [])] + [
         f"",
-        f"Use SL strictly. Trade at your own risk.",
+        f"RSI  : {sig.get('rsi', '?')}    VWAP : Rs {sig.get('vwap', '?')}",
+        f"Vol  : {sig.get('vol_ratio', '?')}x average",
+        f"",
+        f"Move SL to breakeven when T1 is hit.",
+        f"Max risk 0.5% of capital per trade.",
+        f"Trade at your own risk.",
     ]
     return "\n".join(lines)
 
 
-# ── TELEGRAM ───────────────────────────────────────────────────
+# ── TELEGRAM SEND ──────────────────────────────────────────────
+
 def _send_telegram(sig: dict) -> bool:
     try:
-        r    = requests.post(
+        r  = requests.post(
             f"{BASE}/sendMessage",
             json={"chat_id": TELEGRAM_CHAT_ID, "text": _message(sig)},
             timeout=10,
         )
         ok = r.json().get("ok", False)
-        print(f"  [TELEGRAM] {sig['symbol']} -> {'SENT' if ok else 'FAILED: ' + r.json().get('description','')}")
+        print(f"  [TELEGRAM] {sig['symbol']} -> "
+              f"{'SENT' if ok else 'FAILED: ' + r.json().get('description', '')}")
         return ok
     except Exception as e:
         print(f"  [TELEGRAM ERROR] {e}")
         return False
 
 
-# ── DESKTOP ────────────────────────────────────────────────────
-def _send_desktop(sig: dict):
-    try:
-        from winotify import Notification, audio
-        action = "BUY" if sig["direction"] == "LONG" else "SELL"
-        n = Notification(
-            app_id   = "NSE Intraday Bot",
-            title    = f"NSE {action}: {sig['symbol']}  |  Score {sig['score']}/10",
-            msg      = (
-                f"Entry : Rs {sig['entry']}\n"
-                f"Target: Rs {sig['target']}\n"
-                f"SL    : Rs {sig['sl']}"
-            ),
-            duration = "long",
-        )
-        n.set_audio(audio.Default, loop=False)
-        n.show()
-        print(f"  [DESKTOP]  {sig['symbol']} -> SHOWN")
-    except Exception as e:
-        print(f"  [DESKTOP ERROR] {e}")
+# ── PLAIN UTILITY (bot commands, greetings, etc.) ──────────────
 
-
-# ── PLAIN TELEGRAM UTILITY (used by bot for non-alert messages) ─
-def telegram_send(text: str, chat_id: str = TELEGRAM_CHAT_ID, markup: dict = None):
+def telegram_send(text: str, chat_id: str = TELEGRAM_CHAT_ID,
+                  markup: dict = None) -> bool:
     payload = {"chat_id": chat_id, "text": text}
     if markup:
         payload["reply_markup"] = markup
@@ -88,21 +101,25 @@ def telegram_send(text: str, chat_id: str = TELEGRAM_CHAT_ID, markup: dict = Non
         return False
 
 
-# ── FIRE ALERT — BOTH TOGETHER ─────────────────────────────────
-def fire_alert(sig: dict):
-    """Send alert to Telegram and log to dashboard."""
-    sym = sig["symbol"]
-    print(f"\n[ALERT] {sym}  {sig['direction']}  score={sig['score']}  "
-          f"entry={sig['entry']}  target={sig['target']}  SL={sig['sl']}")
+# ── FIRE ALERT ─────────────────────────────────────────────────
 
-    # ── LOG TO DASHBOARD ──────────────────────────────────────
+def fire_alert(sig: dict):
+    """Log signal to dashboard + send to Telegram."""
+    sym = sig["symbol"]
+    print(f"\n[ALERT] {sym}  {sig.get('signal','?')}  "
+          f"score={sig.get('score','?')}/150  "
+          f"entry={sig.get('entry','?')}  "
+          f"t1={sig.get('t1','?')}  t2={sig.get('t2','?')}  "
+          f"sl={sig.get('sl','?')}")
+
+    # ── Log to dashboard ──────────────────────────────────────
     try:
         from signal_logger import log_signal
         log_signal(sig)
     except Exception as e:
         print(f"  [LOG ERROR] {e}")
 
-    # ── SEND TO TELEGRAM ──────────────────────────────────────
+    # ── Send to Telegram (with one retry) ─────────────────────
     ok = _send_telegram(sig)
     if not ok:
         print(f"  [RETRY] {sym}...")

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NSE Intraday Bot — Dashboard</title>
+<title>NSE SMC Bot — Dashboard</title>
 <meta http-equiv="refresh" content="60">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -13,33 +13,46 @@
   .subtitle { color:#888; font-size:13px; margin-bottom:24px; }
 
   /* SUMMARY CARDS */
-  .cards { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:28px; }
+  .cards { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; }
   .card  { background:#1a1a1a; border:1px solid #2a2a2a; border-radius:10px;
-           padding:16px 22px; min-width:140px; flex:1; }
-  .card .label { font-size:12px; color:#888; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
-  .card .value { font-size:28px; font-weight:700; }
-  .card.green .value { color:#00c87a; }
-  .card.red   .value { color:#ff4d4d; }
-  .card.blue  .value { color:#4da6ff; }
-  .card.gold  .value { color:#ffd700; }
-  .card.white .value { color:#f0f0f0; }
+           padding:14px 18px; min-width:120px; flex:1; }
+  .card .label { font-size:11px; color:#888; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
+  .card .value { font-size:26px; font-weight:700; }
+  .card.green  .value { color:#00c87a; }
+  .card.red    .value { color:#ff4d4d; }
+  .card.blue   .value { color:#4da6ff; }
+  .card.gold   .value { color:#ffd700; }
+  .card.white  .value { color:#f0f0f0; }
+  .card.purple .value { color:#b57bee; }
 
   /* TABLE */
   .table-wrap { overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; font-size:13px; }
-  thead th { background:#1a1a1a; color:#888; padding:10px 12px;
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  thead th { background:#1a1a1a; color:#888; padding:9px 10px;
              text-align:left; text-transform:uppercase;
-             font-size:11px; letter-spacing:0.8px; border-bottom:1px solid #2a2a2a; }
-  tbody tr { border-bottom:1px solid #1e1e1e; transition:background 0.15s; }
-  tbody tr:hover { background:#181818; }
-  tbody td { padding:11px 12px; vertical-align:middle; }
+             font-size:10px; letter-spacing:0.8px; border-bottom:1px solid #2a2a2a; }
+  tbody tr { border-bottom:1px solid #1a1a1a; transition:background 0.15s; }
+  tbody tr:hover { background:#161616; }
+  tbody td { padding:10px 10px; vertical-align:middle; }
 
   /* STATUS BADGES */
-  .badge { display:inline-block; padding:3px 10px; border-radius:20px;
-           font-size:11px; font-weight:600; letter-spacing:0.5px; }
-  .badge.target  { background:#0d3b26; color:#00c87a; border:1px solid #00c87a55; }
-  .badge.sl      { background:#3b0d0d; color:#ff4d4d; border:1px solid #ff4d4d55; }
-  .badge.open    { background:#1a2d3b; color:#4da6ff; border:1px solid #4da6ff55; }
+  .badge { display:inline-block; padding:2px 9px; border-radius:20px;
+           font-size:10px; font-weight:600; letter-spacing:0.4px; }
+  .badge.target { background:#0d3b26; color:#00c87a; border:1px solid #00c87a55; }
+  .badge.sl     { background:#3b0d0d; color:#ff4d4d; border:1px solid #ff4d4d55; }
+  .badge.open   { background:#1a2d3b; color:#4da6ff; border:1px solid #4da6ff55; }
+
+  /* STRENGTH BADGES */
+  .str-excellent { color:#ffd700; font-weight:700; font-size:11px; }
+  .str-good      { color:#00c87a; font-weight:700; font-size:11px; }
+  .str-weak      { color:#888;    font-weight:600; font-size:11px; }
+
+  /* KILL ZONE */
+  .kz { display:inline-block; padding:2px 7px; border-radius:4px;
+        font-size:10px; font-weight:600; background:#252525; color:#aaa; }
+  .kz.KZ1 { background:#1a2d1a; color:#00c87a; }
+  .kz.KZ2 { background:#2d2d1a; color:#ffd700; }
+  .kz.KZ3 { background:#1a1a2d; color:#4da6ff; }
 
   /* DIRECTION */
   .buy  { color:#00c87a; font-weight:700; }
@@ -48,17 +61,17 @@
   /* PNL */
   .pnl-pos { color:#00c87a; font-weight:600; }
   .pnl-neg { color:#ff4d4d; font-weight:600; }
-  .pnl-na  { color:#555; }
+  .pnl-na  { color:#444; }
 
-  /* SCORE BAR */
-  .score-bar { display:flex; align-items:center; gap:8px; }
-  .bar-bg    { background:#2a2a2a; border-radius:4px; height:6px; width:60px; }
-  .bar-fill  { height:6px; border-radius:4px; background:linear-gradient(90deg,#ffd700,#00c87a); }
+  /* SCORE BAR (out of 150) */
+  .score-bar { display:flex; align-items:center; gap:6px; }
+  .bar-bg    { background:#2a2a2a; border-radius:4px; height:5px; width:54px; }
+  .bar-fill  { height:5px; border-radius:4px; background:linear-gradient(90deg,#ffd700,#00c87a); }
 
-  /* REASONS TOOLTIP */
-  .reasons { font-size:11px; color:#555; margin-top:3px; }
+  /* PHASE SCORES */
+  .phases { font-size:10px; color:#555; margin-top:3px; line-height:1.6; }
 
-  .refresh-note { color:#444; font-size:11px; margin-top:20px; text-align:right; }
+  .refresh-note { color:#333; font-size:11px; margin-top:20px; text-align:right; }
 
   /* HEADER ROW */
   .header-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
@@ -66,23 +79,41 @@
               border-radius:50%; margin-right:6px; animation:pulse 1.5s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  .no-data { text-align:center; padding:60px; color:#444; font-size:16px; }
+  .no-data { text-align:center; padding:60px; color:#444; font-size:15px; }
+
+  /* STRATEGY INFO */
+  .strategy-bar { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px;
+                  font-size:11px; color:#555; }
+  .strategy-bar span { background:#1a1a1a; border:1px solid #252525;
+                       border-radius:6px; padding:5px 12px; }
+  .strategy-bar .hl  { color:#aaa; }
 </style>
 </head>
 <body>
 
 <div class="header-row">
   <div>
-    <h1><span class="live-dot"></span>NSE Intraday Bot — Signal Dashboard</h1>
-    <div class="subtitle">Auto-refreshes every 60 seconds &nbsp;|&nbsp; All times IST &nbsp;|&nbsp; Threshold: 9.0+/10</div>
+    <h1><span class="live-dot"></span>NSE SMC + ICT Bot — Signal Dashboard</h1>
+    <div class="subtitle">Auto-refreshes every 60 seconds &nbsp;|&nbsp; All times IST &nbsp;|&nbsp; Strategy: SMC + ICT + Price Action</div>
   </div>
   <div style="color:#555;font-size:12px;">{{ now }}</div>
+</div>
+
+<div class="strategy-bar">
+  <span>Scoring: <span class="hl">150-pt scale</span></span>
+  <span>Min to trade: <span class="hl">65 pts</span></span>
+  <span>KZ1: <span class="hl">09:15-10:00</span></span>
+  <span>KZ2: <span class="hl">11:15-11:45</span></span>
+  <span>KZ3: <span class="hl">13:30-14:15</span></span>
+  <span>No entries after: <span class="hl">14:30 IST</span></span>
+  <span>Max SL: <span class="hl">0.8%</span></span>
+  <span>Min R:R: <span class="hl">1:2.5</span></span>
 </div>
 
 <!-- SUMMARY CARDS -->
 <div class="cards">
   <div class="card white">
-    <div class="label">Total Alerts</div>
+    <div class="label">Total Signals</div>
     <div class="value">{{ summary.total }}</div>
   </div>
   <div class="card green">
@@ -105,6 +136,14 @@
     <div class="label">Total P&L (pts)</div>
     <div class="value">{% if summary.total_pnl >= 0 %}+{% endif %}{{ summary.total_pnl }}</div>
   </div>
+  <div class="card purple">
+    <div class="label">Avg Score</div>
+    <div class="value">{{ summary.avg_score }}</div>
+  </div>
+  <div class="card gold">
+    <div class="label">Excellent</div>
+    <div class="value">{{ summary.excellent }}</div>
+  </div>
 </div>
 
 <!-- SIGNALS TABLE -->
@@ -116,16 +155,20 @@
       <th>#</th>
       <th>Date / Time</th>
       <th>Stock</th>
-      <th>Action</th>
-      <th>Score</th>
+      <th>Dir</th>
+      <th>Score / 150</th>
+      <th>Strength</th>
+      <th>Zone</th>
       <th>Entry</th>
-      <th>Target</th>
+      <th>T1</th>
+      <th>T2 (Target)</th>
       <th>SL</th>
       <th>R:R</th>
       <th>Live Price</th>
       <th>Status</th>
       <th>P&L pts</th>
       <th>P&L %</th>
+      <th>Phase Scores</th>
       <th>Signals Confirmed</th>
     </tr>
   </thead>
@@ -133,23 +176,35 @@
   {% for s in signals|reverse %}
   <tr>
     <td style="color:#444">{{ s.id }}</td>
-    <td style="color:#666;white-space:nowrap">{{ s.datetime }}</td>
+    <td style="color:#555;white-space:nowrap;font-size:11px">{{ s.datetime }}</td>
     <td style="font-weight:700;color:#f0f0f0">{{ s.symbol }}</td>
     <td class="{% if s.direction == 'LONG' %}buy{% else %}sell{% endif %}">
       {{ 'BUY' if s.direction == 'LONG' else 'SELL' }}
     </td>
     <td>
       <div class="score-bar">
-        <span style="font-weight:600;color:#ffd700">{{ s.score }}</span>
-        <div class="bar-bg"><div class="bar-fill" style="width:{{ (s.score/10*100)|int }}%"></div></div>
+        <span style="font-weight:700;color:#ffd700;min-width:26px">{{ s.score }}</span>
+        <div class="bar-bg">
+          <div class="bar-fill" style="width:{{ ((s.score or 0)/150*100)|int }}%"></div>
+        </div>
+        <span style="color:#555;font-size:10px">{{ s.score_pct if s.score_pct else '' }}%</span>
       </div>
     </td>
+    <td>
+      {% set str = s.signal_strength if s.signal_strength else 'GOOD' %}
+      <span class="str-{{ str|lower }}">{{ str }}</span>
+    </td>
+    <td>
+      {% set kz = s.kill_zone if s.kill_zone else '?' %}
+      <span class="kz {{ kz }}">{{ kz }}</span>
+    </td>
     <td>Rs {{ s.entry }}</td>
+    <td style="color:#aaa">{% if s.t1 %}Rs {{ s.t1 }}{% else %}—{% endif %}</td>
     <td style="color:#00c87a">Rs {{ s.target }}</td>
     <td style="color:#ff4d4d">Rs {{ s.sl }}</td>
-    <td style="color:#888">1:{{ s.rr }}</td>
+    <td style="color:#666">1:{{ s.rr }}</td>
     <td style="color:#4da6ff">
-      {% if s.exit_price %}Rs {{ s.exit_price }}{% else %}-{% endif %}
+      {% if s.exit_price %}Rs {{ s.exit_price }}{% else %}—{% endif %}
     </td>
     <td>
       {% if s.status == 'TARGET HIT' %}
@@ -163,16 +218,26 @@
     <td class="{% if s.pnl_pts is not none and s.pnl_pts >= 0 %}pnl-pos{% elif s.pnl_pts is not none %}pnl-neg{% else %}pnl-na{% endif %}">
       {% if s.pnl_pts is not none %}
         {% if s.pnl_pts >= 0 %}+{% endif %}{{ s.pnl_pts }}
-      {% else %}-{% endif %}
+      {% else %}—{% endif %}
     </td>
     <td class="{% if s.pnl_pct is not none and s.pnl_pct >= 0 %}pnl-pos{% elif s.pnl_pct is not none %}pnl-neg{% else %}pnl-na{% endif %}">
       {% if s.pnl_pct is not none %}
         {% if s.pnl_pct >= 0 %}+{% endif %}{{ s.pnl_pct }}%
-      {% else %}-{% endif %}
+      {% else %}—{% endif %}
     </td>
     <td>
-      <div style="font-size:11px;color:#666;max-width:280px">
-        {{ s.reasons | join(' · ') if s.reasons else '-' }}
+      {% if s.phase_scores %}
+      <div class="phases">
+        SMC:{{ s.phase_scores.get('smc_structure','?') }}/60
+        ICT:{{ s.phase_scores.get('ict_time_price','?') }}/40
+        PA:{{ s.phase_scores.get('price_action','?') }}/27
+        +{{ s.phase_scores.get('boosters','?') }}
+      </div>
+      {% else %}—{% endif %}
+    </td>
+    <td>
+      <div style="font-size:10px;color:#555;max-width:260px;line-height:1.5">
+        {{ s.reasons | join(' · ') if s.reasons else '—' }}
       </div>
     </td>
   </tr>
@@ -182,12 +247,15 @@
 {% else %}
 <div class="no-data">
   No signals yet.<br>
-  <span style="font-size:13px;color:#333">Alerts will appear here automatically when the bot fires during market hours.</span>
+  <span style="font-size:12px;color:#333">
+    Alerts appear here automatically when a stock scores 65+/150<br>
+    during an active Kill Zone (SMC + ICT strategy).
+  </span>
 </div>
 {% endif %}
 </div>
 
-<div class="refresh-note">Page auto-refreshes every 60 seconds. Status updates live from NSE prices.</div>
+<div class="refresh-note">Page auto-refreshes every 60 seconds. Live prices from NSE via yfinance.</div>
 
 </body>
 </html>
