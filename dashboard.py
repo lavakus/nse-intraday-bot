@@ -10,6 +10,7 @@ from signal_logger import (
     LOG_FILE, GOLD_LOG_FILE, BTC_LOG_FILE,
     _load,
 )
+from run_swing import get_swing_data
 from datetime import datetime, timezone, timedelta
 
 app = Flask(__name__)
@@ -62,21 +63,26 @@ def index():
     btc_summary  = get_summary(btc_signals)
     overall      = get_summary(nse_signals + gold_signals + btc_signals)
 
-    bot_state = _load_bot_state()
-    now       = _ist_now()
+    bot_state  = _load_bot_state()
+    now        = _ist_now()
+    swing_data = get_swing_data()
 
     return render_template(
         "dashboard.html",
-        # per-asset
+        # per-asset intraday
         nse_signals=nse_signals[:30],
         gold_signals=gold_signals[:30],
         btc_signals=btc_signals[:30],
         nse_summary=nse_summary,
         gold_summary=gold_summary,
         btc_summary=btc_summary,
-        # unified
+        # unified feed
         all_signals=all_signals,
         overall=overall,
+        # swing trading
+        swing_week_picks=swing_data["week_picks"],
+        swing_all_picks=swing_data["all_picks"],
+        swing_summary=swing_data["summary"],
         # controls
         bot_state=bot_state,
         now=now,
@@ -109,6 +115,13 @@ def api_asset_status():
         "GOLD": {"paused": bot_state.get("GOLD", {}).get("paused", False), "open": _open_count(gold)},
         "BTC":  {"paused": bot_state.get("BTC",  {}).get("paused", False), "open": _open_count(btc)},
     })
+
+
+@app.route("/api/swing")
+def api_swing():
+    """JSON endpoint for swing picks."""
+    data = get_swing_data()
+    return Response(json.dumps(data, default=str), mimetype="application/json")
 
 
 @app.route("/api/control/<asset>/<action>", methods=["POST"])

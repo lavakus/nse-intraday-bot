@@ -473,6 +473,70 @@ tbody td { padding:10px 10px; vertical-align:middle; }
 }
 .footer a { color:var(--muted); text-decoration:none; }
 
+/* ── SWING SECTION ────────────────────────────────────────────── */
+--emerald: #34d399;
+.swing-section .section-header::before { background:linear-gradient(180deg,#34d399,transparent); }
+.badge-swing {
+  color:#34d399; background:rgba(52,211,153,.12);
+  border:1px solid rgba(52,211,153,.3);
+  font-size:10px; font-weight:800; padding:3px 9px;
+  border-radius:20px; letter-spacing:.5px;
+}
+
+/* card grid */
+.swing-cards {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap:12px;
+}
+.swing-card {
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:14px;
+  display:flex; flex-direction:column; gap:10px;
+  transition:transform .2s, border-color .2s, box-shadow .2s;
+  position:relative; overflow:hidden;
+}
+.swing-card:hover {
+  transform:translateY(-3px);
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.swing-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+}
+.swing-open::before  { background:linear-gradient(90deg,var(--blue),transparent); border-color:rgba(59,130,246,.25); }
+.swing-win::before   { background:linear-gradient(90deg,var(--green),transparent); border-color:rgba(16,185,129,.3); }
+.swing-loss::before  { background:linear-gradient(90deg,var(--red),transparent); border-color:rgba(239,68,68,.3); }
+.swing-win  { border-color:rgba(16,185,129,.2); background:rgba(16,185,129,.04); }
+.swing-loss { border-color:rgba(239,68,68,.2);  background:rgba(239,68,68,.04); }
+
+.sc-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+.sc-symbol { font-size:16px; font-weight:800; color:#f1f5f9; letter-spacing:-.3px; }
+.sc-score  { flex:1; text-align:right; }
+.sc-score-num { font-size:18px; font-weight:700; color:var(--gold); line-height:1; }
+.sc-strength { font-size:10px; font-weight:700; }
+
+.sc-prices { display:flex; flex-direction:column; gap:5px; }
+.sc-price-row { display:flex; justify-content:space-between; align-items:center; font-size:11.5px; }
+.sc-label { color:var(--muted2); font-size:10px; }
+.sc-val   { font-weight:600; font-variant-numeric:tabular-nums; }
+
+.sc-meta {
+  display:flex; gap:6px; flex-wrap:wrap;
+  font-size:9.5px; color:var(--muted2);
+}
+.sc-meta span {
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  padding:2px 7px; border-radius:4px;
+}
+
+.sc-status-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:11.5px; }
+
+.sc-reasons { display:flex; flex-direction:column; gap:3px; }
+.sc-reason  { font-size:9.5px; color:var(--muted2); line-height:1.4; }
+
 /* ── RESPONSIVE ───────────────────────────────────────────────── */
 @media(max-width:900px) {
   .global-strip { grid-template-columns:repeat(4,1fr); }
@@ -549,6 +613,176 @@ tbody td { padding:10px 10px; vertical-align:middle; }
   </div>
 </div>
 
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!--  SWING TRADING — Weekly NSE Stock Picks                   -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="asset-section swing-section">
+  <div class="section-header">
+    <div class="section-title">
+      <span class="asset-badge badge-swing">📈 SWING PICKS</span>
+      Weekly NSE Swing Stocks
+      <span style="color:var(--muted);font-size:12px;font-weight:400">— 5-day hold · Mon open → Fri close</span>
+    </div>
+    <div class="section-right" style="gap:14px">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:10px;">
+        <span class="stag">Week <strong>{{ swing_summary.week }}</strong></span>
+        <span class="stag">Total picks <strong>{{ swing_summary.total }}</strong></span>
+        <span class="stag" style="color:var(--green)">Wins <strong>{{ swing_summary.wins }}</strong></span>
+        <span class="stag" style="color:var(--red)">Losses <strong>{{ swing_summary.losses }}</strong></span>
+        <span class="stag" style="color:var(--gold)">Win Rate <strong>{{ swing_summary.win_rate }}%</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Strategy info -->
+  <div class="strat-bar">
+    <span class="stag">Universe <strong>NIFTY 50 + Select Midcaps</strong></span>
+    <span class="stag">Hold <strong>Mon → Fri (5 days)</strong></span>
+    <span class="stag">Min Score <strong>55/100</strong></span>
+    <span class="stag">Max SL <strong>4%</strong></span>
+    <span class="stag">Min R:R <strong>1:2.0</strong></span>
+    <span class="stag">Filter <strong>Price &gt; EMA50 &gt; EMA200</strong></span>
+    <span class="stag">Scan day <strong>Every Monday 09:15 IST</strong></span>
+  </div>
+
+  <!-- This week's picks (card grid) -->
+  {% if swing_week_picks %}
+  <div style="padding:16px 20px;">
+    <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;">
+      This Week's Top {{ swing_week_picks|length }} Picks — {{ swing_summary.week }}
+    </div>
+    <div class="swing-cards">
+      {% for p in swing_week_picks %}
+      <div class="swing-card {% if p.status == 'TARGET HIT' %}swing-win{% elif p.status == 'SL HIT' %}swing-loss{% else %}swing-open{% endif %}">
+        <div class="sc-top">
+          <div class="sc-symbol">{{ p.symbol }}</div>
+          <div class="sc-score">
+            <div class="sc-score-num">{{ p.score }}<span style="font-size:10px;color:var(--muted)">/100</span></div>
+            <div class="sbar-bg" style="width:100%;margin-top:4px">
+              <div class="sbar-fill" style="width:{{ p.score }}%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-strength str-{{ p.signal_strength|lower }}">{{ p.signal_strength }}</div>
+
+        <div class="sc-prices">
+          <div class="sc-price-row">
+            <span class="sc-label">Entry</span>
+            <span class="sc-val">₹{{ p.entry }}</span>
+          </div>
+          <div class="sc-price-row">
+            <span class="sc-label">T1</span>
+            <span class="sc-val grn">₹{{ p.t1 }}</span>
+          </div>
+          <div class="sc-price-row">
+            <span class="sc-label">T2 Target</span>
+            <span class="sc-val grn" style="font-weight:700">₹{{ p.t2 }}</span>
+          </div>
+          <div class="sc-price-row">
+            <span class="sc-label">Stop Loss</span>
+            <span class="sc-val red">₹{{ p.sl }} <span style="color:var(--muted);font-size:9px">(-{{ p.sl_pct }}%)</span></span>
+          </div>
+          <div class="sc-price-row">
+            <span class="sc-label">R:R</span>
+            <span class="sc-val">1:{{ p.rr_t2 }}</span>
+          </div>
+        </div>
+
+        <div class="sc-meta">
+          <span>RSI {{ p.rsi }}</span>
+          <span>Vol {{ p.vol_ratio }}×</span>
+          <span>MACD {{ '✓' if p.macd_bullish else '✗' }}</span>
+        </div>
+
+        <div class="sc-status-row">
+          {% if p.status == 'TARGET HIT' %}
+            <span class="badge badge-win">✓ TARGET HIT</span>
+            {% if p.pnl_pct is not none %}<span class="pnl-pos">+{{ p.pnl_pct }}%</span>{% endif %}
+          {% elif p.status == 'SL HIT' %}
+            <span class="badge badge-loss">✗ SL HIT</span>
+            {% if p.pnl_pct is not none %}<span class="pnl-neg">{{ p.pnl_pct }}%</span>{% endif %}
+          {% else %}
+            <span class="badge badge-open">● OPEN</span>
+            {% if p.exit_price %}<span style="color:var(--blue);font-size:11px">₹{{ p.exit_price }}
+              {% if p.pnl_pct is not none %}
+                <span class="{{ 'pnl-pos' if p.pnl_pct >= 0 else 'pnl-neg' }}">
+                  ({% if p.pnl_pct >= 0 %}+{% endif %}{{ p.pnl_pct }}%)
+                </span>
+              {% endif %}
+            </span>{% endif %}
+          {% endif %}
+        </div>
+
+        <div class="sc-reasons">
+          {% for r in p.reasons[:3] %}
+          <div class="sc-reason">✦ {{ r }}</div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">📅</div>
+    <div class="empty-title">No swing picks this week yet</div>
+    <div class="empty-sub">The scanner runs every Monday at 09:15 IST and picks the top 7 NSE stocks for the week</div>
+  </div>
+  {% endif %}
+
+  <!-- Historical swing picks table -->
+  {% if swing_all_picks %}
+  <div style="padding:0 20px 16px;">
+    <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px;padding-top:12px;border-top:1px solid var(--border);">
+      Historical Swing Picks
+    </div>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Week</th><th>Symbol</th><th>Score/100</th><th>Strength</th>
+          <th>Entry</th><th>T1</th><th>T2</th><th>SL</th><th>R:R</th>
+          <th>Live Price</th><th>Status</th><th>P&amp;L %</th><th>RSI</th><th>Vol</th><th>Reasons</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for p in swing_all_picks %}
+      <tr>
+        <td class="dim nowrap">{{ p.week }}</td>
+        <td class="sym">{{ p.symbol }}</td>
+        <td>
+          <div class="score-cell">
+            <span class="score-num" style="font-size:11px">{{ p.score }}</span>
+            <div class="sbar-bg"><div class="sbar-fill" style="width:{{ p.score }}%"></div></div>
+          </div>
+        </td>
+        <td><span class="str str-{{ (p.signal_strength or 'good')|lower }}">{{ p.signal_strength }}</span></td>
+        <td class="num">₹{{ p.entry }}</td>
+        <td class="num grn">₹{{ p.t1 }}</td>
+        <td class="num grn" style="font-weight:600">₹{{ p.t2 }}</td>
+        <td class="num red">₹{{ p.sl }}</td>
+        <td class="dim">1:{{ p.rr_t2 }}</td>
+        <td class="num blu">{% if p.exit_price %}₹{{ p.exit_price }}{% else %}—{% endif %}</td>
+        <td>
+          {% if p.status == 'TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>
+          {% elif p.status == 'SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>
+          {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
+        </td>
+        <td class="{{ 'pnl-pos' if p.pnl_pct is not none and p.pnl_pct >= 0 else 'pnl-neg' if p.pnl_pct is not none else 'dim' }}">
+          {% if p.pnl_pct is not none %}{% if p.pnl_pct >= 0 %}+{% endif %}{{ p.pnl_pct }}%{% else %}—{% endif %}
+        </td>
+        <td class="dim">{{ p.rsi }}</td>
+        <td class="dim">{{ p.vol_ratio }}×</td>
+        <td><div class="reasons">{{ p.reasons|join(' · ') if p.reasons else '—' }}</div></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  {% endif %}
+</div>
 
 <!-- ══════════════════════════════════════════════════════════ -->
 <!--  RECENT SIGNALS FEED — all assets                         -->
