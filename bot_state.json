@@ -1,0 +1,11 @@
+{
+  "NSE": {
+    "paused": false
+  },
+  "GOLD": {
+    "paused": false
+  },
+  "BTC": {
+    "paused": false
+  }
+}

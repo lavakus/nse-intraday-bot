@@ -1,12 +1,34 @@
 """
-Logs every alert to signals_log.json.
+Logs every alert to asset-specific JSON files.
 Checks live price to update status: TARGET HIT / SL HIT / OPEN.
+
+Log files:
+  signals_log.json      — NSE India
+  gold_signals_log.json — Gold (XAUUSD)
+  btc_signals_log.json  — Bitcoin (BTCUSDT)
 """
 import json, os
 from datetime import datetime
 
-LOG_FILE   = "signals_log.json"
-EVAL_FILE  = "evaluations_log.jsonl"   # one JSON per line — blocked/near-miss log
+LOG_FILE      = "signals_log.json"           # NSE (existing)
+GOLD_LOG_FILE = "gold_signals_log.json"
+BTC_LOG_FILE  = "btc_signals_log.json"
+EVAL_FILE     = "evaluations_log.jsonl"
+
+# Ticker map for live price lookups
+_PRICE_TICKER = {
+    "GOLD":    "GC=F",
+    "BTC":     "BTC-USD",
+    "BTCUSDT": "BTC-USD",
+}
+
+
+def _log_file_for(asset: str) -> str:
+    if asset in ("GOLD", "XAUUSD"):
+        return GOLD_LOG_FILE
+    if asset in ("BTC", "BTCUSDT"):
+        return BTC_LOG_FILE
+    return LOG_FILE   # NSE default
 
 # When running on Render (no local file), fetch from GitHub raw URL
 GITHUB_RAW = os.environ.get(
@@ -15,39 +37,43 @@ GITHUB_RAW = os.environ.get(
 )
 
 
-def _load() -> list:
+def _load(log_file: str = LOG_FILE) -> list:
     # 1) Try local file
-    if os.path.exists(LOG_FILE):
+    if os.path.exists(log_file):
         try:
-            with open(LOG_FILE, "r") as f:
+            with open(log_file, "r") as f:
                 return json.load(f)
         except Exception:
             pass
     # 2) Fallback: fetch from GitHub (for Render / remote host)
-    try:
-        import requests as _req
-        r = _req.get(GITHUB_RAW, timeout=10)
-        if r.status_code == 200:
-            return r.json()
-    except Exception:
-        pass
+    if log_file == LOG_FILE:          # only NSE log is on GitHub
+        try:
+            import requests as _req
+            r = _req.get(GITHUB_RAW, timeout=10)
+            if r.status_code == 200:
+                return r.json()
+        except Exception:
+            pass
     return []
 
 
-def _save(data: list):
-    with open(LOG_FILE, "w") as f:
+def _save(data: list, log_file: str = LOG_FILE):
+    with open(log_file, "w") as f:
         json.dump(data, f, indent=2, default=str)
 
 
 def log_signal(sig: dict):
-    """Save a new alert to the log file."""
-    data = _load()
-    tp   = sig.get("trade_params", {})
+    """Save a new alert to the correct asset log file."""
+    asset    = sig.get("asset", sig.get("symbol", "NSE"))
+    log_file = _log_file_for(asset)
+    data     = _load(log_file)
+    tp       = sig.get("trade_params", {})
 
     record = {
         "id":             len(data) + 1,
         "datetime":       datetime.now().strftime("%Y-%m-%d %H:%M"),
         "date":           datetime.now().strftime("%Y-%m-%d"),
+        "asset":          asset,
         "symbol":         sig["symbol"],
         "direction":      sig["direction"],
         "signal":         sig.get("signal", "BUY" if sig["direction"] == "LONG" else "SELL"),
@@ -73,7 +99,7 @@ def log_signal(sig: dict):
         "pnl_pct":        None,
     }
     data.append(record)
-    _save(data)
+    _save(data, log_file)
     print(f"[LOG] Saved signal #{record['id']} — {record['symbol']} "
           f"{record['signal']} score={record['score']}/150")
 
@@ -97,18 +123,33 @@ def log_evaluation(sym: str, score: int, blocked_reason: str, phase_scores: dict
         pass
 
 
-def update_statuses() -> list:
-    """Fetch live prices and update status of all OPEN signals."""
+def _get_live_price(rec: dict) -> float | None:
+    """Return live price for any asset (NSE / Gold / BTC)."""
     import yfinance as yf
-    data    = _load()
+    try:
+        symbol = rec.get("symbol", "")
+        asset  = rec.get("asset", symbol)
+        yf_sym = _PRICE_TICKER.get(asset) or _PRICE_TICKER.get(symbol)
+        if yf_sym is None:
+            yf_sym = f"{symbol}.NS"   # default NSE
+        tk = yf.Ticker(yf_sym)
+        return float(tk.fast_info["last_price"])
+    except Exception:
+        return None
+
+
+def _update_file_statuses(log_file: str) -> tuple[list, int]:
+    """Load one log file, refresh OPEN signals, return (data, changed_count)."""
+    data    = _load(log_file)
     changed = 0
 
     for rec in data:
         if rec["status"] != "OPEN":
             continue
+        price = _get_live_price(rec)
+        if price is None:
+            continue
         try:
-            ticker = yf.Ticker(f"{rec['symbol']}.NS")
-            price  = float(ticker.fast_info["last_price"])
             entry  = float(rec["entry"])
             target = float(rec["target"])
             sl     = float(rec["sl"])
@@ -126,7 +167,7 @@ def update_statuses() -> list:
                                pnl_pct=round((price - entry) / entry * 100, 2))
                     changed += 1
                 else:
-                    rec["exit_price"] = price   # live price for open trade
+                    rec["exit_price"] = price
             else:  # SHORT
                 if price <= target:
                     rec.update(status="TARGET HIT", exit_price=price,
@@ -144,12 +185,31 @@ def update_statuses() -> list:
             pass
 
     if changed:
-        _save(data)
-    return data
+        _save(data, log_file)
+    return data, changed
 
 
-def get_all() -> list:
-    return update_statuses()
+def update_statuses(asset: str = "ALL") -> list:
+    """
+    Fetch live prices and update status of OPEN signals.
+    asset="ALL"  → updates all three log files and returns combined list
+    asset="NSE"  → NSE only
+    asset="GOLD" → Gold only
+    asset="BTC"  → BTC only
+    """
+    if asset == "ALL":
+        nse,  _ = _update_file_statuses(LOG_FILE)
+        gold, _ = _update_file_statuses(GOLD_LOG_FILE)
+        btc,  _ = _update_file_statuses(BTC_LOG_FILE)
+        return nse + gold + btc
+    else:
+        log_file = _log_file_for(asset)
+        data, _  = _update_file_statuses(log_file)
+        return data
+
+
+def get_all(asset: str = "ALL") -> list:
+    return update_statuses(asset)
 
 
 def get_summary(data: list) -> dict:
