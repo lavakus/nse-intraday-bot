@@ -1,25 +1,22 @@
-{# ── MACRO: signal table ─────────────────────────────────────── #}
+{# ── SIGNAL TABLE MACRO ──────────────────────────────────────── #}
 {% macro signal_table(signals, asset_type) %}
 <div class="table-wrap">
 {% if signals %}
 <table>
-  <thead>
-    <tr>
-      <th>#</th><th>Date / Time</th><th>Symbol</th><th>Dir</th>
-      <th>Score / 150</th><th>Strength</th><th>Zone</th>
-      <th>Entry</th><th>T1</th><th>T2 Target</th><th>SL</th><th>R:R</th>
-      <th>Live Price</th><th>Status</th><th>P&amp;L pts</th><th>P&amp;L %</th>
-      <th>Phase Scores</th><th>Reasons</th>
-    </tr>
-  </thead>
+  <thead><tr>
+    <th>#</th><th>Date/Time</th><th>Symbol</th><th>Dir</th>
+    <th>Score/150</th><th>Strength</th><th>Zone</th>
+    <th>Entry</th><th>T1</th><th>T2 Target</th><th>SL</th><th>R:R</th>
+    <th>Live Price</th><th>Status</th><th>P&amp;L pts</th><th>P&amp;L %</th>
+    <th>Phase Scores</th><th>Reasons</th>
+  </tr></thead>
   <tbody>
   {% for s in signals %}
-  <tr>
+  <tr class="trow-anim" style="animation-delay:{{ loop.index0 * 0.03 }}s">
     <td class="dim">{{ s.id }}</td>
     <td class="dim nowrap">{{ s.datetime }}</td>
     <td class="sym">{{ s.symbol }}</td>
-    <td><span class="dir-badge {{ 'long' if s.direction == 'LONG' else 'short' }}">
-      {{ 'BUY' if s.direction == 'LONG' else 'SELL' }}</span></td>
+    <td><span class="dir-badge {{ 'long' if s.direction=='LONG' else 'short' }}">{{ 'BUY' if s.direction=='LONG' else 'SELL' }}</span></td>
     <td>
       <div class="score-cell">
         <span class="score-num">{{ s.score }}</span>
@@ -27,39 +24,33 @@
         <span class="score-pct">{{ s.score_pct if s.score_pct else '' }}%</span>
       </div>
     </td>
-    <td>
-      {% set st = s.signal_strength if s.signal_strength else 'GOOD' %}
-      <span class="str str-{{ st|lower }}">{{ st }}</span>
-    </td>
-    <td>
-      {% set kz = (s.kill_zone if s.kill_zone else '?')|replace(' ','') %}
-      <span class="kz-tag {{ kz }}">{{ s.kill_zone or '?' }}</span>
-    </td>
+    <td><span class="str str-{{ (s.signal_strength or 'good')|lower }}">{{ s.signal_strength or 'GOOD' }}</span></td>
+    <td><span class="kz-tag {{ (s.kill_zone or '?')|replace(' ','') }}">{{ s.kill_zone or '?' }}</span></td>
     <td class="num">{{ s.entry }}</td>
-    <td class="num dim">{% if s.t1 %}{{ s.t1 }}{% else %}—{% endif %}</td>
+    <td class="num dim">{{ s.t1 or '—' }}</td>
     <td class="num grn">{{ s.target }}</td>
     <td class="num red">{{ s.sl }}</td>
-    <td class="num dim">1:{{ s.rr }}</td>
-    <td class="num blu">{% if s.exit_price %}{{ s.exit_price }}{% else %}—{% endif %}</td>
+    <td class="dim">1:{{ s.rr }}</td>
+    <td class="num blu">{{ s.exit_price or '—' }}</td>
     <td>
-      {% if s.status == 'TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>
-      {% elif s.status == 'SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>
+      {% if s.status=='TARGET HIT' %}<span class="badge badge-win">✓ HIT</span>
+      {% elif s.status=='SL HIT' %}<span class="badge badge-loss">✗ SL</span>
       {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
     </td>
-    <td class="{{ 'pnl-pos' if s.pnl_pts is not none and s.pnl_pts >= 0 else 'pnl-neg' if s.pnl_pts is not none else 'dim' }}">
-      {% if s.pnl_pts is not none %}{% if s.pnl_pts >= 0 %}+{% endif %}{{ s.pnl_pts }}{% else %}—{% endif %}
+    <td class="{{ 'pnl-pos' if s.pnl_pts is not none and s.pnl_pts>=0 else 'pnl-neg' if s.pnl_pts is not none else 'dim' }}">
+      {% if s.pnl_pts is not none %}{% if s.pnl_pts>=0 %}+{% endif %}{{ s.pnl_pts }}{% else %}—{% endif %}
     </td>
-    <td class="{{ 'pnl-pos' if s.pnl_pct is not none and s.pnl_pct >= 0 else 'pnl-neg' if s.pnl_pct is not none else 'dim' }}">
-      {% if s.pnl_pct is not none %}{% if s.pnl_pct >= 0 %}+{% endif %}{{ s.pnl_pct }}%{% else %}—{% endif %}
+    <td class="{{ 'pnl-pos' if s.pnl_pct is not none and s.pnl_pct>=0 else 'pnl-neg' if s.pnl_pct is not none else 'dim' }}">
+      {% if s.pnl_pct is not none %}{% if s.pnl_pct>=0 %}+{% endif %}{{ s.pnl_pct }}%{% else %}—{% endif %}
     </td>
     <td>
       {% if s.phase_scores %}
       <div class="phases">
-        {% if asset_type == 'nse' %}
+        {% if asset_type=='nse' %}
           <span>SMC {{ s.phase_scores.get('smc_structure','?') }}/60</span>
           <span>ICT {{ s.phase_scores.get('ict_time_price','?') }}/40</span>
           <span>PA {{ s.phase_scores.get('price_action','?') }}/27</span>
-        {% elif asset_type == 'gold' %}
+        {% elif asset_type=='gold' %}
           <span>SMC {{ s.phase_scores.get('smc_structure','?') }}/60</span>
           <span>ICT {{ s.phase_scores.get('ict_gold_filters','?') }}/40</span>
           <span>PA {{ s.phase_scores.get('pa_boosters','?') }}/50</span>
@@ -77,1413 +68,1565 @@
   </tbody>
 </table>
 {% else %}
-<div class="empty-state">
-  <div class="empty-icon">📡</div>
-  <div class="empty-title">Scanning for signals…</div>
-  <div class="empty-sub">Alerts appear here when score ≥ 65/150 inside a Kill Zone</div>
-</div>
+<div class="empty-state"><div class="empty-icon">📡</div><div class="empty-title">No signals yet</div><div class="empty-sub">Alerts appear when score ≥ 65/150 inside a Kill Zone</div></div>
 {% endif %}
 </div>
 {% endmacro %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradingBot Pro — NSE · Gold · BTC</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TradingBot Pro — Live Dashboard</title>
 <meta http-equiv="refresh" content="60">
 <style>
-/* ── RESET & BASE ─────────────────────────────────────────────── */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-:root {
-  --bg:       #070b14;
-  --bg2:      #0c1220;
-  --bg3:      #111827;
-  --border:   rgba(255,255,255,0.06);
-  --border2:  rgba(255,255,255,0.10);
-  --text:     #e2e8f0;
-  --muted:    #64748b;
-  --muted2:   #475569;
+/* ═══════════════════════════════════════════════════════════════
+   RESET & CSS VARIABLES
+═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#020510;
+  --bg2:#060d1a;
+  --bg3:#0a1527;
+  --glass:rgba(255,255,255,0.03);
+  --glass2:rgba(255,255,255,0.06);
+  --glass3:rgba(255,255,255,0.10);
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.13);
+  --border3:rgba(255,255,255,0.20);
+  --text:#e2e8f0;
+  --muted:#64748b;
+  --muted2:#475569;
 
-  --green:    #10b981;
-  --green-bg: rgba(16,185,129,0.10);
-  --green-b:  rgba(16,185,129,0.25);
-
-  --red:      #ef4444;
-  --red-bg:   rgba(239,68,68,0.10);
-  --red-b:    rgba(239,68,68,0.25);
-
-  --blue:     #3b82f6;
-  --blue-bg:  rgba(59,130,246,0.10);
-  --blue-b:   rgba(59,130,246,0.25);
-
-  --gold:     #f59e0b;
-  --gold-bg:  rgba(245,158,11,0.10);
-  --gold-b:   rgba(245,158,11,0.25);
-
-  --orange:   #f97316;
-  --orange-bg:rgba(249,115,22,0.10);
-  --orange-b: rgba(249,115,22,0.25);
-
-  --purple:   #8b5cf6;
-  --purple-bg:rgba(139,92,246,0.10);
-  --purple-b: rgba(139,92,246,0.25);
-
-  --cyan:     #06b6d4;
-  --r:        12px;
-  --r2:       8px;
+  --green:#10b981;  --green-g:rgba(16,185,129,.13);  --green-b:rgba(16,185,129,.35);  --green-d:rgba(16,185,129,.07);
+  --red:#ef4444;    --red-g:rgba(239,68,68,.13);      --red-b:rgba(239,68,68,.35);      --red-d:rgba(239,68,68,.07);
+  --blue:#3b82f6;   --blue-g:rgba(59,130,246,.13);    --blue-b:rgba(59,130,246,.35);    --blue-d:rgba(59,130,246,.07);
+  --gold:#f59e0b;   --gold-g:rgba(245,158,11,.13);    --gold-b:rgba(245,158,11,.35);    --gold-d:rgba(245,158,11,.07);
+  --orange:#f97316; --orange-g:rgba(249,115,22,.13);  --orange-b:rgba(249,115,22,.35);  --orange-d:rgba(249,115,22,.07);
+  --purple:#a855f7; --purple-g:rgba(168,85,247,.13);  --purple-b:rgba(168,85,247,.35);  --purple-d:rgba(168,85,247,.07);
+  --emerald:#34d399;--emerald-g:rgba(52,211,153,.13); --emerald-b:rgba(52,211,153,.35); --emerald-d:rgba(52,211,153,.07);
+  --cyan:#06b6d4;   --cyan-g:rgba(6,182,212,.13);     --cyan-b:rgba(6,182,212,.35);
+  --r:16px; --r2:11px; --r3:7px;
+  --nav-h:68px;
 }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  font-size: 13px;
-  line-height: 1.5;
-  min-height: 100vh;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(139,92,246,0.06) 0%, transparent 50%);
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter','Segoe UI',system-ui,sans-serif;
+  font-size:13px;min-height:100vh;overflow-x:hidden;
 }
 
-/* ── SCROLLBAR ────────────────────────────────────────────────── */
-::-webkit-scrollbar { width:6px; height:6px; }
-::-webkit-scrollbar-track { background:var(--bg2); }
-::-webkit-scrollbar-thumb { background:#1e2d3d; border-radius:3px; }
-::-webkit-scrollbar-thumb:hover { background:#2d4a6e; }
+/* ── ANIMATED BACKGROUND ─────────────────────────────────────── */
+.bg-canvas{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orb-drift 18s ease-in-out infinite alternate}
+.orb1{width:600px;height:600px;left:-15%;top:-20%;background:rgba(59,130,246,.09);animation-delay:0s}
+.orb2{width:500px;height:500px;right:-10%;top:20%;background:rgba(168,85,247,.07);animation-delay:-6s}
+.orb3{width:400px;height:400px;left:30%;bottom:-10%;background:rgba(16,185,129,.06);animation-delay:-12s}
+.orb4{width:300px;height:300px;right:20%;bottom:30%;background:rgba(245,158,11,.05);animation-delay:-4s}
+@keyframes orb-drift{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(40px,30px) scale(1.08)}
+}
 
-/* ── LAYOUT ───────────────────────────────────────────────────── */
-.page { max-width:1600px; margin:0 auto; padding:20px 24px; }
+.page{position:relative;z-index:1;max-width:1750px;margin:0 auto;padding:14px 18px}
 
-/* ── TOP NAV ──────────────────────────────────────────────────── */
-.topbar {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 20px;
-  background:rgba(12,18,32,0.85);
-  border:1px solid var(--border2);
-  border-radius:var(--r);
-  backdrop-filter:blur(20px);
-  margin-bottom:22px;
-}
-.topbar-left { display:flex; align-items:center; gap:14px; }
-.logo {
-  display:flex; align-items:center; gap:10px;
-  font-size:17px; font-weight:700; letter-spacing:-0.3px; color:#fff;
-}
-.logo-dot {
-  width:10px; height:10px; border-radius:50%; background:var(--green);
-  box-shadow:0 0 8px var(--green);
-  animation:pulse 2s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
+/* ── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.09);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.18)}
 
-.asset-chips { display:flex; gap:6px; }
-.chip {
-  font-size:10px; font-weight:700; padding:3px 10px;
-  border-radius:20px; letter-spacing:0.4px; border:1px solid;
-  cursor:pointer; transition:all .2s;
+/* ═══════════════════════════════════════════════════════════════
+   TOP HEADER BAR
+═══════════════════════════════════════════════════════════════ */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 22px;margin-bottom:12px;
+  background:rgba(6,13,26,.92);
+  border:1px solid var(--border2);border-radius:var(--r);
+  backdrop-filter:blur(32px);
+  box-shadow:0 4px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);
+  position:relative;overflow:hidden;
 }
-.chip:hover { transform:translateY(-1px); }
-.chip-nse   { color:var(--blue);   background:var(--blue-bg);   border-color:var(--blue-b); }
-.chip-gold  { color:var(--gold);   background:var(--gold-bg);   border-color:var(--gold-b); }
-.chip-btc   { color:var(--orange); background:var(--orange-bg); border-color:var(--orange-b); }
+.topbar::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(59,130,246,.04) 0%,transparent 50%,rgba(168,85,247,.04) 100%);
+  pointer-events:none;
+}
+.topbar-brand{display:flex;align-items:center;gap:12px}
+.brand-logo{
+  width:40px;height:40px;border-radius:11px;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;box-shadow:0 0 20px rgba(59,130,246,.4);
+  animation:logo-pulse 3s ease-in-out infinite;
+}
+@keyframes logo-pulse{
+  0%,100%{box-shadow:0 0 16px rgba(59,130,246,.4)}
+  50%{box-shadow:0 0 30px rgba(59,130,246,.6),0 0 50px rgba(168,85,247,.2)}
+}
+.brand-text .brand-name{font-size:18px;font-weight:800;letter-spacing:-.5px;color:#fff}
+.brand-text .brand-name em{color:var(--blue);font-style:normal}
+.brand-text .brand-sub{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.2px}
 
-.topbar-right { display:flex; align-items:center; gap:14px; }
-.live-indicator {
-  display:flex; align-items:center; gap:6px;
-  font-size:11px; color:var(--green); font-weight:600;
-}
-.live-dot {
-  width:7px; height:7px; border-radius:50%; background:var(--green);
-  box-shadow:0 0 6px var(--green); animation:pulse 2s infinite;
-}
-.clock { font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
-
-/* ── GLOBAL SUMMARY STRIP ─────────────────────────────────────── */
-.global-strip {
-  display:grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap:10px;
-  margin-bottom:22px;
-}
-.gcard {
-  background:linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
-  border:1px solid var(--border);
-  border-radius:var(--r2);
-  padding:14px 16px;
-  position:relative; overflow:hidden;
-  transition:border-color .2s, transform .2s;
-}
-.gcard:hover { border-color:var(--border2); transform:translateY(-2px); }
-.gcard::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  border-radius:var(--r2) var(--r2) 0 0;
-}
-.gcard.c-green::before  { background:linear-gradient(90deg,var(--green),transparent); }
-.gcard.c-red::before    { background:linear-gradient(90deg,var(--red),transparent); }
-.gcard.c-blue::before   { background:linear-gradient(90deg,var(--blue),transparent); }
-.gcard.c-gold::before   { background:linear-gradient(90deg,var(--gold),transparent); }
-.gcard.c-purple::before { background:linear-gradient(90deg,var(--purple),transparent); }
-.gcard.c-white::before  { background:linear-gradient(90deg,#94a3b8,transparent); }
-.gcard.c-orange::before { background:linear-gradient(90deg,var(--orange),transparent); }
-.gcard.c-cyan::before   { background:linear-gradient(90deg,var(--cyan),transparent); }
-
-.gcard-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.8px; margin-bottom:6px; }
-.gcard-value { font-size:24px; font-weight:700; line-height:1; }
-.gcard.c-green  .gcard-value { color:var(--green); }
-.gcard.c-red    .gcard-value { color:var(--red); }
-.gcard.c-blue   .gcard-value { color:var(--blue); }
-.gcard.c-gold   .gcard-value { color:var(--gold); }
-.gcard.c-purple .gcard-value { color:var(--purple); }
-.gcard.c-white  .gcard-value { color:#f1f5f9; }
-.gcard.c-orange .gcard-value { color:var(--orange); }
-.gcard.c-cyan   .gcard-value { color:var(--cyan); }
-
-/* ── RECENT FEED ──────────────────────────────────────────────── */
-.recent-feed {
-  background:linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
-  border:1px solid var(--border);
-  border-radius:var(--r);
-  margin-bottom:22px;
-  overflow:hidden;
-}
-.feed-header {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 20px;
-  border-bottom:1px solid var(--border);
-  background:rgba(255,255,255,0.02);
-}
-.feed-title { display:flex; align-items:center; gap:10px; font-weight:700; font-size:14px; }
-
-/* ── ASSET SECTIONS ───────────────────────────────────────────── */
-.asset-section {
-  background:linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
-  border:1px solid var(--border);
-  border-radius:var(--r);
-  margin-bottom:20px;
-  overflow:hidden;
-}
-.section-header {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:16px 20px;
-  border-bottom:1px solid var(--border);
-  position:relative;
-}
-.section-header::before {
-  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
-  border-radius:0 2px 2px 0;
-}
-.nse-section   .section-header::before { background:linear-gradient(180deg,var(--blue),transparent); }
-.gold-section  .section-header::before { background:linear-gradient(180deg,var(--gold),transparent); }
-.btc-section   .section-header::before { background:linear-gradient(180deg,var(--orange),transparent); }
-.all-section   .section-header::before { background:linear-gradient(180deg,var(--purple),transparent); }
-
-.section-title { display:flex; align-items:center; gap:12px; font-size:15px; font-weight:700; }
-.asset-badge {
-  font-size:9px; font-weight:800; padding:3px 9px;
-  border-radius:20px; letter-spacing:.6px; border:1px solid;
-}
-.badge-nse    { color:var(--blue);   background:var(--blue-bg);   border-color:var(--blue-b); }
-.badge-gold   { color:var(--gold);   background:var(--gold-bg);   border-color:var(--gold-b); }
-.badge-btc    { color:var(--orange); background:var(--orange-bg); border-color:var(--orange-b); }
-.badge-all    { color:var(--purple); background:var(--purple-bg); border-color:var(--purple-b); }
-
-.section-right { display:flex; align-items:center; gap:10px; }
-
-/* ── STRATEGY BAR ─────────────────────────────────────────────── */
-.strat-bar {
-  display:flex; gap:6px; flex-wrap:wrap;
-  padding:10px 20px 12px;
-  border-bottom:1px solid var(--border);
-  background:rgba(0,0,0,0.15);
-}
-.stag {
-  font-size:10px; padding:3px 9px; border-radius:5px;
-  background:rgba(255,255,255,0.04); border:1px solid var(--border);
-  color:var(--muted); white-space:nowrap;
-}
-.stag strong { color:#94a3b8; }
-
-/* ── MINI STAT CARDS ──────────────────────────────────────────── */
-.mini-cards { display:flex; gap:8px; padding:14px 20px; flex-wrap:wrap; border-bottom:1px solid var(--border); }
-.mcard {
-  background:rgba(255,255,255,0.03);
-  border:1px solid var(--border);
-  border-radius:var(--r2);
-  padding:10px 14px;
-  flex:1; min-width:80px;
+.topbar-center{display:flex;align-items:center;gap:8px}
+.ticker-item{
+  display:flex;align-items:center;gap:6px;padding:5px 12px;
+  background:var(--glass2);border:1px solid var(--border2);border-radius:8px;
+  font-size:10.5px;font-weight:700;white-space:nowrap;
   transition:border-color .2s;
 }
-.mcard:hover { border-color:var(--border2); }
-.mcard-label { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
-.mcard-value { font-size:18px; font-weight:700; }
-.mc-green  .mcard-value { color:var(--green); }
-.mc-red    .mcard-value { color:var(--red); }
-.mc-blue   .mcard-value { color:var(--blue); }
-.mc-gold   .mcard-value { color:var(--gold); }
-.mc-purple .mcard-value { color:var(--purple); }
-.mc-orange .mcard-value { color:var(--orange); }
-.mc-white  .mcard-value { color:#f1f5f9; }
+.ticker-item:hover{border-color:var(--border3)}
+.ti-name{color:var(--muted);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.ti-price{color:#f1f5f9;font-variant-numeric:tabular-nums}
+.ti-chg{font-size:9px;font-weight:700}
+.ti-up .ti-chg{color:var(--green)} .ti-dn .ti-chg{color:var(--red)}
+.ti-up{border-color:rgba(16,185,129,.2)} .ti-dn{border-color:rgba(239,68,68,.2)}
 
-/* ── CONTROLS ─────────────────────────────────────────────────── */
-.btn-ctrl {
-  font-size:11px; font-weight:600; padding:6px 14px;
-  border-radius:6px; border:1px solid; cursor:pointer;
-  transition:all .2s; letter-spacing:.3px;
+.topbar-right{display:flex;align-items:center;gap:12px}
+.live-pill{
+  display:flex;align-items:center;gap:6px;padding:6px 14px;
+  border-radius:20px;background:var(--green-g);border:1px solid var(--green-b);
+  font-size:10px;font-weight:800;color:var(--green);letter-spacing:.8px;
+  box-shadow:0 0 16px rgba(16,185,129,.15);
 }
-.btn-ctrl:hover { transform:translateY(-1px); filter:brightness(1.15); }
-.btn-pause  { color:var(--gold);  background:var(--gold-bg);  border-color:var(--gold-b); }
-.btn-resume { color:var(--green); background:var(--green-bg); border-color:var(--green-b); }
-.status-running {
-  display:flex; align-items:center; gap:5px;
-  font-size:10px; font-weight:700; color:var(--green);
-  padding:4px 10px; border-radius:20px;
-  background:var(--green-bg); border:1px solid var(--green-b);
-}
-.status-paused {
-  display:flex; align-items:center; gap:5px;
-  font-size:10px; font-weight:700; color:var(--red);
-  padding:4px 10px; border-radius:20px;
-  background:var(--red-bg); border:1px solid var(--red-b);
-}
-.status-dot { width:5px; height:5px; border-radius:50%; }
-.dot-green { background:var(--green); box-shadow:0 0 4px var(--green); animation:pulse 2s infinite; }
-.dot-red   { background:var(--red); }
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:live-blink 1.2s ease-in-out infinite}
+@keyframes live-blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,.6)}50%{opacity:.7;box-shadow:0 0 0 5px rgba(16,185,129,0)}}
+.clock{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.3px}
 
-/* ── TABLE ────────────────────────────────────────────────────── */
-.table-wrap { overflow-x:auto; padding:0 0 4px; }
-table { width:100%; border-collapse:collapse; font-size:11.5px; }
-thead th {
-  background:rgba(0,0,0,0.3);
-  color:var(--muted);
-  padding:9px 10px;
-  text-align:left;
-  font-size:9px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.8px;
-  border-bottom:1px solid var(--border);
+/* ═══════════════════════════════════════════════════════════════
+   SECTION NAV TABS
+═══════════════════════════════════════════════════════════════ */
+.section-nav{
+  display:flex;gap:4px;padding:5px;
+  background:rgba(6,13,26,.88);
+  border:1px solid var(--border2);border-radius:14px;
+  backdrop-filter:blur(24px);
+  margin-bottom:16px;
+  box-shadow:0 2px 24px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05);
+  overflow-x:auto;position:relative;
+}
+.nav-tab{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:10px;
+  font-size:12px;font-weight:700;letter-spacing:.2px;
+  cursor:pointer;border:1px solid transparent;
+  transition:all .28s cubic-bezier(.4,0,.2,1);
+  white-space:nowrap;user-select:none;
+  color:var(--muted);background:transparent;
+  position:relative;
+}
+.nav-tab:hover{
+  color:var(--text);background:var(--glass2);
+  border-color:var(--border2);
+  transform:translateY(-1px);
+}
+.tab-icon{font-size:16px;transition:transform .28s;line-height:1}
+.nav-tab:hover .tab-icon{transform:scale(1.2) rotate(-5deg)}
+
+.tab-badge{
+  display:flex;align-items:center;gap:4px;
+  font-size:9px;font-weight:800;padding:2px 7px;border-radius:20px;
+  background:rgba(255,255,255,.06);color:var(--muted);
+  transition:all .28s;border:1px solid transparent;
+  min-width:22px;justify-content:center;
+}
+.tab-badge .pulse-dot{
+  width:5px;height:5px;border-radius:50%;background:currentColor;
+  display:none;animation:live-blink 1.2s infinite;
+}
+
+/* Active states */
+.nav-tab.act-all{
+  color:#fff;border-color:rgba(168,85,247,.4);
+  background:linear-gradient(135deg,rgba(168,85,247,.18),rgba(59,130,246,.18));
+  box-shadow:0 0 20px rgba(168,85,247,.15),0 4px 12px rgba(0,0,0,.3);
+}
+.nav-tab.act-swing{color:var(--emerald);background:var(--emerald-d);border-color:var(--emerald-b);box-shadow:0 0 16px rgba(52,211,153,.12)}
+.nav-tab.act-options{color:var(--purple);background:var(--purple-d);border-color:var(--purple-b);box-shadow:0 0 16px rgba(168,85,247,.12)}
+.nav-tab.act-nse{color:var(--blue);background:var(--blue-d);border-color:var(--blue-b);box-shadow:0 0 16px rgba(59,130,246,.12)}
+.nav-tab.act-gold{color:var(--gold);background:var(--gold-d);border-color:var(--gold-b);box-shadow:0 0 16px rgba(245,158,11,.12)}
+.nav-tab.act-btc{color:var(--orange);background:var(--orange-d);border-color:var(--orange-b);box-shadow:0 0 16px rgba(249,115,22,.12)}
+
+.nav-tab.act-all    .tab-badge{background:rgba(168,85,247,.25);color:var(--purple);border-color:var(--purple-b)}
+.nav-tab.act-swing  .tab-badge{background:var(--emerald-g);color:var(--emerald);border-color:var(--emerald-b)}
+.nav-tab.act-options .tab-badge{background:var(--purple-g);color:var(--purple);border-color:var(--purple-b)}
+.nav-tab.act-nse    .tab-badge{background:var(--blue-g);color:var(--blue);border-color:var(--blue-b)}
+.nav-tab.act-gold   .tab-badge{background:var(--gold-g);color:var(--gold);border-color:var(--gold-b)}
+.nav-tab.act-btc    .tab-badge{background:var(--orange-g);color:var(--orange);border-color:var(--orange-b)}
+
+.nav-tab[data-open="true"] .pulse-dot{display:block}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLOBAL STATS STRIP
+═══════════════════════════════════════════════════════════════ */
+.stats-strip{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin-bottom:16px}
+.stat-card{
+  padding:16px 16px 14px;border-radius:var(--r2);
+  background:var(--glass);border:1px solid var(--border);
+  position:relative;overflow:hidden;
+  transition:transform .22s,border-color .22s,box-shadow .22s;
+  cursor:default;
+}
+.stat-card:hover{transform:translateY(-4px);border-color:var(--border3);box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.stat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.02),transparent);pointer-events:none}
+.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:var(--r2) var(--r2) 0 0}
+.sc-green::after {background:linear-gradient(90deg,var(--green),rgba(16,185,129,0))}
+.sc-red::after   {background:linear-gradient(90deg,var(--red),rgba(239,68,68,0))}
+.sc-blue::after  {background:linear-gradient(90deg,var(--blue),rgba(59,130,246,0))}
+.sc-gold::after  {background:linear-gradient(90deg,var(--gold),rgba(245,158,11,0))}
+.sc-purple::after{background:linear-gradient(90deg,var(--purple),rgba(168,85,247,0))}
+.sc-white::after {background:linear-gradient(90deg,#94a3b8,transparent)}
+.sc-orange::after{background:linear-gradient(90deg,var(--orange),rgba(249,115,22,0))}
+.sc-cyan::after  {background:linear-gradient(90deg,var(--cyan),rgba(6,182,212,0))}
+.stat-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:8px;font-weight:600}
+.stat-val{font-size:28px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.sc-green .stat-val {color:var(--green)}
+.sc-red   .stat-val {color:var(--red)}
+.sc-blue  .stat-val {color:var(--blue)}
+.sc-gold  .stat-val {color:var(--gold)}
+.sc-white .stat-val {color:#f1f5f9}
+.sc-orange .stat-val{color:var(--orange)}
+.sc-cyan  .stat-val {color:var(--cyan)}
+.sc-purple .stat-val{color:var(--purple)}
+.stat-sub{font-size:9px;color:var(--muted2);margin-top:5px}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION PANELS
+═══════════════════════════════════════════════════════════════ */
+.section-panel{display:none}
+.section-panel.visible{display:block;animation:panelIn .38s cubic-bezier(.4,0,.2,1)}
+@keyframes panelIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* In "All" mode each panel gets a slight stagger */
+.section-panel.all-visible{
+  display:block;
+  animation:panelIn .4s cubic-bezier(.4,0,.2,1) both;
+}
+.all-visible:nth-child(1){animation-delay:.04s}
+.all-visible:nth-child(2){animation-delay:.09s}
+.all-visible:nth-child(3){animation-delay:.14s}
+.all-visible:nth-child(4){animation-delay:.19s}
+.all-visible:nth-child(5){animation-delay:.24s}
+
+/* ── Section separator ──────────────────────────────────────── */
+.section-sep{
+  display:none;height:1px;margin:8px 0;
+  background:linear-gradient(90deg,transparent,var(--border2),transparent);
+}
+.section-sep.visible{display:block}
+
+/* Content card wrapper */
+.content-card{
+  background:rgba(6,12,24,.7);border:1px solid var(--border);border-radius:var(--r);
+  margin-bottom:12px;overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.4);
+  transition:box-shadow .25s;
+}
+.content-card:hover{box-shadow:0 6px 40px rgba(0,0,0,.55)}
+
+.content-card-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 22px;border-bottom:1px solid var(--border);
+  background:rgba(0,0,0,.25);position:relative;cursor:pointer;
+  transition:background .2s;
+  user-select:none;
+}
+.content-card-header:hover{background:rgba(255,255,255,.02)}
+.content-card-header::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:0 2px 2px 0;
+}
+.acc-blue    .content-card-header::before{background:linear-gradient(180deg,var(--blue),transparent)}
+.acc-gold    .content-card-header::before{background:linear-gradient(180deg,var(--gold),transparent)}
+.acc-orange  .content-card-header::before{background:linear-gradient(180deg,var(--orange),transparent)}
+.acc-purple  .content-card-header::before{background:linear-gradient(180deg,var(--purple),transparent)}
+.acc-emerald .content-card-header::before{background:linear-gradient(180deg,var(--emerald),transparent)}
+.acc-white   .content-card-header::before{background:linear-gradient(180deg,#94a3b8,transparent)}
+
+/* Left glow effect on cards */
+.acc-blue   {box-shadow:0 4px 24px rgba(0,0,0,.4),-4px 0 32px rgba(59,130,246,.08)}
+.acc-gold   {box-shadow:0 4px 24px rgba(0,0,0,.4),-4px 0 32px rgba(245,158,11,.08)}
+.acc-orange {box-shadow:0 4px 24px rgba(0,0,0,.4),-4px 0 32px rgba(249,115,22,.08)}
+.acc-purple {box-shadow:0 4px 24px rgba(0,0,0,.4),-4px 0 32px rgba(168,85,247,.08)}
+.acc-emerald{box-shadow:0 4px 24px rgba(0,0,0,.4),-4px 0 32px rgba(52,211,153,.08)}
+
+.card-title{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;flex:1}
+.card-title-right{display:flex;align-items:center;gap:10px}
+.collapse-arrow{font-size:12px;color:var(--muted);transition:transform .28s;margin-left:4px}
+.collapsed .collapse-arrow{transform:rotate(-90deg)}
+.card-body{transition:all .32s cubic-bezier(.4,0,.2,1)}
+.card-body.collapsed{display:none}
+
+.section-badge{
+  font-size:9.5px;font-weight:800;padding:3px 11px;border-radius:20px;letter-spacing:.5px;border:1px solid;
   white-space:nowrap;
-  position:sticky; top:0;
 }
-tbody tr {
-  border-bottom:1px solid rgba(255,255,255,0.03);
-  transition:background .12s;
+.badge-nse    {color:var(--blue);   background:var(--blue-g);   border-color:var(--blue-b)}
+.badge-gold   {color:var(--gold);   background:var(--gold-g);   border-color:var(--gold-b)}
+.badge-btc    {color:var(--orange); background:var(--orange-g); border-color:var(--orange-b)}
+.badge-options{color:var(--purple); background:var(--purple-g); border-color:var(--purple-b)}
+.badge-swing  {color:var(--emerald);background:var(--emerald-g);border-color:var(--emerald-b)}
+.badge-all    {color:var(--purple); background:var(--purple-g); border-color:var(--purple-b)}
+
+/* ── Strategy tag bar ──────────────────────────────────────── */
+.strat-bar{
+  display:flex;gap:6px;flex-wrap:wrap;padding:10px 22px;
+  border-bottom:1px solid var(--border);background:rgba(0,0,0,.15);
 }
-tbody tr:hover { background:rgba(255,255,255,0.03); }
-tbody td { padding:10px 10px; vertical-align:middle; }
-
-/* table cell helpers */
-.dim    { color:var(--muted2); }
-.nowrap { white-space:nowrap; font-size:10.5px; }
-.sym    { font-weight:700; color:#f1f5f9; font-size:12px; }
-.num    { font-variant-numeric:tabular-nums; }
-.grn    { color:var(--green); }
-.red    { color:var(--red); }
-.blu    { color:var(--blue); }
-.pnl-pos { color:var(--green); font-weight:600; }
-.pnl-neg { color:var(--red);   font-weight:600; }
-
-/* ── DIRECTION BADGE ──────────────────────────────────────────── */
-.dir-badge {
-  display:inline-block; padding:2px 9px; border-radius:4px;
-  font-size:10px; font-weight:800; letter-spacing:.4px;
+.stag{
+  font-size:10px;padding:3px 10px;border-radius:6px;
+  background:var(--glass2);border:1px solid var(--border);color:var(--muted);white-space:nowrap;
 }
-.long  { color:var(--green); background:var(--green-bg); border:1px solid var(--green-b); }
-.short { color:var(--red);   background:var(--red-bg);   border:1px solid var(--red-b); }
+.stag strong{color:#94a3b8}
 
-/* ── STATUS BADGE ─────────────────────────────────────────────── */
-.badge {
-  display:inline-flex; align-items:center; gap:4px;
-  padding:3px 9px; border-radius:20px;
-  font-size:9.5px; font-weight:700; letter-spacing:.3px; white-space:nowrap;
+/* ── Mini stat row ─────────────────────────────────────────── */
+.mini-row{display:flex;gap:8px;padding:14px 22px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.mini{
+  background:var(--glass);border:1px solid var(--border);border-radius:var(--r3);
+  padding:10px 14px;flex:1;min-width:72px;transition:border-color .2s,transform .2s;
+  cursor:default;
 }
-.badge-win  { color:var(--green); background:var(--green-bg); border:1px solid var(--green-b); }
-.badge-loss { color:var(--red);   background:var(--red-bg);   border:1px solid var(--red-b); }
-.badge-open { color:var(--blue);  background:var(--blue-bg);  border:1px solid var(--blue-b); }
+.mini:hover{border-color:var(--border2);transform:translateY(-2px)}
+.mini-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;font-weight:600}
+.mini-val{font-size:19px;font-weight:800}
+.mv-green{color:var(--green)} .mv-red{color:var(--red)} .mv-blue{color:var(--blue)}
+.mv-gold{color:var(--gold)}   .mv-purple{color:var(--purple)} .mv-orange{color:var(--orange)}
+.mv-white{color:#f1f5f9}
 
-/* ── STRENGTH ─────────────────────────────────────────────────── */
-.str { font-size:10px; font-weight:700; }
-.str-excellent { color:var(--gold); }
-.str-good      { color:var(--green); }
-.str-weak      { color:var(--muted); }
-
-/* ── KILL ZONE TAG ────────────────────────────────────────────── */
-.kz-tag {
-  display:inline-block; padding:2px 7px; border-radius:4px;
-  font-size:9.5px; font-weight:700; letter-spacing:.3px;
-  background:rgba(255,255,255,0.05); color:var(--muted);
-  border:1px solid var(--border);
+/* ── Bot controls ──────────────────────────────────────────── */
+.ctrl-row{display:flex;align-items:center;gap:8px}
+.btn-ctrl{
+  font-size:11px;font-weight:700;padding:7px 16px;border-radius:7px;
+  border:1px solid;cursor:pointer;transition:all .2s;letter-spacing:.3px;
+  position:relative;overflow:hidden;
 }
-.kz-tag.KZ1  { color:var(--green);  background:rgba(16,185,129,.10);  border-color:rgba(16,185,129,.25); }
-.kz-tag.KZ2  { color:var(--gold);   background:rgba(245,158,11,.10);  border-color:rgba(245,158,11,.25); }
-.kz-tag.KZ3  { color:var(--blue);   background:rgba(59,130,246,.10);  border-color:rgba(59,130,246,.25); }
-.kz-tag.KZ-A { color:#c084fc;       background:rgba(192,132,252,.10); border-color:rgba(192,132,252,.25); }
-.kz-tag.KZ-L { color:var(--gold);   background:rgba(245,158,11,.10);  border-color:rgba(245,158,11,.25); }
-.kz-tag.KZ-NY{ color:var(--cyan);   background:rgba(6,182,212,.10);   border-color:rgba(6,182,212,.25); }
-
-/* ── SCORE BAR ────────────────────────────────────────────────── */
-.score-cell { display:flex; align-items:center; gap:6px; white-space:nowrap; }
-.score-num  { font-weight:700; color:var(--gold); font-size:12px; min-width:22px; }
-.score-pct  { font-size:9.5px; color:var(--muted2); min-width:30px; }
-.sbar-bg    { width:52px; height:4px; background:rgba(255,255,255,0.08); border-radius:2px; flex-shrink:0; }
-.sbar-fill  {
-  height:4px; border-radius:2px;
-  background:linear-gradient(90deg, #f59e0b, #10b981);
-  box-shadow:0 0 6px rgba(16,185,129,0.4);
-  transition:width .4s ease;
+.btn-ctrl::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.08);opacity:0;transition:opacity .15s}
+.btn-ctrl:hover::after{opacity:1}
+.btn-ctrl:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.btn-ctrl:active{transform:translateY(0)}
+.btn-pause {color:var(--gold);background:var(--gold-g);border-color:var(--gold-b)}
+.btn-resume{color:var(--green);background:var(--green-g);border-color:var(--green-b)}
+.pill-run{
+  display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;
+  color:var(--green);padding:5px 12px;border-radius:20px;
+  background:var(--green-g);border:1px solid var(--green-b);
+  box-shadow:0 0 12px rgba(16,185,129,.12);
 }
-
-/* ── PHASE SCORES ─────────────────────────────────────────────── */
-.phases { display:flex; flex-direction:column; gap:2px; }
-.phases span {
-  font-size:9.5px; color:var(--muted2);
-  background:rgba(255,255,255,0.03);
-  padding:1px 5px; border-radius:3px;
-  white-space:nowrap;
+.pill-pause{
+  display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;
+  color:var(--red);padding:5px 12px;border-radius:20px;
+  background:var(--red-g);border:1px solid var(--red-b);
 }
+.ctrl-dot{width:6px;height:6px;border-radius:50%}
+.dot-green{background:var(--green);box-shadow:0 0 6px var(--green);animation:live-blink 1.5s infinite}
+.dot-red  {background:var(--red)}
 
-/* ── REASONS ──────────────────────────────────────────────────── */
-.reasons { font-size:9.5px; color:var(--muted2); max-width:240px; line-height:1.6; }
-
-/* ── ASSET TAG (combined table) ───────────────────────────────── */
-.atag {
-  font-size:9px; font-weight:800; padding:2px 7px;
-  border-radius:3px; letter-spacing:.5px; border:1px solid;
+/* ═══════════════════════════════════════════════════════════════
+   TABLE
+═══════════════════════════════════════════════════════════════ */
+.table-wrap{overflow-x:auto;padding-bottom:4px}
+table{width:100%;border-collapse:collapse;font-size:11.5px}
+thead th{
+  background:rgba(0,0,0,.4);color:var(--muted);
+  padding:9px 11px;text-align:left;
+  font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;
+  border-bottom:1px solid var(--border2);white-space:nowrap;
+  position:sticky;top:0;z-index:2;
 }
-.atag-nse  { color:var(--blue);   background:var(--blue-bg);   border-color:var(--blue-b); }
-.atag-gold { color:var(--gold);   background:var(--gold-bg);   border-color:var(--gold-b); }
-.atag-btc  { color:var(--orange); background:var(--orange-bg); border-color:var(--orange-b); }
+tbody tr{border-bottom:1px solid rgba(255,255,255,.022);transition:background .12s}
+tbody tr:hover{background:rgba(255,255,255,.035)}
+.trow-anim{animation:fadeSlideIn .3s ease both}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+td{padding:10px 11px;vertical-align:middle}
+.dim{color:var(--muted2)} .nowrap{white-space:nowrap;font-size:10.5px}
+.sym{font-weight:800;color:#f1f5f9;font-size:12.5px}
+.num{font-variant-numeric:tabular-nums}
+.grn{color:var(--green)} .red{color:var(--red)} .blu{color:var(--blue)}
+.pnl-pos{color:var(--green);font-weight:700} .pnl-neg{color:var(--red);font-weight:700}
 
-/* ── EMPTY STATE ──────────────────────────────────────────────── */
-.empty-state {
-  text-align:center; padding:48px 20px;
-  color:var(--muted2);
+/* ── Table elements ────────────────────────────────────────── */
+.dir-badge{
+  display:inline-block;padding:3px 10px;border-radius:5px;
+  font-size:10px;font-weight:800;letter-spacing:.4px;border:1px solid;
 }
-.empty-icon  { font-size:36px; margin-bottom:12px; opacity:.5; }
-.empty-title { font-size:14px; font-weight:600; color:var(--muted); margin-bottom:6px; }
-.empty-sub   { font-size:12px; color:var(--muted2); }
+.long {color:var(--green);background:var(--green-g);border-color:var(--green-b)}
+.short{color:var(--red);  background:var(--red-g);  border-color:var(--red-b)}
 
-/* ── DIVIDER ──────────────────────────────────────────────────── */
-.divider { border:none; border-top:1px solid var(--border); margin:0; }
-
-/* ── FOOTER ───────────────────────────────────────────────────── */
-.footer {
-  text-align:center; padding:20px; color:var(--muted2);
-  font-size:11px; margin-top:4px;
+.badge{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:3px 9px;border-radius:20px;font-size:9.5px;font-weight:700;
+  letter-spacing:.3px;white-space:nowrap;border:1px solid;
 }
-.footer a { color:var(--muted); text-decoration:none; }
+.badge-win {color:var(--green);background:var(--green-g);border-color:var(--green-b)}
+.badge-loss{color:var(--red);  background:var(--red-g);  border-color:var(--red-b)}
+.badge-open{color:var(--blue); background:var(--blue-g); border-color:var(--blue-b)}
 
-/* ── OPTIONS SECTION ──────────────────────────────────────────── */
-.options-section .section-header::before { background:linear-gradient(180deg,#a855f7,transparent); }
-.badge-options {
-  color:#a855f7; background:rgba(168,85,247,.12);
-  border:1px solid rgba(168,85,247,.3);
-  font-size:10px; font-weight:800; padding:3px 9px;
-  border-radius:20px; letter-spacing:.5px;
-}
+.str{font-size:10px;font-weight:700}
+.str-excellent{color:var(--gold)} .str-strong{color:var(--emerald)}
+.str-good{color:var(--green)}     .str-weak{color:var(--muted)}
 
-/* Market ticker strip */
-.opt-ticker {
-  display:flex; gap:10px; flex-wrap:wrap; align-items:stretch;
-  padding:14px 20px; border-bottom:1px solid var(--border);
-  background:rgba(0,0,0,.15);
+.kz-tag{
+  display:inline-block;padding:2px 8px;border-radius:5px;
+  font-size:9.5px;font-weight:700;border:1px solid;
+  background:var(--glass);color:var(--muted);border-color:var(--border);
 }
-.opt-index-pill {
-  background:rgba(255,255,255,.04); border:1px solid var(--border2);
-  border-radius:10px; padding:12px 16px;
-  display:flex; flex-direction:column; gap:3px; min-width:150px;
-  transition:transform .2s;
-}
-.opt-index-pill:hover { transform:translateY(-2px); }
-.opt-up { border-color:rgba(16,185,129,.3); }
-.opt-dn { border-color:rgba(239,68,68,.3); }
+.kz-tag.KZ1{color:var(--green);background:var(--green-g);border-color:var(--green-b)}
+.kz-tag.KZ2{color:var(--gold); background:var(--gold-g); border-color:var(--gold-b)}
+.kz-tag.KZ3{color:var(--blue); background:var(--blue-g); border-color:var(--blue-b)}
+.kz-tag.KZ-A{color:#c084fc;background:rgba(192,132,252,.12);border-color:rgba(192,132,252,.3)}
+.kz-tag.KZ-L{color:var(--gold);background:var(--gold-g);border-color:var(--gold-b)}
+.kz-tag.KZ-NY{color:var(--cyan);background:var(--cyan-g);border-color:var(--cyan-b)}
 
-.opt-idx-name  { font-size:9px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.8px; }
-.opt-idx-price { font-size:22px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.1; }
-.opt-up .opt-idx-price { color:var(--green); }
-.opt-dn .opt-idx-price { color:var(--red); }
-.opt-idx-chg   { font-size:11px; font-weight:600; }
-.opt-up .opt-idx-chg { color:var(--green); }
-.opt-dn .opt-idx-chg { color:var(--red); }
-.opt-idx-exp   { font-size:9px; color:var(--muted2); margin-top:2px; }
-
-/* VIX pill */
-.opt-vix-pill {
-  background:rgba(255,255,255,.04); border:1px solid var(--border2);
-  border-radius:10px; padding:12px 16px;
-  display:flex; flex-direction:column; gap:3px; min-width:180px;
+.score-cell{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.score-num{font-weight:800;color:var(--gold);font-size:12.5px;min-width:24px}
+.score-pct{font-size:9px;color:var(--muted2);min-width:28px}
+.sbar-bg{width:48px;height:4px;background:rgba(255,255,255,.07);border-radius:2px;flex-shrink:0;overflow:hidden}
+.sbar-fill{
+  height:4px;border-radius:2px;
+  background:linear-gradient(90deg,var(--gold),var(--green));
+  box-shadow:0 0 6px rgba(16,185,129,.4);
+  transition:width .7s cubic-bezier(.4,0,.2,1);
 }
-.opt-vix-low     { border-color:rgba(16,185,129,.35); }
-.opt-vix-medium  { border-color:rgba(245,158,11,.35); }
-.opt-vix-high    { border-color:rgba(239,68,68,.35); }
-.opt-vix-very_high{ border-color:rgba(239,68,68,.6); background:rgba(239,68,68,.06); }
-.opt-vix-label   { font-size:10px; color:var(--muted); line-height:1.4; }
-.opt-vix-block   { font-size:10px; color:var(--red); font-weight:700; margin-top:4px; }
+.phases{display:flex;flex-direction:column;gap:2px}
+.phases span{font-size:9px;color:var(--muted2);background:var(--glass);padding:1px 6px;border-radius:3px;white-space:nowrap}
+.reasons{font-size:9.5px;color:var(--muted2);max-width:220px;line-height:1.6}
+.empty-state{text-align:center;padding:55px 20px;color:var(--muted2)}
+.empty-icon{font-size:42px;margin-bottom:14px;opacity:.35;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.empty-title{font-size:15px;font-weight:600;color:var(--muted);margin-bottom:8px}
+.empty-sub{font-size:12px;line-height:1.7}
 
-/* Summary mini */
-.opt-summary-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-.opt-mini {
-  background:rgba(255,255,255,.04); border:1px solid var(--border);
-  border-radius:8px; padding:8px 12px; text-align:center; min-width:60px;
+/* ═══════════════════════════════════════════════════════════════
+   OPTIONS SECTION STYLES
+═══════════════════════════════════════════════════════════════ */
+.opt-ticker{
+  display:flex;gap:10px;flex-wrap:wrap;padding:16px 22px;
+  border-bottom:1px solid var(--border);background:rgba(0,0,0,.18);align-items:stretch;
 }
-.om-label { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.6px; }
-.om-val   { font-size:18px; font-weight:700; color:#f1f5f9; }
+.opt-idx-pill{
+  background:var(--glass);border:1px solid var(--border2);border-radius:12px;
+  padding:14px 18px;display:flex;flex-direction:column;gap:4px;min-width:148px;
+  transition:transform .22s,box-shadow .22s,border-color .22s;cursor:default;
+}
+.opt-idx-pill:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.opt-up{border-color:rgba(16,185,129,.3)!important;background:rgba(16,185,129,.04)!important}
+.opt-dn{border-color:rgba(239,68,68,.3)!important;background:rgba(239,68,68,.04)!important}
+.oi-name{font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+.oi-price{font-size:23px;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
+.opt-up .oi-price{color:var(--green)} .opt-dn .oi-price{color:var(--red)}
+.oi-chg{font-size:11.5px;font-weight:700}
+.opt-up .oi-chg{color:var(--green)} .opt-dn .oi-chg{color:var(--red)}
+.oi-exp{font-size:9px;color:var(--muted2);margin-top:3px}
 
-.opt-section-label {
-  font-size:11px; color:var(--muted); font-weight:700;
-  text-transform:uppercase; letter-spacing:.7px; margin-bottom:12px;
+.opt-vix-pill{
+  background:var(--glass);border:1px solid var(--border2);border-radius:12px;
+  padding:14px 18px;display:flex;flex-direction:column;gap:4px;min-width:210px;
 }
+.vix-low    {border-color:var(--green-b)!important}
+.vix-medium {border-color:var(--gold-b)!important}
+.vix-high   {border-color:var(--orange-b)!important}
+.vix-very_high{border-color:var(--red-b)!important;background:rgba(239,68,68,.06)!important}
+.vix-num{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums}
+.vix-low .vix-num{color:var(--green)} .vix-medium .vix-num{color:var(--gold)}
+.vix-high .vix-num{color:var(--orange)} .vix-very_high .vix-num{color:var(--red)}
+.vix-lbl{font-size:10.5px;color:var(--muted);line-height:1.5}
+.vix-block-msg{font-size:11px;font-weight:700;color:var(--red);margin-top:3px;animation:live-blink 1.2s infinite}
+
+.opt-mini-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:4px}
+.opt-mini{
+  background:var(--glass);border:1px solid var(--border);border-radius:10px;
+  padding:10px 14px;text-align:center;min-width:64px;
+  transition:transform .2s,border-color .2s;cursor:default;
+}
+.opt-mini:hover{transform:translateY(-2px);border-color:var(--border2)}
+.om-l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px}
+.om-v{font-size:20px;font-weight:800;color:#f1f5f9}
 
 /* Option cards */
-.opt-cards {
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap:14px;
-  margin-bottom:16px;
+.opt-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;padding:18px 22px}
+.opt-card{
+  border:1px solid var(--border2);border-radius:var(--r);padding:18px;
+  display:flex;flex-direction:column;gap:11px;
+  background:rgba(8,14,24,.8);position:relative;overflow:hidden;
+  transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;
 }
-.opt-card {
-  border:1px solid var(--border2); border-radius:12px;
-  padding:16px; display:flex; flex-direction:column; gap:10px;
-  background:rgba(255,255,255,.03);
-  position:relative; overflow:hidden;
-  transition:transform .2s, box-shadow .2s;
-}
-.opt-card:hover { transform:translateY(-3px); box-shadow:0 10px 40px rgba(0,0,0,.45); }
-.opt-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
-.opt-card-call { border-color:rgba(16,185,129,.3); background:rgba(16,185,129,.04); }
-.opt-card-call::before { background:linear-gradient(90deg,var(--green),transparent); }
-.opt-card-put  { border-color:rgba(239,68,68,.3);   background:rgba(239,68,68,.04); }
-.opt-card-put::before  { background:linear-gradient(90deg,var(--red),transparent); }
+.opt-card:hover{transform:translateY(-5px);box-shadow:0 16px 50px rgba(0,0,0,.6)}
+.opt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.oc-call{border-color:var(--green-b);background:rgba(16,185,129,.04)}
+.oc-call::before{background:linear-gradient(90deg,var(--green),rgba(16,185,129,0))}
+.oc-put {border-color:var(--red-b);  background:rgba(239,68,68,.04)}
+.oc-put::before {background:linear-gradient(90deg,var(--red),rgba(239,68,68,0))}
 
-.opt-card-top  { display:flex; justify-content:space-between; align-items:flex-start; }
-.opt-card-index{ font-size:18px; font-weight:800; color:#f1f5f9; }
-.opt-card-type { font-size:12px; font-weight:700; margin-top:3px; }
-.oc-call { color:var(--green); }
-.oc-put  { color:var(--red); }
-.opt-kz  { font-size:9px; font-weight:700; padding:2px 7px; border-radius:4px;
-           background:rgba(255,255,255,.05); color:var(--muted); border:1px solid var(--border); }
+.opt-card-top{display:flex;justify-content:space-between;align-items:flex-start}
+.opt-idx-name{font-size:20px;font-weight:900;color:#f1f5f9}
+.opt-type-tag{font-size:12.5px;font-weight:700;margin-top:4px}
+.oc-call .opt-type-tag{color:var(--green)} .oc-put .opt-type-tag{color:var(--red)}
+.opt-strike-box{
+  background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:10px;
+  padding:13px;text-align:center;
+}
+.opt-strike-num{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums}
+.oc-call .opt-strike-num{color:var(--green)} .oc-put .opt-strike-num{color:var(--red)}
+.opt-strike-exp{font-size:10px;color:var(--muted2);margin-top:4px}
+.opt-strike-note{font-size:9.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+.opt-levels{display:flex;flex-direction:column;gap:5px}
+.opt-level-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:6px 10px;background:var(--glass);border-radius:6px;border:1px solid var(--border);font-size:12px;
+}
+.opt-ll{font-size:9.5px;color:var(--muted2);font-weight:600;min-width:85px}
+.opt-lv{font-weight:700;font-variant-numeric:tabular-nums}
+.opt-checklist{display:flex;gap:5px;flex-wrap:wrap}
+.opt-chk{font-size:9.5px;padding:3px 8px;border-radius:5px;font-weight:600;border:1px solid}
+.chk-ok{color:var(--green);background:var(--green-g);border-color:var(--green-b)}
+.chk-no{color:var(--red);  background:var(--red-g);  border-color:var(--red-b)}
 
-.opt-strike-box {
-  background:rgba(0,0,0,.3); border:1px solid var(--border);
-  border-radius:8px; padding:10px 12px; text-align:center;
+/* ═══════════════════════════════════════════════════════════════
+   SWING SECTION STYLES
+═══════════════════════════════════════════════════════════════ */
+.swing-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;padding:18px 22px}
+.swing-card{
+  border:1px solid var(--border2);border-radius:var(--r);padding:18px;
+  display:flex;flex-direction:column;gap:11px;
+  background:rgba(8,14,24,.8);position:relative;overflow:hidden;
+  transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;
 }
-.opt-strike-main { font-size:22px; font-weight:900; color:#f1f5f9; font-variant-numeric:tabular-nums; }
-.opt-card-call .opt-strike-main { color:var(--green); }
-.opt-card-put  .opt-strike-main { color:var(--red); }
-.opt-strike-exp  { font-size:10px; color:var(--muted2); margin-top:2px; }
-.opt-strike-note { font-size:9.5px; color:var(--muted); margin-top:3px; line-height:1.4; }
+.swing-card:hover{transform:translateY(-5px);box-shadow:0 16px 50px rgba(0,0,0,.6)}
+.swing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.sw-open {border-color:var(--blue-b);  background:rgba(59,130,246,.03)}
+.sw-open::before {background:linear-gradient(90deg,var(--blue),rgba(59,130,246,0))}
+.sw-win  {border-color:var(--green-b); background:rgba(16,185,129,.04)}
+.sw-win::before  {background:linear-gradient(90deg,var(--green),rgba(16,185,129,0))}
+.sw-loss {border-color:var(--red-b);   background:rgba(239,68,68,.03)}
+.sw-loss::before {background:linear-gradient(90deg,var(--red),rgba(239,68,68,0))}
 
-.opt-levels { display:flex; flex-direction:column; gap:5px; }
-.opt-level-row {
-  display:flex; justify-content:space-between; align-items:center;
-  font-size:11.5px; padding:5px 8px;
-  background:rgba(255,255,255,.02); border-radius:5px; border:1px solid var(--border);
+.sc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.sc-sym{font-size:19px;font-weight:900;color:#f1f5f9;letter-spacing:-.4px}
+.sc-date{font-size:9px;color:var(--muted2);margin-top:3px}
+.sc-badge-col{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.sc-score-pill{
+  font-size:11.5px;font-weight:700;color:var(--gold);
+  background:var(--gold-g);border:1px solid var(--gold-b);
+  padding:3px 10px;border-radius:20px;
 }
-.opt-ll { font-size:9.5px; color:var(--muted2); font-weight:600; min-width:80px; }
-.opt-lv { font-weight:700; font-variant-numeric:tabular-nums; }
+.sc-str{font-size:9.5px;font-weight:700}
+.sc-str.str-excellent{color:var(--gold)} .sc-str.str-strong{color:var(--emerald)} .sc-str.str-good{color:var(--green)}
 
-.opt-checklist { display:flex; gap:5px; flex-wrap:wrap; }
-.opt-chk {
-  font-size:9.5px; padding:2px 7px; border-radius:4px; font-weight:600;
-  border:1px solid var(--border);
-}
-.chk-ok { color:var(--green); background:rgba(16,185,129,.08); border-color:rgba(16,185,129,.25); }
-.chk-no { color:var(--red);   background:rgba(239,68,68,.08);  border-color:rgba(239,68,68,.25); }
+.sc-live{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:10px;padding:11px 14px}
+.sc-live-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px}
+.sc-live-price{font-size:23px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1}
+.sc-live-pnl{font-size:12.5px;font-weight:700;margin-top:4px}
+.sc-live-upd{font-size:9px;color:var(--muted2);margin-top:3px}
 
-/* ── SWING SECTION ────────────────────────────────────────────── */
-.swing-section .section-header::before { background:linear-gradient(180deg,#34d399,transparent); }
-.badge-swing {
-  color:#34d399; background:rgba(52,211,153,.12);
-  border:1px solid rgba(52,211,153,.3);
-  font-size:10px; font-weight:800; padding:3px 9px;
-  border-radius:20px; letter-spacing:.5px;
+.sc-prog-hdr{display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted2);margin-bottom:5px}
+.sc-prog-bg{height:7px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}
+.sc-prog-fill{
+  height:7px;border-radius:4px;
+  background:linear-gradient(90deg,var(--blue),var(--emerald));
+  transition:width .7s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
 }
+.sc-prog-fill::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+  animation:shimmer 2s infinite;
+}
+@keyframes shimmer{from{left:-100%}to{left:200%}}
+.sc-prog-fill.neg{background:linear-gradient(90deg,var(--red),var(--orange))}
+.sc-prog-fill.neg::after{display:none}
+.sc-dist-row{display:flex;justify-content:space-between;font-size:9.5px;margin-top:5px}
 
-/* card grid */
-.swing-cards {
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap:14px;
+.sc-levels{display:flex;flex-direction:column;gap:5px}
+.sc-level-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;padding:6px 10px;background:var(--glass);border-radius:6px;border:1px solid var(--border);
 }
-.swing-card {
-  background:rgba(255,255,255,0.03);
-  border:1px solid var(--border2);
-  border-radius:12px;
-  padding:16px;
-  display:flex; flex-direction:column; gap:12px;
-  transition:transform .2s, box-shadow .2s;
-  position:relative; overflow:hidden;
-}
-.swing-card:hover { transform:translateY(-3px); box-shadow:0 10px 40px rgba(0,0,0,0.45); }
-.swing-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
-.swing-open::before { background:linear-gradient(90deg,var(--blue),transparent); }
-.swing-win::before  { background:linear-gradient(90deg,var(--green),transparent); }
-.swing-loss::before { background:linear-gradient(90deg,var(--red),transparent); }
-.swing-win  { border-color:rgba(16,185,129,.25); background:rgba(16,185,129,.04); }
-.swing-loss { border-color:rgba(239,68,68,.25);  background:rgba(239,68,68,.04); }
+.sc-ll{font-size:9.5px;color:var(--muted2);font-weight:600;min-width:55px}
+.sc-lv{font-weight:700;font-variant-numeric:tabular-nums}
+.t1-hit{text-decoration:line-through;opacity:.4}
 
-/* header row */
-.sc-top { display:flex; justify-content:space-between; align-items:flex-start; }
-.sc-symbol { font-size:18px; font-weight:800; color:#f1f5f9; letter-spacing:-.4px; }
-.sc-badge-row { display:flex; flex-direction:column; align-items:flex-end; gap:3px; }
-.sc-score-pill {
-  font-size:11px; font-weight:700; color:var(--gold);
-  background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.3);
-  padding:2px 8px; border-radius:20px;
-}
-.sc-strength { font-size:9.5px; font-weight:700; }
-.str-excellent { color:var(--gold); }
-.str-strong    { color:#34d399; }
-.str-good      { color:var(--green); }
+.sc-inds{display:flex;gap:5px;flex-wrap:wrap}
+.sc-ind{font-size:9.5px;padding:3px 8px;border-radius:5px;background:var(--glass2);border:1px solid var(--border);color:var(--muted2)}
+.sc-reasons{display:flex;flex-direction:column;gap:3px}
+.sc-reason{font-size:9.5px;color:var(--muted2);line-height:1.5}
+.sc-reason::before{content:"✦ ";color:var(--muted)}
+.sc-status-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 
-/* live price block */
-.sc-live {
-  background:rgba(0,0,0,0.25);
-  border:1px solid var(--border);
-  border-radius:8px; padding:10px 12px;
-}
-.sc-live-label { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
-.sc-live-price { font-size:22px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1; }
-.sc-live-pnl   { font-size:12px; font-weight:700; margin-top:3px; }
-.sc-live-updated { font-size:9px; color:var(--muted2); margin-top:3px; }
+/* ═══════════════════════════════════════════════════════════════
+   ASSET TAG + MISC
+═══════════════════════════════════════════════════════════════ */
+.atag{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:.5px;border:1px solid}
+.atag-nse {color:var(--blue);  background:var(--blue-g);  border-color:var(--blue-b)}
+.atag-gold{color:var(--gold);  background:var(--gold-g);  border-color:var(--gold-b)}
+.atag-btc {color:var(--orange);background:var(--orange-g);border-color:var(--orange-b)}
 
-/* progress toward target */
-.sc-progress { }
-.sc-progress-header {
-  display:flex; justify-content:space-between;
-  font-size:9.5px; color:var(--muted2); margin-bottom:5px;
+.opt-section-lbl{
+  font-size:11px;color:var(--muted);font-weight:700;
+  text-transform:uppercase;letter-spacing:.7px;padding:16px 22px 4px;
 }
-.sc-progress-bar-bg {
-  height:6px; background:rgba(255,255,255,0.07);
-  border-radius:3px; overflow:hidden;
-}
-.sc-progress-bar-fill {
-  height:6px; border-radius:3px;
-  background:linear-gradient(90deg, var(--blue), #34d399);
-  transition:width .5s ease;
-}
-.sc-progress-bar-fill.negative { background:linear-gradient(90deg, var(--red), #f97316); }
-.sc-dist-row {
-  display:flex; justify-content:space-between;
-  font-size:9.5px; margin-top:5px;
-}
+.divider-line{border:none;border-top:1px solid var(--border);margin:4px 0}
 
-/* price levels */
-.sc-levels { display:flex; flex-direction:column; gap:6px; }
-.sc-level-row {
-  display:flex; justify-content:space-between; align-items:center;
-  font-size:11.5px; padding:5px 8px;
-  background:rgba(255,255,255,0.03);
-  border-radius:5px; border:1px solid var(--border);
+/* ── Footer ────────────────────────────────────────────────── */
+.footer{
+  text-align:center;padding:22px;font-size:11px;color:var(--muted2);margin-top:8px;
+  border-top:1px solid var(--border);
 }
-.sc-level-label { font-size:9.5px; color:var(--muted2); font-weight:600; min-width:55px; }
-.sc-level-val   { font-weight:700; font-variant-numeric:tabular-nums; }
-.sc-t1-hit { text-decoration:line-through; opacity:.6; }
+.footer a{color:var(--blue);text-decoration:none}
 
-/* indicators row */
-.sc-indicators {
-  display:flex; gap:6px; flex-wrap:wrap;
-}
-.sc-ind {
-  font-size:9.5px; padding:2px 8px; border-radius:4px;
-  background:rgba(255,255,255,0.04); border:1px solid var(--border);
-  color:var(--muted2);
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════════════════════ */
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.stat-val{animation:countUp .55s cubic-bezier(.4,0,.2,1) both}
+.stat-card:nth-child(1) .stat-val{animation-delay:.05s}
+.stat-card:nth-child(2) .stat-val{animation-delay:.10s}
+.stat-card:nth-child(3) .stat-val{animation-delay:.15s}
+.stat-card:nth-child(4) .stat-val{animation-delay:.20s}
+.stat-card:nth-child(5) .stat-val{animation-delay:.25s}
+.stat-card:nth-child(6) .stat-val{animation-delay:.30s}
+.stat-card:nth-child(7) .stat-val{animation-delay:.35s}
+.stat-card:nth-child(8) .stat-val{animation-delay:.40s}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET (≤1200px)
+═══════════════════════════════════════════════════════════════ */
+@media(max-width:1200px){
+  .stats-strip{grid-template-columns:repeat(4,1fr)}
+  .topbar-center{display:none}
 }
 
-.sc-status-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-.sc-reasons    { display:flex; flex-direction:column; gap:3px; }
-.sc-reason     { font-size:9.5px; color:var(--muted2); line-height:1.5; }
-.sc-reason::before { content:"✦ "; color:var(--muted); }
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE (≤768px)
+═══════════════════════════════════════════════════════════════ */
+@media(max-width:768px){
+  /* ── Page & layout ─────────────────────────────────────── */
+  .page{padding:10px 10px 20px}
 
-/* ── RESPONSIVE ───────────────────────────────────────────────── */
-@media(max-width:900px) {
-  .global-strip { grid-template-columns:repeat(4,1fr); }
-  .topbar { flex-direction:column; gap:10px; align-items:flex-start; }
+  /* ── Top bar ───────────────────────────────────────────── */
+  .topbar{
+    padding:12px 14px;gap:10px;
+    flex-wrap:wrap;justify-content:space-between;
+  }
+  .brand-logo{width:34px;height:34px;font-size:15px}
+  .brand-text .brand-name{font-size:15px}
+  .brand-text .brand-sub{font-size:9px}
+  .topbar-center{display:none!important}
+  .live-pill{padding:5px 11px;font-size:9px}
+  .clock{font-size:10px}
+
+  /* ── Section nav ───────────────────────────────────────── */
+  .section-nav{
+    padding:4px;gap:3px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .section-nav::-webkit-scrollbar{display:none}
+  .nav-tab{padding:9px 13px;font-size:11px;gap:5px;border-radius:8px}
+  .tab-icon{font-size:14px}
+  .tab-badge{font-size:9px;padding:2px 6px;min-width:20px}
+
+  /* ── Stats strip ───────────────────────────────────────── */
+  .stats-strip{grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+  .stat-val{font-size:22px}
+  .stat-card{padding:13px 14px 11px}
+  .stat-sub{display:none}
+
+  /* ── Content card header ───────────────────────────────── */
+  .content-card-header{
+    flex-direction:column;align-items:flex-start;gap:10px;padding:13px 16px;
+  }
+  .card-title{font-size:13px;gap:8px;flex-wrap:wrap}
+  .card-title-right{
+    width:100%;display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  }
+  .collapse-arrow{margin-left:auto}
+
+  /* ── Strategy bar ──────────────────────────────────────── */
+  .strat-bar{
+    flex-wrap:nowrap;overflow-x:auto;padding:9px 14px;gap:5px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .strat-bar::-webkit-scrollbar{display:none}
+
+  /* ── Mini stat row ─────────────────────────────────────── */
+  .mini-row{padding:10px 14px;gap:6px}
+  .mini{padding:8px 10px;min-width:64px}
+  .mini-val{font-size:16px}
+
+  /* ── Opt ticker ────────────────────────────────────────── */
+  .opt-ticker{
+    overflow-x:auto;flex-wrap:nowrap;padding:12px 14px;gap:8px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .opt-ticker::-webkit-scrollbar{display:none}
+  .opt-idx-pill{min-width:130px;padding:11px 13px}
+  .oi-price{font-size:19px}
+  .opt-vix-pill{min-width:160px;padding:11px 13px}
+  .vix-num{font-size:21px}
+  .opt-mini-row{margin-left:0;margin-top:4px}
+
+  /* ── Option & Swing cards ──────────────────────────────── */
+  .opt-cards{grid-template-columns:1fr;padding:12px 14px;gap:12px}
+  .swing-cards{grid-template-columns:1fr;padding:12px 14px;gap:12px}
+  .opt-card,.swing-card{padding:15px}
+  .opt-idx-name{font-size:17px}
+  .opt-strike-num{font-size:22px}
+  .sc-sym{font-size:17px}
+  .sc-live-price{font-size:20px}
+
+  /* ── Bot control buttons ───────────────────────────────── */
+  .btn-ctrl{padding:8px 14px;font-size:11px}
+  .pill-run,.pill-pause{padding:5px 10px;font-size:9.5px}
+
+  /* ════════════════════════════════════════════════════════
+     TABLE → MOBILE CARD CONVERSION
+     js adds data-label attrs; CSS turns each td into a row
+  ════════════════════════════════════════════════════════ */
+  .table-wrap{padding:0}
+
+  /* Scroll hint gradient on right side */
+  .table-wrap::after{
+    content:'';position:absolute;right:0;top:0;bottom:0;
+    width:24px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(2,5,16,.7));
+    border-radius:0 var(--r2) var(--r2) 0;
+  }
+  .table-wrap{position:relative}
+
+  table{display:block;width:100%}
+  thead{display:none}
+  tbody{display:block;padding:10px 14px;display:flex;flex-direction:column;gap:10px}
+  tbody tr{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--border2);
+    border-radius:var(--r2);
+    overflow:hidden;
+    background:rgba(8,14,24,.8);
+    position:relative;
+    animation:fadeSlideIn .3s ease both;
+  }
+  /* Full-width cells */
+  tbody tr td:nth-child(1),  /* # */
+  tbody tr td:nth-child(18)  /* Reasons */
+  { display:none } /* hide # and reasons on mobile — save space */
+
+  tbody td{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:8px 10px;font-size:11.5px;
+    border-right:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  tbody td:nth-child(even){border-right:none}
+  tbody td::before{
+    content:attr(data-label);
+    font-size:8.5px;color:var(--muted);font-weight:700;
+    text-transform:uppercase;letter-spacing:.7px;
+    margin-bottom:3px;display:block;
+  }
+  /* Full-width: Symbol + Direction row */
+  tbody tr td:nth-child(3){grid-column:1;font-size:14px}
+  tbody tr td:nth-child(4){grid-column:2}
+
+  /* Status spans full row on mobile */
+  tbody tr td:nth-child(14){
+    grid-column:1/-1;border-right:none;flex-direction:row;
+    align-items:center;justify-content:space-between;
+    background:rgba(0,0,0,.2);
+  }
+
+  /* Phase scores — hide on mobile */
+  tbody tr td:nth-child(17){display:none}
+
+  /* P&L row — span full width */
+  tbody tr td:nth-child(15),tbody tr td:nth-child(16){
+    font-size:13px;font-weight:700;
+  }
 }
-@media(max-width:600px) {
-  .global-strip { grid-template-columns:repeat(2,1fr); }
-  .page { padding:12px; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — SMALL PHONES (≤420px)
+═══════════════════════════════════════════════════════════════ */
+@media(max-width:420px){
+  .stats-strip{grid-template-columns:repeat(2,1fr);gap:6px}
+  .stat-val{font-size:20px}
+  .nav-tab{padding:8px 10px;font-size:10.5px;gap:4px}
+  .tab-icon{font-size:13px}
+  .tab-badge{display:none}  /* hide count badge on very small screens */
+  .section-badge{font-size:9px;padding:2px 8px}
+  .brand-text .brand-sub{display:none}
+  .opt-mini-row{display:none}  /* hide mini stats row inside options ticker */
+  .vix-lbl{font-size:9.5px}
 }
 </style>
 </head>
 <body>
+<div class="bg-canvas">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+</div>
+
 <div class="page">
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  TOP NAV                                                   -->
-<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════
+     TOP HEADER BAR
+═══════════════════════════════════════════════════════════════ -->
 <nav class="topbar">
-  <div class="topbar-left">
-    <div class="logo">
-      <div class="logo-dot"></div>
-      TradingBot <span style="color:var(--muted);font-weight:400">Pro</span>
-    </div>
-    <div class="asset-chips">
-      <span class="chip chip-nse">NSE India</span>
-      <span class="chip chip-gold">Gold XAUUSD</span>
-      <span class="chip chip-btc">Bitcoin BTC</span>
+  <div class="topbar-brand">
+    <div class="brand-logo">📊</div>
+    <div class="brand-text">
+      <div class="brand-name">Trading<em>Bot</em> Pro</div>
+      <div class="brand-sub">NSE · Options · Swing · Gold · Bitcoin</div>
     </div>
   </div>
-  <div class="topbar-right">
-    <div class="live-indicator">
-      <div class="live-dot"></div> LIVE
+
+  <!-- Live Index Ticker (center) -->
+  <div class="topbar-center" id="topTicker">
+    {% if options_market.nifty %}
+    <div class="ticker-item {{ 'ti-up' if options_market.nifty_chg is not none and options_market.nifty_chg>=0 else 'ti-dn' }}">
+      <div>
+        <div class="ti-name">NIFTY</div>
+        <div class="ti-price">{{ '{:,.0f}'.format(options_market.nifty) }}</div>
+      </div>
+      {% if options_market.nifty_chg is not none %}<div class="ti-chg">{{ '▲' if options_market.nifty_chg>=0 else '▼' }} {{ options_market.nifty_chg }}%</div>{% endif %}
     </div>
-    <div class="clock">{{ now }}</div>
+    {% endif %}
+    {% if options_market.banknifty %}
+    <div class="ticker-item {{ 'ti-up' if options_market.banknifty_chg is not none and options_market.banknifty_chg>=0 else 'ti-dn' }}">
+      <div>
+        <div class="ti-name">BANKNIFTY</div>
+        <div class="ti-price">{{ '{:,.0f}'.format(options_market.banknifty) }}</div>
+      </div>
+      {% if options_market.banknifty_chg is not none %}<div class="ti-chg">{{ '▲' if options_market.banknifty_chg>=0 else '▼' }} {{ options_market.banknifty_chg }}%</div>{% endif %}
+    </div>
+    {% endif %}
+    {% if options_market.sensex %}
+    <div class="ticker-item {{ 'ti-up' if options_market.sensex_chg is not none and options_market.sensex_chg>=0 else 'ti-dn' }}">
+      <div>
+        <div class="ti-name">SENSEX</div>
+        <div class="ti-price">{{ '{:,.0f}'.format(options_market.sensex) }}</div>
+      </div>
+      {% if options_market.sensex_chg is not none %}<div class="ti-chg">{{ '▲' if options_market.sensex_chg>=0 else '▼' }} {{ options_market.sensex_chg }}%</div>{% endif %}
+    </div>
+    {% endif %}
+    <div class="ticker-item vix-{{ options_market.vix_risk }}" style="border-width:1px">
+      <div>
+        <div class="ti-name">India VIX</div>
+        <div class="ti-price" style="font-size:17px">{{ options_market.vix }}</div>
+      </div>
+      {% if options_market.vix_block %}<div class="ti-chg" style="color:var(--red)">⛔ BLOCKED</div>{% endif %}
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <div class="live-pill"><div class="live-dot"></div>LIVE</div>
+    <div class="clock" id="liveClock">{{ now }}</div>
   </div>
 </nav>
 
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  GLOBAL SUMMARY STRIP                                      -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="global-strip">
-  <div class="gcard c-white">
-    <div class="gcard-label">All Signals</div>
-    <div class="gcard-value">{{ overall.total }}</div>
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION NAV TABS
+═══════════════════════════════════════════════════════════════ -->
+<nav class="section-nav" id="sectionNav">
+  <div class="nav-tab act-all" data-tab="all" onclick="switchTab('all',this)" title="Show all sections">
+    <span class="tab-icon">⚡</span> All Signals
+    <span class="tab-badge" id="cnt-all">{{ overall.total }}</span>
   </div>
-  <div class="gcard c-green">
-    <div class="gcard-label">Target Hit</div>
-    <div class="gcard-value">{{ overall.wins }}</div>
+  <div class="nav-tab" data-tab="swing" onclick="switchTab('swing',this)" title="Swing Trading Picks">
+    <span class="tab-icon">📈</span> Swing
+    <span class="tab-badge" id="cnt-swing">
+      <span class="pulse-dot"></span>
+      {{ swing_summary.total }}
+    </span>
   </div>
-  <div class="gcard c-red">
-    <div class="gcard-label">SL Hit</div>
-    <div class="gcard-value">{{ overall.losses }}</div>
+  <div class="nav-tab" data-tab="options" onclick="switchTab('options',this)" title="Options — Nifty / BankNifty / Sensex">
+    <span class="tab-icon">🎯</span> Options
+    <span class="tab-badge" id="cnt-options">
+      <span class="pulse-dot"></span>
+      {{ options_summary.total }}
+    </span>
   </div>
-  <div class="gcard c-blue">
-    <div class="gcard-label">Open</div>
-    <div class="gcard-value">{{ overall.open }}</div>
+  <div class="nav-tab" data-tab="nse" onclick="switchTab('nse',this)" title="NSE India Intraday">
+    <span class="tab-icon">🇮🇳</span> Intraday
+    <span class="tab-badge" id="cnt-nse">
+      <span class="pulse-dot"></span>
+      {{ nse_summary.total }}
+    </span>
   </div>
-  <div class="gcard c-gold">
-    <div class="gcard-label">Win Rate</div>
-    <div class="gcard-value">{{ overall.win_rate }}%</div>
+  <div class="nav-tab" data-tab="gold" onclick="switchTab('gold',this)" title="Gold XAUUSD">
+    <span class="tab-icon">🥇</span> Gold
+    <span class="tab-badge" id="cnt-gold">
+      <span class="pulse-dot"></span>
+      {{ gold_summary.total }}
+    </span>
   </div>
-  <div class="gcard {{ 'c-green' if overall.total_pnl >= 0 else 'c-red' }}">
-    <div class="gcard-label">Total P&amp;L</div>
-    <div class="gcard-value" style="font-size:18px">{% if overall.total_pnl >= 0 %}+{% endif %}{{ overall.total_pnl }}</div>
+  <div class="nav-tab" data-tab="btc" onclick="switchTab('btc',this)" title="Bitcoin BTC">
+    <span class="tab-icon">₿</span> Bitcoin
+    <span class="tab-badge" id="cnt-btc">
+      <span class="pulse-dot"></span>
+      {{ btc_summary.total }}
+    </span>
   </div>
-  <div class="gcard c-purple">
-    <div class="gcard-label">Avg Score</div>
-    <div class="gcard-value">{{ overall.avg_score }}</div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     GLOBAL STATS STRIP (always visible)
+═══════════════════════════════════════════════════════════════ -->
+<div class="stats-strip" id="statsStrip">
+  <div class="stat-card sc-white">
+    <div class="stat-label">All Signals</div>
+    <div class="stat-val">{{ overall.total }}</div>
+    <div class="stat-sub">across all assets</div>
   </div>
-  <div class="gcard c-cyan">
-    <div class="gcard-label">Excellent</div>
-    <div class="gcard-value">{{ overall.excellent }}</div>
+  <div class="stat-card sc-green">
+    <div class="stat-label">Target Hit</div>
+    <div class="stat-val">{{ overall.wins }}</div>
+    <div class="stat-sub">✓ successful exits</div>
+  </div>
+  <div class="stat-card sc-red">
+    <div class="stat-label">SL Hit</div>
+    <div class="stat-val">{{ overall.losses }}</div>
+    <div class="stat-sub">✗ stopped out</div>
+  </div>
+  <div class="stat-card sc-blue">
+    <div class="stat-label">Open</div>
+    <div class="stat-val">{{ overall.open }}</div>
+    <div class="stat-sub">● live positions</div>
+  </div>
+  <div class="stat-card sc-gold">
+    <div class="stat-label">Win Rate</div>
+    <div class="stat-val">{{ overall.win_rate }}%</div>
+    <div class="stat-sub">closed trades</div>
+  </div>
+  <div class="stat-card {{ 'sc-green' if overall.total_pnl>=0 else 'sc-red' }}">
+    <div class="stat-label">Total P&amp;L</div>
+    <div class="stat-val" style="font-size:20px">{% if overall.total_pnl>=0 %}+{% endif %}{{ overall.total_pnl }}</div>
+    <div class="stat-sub">points net</div>
+  </div>
+  <div class="stat-card sc-purple">
+    <div class="stat-label">Avg Score</div>
+    <div class="stat-val">{{ overall.avg_score }}</div>
+    <div class="stat-sub">signal quality</div>
+  </div>
+  <div class="stat-card sc-cyan">
+    <div class="stat-label">Excellent</div>
+    <div class="stat-val">{{ overall.excellent }}</div>
+    <div class="stat-sub">score ≥ 110/150</div>
   </div>
 </div>
 
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  OPTIONS — Nifty / BankNifty / Sensex                     -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="asset-section options-section">
-  <div class="section-header">
-    <div class="section-title">
-      <span class="asset-badge badge-options">🎯 OPTIONS</span>
-      Nifty · Bank Nifty · Sensex
-      <span style="color:var(--muted);font-size:12px;font-weight:400">— Sure-shot calls only (score ≥ 70/100)</span>
+<!-- ═══════════════════════════════════════════════════════════
+     SWING PANEL  (id=panel-swing)
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-panel" id="panel-swing" data-section="swing">
+  <div class="content-card acc-emerald">
+    <div class="content-card-header" onclick="toggleSection('swing')">
+      <div class="card-title">
+        <span class="section-badge badge-swing">📈 SWING PICKS</span>
+        Weekly NSE Swing Stocks — Mon→Fri (5 days)
+      </div>
+      <div class="card-title-right">
+        <span class="badge badge-win">{{ swing_summary.wins }} wins</span>
+        <span class="badge badge-loss">{{ swing_summary.losses }} losses</span>
+        <span style="font-size:11px;color:var(--gold);font-weight:700">{{ swing_summary.win_rate }}% WR</span>
+        <span style="font-size:11px;color:var(--muted)">Week <strong style="color:#94a3b8">{{ swing_summary.week }}</strong></span>
+        <span class="collapse-arrow">▼</span>
+      </div>
     </div>
-    <div class="section-right">
-      {% if bot_state.get('OPTIONS',{}).get('paused') %}
-        <div class="status-paused"><div class="status-dot dot-red"></div>PAUSED</div>
-        <button class="btn-ctrl btn-resume" onclick="control('OPTIONS','resume')">▶ Resume</button>
-      {% else %}
-        <div class="status-running"><div class="status-dot dot-green"></div>RUNNING</div>
-        <button class="btn-ctrl btn-pause" onclick="control('OPTIONS','pause')">⏸ Pause</button>
-      {% endif %}
-    </div>
-  </div>
+    <div class="card-body" id="body-swing">
+      <div class="strat-bar">
+        <span class="stag">Universe <strong>NIFTY 50 + Midcaps (75+)</strong></span>
+        <span class="stag">Hold <strong>Mon→Fri (5 days)</strong></span>
+        <span class="stag">Score <strong>≥ 55/100</strong></span>
+        <span class="stag">Max SL <strong>4%</strong></span>
+        <span class="stag">Min R:R <strong>1:2.0</strong></span>
+        <span class="stag">Filter <strong>Price &gt; EMA200 &gt; EMA50</strong></span>
+        <span class="stag">Scan <strong>Every Monday 09:15 IST</strong></span>
+      </div>
 
-  <!-- Live Market Ticker -->
-  <div class="opt-ticker">
-    <div class="opt-index-pill {% if options_market.nifty_chg is not none and options_market.nifty_chg >= 0 %}opt-up{% else %}opt-dn{% endif %}">
-      <span class="opt-idx-name">NIFTY</span>
-      <span class="opt-idx-price">{{ '{:,.0f}'.format(options_market.nifty or 0) if options_market.nifty else '—' }}</span>
-      {% if options_market.nifty_chg is not none %}
-      <span class="opt-idx-chg">{% if options_market.nifty_chg >= 0 %}▲{% else %}▼{% endif %} {{ options_market.nifty_chg }}%</span>
-      {% endif %}
-      <span class="opt-idx-exp">Exp: {{ options_expiry.NIFTY }}</span>
-    </div>
-    <div class="opt-index-pill {% if options_market.banknifty_chg is not none and options_market.banknifty_chg >= 0 %}opt-up{% else %}opt-dn{% endif %}">
-      <span class="opt-idx-name">BANKNIFTY</span>
-      <span class="opt-idx-price">{{ '{:,.0f}'.format(options_market.banknifty or 0) if options_market.banknifty else '—' }}</span>
-      {% if options_market.banknifty_chg is not none %}
-      <span class="opt-idx-chg">{% if options_market.banknifty_chg >= 0 %}▲{% else %}▼{% endif %} {{ options_market.banknifty_chg }}%</span>
-      {% endif %}
-      <span class="opt-idx-exp">Exp: {{ options_expiry.BANKNIFTY }}</span>
-    </div>
-    <div class="opt-index-pill {% if options_market.sensex_chg is not none and options_market.sensex_chg >= 0 %}opt-up{% else %}opt-dn{% endif %}">
-      <span class="opt-idx-name">SENSEX</span>
-      <span class="opt-idx-price">{{ '{:,.0f}'.format(options_market.sensex or 0) if options_market.sensex else '—' }}</span>
-      {% if options_market.sensex_chg is not none %}
-      <span class="opt-idx-chg">{% if options_market.sensex_chg >= 0 %}▲{% else %}▼{% endif %} {{ options_market.sensex_chg }}%</span>
-      {% endif %}
-      <span class="opt-idx-exp">Exp: {{ options_expiry.SENSEX }}</span>
-    </div>
-
-    <!-- India VIX -->
-    <div class="opt-vix-pill opt-vix-{{ options_market.vix_risk }}">
-      <span class="opt-idx-name">INDIA VIX</span>
-      <span class="opt-idx-price" style="font-size:20px">{{ options_market.vix }}</span>
-      <span class="opt-vix-label">{{ options_market.vix_label.split('(')[0].strip() }}</span>
-      {% if options_market.vix_block %}
-      <span class="opt-vix-block">⛔ OPTIONS BLOCKED</span>
-      {% endif %}
-    </div>
-
-    <!-- Summary mini cards -->
-    <div class="opt-summary-row">
-      <div class="opt-mini"><div class="om-label">Calls</div><div class="om-val">{{ options_summary.total }}</div></div>
-      <div class="opt-mini"><div class="om-label">Wins</div><div class="om-val" style="color:var(--green)">{{ options_summary.wins }}</div></div>
-      <div class="opt-mini"><div class="om-label">Losses</div><div class="om-val" style="color:var(--red)">{{ options_summary.losses }}</div></div>
-      <div class="opt-mini"><div class="om-label">Win Rate</div><div class="om-val" style="color:var(--gold)">{{ options_summary.win_rate }}%</div></div>
-    </div>
-  </div>
-
-  <!-- Strategy bar -->
-  <div class="strat-bar">
-    <span class="stag">Indices <strong>Nifty · BankNifty · Sensex</strong></span>
-    <span class="stag">Min Score <strong>70/100</strong></span>
-    <span class="stag">KZ1 <strong>09:15–10:00</strong></span>
-    <span class="stag">KZ2 <strong>11:15–11:45</strong></span>
-    <span class="stag">KZ3 <strong>13:30–14:15</strong></span>
-    <span class="stag">VIX block <strong>≥ 25</strong></span>
-    <span class="stag">Strategy <strong>SMC + ICT 15min</strong></span>
-    <span class="stag">Scan <strong>Every 5 min</strong></span>
-  </div>
-
-  <!-- Active calls -->
-  {% if options_active %}
-  <div style="padding:16px 20px 0">
-    <div class="opt-section-label">🔴 Active Options Calls</div>
-    <div class="opt-cards">
-      {% for s in options_active %}
-      {% set is_call = s.option_type == 'CALL' %}
-      <div class="opt-card {% if is_call %}opt-card-call{% else %}opt-card-put{% endif %}">
-
-        <!-- Top row -->
-        <div class="opt-card-top">
-          <div>
-            <div class="opt-card-index">{{ s.index }}</div>
-            <div class="opt-card-type {% if is_call %}oc-call{% else %}oc-put{% endif %}">
-              {{ '🟢 BUY CALL' if is_call else '🔴 BUY PUT' }}
+      {% if swing_week_picks %}
+      <div style="padding:6px 22px 0">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:12px 0">
+          This Week — {{ swing_summary.week }}
+        </div>
+      </div>
+      <div class="swing-cards">
+        {% for p in swing_week_picks %}
+        {% set pnl=p.pnl_pct if p.pnl_pct is not none else 0 %}
+        {% set prog=p.progress_pct if p.progress_pct is not none else 0 %}
+        <div class="swing-card {{ 'sw-win' if p.status=='TARGET HIT' else 'sw-loss' if p.status=='SL HIT' else 'sw-open' }}"
+             style="animation:fadeSlideIn .4s ease {{ loop.index0*0.08 }}s both">
+          <div class="sc-top">
+            <div><div class="sc-sym">{{ p.symbol }}</div><div class="sc-date">📅 {{ p.scan_date }} · 5 days</div></div>
+            <div class="sc-badge-col">
+              <span class="sc-score-pill">{{ p.score }}/100</span>
+              <span class="sc-str str-{{ (p.signal_strength or 'good')|lower }}">{{ p.signal_strength }}</span>
             </div>
           </div>
-          <div style="text-align:right">
-            <div class="sc-score-pill">{{ s.score }}/100</div>
-            <div class="opt-kz" style="margin-top:4px">{{ s.kill_zone }}</div>
+          <div class="sc-live">
+            <div class="sc-live-lbl">{% if p.status=='OPEN' %}Live Price{% elif p.status=='TARGET HIT' %}Exit (T2 Hit){% else %}Exit (SL Hit){% endif %}</div>
+            <div class="sc-live-price {{ 'grn' if pnl>=0 else 'red' }}">₹{{ p.current_price or p.exit_price or p.entry }}</div>
+            <div class="sc-live-pnl {{ 'pnl-pos' if pnl>=0 else 'pnl-neg' }}">{% if pnl>=0 %}▲ +{% else %}▼ {% endif %}{{ pnl }}%&nbsp;·&nbsp;{% if p.pnl_pts is not none %}{% if p.pnl_pts>=0 %}+{% endif %}₹{{ p.pnl_pts }}{% endif %}</div>
+            {% if p.last_updated %}<div class="sc-live-upd">{{ p.last_updated }}</div>{% endif %}
           </div>
+          {% if p.status=='OPEN' %}
+          <div class="sc-prog">
+            <div class="sc-prog-hdr"><span>Progress → Target</span><span style="color:{{ 'var(--green)' if prog>=0 else 'var(--red)' }}">{{ prog }}%</span></div>
+            <div class="sc-prog-bg"><div class="sc-prog-fill {{ 'neg' if prog<0 else '' }}" style="width:{{ [prog,0]|max|int }}%"></div></div>
+            <div class="sc-dist-row"><span style="color:var(--red)">SL buffer: {{ p.dist_sl_pct }}%</span><span style="color:var(--green)">To T2: {{ p.dist_t2_pct }}%</span></div>
+          </div>
+          {% endif %}
+          <div class="sc-levels">
+            <div class="sc-level-row"><span class="sc-ll">Entry</span><span class="sc-lv">₹{{ p.entry }}</span><span style="font-size:9px;color:var(--muted2)">base</span></div>
+            <div class="sc-level-row"><span class="sc-ll">T1 (50% exit)</span><span class="sc-lv grn {{ 't1-hit' if p.t1_hit else '' }}">₹{{ p.t1 }}</span><span style="font-size:9px;color:var(--muted2)">1:{{ p.rr_t1 }}</span></div>
+            <div class="sc-level-row" style="border-color:var(--green-b)"><span class="sc-ll">T2 Target</span><span class="sc-lv grn" style="font-size:13px;font-weight:900">₹{{ p.t2 }}</span><span style="font-size:9px;color:var(--green)">1:{{ p.rr_t2 }}</span></div>
+            <div class="sc-level-row" style="border-color:var(--red-b)"><span class="sc-ll">Stop Loss</span><span class="sc-lv red">₹{{ p.sl }}</span><span style="font-size:9px;color:var(--red)">-{{ p.sl_pct }}%</span></div>
+          </div>
+          <div class="sc-inds">
+            <span class="sc-ind">RSI {{ p.rsi }}</span>
+            <span class="sc-ind">Vol {{ p.vol_ratio }}×</span>
+            <span class="sc-ind">MACD {{ '✅' if p.macd_bullish else '❌' }}</span>
+            <span class="sc-ind">EMA21 ₹{{ p.ema21 }}</span>
+          </div>
+          <div class="sc-status-row">
+            {% if p.status=='TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span><span class="pnl-pos">+{{ pnl }}%</span>
+            {% elif p.status=='SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span><span class="pnl-neg">{{ pnl }}%</span>
+            {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
+          </div>
+          <div class="sc-reasons">{% for r in p.reasons[:3] %}<div class="sc-reason">{{ r }}</div>{% endfor %}</div>
         </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state"><div class="empty-icon">📅</div><div class="empty-title">No picks this week yet</div><div class="empty-sub">Scanner runs every Monday 09:15 IST<br>Picks top 7 NSE stocks for the week</div></div>
+      {% endif %}
 
-        <!-- Strike + expiry -->
-        <div class="opt-strike-box">
-          <div class="opt-strike-main">
-            {{ s.strike | int }} {{ s.option_type }}
-          </div>
-          <div class="opt-strike-exp">Expiry: {{ s.expiry }}</div>
-          <div class="opt-strike-note">{{ s.strike_note }}</div>
+      {% if swing_all_picks %}
+      <hr class="divider-line" style="margin:0 22px">
+      <div style="padding:14px 22px 4px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.7px">All Historical Picks</div></div>
+      <div class="table-wrap" style="padding:0 22px 18px">
+      <table>
+        <thead><tr><th>Week</th><th>Symbol</th><th>Score/100</th><th>Strength</th><th>Entry</th><th>T1</th><th>T2</th><th>SL</th><th>R:R</th><th>Live</th><th>Status</th><th>P&amp;L%</th><th>RSI</th><th>Vol</th><th>Reasons</th></tr></thead>
+        <tbody>
+        {% for p in swing_all_picks %}
+        <tr class="trow-anim" style="animation-delay:{{ loop.index0*0.03 }}s">
+          <td class="dim nowrap">{{ p.week }}</td>
+          <td class="sym">{{ p.symbol }}</td>
+          <td><div class="score-cell"><span class="score-num" style="font-size:11px">{{ p.score }}</span><div class="sbar-bg"><div class="sbar-fill" style="width:{{ p.score }}%"></div></div></div></td>
+          <td><span class="str str-{{ (p.signal_strength or 'good')|lower }}">{{ p.signal_strength }}</span></td>
+          <td class="num">₹{{ p.entry }}</td><td class="num grn">₹{{ p.t1 }}</td>
+          <td class="num grn" style="font-weight:700">₹{{ p.t2 }}</td><td class="num red">₹{{ p.sl }}</td>
+          <td class="dim">1:{{ p.rr_t2 }}</td>
+          <td class="num blu">{% if p.exit_price %}₹{{ p.exit_price }}{% else %}—{% endif %}</td>
+          <td>{% if p.status=='TARGET HIT' %}<span class="badge badge-win">✓ HIT</span>{% elif p.status=='SL HIT' %}<span class="badge badge-loss">✗ SL</span>{% else %}<span class="badge badge-open">● OPEN</span>{% endif %}</td>
+          <td class="{{ 'pnl-pos' if p.pnl_pct is not none and p.pnl_pct>=0 else 'pnl-neg' if p.pnl_pct is not none else 'dim' }}">{% if p.pnl_pct is not none %}{% if p.pnl_pct>=0 %}+{% endif %}{{ p.pnl_pct }}%{% else %}—{% endif %}</td>
+          <td class="dim">{{ p.rsi }}</td><td class="dim">{{ p.vol_ratio }}×</td>
+          <td><div class="reasons">{{ p.reasons|join(' · ') if p.reasons else '—' }}</div></td>
+        </tr>{% endfor %}
+        </tbody>
+      </table></div>
+      {% endif %}
+    </div><!-- card-body -->
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     OPTIONS PANEL  (id=panel-options)
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-panel" id="panel-options" data-section="options">
+  <div class="content-card acc-purple">
+    <div class="content-card-header" onclick="toggleSection('options')">
+      <div class="card-title">
+        <span class="section-badge badge-options">🎯 OPTIONS</span>
+        Nifty · Bank Nifty · Sensex — Sure Shot Calls Only
+      </div>
+      <div class="card-title-right">
+        {% if bot_state.get('OPTIONS',{}).get('paused') %}
+          <div class="pill-pause"><div class="ctrl-dot dot-red"></div>PAUSED</div>
+          <button class="btn-ctrl btn-resume" onclick="event.stopPropagation();control('OPTIONS','resume')">▶ Resume</button>
+        {% else %}
+          <div class="pill-run"><div class="ctrl-dot dot-green"></div>RUNNING</div>
+          <button class="btn-ctrl btn-pause" onclick="event.stopPropagation();control('OPTIONS','pause')">⏸ Pause</button>
+        {% endif %}
+        <span class="collapse-arrow">▼</span>
+      </div>
+    </div>
+    <div class="card-body" id="body-options">
+      <!-- Live Index Ticker -->
+      <div class="opt-ticker">
+        <div class="opt-idx-pill {{ 'opt-up' if options_market.nifty_chg is not none and options_market.nifty_chg>=0 else 'opt-dn' }}">
+          <div class="oi-name">NIFTY 50</div>
+          <div class="oi-price">{{ '{:,.0f}'.format(options_market.nifty) if options_market.nifty else '—' }}</div>
+          {% if options_market.nifty_chg is not none %}<div class="oi-chg">{{ '▲' if options_market.nifty_chg>=0 else '▼' }} {{ options_market.nifty_chg }}%</div>{% endif %}
+          <div class="oi-exp">Expiry: {{ options_expiry.NIFTY }}</div>
         </div>
-
-        <!-- Index levels -->
-        <div class="opt-levels">
-          <div class="opt-level-row">
-            <span class="opt-ll">Entry (Index)</span>
-            <span class="opt-lv">{{ '{:,.0f}'.format(s.entry) }}</span>
-          </div>
-          <div class="opt-level-row" style="border-color:rgba(16,185,129,.3)">
-            <span class="opt-ll">T1</span>
-            <span class="opt-lv grn">{{ '{:,.0f}'.format(s.t1) }}</span>
-          </div>
-          <div class="opt-level-row" style="border-color:rgba(16,185,129,.4)">
-            <span class="opt-ll">T2 Target</span>
-            <span class="opt-lv grn" style="font-weight:800;font-size:13px">{{ '{:,.0f}'.format(s.t2) }}</span>
-            <span style="font-size:9px;color:var(--green)">R:R 1:{{ s.rr }}</span>
-          </div>
-          <div class="opt-level-row" style="border-color:rgba(239,68,68,.3)">
-            <span class="opt-ll">SL (Index)</span>
-            <span class="opt-lv red">{{ '{:,.0f}'.format(s.sl) }}</span>
-            <span style="font-size:9px;color:var(--red)">-{{ s.sl_pct }}%</span>
-          </div>
+        <div class="opt-idx-pill {{ 'opt-up' if options_market.banknifty_chg is not none and options_market.banknifty_chg>=0 else 'opt-dn' }}">
+          <div class="oi-name">BANK NIFTY</div>
+          <div class="oi-price">{{ '{:,.0f}'.format(options_market.banknifty) if options_market.banknifty else '—' }}</div>
+          {% if options_market.banknifty_chg is not none %}<div class="oi-chg">{{ '▲' if options_market.banknifty_chg>=0 else '▼' }} {{ options_market.banknifty_chg }}%</div>{% endif %}
+          <div class="oi-exp">Expiry: {{ options_expiry.BANKNIFTY }}</div>
         </div>
+        <div class="opt-idx-pill {{ 'opt-up' if options_market.sensex_chg is not none and options_market.sensex_chg>=0 else 'opt-dn' }}">
+          <div class="oi-name">SENSEX</div>
+          <div class="oi-price">{{ '{:,.0f}'.format(options_market.sensex) if options_market.sensex else '—' }}</div>
+          {% if options_market.sensex_chg is not none %}<div class="oi-chg">{{ '▲' if options_market.sensex_chg>=0 else '▼' }} {{ options_market.sensex_chg }}%</div>{% endif %}
+          <div class="oi-exp">Expiry: {{ options_expiry.SENSEX }}</div>
+        </div>
+        <div class="opt-vix-pill vix-{{ options_market.vix_risk }}">
+          <div class="oi-name">INDIA VIX</div>
+          <div class="vix-num">{{ options_market.vix }}</div>
+          <div class="vix-lbl">{{ options_market.vix_label.split('(')[0].strip() }}</div>
+          {% if options_market.vix_block %}<div class="vix-block-msg">⛔ OPTIONS BLOCKED</div>{% endif %}
+        </div>
+        <div class="opt-mini-row">
+          <div class="opt-mini"><div class="om-l">Calls</div><div class="om-v">{{ options_summary.total }}</div></div>
+          <div class="opt-mini"><div class="om-l">Wins</div><div class="om-v" style="color:var(--green)">{{ options_summary.wins }}</div></div>
+          <div class="opt-mini"><div class="om-l">Losses</div><div class="om-v" style="color:var(--red)">{{ options_summary.losses }}</div></div>
+          <div class="opt-mini"><div class="om-l">Win %</div><div class="om-v" style="color:var(--gold)">{{ options_summary.win_rate }}%</div></div>
+          <div class="opt-mini"><div class="om-l">Open</div><div class="om-v" style="color:var(--blue)">{{ options_summary.open }}</div></div>
+        </div>
+      </div>
 
-        <!-- Checklist -->
-        <div class="opt-checklist">
+      <div class="strat-bar">
+        <span class="stag">Score <strong>≥ 70/100</strong></span>
+        <span class="stag">KZ1 <strong>09:15–10:00 IST</strong></span>
+        <span class="stag">KZ2 <strong>11:15–11:45 IST</strong></span>
+        <span class="stag">KZ3 <strong>13:30–14:15 IST</strong></span>
+        <span class="stag">VIX block <strong>≥ 25</strong></span>
+        <span class="stag">Scan <strong>Every 5 min</strong></span>
+        <span class="stag">SMC + ICT <strong>15min charts</strong></span>
+      </div>
+
+      {% if options_active %}
+      <div class="opt-section-lbl">🔴 Active Calls</div>
+      <div class="opt-cards">
+        {% for s in options_active %}
+        {% set ic = s.option_type == 'CALL' %}
+        <div class="opt-card {{ 'oc-call' if ic else 'oc-put' }}" style="animation:fadeSlideIn .4s ease {{ loop.index0*0.08 }}s both">
+          <div class="opt-card-top">
+            <div>
+              <div class="opt-idx-name">{{ s.index }}</div>
+              <div class="opt-type-tag">{{ '🟢 BUY CALL' if ic else '🔴 BUY PUT' }}</div>
+            </div>
+            <div style="text-align:right">
+              <div class="sc-score-pill">{{ s.score }}/100</div>
+              <div style="font-size:9px;color:var(--muted2);margin-top:5px">{{ s.kill_zone }}</div>
+            </div>
+          </div>
+          <div class="opt-strike-box">
+            <div class="opt-strike-num">{{ s.strike|int }} {{ s.option_type }}</div>
+            <div class="opt-strike-exp">Expiry: {{ s.expiry }}</div>
+            <div class="opt-strike-note">{{ s.strike_note }}</div>
+          </div>
+          <div class="opt-levels">
+            <div class="opt-level-row"><span class="opt-ll">Entry (Index)</span><span class="opt-lv">{{ '{:,.0f}'.format(s.entry) }}</span></div>
+            <div class="opt-level-row" style="border-color:var(--green-b)"><span class="opt-ll">T1</span><span class="opt-lv grn">{{ '{:,.0f}'.format(s.t1) }}</span></div>
+            <div class="opt-level-row" style="border-color:var(--green-b)"><span class="opt-ll">T2 Target</span><span class="opt-lv grn" style="font-weight:900;font-size:14px">{{ '{:,.0f}'.format(s.t2) }}</span><span style="font-size:9px;color:var(--green)">R:R 1:{{ s.rr }}</span></div>
+            <div class="opt-level-row" style="border-color:var(--red-b)"><span class="opt-ll">SL</span><span class="opt-lv red">{{ '{:,.0f}'.format(s.sl) }}</span><span style="font-size:9px;color:var(--red)">-{{ s.sl_pct }}%</span></div>
+          </div>
           {% set chk = s.must_have_checklist %}
-          <span class="opt-chk {% if chk.bos_or_choch_15m %}chk-ok{% else %}chk-no{% endif %}">
-            {{ '✓' if chk.bos_or_choch_15m else '✗' }} BOS/CHOCH
-          </span>
-          <span class="opt-chk {% if chk.inside_kill_zone %}chk-ok{% else %}chk-no{% endif %}">
-            {{ '✓' if chk.inside_kill_zone else '✗' }} Kill Zone
-          </span>
-          <span class="opt-chk {% if chk.vix_safe %}chk-ok{% else %}chk-no{% endif %}">
-            {{ '✓' if chk.vix_safe else '✗' }} VIX Safe
-          </span>
-          <span class="opt-chk {% if chk.order_block %}chk-ok{% else %}chk-no{% endif %}">
-            {{ '✓' if chk.order_block else '✗' }} OB
-          </span>
-          <span class="opt-chk {% if chk.liquidity_sweep %}chk-ok{% else %}chk-no{% endif %}">
-            {{ '✓' if chk.liquidity_sweep else '✗' }} Sweep
-          </span>
-        </div>
-
-        <!-- Reasons -->
-        <div class="sc-reasons" style="margin-top:4px">
-          {% for r in s.reasons[:3] %}<div class="sc-reason">{{ r }}</div>{% endfor %}
-        </div>
-
-        <!-- Status -->
-        <div class="sc-status-row" style="margin-top:6px">
-          {% if s.status == 'TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>
-            {% if s.pnl_pct is not none %}<span class="pnl-pos">+{{ s.pnl_pct }}%</span>{% endif %}
-          {% elif s.status == 'SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>
-            {% if s.pnl_pct is not none %}<span class="pnl-neg">{{ s.pnl_pct }}%</span>{% endif %}
-          {% else %}<span class="badge badge-open">● OPEN</span>
-            {% if s.exit_price %}<span class="blu">{{ '{:,.0f}'.format(s.exit_price) }}</span>{% endif %}
-          {% endif %}
-          <span style="font-size:9px;color:var(--muted2);margin-left:auto">{{ s.datetime }}</span>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-  {% else %}
-  <div class="empty-state">
-    <div class="empty-icon">📡</div>
-    <div class="empty-title">Scanning for sure-shot options calls…</div>
-    <div class="empty-sub">Score ≥ 70/100 required · All 3 must-haves required · VIX must be below 25<br>Scans fire every 5 min during Kill Zones (KZ1 / KZ2 / KZ3)</div>
-  </div>
-  {% endif %}
-
-  <!-- History table -->
-  {% if options_history %}
-  <div style="padding:12px 20px 16px">
-    <div class="opt-section-label" style="border-top:1px solid var(--border);padding-top:14px">📋 Options History</div>
-    <div class="table-wrap" style="margin-top:10px">
-    <table>
-      <thead>
-        <tr>
-          <th>Date/Time</th><th>Index</th><th>Call</th><th>Score</th><th>Strike</th>
-          <th>Expiry</th><th>Entry</th><th>T1</th><th>T2</th><th>SL</th><th>R:R</th>
-          <th>Zone</th><th>VIX</th><th>Live Price</th><th>Status</th><th>P&L %</th><th>Reasons</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for s in options_history %}
-      <tr>
-        <td class="dim nowrap">{{ s.datetime }}</td>
-        <td class="sym">{{ s.index }}</td>
-        <td>
-          {% if s.option_type == 'CALL' %}
-            <span class="dir-badge long">CALL</span>
-          {% else %}
-            <span class="dir-badge short">PUT</span>
-          {% endif %}
-        </td>
-        <td>
-          <div class="score-cell">
-            <span class="score-num">{{ s.score }}</span>
-            <div class="sbar-bg"><div class="sbar-fill" style="width:{{ s.score }}%"></div></div>
+          <div class="opt-checklist">
+            <span class="opt-chk {{ 'chk-ok' if chk.bos_or_choch_15m else 'chk-no' }}">{{ '✓' if chk.bos_or_choch_15m else '✗' }} BOS/CHOCH</span>
+            <span class="opt-chk {{ 'chk-ok' if chk.inside_kill_zone else 'chk-no' }}">{{ '✓' if chk.inside_kill_zone else '✗' }} KZ</span>
+            <span class="opt-chk {{ 'chk-ok' if chk.vix_safe else 'chk-no' }}">{{ '✓' if chk.vix_safe else '✗' }} VIX</span>
+            <span class="opt-chk {{ 'chk-ok' if chk.order_block else 'chk-no' }}">{{ '✓' if chk.order_block else '✗' }} OB</span>
+            <span class="opt-chk {{ 'chk-ok' if chk.liquidity_sweep else 'chk-no' }}">{{ '✓' if chk.liquidity_sweep else '✗' }} Sweep</span>
           </div>
-        </td>
-        <td class="num" style="color:var(--gold);font-weight:700">{{ s.strike | int }} {{ s.option_type }}</td>
-        <td class="dim nowrap">{{ s.expiry }}</td>
-        <td class="num">{{ '{:,.0f}'.format(s.entry) }}</td>
-        <td class="num grn">{{ '{:,.0f}'.format(s.t1) }}</td>
-        <td class="num grn" style="font-weight:700">{{ '{:,.0f}'.format(s.t2) }}</td>
-        <td class="num red">{{ '{:,.0f}'.format(s.sl) }}</td>
-        <td class="dim">1:{{ s.rr }}</td>
-        <td>
-          {% set kz = (s.kill_zone if s.kill_zone else '?')|replace(' ','') %}
-          <span class="kz-tag {{ kz }}">{{ s.kill_zone or '?' }}</span>
-        </td>
-        <td class="dim">{{ s.vix }}</td>
-        <td class="num blu">{% if s.exit_price %}{{ '{:,.0f}'.format(s.exit_price) }}{% else %}—{% endif %}</td>
-        <td>
-          {% if s.status == 'TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>
-          {% elif s.status == 'SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>
-          {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
-        </td>
-        <td class="{{ 'pnl-pos' if s.pnl_pct is not none and s.pnl_pct >= 0 else 'pnl-neg' if s.pnl_pct is not none else 'dim' }}">
-          {% if s.pnl_pct is not none %}{% if s.pnl_pct >= 0 %}+{% endif %}{{ s.pnl_pct }}%{% else %}—{% endif %}
-        </td>
-        <td><div class="reasons">{{ s.reasons|join(' · ') if s.reasons else '—' }}</div></td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
+          <div class="sc-reasons">{% for r in s.reasons[:3] %}<div class="sc-reason">{{ r }}</div>{% endfor %}</div>
+          <div class="sc-status-row">
+            {% if s.status=='TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>{% if s.pnl_pct is not none %}<span class="pnl-pos">+{{ s.pnl_pct }}%</span>{% endif %}
+            {% elif s.status=='SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>{% if s.pnl_pct is not none %}<span class="pnl-neg">{{ s.pnl_pct }}%</span>{% endif %}
+            {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
+            <span style="font-size:9px;color:var(--muted2);margin-left:auto">{{ s.datetime }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state"><div class="empty-icon">🎯</div><div class="empty-title">Scanning for sure-shot options calls…</div><div class="empty-sub">Score ≥ 70/100 + all 3 must-haves + VIX &lt; 25<br>Scans every 5 min during KZ1 / KZ2 / KZ3</div></div>
+      {% endif %}
+
+      {% if options_history %}
+      <div class="opt-section-lbl" style="border-top:1px solid var(--border);padding-top:16px">📋 Options History (last 30)</div>
+      <div class="table-wrap" style="padding:0 22px 18px">
+      <table>
+        <thead><tr><th>Date/Time</th><th>Index</th><th>Call</th><th>Score</th><th>Strike</th><th>Expiry</th><th>Entry</th><th>T1</th><th>T2</th><th>SL</th><th>R:R</th><th>Zone</th><th>VIX</th><th>Live</th><th>Status</th><th>P&amp;L%</th><th>Reasons</th></tr></thead>
+        <tbody>
+        {% for s in options_history %}
+        <tr class="trow-anim" style="animation-delay:{{ loop.index0*0.03 }}s">
+          <td class="dim nowrap">{{ s.datetime }}</td>
+          <td class="sym">{{ s.index }}</td>
+          <td><span class="dir-badge {{ 'long' if s.option_type=='CALL' else 'short' }}">{{ s.option_type }}</span></td>
+          <td><div class="score-cell"><span class="score-num">{{ s.score }}</span><div class="sbar-bg"><div class="sbar-fill" style="width:{{ s.score }}%"></div></div></div></td>
+          <td class="num" style="color:var(--gold);font-weight:700">{{ s.strike|int }} {{ s.option_type }}</td>
+          <td class="dim nowrap">{{ s.expiry }}</td>
+          <td class="num">{{ '{:,.0f}'.format(s.entry) }}</td>
+          <td class="num grn">{{ '{:,.0f}'.format(s.t1) }}</td>
+          <td class="num grn" style="font-weight:700">{{ '{:,.0f}'.format(s.t2) }}</td>
+          <td class="num red">{{ '{:,.0f}'.format(s.sl) }}</td>
+          <td class="dim">1:{{ s.rr }}</td>
+          <td><span class="kz-tag {{ (s.kill_zone or '?')|replace(' ','') }}">{{ s.kill_zone or '?' }}</span></td>
+          <td class="dim">{{ s.vix }}</td>
+          <td class="num blu">{% if s.exit_price %}{{ '{:,.0f}'.format(s.exit_price) }}{% else %}—{% endif %}</td>
+          <td>{% if s.status=='TARGET HIT' %}<span class="badge badge-win">✓ HIT</span>{% elif s.status=='SL HIT' %}<span class="badge badge-loss">✗ SL</span>{% else %}<span class="badge badge-open">● OPEN</span>{% endif %}</td>
+          <td class="{{ 'pnl-pos' if s.pnl_pct is not none and s.pnl_pct>=0 else 'pnl-neg' if s.pnl_pct is not none else 'dim' }}">{% if s.pnl_pct is not none %}{% if s.pnl_pct>=0 %}+{% endif %}{{ s.pnl_pct }}%{% else %}—{% endif %}</td>
+          <td><div class="reasons">{{ s.reasons|join(' · ') if s.reasons else '—' }}</div></td>
+        </tr>{% endfor %}
+        </tbody>
+      </table></div>
+      {% endif %}
+    </div><!-- card-body -->
   </div>
-  {% endif %}
 </div>
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  SWING TRADING — Weekly NSE Stock Picks                   -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="asset-section swing-section">
-  <div class="section-header">
-    <div class="section-title">
-      <span class="asset-badge badge-swing">📈 SWING PICKS</span>
-      Weekly NSE Swing Stocks
-      <span style="color:var(--muted);font-size:12px;font-weight:400">— 5-day hold · Mon open → Fri close</span>
-    </div>
-    <div class="section-right" style="gap:14px">
-      <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:10px;">
-        <span class="stag">Week <strong>{{ swing_summary.week }}</strong></span>
-        <span class="stag">Total picks <strong>{{ swing_summary.total }}</strong></span>
-        <span class="stag" style="color:var(--green)">Wins <strong>{{ swing_summary.wins }}</strong></span>
-        <span class="stag" style="color:var(--red)">Losses <strong>{{ swing_summary.losses }}</strong></span>
-        <span class="stag" style="color:var(--gold)">Win Rate <strong>{{ swing_summary.win_rate }}%</strong></span>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NSE INTRADAY PANEL  (id=panel-nse)
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-panel" id="panel-nse" data-section="nse">
+  <div class="content-card acc-blue">
+    <div class="content-card-header" onclick="toggleSection('nse')">
+      <div class="card-title">
+        <span class="section-badge badge-nse">🇮🇳 NSE INTRADAY</span>
+        Indian Markets — SMC + ICT + Price Action
       </div>
-    </div>
-  </div>
-
-  <!-- Strategy info -->
-  <div class="strat-bar">
-    <span class="stag">Universe <strong>NIFTY 50 + Select Midcaps</strong></span>
-    <span class="stag">Hold <strong>Mon → Fri (5 days)</strong></span>
-    <span class="stag">Min Score <strong>55/100</strong></span>
-    <span class="stag">Max SL <strong>4%</strong></span>
-    <span class="stag">Min R:R <strong>1:2.0</strong></span>
-    <span class="stag">Filter <strong>Price &gt; EMA50 &gt; EMA200</strong></span>
-    <span class="stag">Scan day <strong>Every Monday 09:15 IST</strong></span>
-  </div>
-
-  <!-- This week's picks (card grid) -->
-  {% if swing_week_picks %}
-  <div style="padding:16px 20px;">
-    <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:12px;">
-      This Week's Top {{ swing_week_picks|length }} Picks — {{ swing_summary.week }}
-    </div>
-    <div class="swing-cards">
-      {% for p in swing_week_picks %}
-      {% set is_open = p.status == 'OPEN' %}
-      {% set is_win  = p.status == 'TARGET HIT' %}
-      {% set is_loss = p.status == 'SL HIT' %}
-      {% set pnl     = p.pnl_pct if p.pnl_pct is not none else 0 %}
-      {% set prog    = p.progress_pct if p.progress_pct is not none else 0 %}
-      {% set prog_w  = [prog, 0]|max if prog >= 0 else 0 %}
-
-      <div class="swing-card {% if is_win %}swing-win{% elif is_loss %}swing-loss{% else %}swing-open{% endif %}">
-
-        <!-- Header: symbol + score + strength -->
-        <div class="sc-top">
-          <div>
-            <div class="sc-symbol">{{ p.symbol }}</div>
-            <div style="font-size:9.5px;color:var(--muted2);margin-top:2px">
-              📅 {{ p.scan_date }}  ·  Hold 5 days
-            </div>
-          </div>
-          <div class="sc-badge-row">
-            <span class="sc-score-pill">{{ p.score }}/100</span>
-            <span class="sc-strength str-{{ (p.signal_strength or 'good')|lower }}">
-              {{ p.signal_strength }}
-            </span>
-          </div>
-        </div>
-
-        <!-- Live price block -->
-        <div class="sc-live">
-          <div class="sc-live-label">
-            {% if is_open %}Live Price{% elif is_win %}Exit Price (T2 Hit){% else %}Exit Price (SL Hit){% endif %}
-          </div>
-          <div class="sc-live-price {% if is_win %}grn{% elif is_loss %}red{% else %}{% if pnl >= 0 %}grn{% else %}red{% endif %}{% endif %}">
-            ₹{{ p.current_price or p.exit_price or p.entry }}
-          </div>
-          <div class="sc-live-pnl {% if pnl >= 0 %}pnl-pos{% else %}pnl-neg{% endif %}">
-            {% if pnl >= 0 %}▲ +{% else %}▼ {% endif %}{{ pnl }}%
-            &nbsp;·&nbsp;
-            {% if p.pnl_pts is not none %}{% if p.pnl_pts >= 0 %}+{% endif %}₹{{ p.pnl_pts }}{% endif %}
-          </div>
-          {% if p.last_updated %}
-          <div class="sc-live-updated">Updated: {{ p.last_updated }}</div>
-          {% endif %}
-        </div>
-
-        <!-- Progress bar toward T2 -->
-        {% if is_open %}
-        <div class="sc-progress">
-          <div class="sc-progress-header">
-            <span>Progress → Target</span>
-            <span style="color:{% if prog >= 0 %}var(--green){% else %}var(--red){% endif %}">
-              {{ prog }}%
-            </span>
-          </div>
-          <div class="sc-progress-bar-bg">
-            <div class="sc-progress-bar-fill {% if prog < 0 %}negative{% endif %}"
-                 style="width:{{ [prog_w, 100]|min }}%"></div>
-          </div>
-          <div class="sc-dist-row">
-            <span style="color:var(--red);font-size:9.5px">
-              SL buffer: {{ p.dist_sl_pct }}%
-            </span>
-            <span style="color:var(--green);font-size:9.5px">
-              To T2: {{ p.dist_t2_pct }}%
-            </span>
-          </div>
-        </div>
+      <div class="card-title-right">
+        {% if bot_state.NSE.paused %}
+          <div class="pill-pause"><div class="ctrl-dot dot-red"></div>PAUSED</div>
+          <button class="btn-ctrl btn-resume" onclick="event.stopPropagation();control('NSE','resume')">▶ Resume</button>
+        {% else %}
+          <div class="pill-run"><div class="ctrl-dot dot-green"></div>RUNNING</div>
+          <button class="btn-ctrl btn-pause" onclick="event.stopPropagation();control('NSE','pause')">⏸ Pause</button>
         {% endif %}
-
-        <!-- Price levels: Entry / T1 / T2 / SL -->
-        <div class="sc-levels">
-          <div class="sc-level-row">
-            <span class="sc-level-label">Entry</span>
-            <span class="sc-level-val">₹{{ p.entry }}</span>
-            <span style="font-size:9px;color:var(--muted2)">base</span>
-          </div>
-          <div class="sc-level-row">
-            <span class="sc-level-label">T1 <span style="font-size:8px">(50% exit)</span></span>
-            <span class="sc-level-val grn {% if p.t1_hit %}sc-t1-hit{% endif %}">
-              ₹{{ p.t1 }}
-            </span>
-            <span style="font-size:9px;color:var(--muted2)">1:{{ p.rr_t1 }}</span>
-          </div>
-          <div class="sc-level-row" style="border-color:rgba(16,185,129,.3)">
-            <span class="sc-level-label">T2 Target</span>
-            <span class="sc-level-val grn" style="font-size:13px">₹{{ p.t2 }}</span>
-            <span style="font-size:9px;color:var(--green)">1:{{ p.rr_t2 }}</span>
-          </div>
-          <div class="sc-level-row" style="border-color:rgba(239,68,68,.25)">
-            <span class="sc-level-label">Stop Loss</span>
-            <span class="sc-level-val red">₹{{ p.sl }}</span>
-            <span style="font-size:9px;color:var(--red)">-{{ p.sl_pct }}%</span>
-          </div>
-        </div>
-
-        <!-- Indicators -->
-        <div class="sc-indicators">
-          <span class="sc-ind">RSI {{ p.rsi }}</span>
-          <span class="sc-ind">Vol {{ p.vol_ratio }}×</span>
-          <span class="sc-ind">MACD {{ '✅' if p.macd_bullish else '❌' }}</span>
-          <span class="sc-ind">EMA21 ₹{{ p.ema21 }}</span>
-        </div>
-
-        <!-- Status -->
-        <div class="sc-status-row">
-          {% if is_win %}
-            <span class="badge badge-win">✓ TARGET HIT</span>
-            <span class="pnl-pos">+{{ pnl }}%</span>
-          {% elif is_loss %}
-            <span class="badge badge-loss">✗ SL HIT</span>
-            <span class="pnl-neg">{{ pnl }}%</span>
-          {% else %}
-            <span class="badge badge-open">● OPEN</span>
-          {% endif %}
-        </div>
-
-        <!-- Reasons -->
-        <div class="sc-reasons">
-          {% for r in p.reasons[:3] %}
-          <div class="sc-reason">{{ r }}</div>
-          {% endfor %}
-        </div>
-
+        <span class="collapse-arrow">▼</span>
       </div>
-      {% endfor %}
+    </div>
+    <div class="card-body" id="body-nse">
+      <div class="strat-bar">
+        <span class="stag">KZ1 <strong>09:15–10:00</strong></span>
+        <span class="stag">KZ2 <strong>11:15–11:45</strong></span>
+        <span class="stag">KZ3 <strong>13:30–14:15</strong></span>
+        <span class="stag">Max SL <strong>0.8%</strong></span>
+        <span class="stag">Min R:R <strong>1:2.5</strong></span>
+        <span class="stag">Score <strong>≥ 65/150</strong></span>
+        <span class="stag">SMC <strong>BOS / CHOCH</strong></span>
+        <span class="stag">ICT <strong>OB + FVG + OTE</strong></span>
+      </div>
+      <div class="mini-row">
+        <div class="mini"><div class="mini-label">Signals</div><div class="mini-val mv-white">{{ nse_summary.total }}</div></div>
+        <div class="mini"><div class="mini-label">Wins</div><div class="mini-val mv-green">{{ nse_summary.wins }}</div></div>
+        <div class="mini"><div class="mini-label">Losses</div><div class="mini-val mv-red">{{ nse_summary.losses }}</div></div>
+        <div class="mini"><div class="mini-label">Open</div><div class="mini-val mv-blue">{{ nse_summary.open }}</div></div>
+        <div class="mini"><div class="mini-label">Win Rate</div><div class="mini-val mv-gold">{{ nse_summary.win_rate }}%</div></div>
+        <div class="mini {{ 'mv-green' if nse_summary.total_pnl>=0 else 'mv-red' }}"><div class="mini-label">P&amp;L pts</div><div class="mini-val">{% if nse_summary.total_pnl>=0 %}+{% endif %}{{ nse_summary.total_pnl }}</div></div>
+        <div class="mini"><div class="mini-label">Avg Score</div><div class="mini-val mv-purple">{{ nse_summary.avg_score }}</div></div>
+      </div>
+      {{ signal_table(nse_signals, 'nse') }}
     </div>
   </div>
-  {% else %}
-  <div class="empty-state">
-    <div class="empty-icon">📅</div>
-    <div class="empty-title">No swing picks this week yet</div>
-    <div class="empty-sub">The scanner runs every Monday at 09:15 IST and picks the top 7 NSE stocks for the week</div>
-  </div>
-  {% endif %}
-
-  <!-- Historical swing picks table -->
-  {% if swing_all_picks %}
-  <div style="padding:0 20px 16px;">
-    <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px;padding-top:12px;border-top:1px solid var(--border);">
-      Historical Swing Picks
-    </div>
-    <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Week</th><th>Symbol</th><th>Score/100</th><th>Strength</th>
-          <th>Entry</th><th>T1</th><th>T2</th><th>SL</th><th>R:R</th>
-          <th>Live Price</th><th>Status</th><th>P&amp;L %</th><th>RSI</th><th>Vol</th><th>Reasons</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for p in swing_all_picks %}
-      <tr>
-        <td class="dim nowrap">{{ p.week }}</td>
-        <td class="sym">{{ p.symbol }}</td>
-        <td>
-          <div class="score-cell">
-            <span class="score-num" style="font-size:11px">{{ p.score }}</span>
-            <div class="sbar-bg"><div class="sbar-fill" style="width:{{ p.score }}%"></div></div>
-          </div>
-        </td>
-        <td><span class="str str-{{ (p.signal_strength or 'good')|lower }}">{{ p.signal_strength }}</span></td>
-        <td class="num">₹{{ p.entry }}</td>
-        <td class="num grn">₹{{ p.t1 }}</td>
-        <td class="num grn" style="font-weight:600">₹{{ p.t2 }}</td>
-        <td class="num red">₹{{ p.sl }}</td>
-        <td class="dim">1:{{ p.rr_t2 }}</td>
-        <td class="num blu">{% if p.exit_price %}₹{{ p.exit_price }}{% else %}—{% endif %}</td>
-        <td>
-          {% if p.status == 'TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>
-          {% elif p.status == 'SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>
-          {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
-        </td>
-        <td class="{{ 'pnl-pos' if p.pnl_pct is not none and p.pnl_pct >= 0 else 'pnl-neg' if p.pnl_pct is not none else 'dim' }}">
-          {% if p.pnl_pct is not none %}{% if p.pnl_pct >= 0 %}+{% endif %}{{ p.pnl_pct }}%{% else %}—{% endif %}
-        </td>
-        <td class="dim">{{ p.rsi }}</td>
-        <td class="dim">{{ p.vol_ratio }}×</td>
-        <td><div class="reasons">{{ p.reasons|join(' · ') if p.reasons else '—' }}</div></td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
-  </div>
-  {% endif %}
 </div>
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  RECENT SIGNALS FEED — all assets                         -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="recent-feed all-section asset-section">
-  <div class="section-header">
-    <div class="section-title">
-      <span class="asset-badge badge-all">ALL ASSETS</span>
-      Recent Signals <span style="color:var(--muted);font-size:12px;font-weight:400">— last 20 across NSE · Gold · BTC</span>
-    </div>
-  </div>
 
-  <div class="table-wrap">
-  {% if all_signals %}
-  <table>
-    <thead>
-      <tr>
-        <th>Asset</th><th>Date / Time</th><th>Symbol</th><th>Dir</th>
-        <th>Score / 150</th><th>Strength</th><th>Zone</th>
-        <th>Entry</th><th>T1</th><th>T2 Target</th><th>SL</th><th>R:R</th>
-        <th>Live Price</th><th>Status</th><th>P&amp;L pts</th><th>P&amp;L %</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for s in all_signals %}
-    <tr>
-      <td>
-        {% set a = s.asset if s.asset else s.symbol %}
-        {% if a in ('BTC','BTCUSDT') %}  <span class="atag atag-btc">BTC</span>
-        {% elif a in ('GOLD','XAUUSD') %}<span class="atag atag-gold">GOLD</span>
-        {% else %}                        <span class="atag atag-nse">NSE</span>
+<!-- ═══════════════════════════════════════════════════════════
+     GOLD PANEL  (id=panel-gold)
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-panel" id="panel-gold" data-section="gold">
+  <div class="content-card acc-gold">
+    <div class="content-card-header" onclick="toggleSection('gold')">
+      <div class="card-title">
+        <span class="section-badge badge-gold">🥇 GOLD XAUUSD</span>
+        Gold Signals — SMC + ICT + DXY Correlation
+      </div>
+      <div class="card-title-right">
+        {% if bot_state.GOLD.paused %}
+          <div class="pill-pause"><div class="ctrl-dot dot-red"></div>PAUSED</div>
+          <button class="btn-ctrl btn-resume" onclick="event.stopPropagation();control('GOLD','resume')">▶ Resume</button>
+        {% else %}
+          <div class="pill-run"><div class="ctrl-dot dot-green"></div>RUNNING</div>
+          <button class="btn-ctrl btn-pause" onclick="event.stopPropagation();control('GOLD','pause')">⏸ Pause</button>
         {% endif %}
-      </td>
-      <td class="dim nowrap">{{ s.datetime }}</td>
-      <td class="sym">{{ s.symbol }}</td>
-      <td><span class="dir-badge {{ 'long' if s.direction == 'LONG' else 'short' }}">
-        {{ 'BUY' if s.direction == 'LONG' else 'SELL' }}</span></td>
-      <td>
-        <div class="score-cell">
-          <span class="score-num">{{ s.score }}</span>
-          <div class="sbar-bg"><div class="sbar-fill" style="width:{{ ((s.score or 0)/150*100)|int }}%"></div></div>
-        </div>
-      </td>
-      <td>
-        {% set st = s.signal_strength if s.signal_strength else 'GOOD' %}
-        <span class="str str-{{ st|lower }}">{{ st }}</span>
-      </td>
-      <td>
-        {% set kz = (s.kill_zone if s.kill_zone else '?')|replace(' ','') %}
-        <span class="kz-tag {{ kz }}">{{ s.kill_zone or '?' }}</span>
-      </td>
-      <td class="num">{{ s.entry }}</td>
-      <td class="num dim">{% if s.t1 %}{{ s.t1 }}{% else %}—{% endif %}</td>
-      <td class="num grn">{{ s.target }}</td>
-      <td class="num red">{{ s.sl }}</td>
-      <td class="num dim">1:{{ s.rr }}</td>
-      <td class="num blu">{% if s.exit_price %}{{ s.exit_price }}{% else %}—{% endif %}</td>
-      <td>
-        {% if s.status == 'TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>
-        {% elif s.status == 'SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>
-        {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
-      </td>
-      <td class="{{ 'pnl-pos' if s.pnl_pts is not none and s.pnl_pts >= 0 else 'pnl-neg' if s.pnl_pts is not none else 'dim' }}">
-        {% if s.pnl_pts is not none %}{% if s.pnl_pts >= 0 %}+{% endif %}{{ s.pnl_pts }}{% else %}—{% endif %}
-      </td>
-      <td class="{{ 'pnl-pos' if s.pnl_pct is not none and s.pnl_pct >= 0 else 'pnl-neg' if s.pnl_pct is not none else 'dim' }}">
-        {% if s.pnl_pct is not none %}{% if s.pnl_pct >= 0 %}+{% endif %}{{ s.pnl_pct }}%{% else %}—{% endif %}
-      </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-  {% else %}
-  <div class="empty-state">
-    <div class="empty-icon">📡</div>
-    <div class="empty-title">No signals yet</div>
-    <div class="empty-sub">Alerts will appear here automatically when any asset scores ≥ 65/150</div>
-  </div>
-  {% endif %}
+        <span class="collapse-arrow">▼</span>
+      </div>
+    </div>
+    <div class="card-body" id="body-gold">
+      <div class="strat-bar">
+        <span class="stag">KZ-Asian <strong>05:30–07:30</strong></span>
+        <span class="stag">KZ-London <strong>13:30–15:30</strong></span>
+        <span class="stag">KZ-NY <strong>18:30–20:30</strong></span>
+        <span class="stag">Max SL <strong>0.6%</strong></span>
+        <span class="stag">R:R T1 <strong>1:2.0</strong></span>
+        <span class="stag">R:R T2 <strong>1:3.5</strong></span>
+        <span class="stag">DXY <strong>inverse</strong></span>
+      </div>
+      <div class="mini-row">
+        <div class="mini"><div class="mini-label">Signals</div><div class="mini-val mv-white">{{ gold_summary.total }}</div></div>
+        <div class="mini"><div class="mini-label">Wins</div><div class="mini-val mv-green">{{ gold_summary.wins }}</div></div>
+        <div class="mini"><div class="mini-label">Losses</div><div class="mini-val mv-red">{{ gold_summary.losses }}</div></div>
+        <div class="mini"><div class="mini-label">Open</div><div class="mini-val mv-blue">{{ gold_summary.open }}</div></div>
+        <div class="mini"><div class="mini-label">Win Rate</div><div class="mini-val mv-gold">{{ gold_summary.win_rate }}%</div></div>
+        <div class="mini {{ 'mv-green' if gold_summary.total_pnl>=0 else 'mv-red' }}"><div class="mini-label">P&amp;L pts</div><div class="mini-val">{% if gold_summary.total_pnl>=0 %}+{% endif %}{{ gold_summary.total_pnl }}</div></div>
+        <div class="mini"><div class="mini-label">Avg Score</div><div class="mini-val mv-purple">{{ gold_summary.avg_score }}</div></div>
+      </div>
+      {{ signal_table(gold_signals, 'gold') }}
+    </div>
   </div>
 </div>
 
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  NSE INDIA                                                 -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="asset-section nse-section">
-  <div class="section-header">
-    <div class="section-title">
-      <span class="asset-badge badge-nse">NSE INDIA</span>
-      Intraday Signals
+<!-- ═══════════════════════════════════════════════════════════
+     BITCOIN PANEL  (id=panel-btc)
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-panel" id="panel-btc" data-section="btc">
+  <div class="content-card acc-orange">
+    <div class="content-card-header" onclick="toggleSection('btc')">
+      <div class="card-title">
+        <span class="section-badge badge-btc">₿ BITCOIN</span>
+        BTC Signals — SMC + Funding Rate + Fear &amp; Greed
+      </div>
+      <div class="card-title-right">
+        {% if bot_state.BTC.paused %}
+          <div class="pill-pause"><div class="ctrl-dot dot-red"></div>PAUSED</div>
+          <button class="btn-ctrl btn-resume" onclick="event.stopPropagation();control('BTC','resume')">▶ Resume</button>
+        {% else %}
+          <div class="pill-run"><div class="ctrl-dot dot-green"></div>RUNNING</div>
+          <button class="btn-ctrl btn-pause" onclick="event.stopPropagation();control('BTC','pause')">⏸ Pause</button>
+        {% endif %}
+        <span class="collapse-arrow">▼</span>
+      </div>
     </div>
-    <div class="section-right">
-      {% if bot_state.NSE.paused %}
-        <div class="status-paused"><div class="status-dot dot-red"></div>PAUSED</div>
-        <button class="btn-ctrl btn-resume" onclick="control('NSE','resume')">▶ Resume</button>
-      {% else %}
-        <div class="status-running"><div class="status-dot dot-green"></div>RUNNING</div>
-        <button class="btn-ctrl btn-pause" onclick="control('NSE','pause')">⏸ Pause</button>
-      {% endif %}
+    <div class="card-body" id="body-btc">
+      <div class="strat-bar">
+        <span class="stag">KZ-Asian <strong>05:30–07:30</strong></span>
+        <span class="stag">KZ-London <strong>13:30–15:30</strong></span>
+        <span class="stag">KZ-NY <strong>18:30–20:30</strong></span>
+        <span class="stag">Max SL <strong>1.5%</strong></span>
+        <span class="stag">R:R T1 <strong>1:3.0</strong></span>
+        <span class="stag">R:R T2 <strong>1:5.0</strong></span>
+        <span class="stag">Funding <strong>rate check</strong></span>
+        <span class="stag">F&amp;G <strong>filter</strong></span>
+        <span class="stag">CME Gap <strong>aware</strong></span>
+      </div>
+      <div class="mini-row">
+        <div class="mini"><div class="mini-label">Signals</div><div class="mini-val mv-white">{{ btc_summary.total }}</div></div>
+        <div class="mini"><div class="mini-label">Wins</div><div class="mini-val mv-green">{{ btc_summary.wins }}</div></div>
+        <div class="mini"><div class="mini-label">Losses</div><div class="mini-val mv-red">{{ btc_summary.losses }}</div></div>
+        <div class="mini"><div class="mini-label">Open</div><div class="mini-val mv-blue">{{ btc_summary.open }}</div></div>
+        <div class="mini"><div class="mini-label">Win Rate</div><div class="mini-val mv-orange">{{ btc_summary.win_rate }}%</div></div>
+        <div class="mini {{ 'mv-green' if btc_summary.total_pnl>=0 else 'mv-red' }}"><div class="mini-label">P&amp;L pts</div><div class="mini-val">{% if btc_summary.total_pnl>=0 %}+{% endif %}{{ btc_summary.total_pnl }}</div></div>
+        <div class="mini"><div class="mini-label">Avg Score</div><div class="mini-val mv-purple">{{ btc_summary.avg_score }}</div></div>
+      </div>
+      {{ signal_table(btc_signals, 'btc') }}
     </div>
   </div>
-
-  <div class="strat-bar">
-    <span class="stag">KZ1 <strong>09:15–10:00</strong></span>
-    <span class="stag">KZ2 <strong>11:15–11:45</strong></span>
-    <span class="stag">KZ3 <strong>13:30–14:15</strong></span>
-    <span class="stag">Max SL <strong>0.8%</strong></span>
-    <span class="stag">Min R:R <strong>1:2.5</strong></span>
-    <span class="stag">Max trades/day <strong>3</strong></span>
-    <span class="stag">Score min <strong>65/150</strong></span>
-  </div>
-
-  <div class="mini-cards">
-    <div class="mcard mc-white"><div class="mcard-label">Signals</div><div class="mcard-value">{{ nse_summary.total }}</div></div>
-    <div class="mcard mc-green"><div class="mcard-label">Wins</div><div class="mcard-value">{{ nse_summary.wins }}</div></div>
-    <div class="mcard mc-red"><div class="mcard-label">Losses</div><div class="mcard-value">{{ nse_summary.losses }}</div></div>
-    <div class="mcard mc-blue"><div class="mcard-label">Open</div><div class="mcard-value">{{ nse_summary.open }}</div></div>
-    <div class="mcard mc-gold"><div class="mcard-label">Win Rate</div><div class="mcard-value">{{ nse_summary.win_rate }}%</div></div>
-    <div class="mcard {{ 'mc-green' if nse_summary.total_pnl >= 0 else 'mc-red' }}"><div class="mcard-label">P&amp;L pts</div><div class="mcard-value" style="font-size:15px">{% if nse_summary.total_pnl >= 0 %}+{% endif %}{{ nse_summary.total_pnl }}</div></div>
-    <div class="mcard mc-purple"><div class="mcard-label">Avg Score</div><div class="mcard-value">{{ nse_summary.avg_score }}</div></div>
-  </div>
-
-  {{ signal_table(nse_signals, 'nse') }}
 </div>
 
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  GOLD                                                      -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="asset-section gold-section">
-  <div class="section-header">
-    <div class="section-title">
-      <span class="asset-badge badge-gold">GOLD · XAUUSD</span>
-      Signals
-    </div>
-    <div class="section-right">
-      {% if bot_state.GOLD.paused %}
-        <div class="status-paused"><div class="status-dot dot-red"></div>PAUSED</div>
-        <button class="btn-ctrl btn-resume" onclick="control('GOLD','resume')">▶ Resume</button>
-      {% else %}
-        <div class="status-running"><div class="status-dot dot-green"></div>RUNNING</div>
-        <button class="btn-ctrl btn-pause" onclick="control('GOLD','pause')">⏸ Pause</button>
-      {% endif %}
-    </div>
-  </div>
-
-  <div class="strat-bar">
-    <span class="stag">KZ-Asian <strong>05:30–07:30</strong></span>
-    <span class="stag">KZ-London <strong>13:30–15:30</strong></span>
-    <span class="stag">KZ-NY <strong>18:30–20:30</strong></span>
-    <span class="stag">Max SL <strong>0.6%</strong></span>
-    <span class="stag">R:R T1 <strong>1:2.0</strong></span>
-    <span class="stag">R:R T2 <strong>1:3.5</strong></span>
-    <span class="stag">DXY inverse <strong>confirmation</strong></span>
-  </div>
-
-  <div class="mini-cards">
-    <div class="mcard mc-white"><div class="mcard-label">Signals</div><div class="mcard-value">{{ gold_summary.total }}</div></div>
-    <div class="mcard mc-green"><div class="mcard-label">Wins</div><div class="mcard-value">{{ gold_summary.wins }}</div></div>
-    <div class="mcard mc-red"><div class="mcard-label">Losses</div><div class="mcard-value">{{ gold_summary.losses }}</div></div>
-    <div class="mcard mc-blue"><div class="mcard-label">Open</div><div class="mcard-value">{{ gold_summary.open }}</div></div>
-    <div class="mcard mc-gold"><div class="mcard-label">Win Rate</div><div class="mcard-value">{{ gold_summary.win_rate }}%</div></div>
-    <div class="mcard {{ 'mc-green' if gold_summary.total_pnl >= 0 else 'mc-red' }}"><div class="mcard-label">P&amp;L pts</div><div class="mcard-value" style="font-size:15px">{% if gold_summary.total_pnl >= 0 %}+{% endif %}{{ gold_summary.total_pnl }}</div></div>
-    <div class="mcard mc-purple"><div class="mcard-label">Avg Score</div><div class="mcard-value">{{ gold_summary.avg_score }}</div></div>
-  </div>
-
-  {{ signal_table(gold_signals, 'gold') }}
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  BITCOIN                                                   -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<div class="asset-section btc-section">
-  <div class="section-header">
-    <div class="section-title">
-      <span class="asset-badge badge-btc">BITCOIN · BTCUSDT</span>
-      Signals
-    </div>
-    <div class="section-right">
-      {% if bot_state.BTC.paused %}
-        <div class="status-paused"><div class="status-dot dot-red"></div>PAUSED</div>
-        <button class="btn-ctrl btn-resume" onclick="control('BTC','resume')">▶ Resume</button>
-      {% else %}
-        <div class="status-running"><div class="status-dot dot-green"></div>RUNNING</div>
-        <button class="btn-ctrl btn-pause" onclick="control('BTC','pause')">⏸ Pause</button>
-      {% endif %}
-    </div>
-  </div>
-
-  <div class="strat-bar">
-    <span class="stag">KZ-Asian <strong>05:30–07:30</strong></span>
-    <span class="stag">KZ-London <strong>13:30–15:30</strong></span>
-    <span class="stag">KZ-NY <strong>18:30–20:30</strong></span>
-    <span class="stag">Max SL <strong>1.5%</strong></span>
-    <span class="stag">R:R T1 <strong>1:3.0</strong></span>
-    <span class="stag">R:R T2 <strong>1:5.0</strong></span>
-    <span class="stag">Funding rate <strong>check</strong></span>
-    <span class="stag">Fear &amp; Greed <strong>filter</strong></span>
-    <span class="stag">CME Gap <strong>aware</strong></span>
-  </div>
-
-  <div class="mini-cards">
-    <div class="mcard mc-white"><div class="mcard-label">Signals</div><div class="mcard-value">{{ btc_summary.total }}</div></div>
-    <div class="mcard mc-green"><div class="mcard-label">Wins</div><div class="mcard-value">{{ btc_summary.wins }}</div></div>
-    <div class="mcard mc-red"><div class="mcard-label">Losses</div><div class="mcard-value">{{ btc_summary.losses }}</div></div>
-    <div class="mcard mc-blue"><div class="mcard-label">Open</div><div class="mcard-value">{{ btc_summary.open }}</div></div>
-    <div class="mcard mc-orange"><div class="mcard-label">Win Rate</div><div class="mcard-value">{{ btc_summary.win_rate }}%</div></div>
-    <div class="mcard {{ 'mc-green' if btc_summary.total_pnl >= 0 else 'mc-red' }}"><div class="mcard-label">P&amp;L pts</div><div class="mcard-value" style="font-size:15px">{% if btc_summary.total_pnl >= 0 %}+{% endif %}{{ btc_summary.total_pnl }}</div></div>
-    <div class="mcard mc-purple"><div class="mcard-label">Avg Score</div><div class="mcard-value">{{ btc_summary.avg_score }}</div></div>
-  </div>
-
-  {{ signal_table(btc_signals, 'btc') }}
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!--  FOOTER                                                    -->
-<!-- ══════════════════════════════════════════════════════════ -->
 <div class="footer">
-  Auto-refreshes every 60 s &nbsp;·&nbsp; Live prices via yfinance &nbsp;·&nbsp;
-  Strategy: SMC + ICT + Price Action &nbsp;·&nbsp; 150-pt scale, min 65/150 to trade &nbsp;·&nbsp;
-  Pause/Resume takes effect within 60 s
+  Auto-refreshes every 60 s &nbsp;·&nbsp; Strategy: SMC + ICT + Price Action &nbsp;·&nbsp;
+  Live prices via yfinance &nbsp;·&nbsp; Pause/Resume writes to bot_state.json &nbsp;·&nbsp;
+  <span style="color:var(--muted)">{{ now }}</span>
 </div>
 
 </div><!-- .page -->
 
-<!-- ── JS ─────────────────────────────────────────────────────── -->
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════════ -->
 <script>
-function control(asset, action) {
-  fetch('/api/control/' + asset + '/' + action, { method: 'POST' })
-    .then(r => r.json())
-    .then(d => { location.reload(); })
-    .catch(() => alert('Control failed — is the dashboard server running?'));
+/* ─── Constants ───────────────────────────────────────────── */
+const SECTION_TABS = ['swing','options','nse','gold','btc'];
+const ALL_TABS     = ['all','swing','options','nse','gold','btc'];
+const ACCENT       = {
+  all:'act-all', swing:'act-swing', options:'act-options',
+  nse:'act-nse', gold:'act-gold',   btc:'act-btc',
+};
+let collapsedSections = {};
+
+/* ─── Tab switching ───────────────────────────────────────── */
+function switchTab(tab, el) {
+  // Clear all active classes
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    ALL_TABS.forEach(k => t.classList.remove('act-' + k));
+  });
+  // Set active
+  el.classList.add(ACCENT[tab]);
+
+  if (tab === 'all') {
+    // Show ALL section panels
+    SECTION_TABS.forEach(s => {
+      const p = document.getElementById('panel-' + s);
+      if (!p) return;
+      p.classList.remove('visible');
+      p.classList.add('all-visible');
+      // stagger each panel
+      p.style.animationDelay = (SECTION_TABS.indexOf(s) * 0.06) + 's';
+    });
+  } else {
+    // Show only the selected panel
+    SECTION_TABS.forEach(s => {
+      const p = document.getElementById('panel-' + s);
+      if (!p) return;
+      p.classList.remove('all-visible');
+      p.style.animationDelay = '0s';
+      if (s === tab) {
+        p.classList.add('visible');
+        // Scroll to it smoothly if in all-mode
+        setTimeout(() => p.scrollIntoView({ behavior:'smooth', block:'start' }), 80);
+      } else {
+        p.classList.remove('visible');
+      }
+    });
+  }
+
+  animateBars();
+  labelTableCells();
+  sessionStorage.setItem('activeTab', tab);
 }
 
-// Smooth score bar entrance animation
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.sbar-fill').forEach(el => {
+/* ─── Section collapse/expand ─────────────────────────────── */
+function toggleSection(sec) {
+  const body  = document.getElementById('body-' + sec);
+  const panel = document.getElementById('panel-' + sec);
+  if (!body) return;
+  const isCollapsed = body.classList.toggle('collapsed');
+  collapsedSections[sec] = isCollapsed;
+  // Rotate arrow
+  const arrow = panel.querySelector('.collapse-arrow');
+  if (arrow) {
+    arrow.style.transform = isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)';
+    arrow.style.transition = 'transform .28s cubic-bezier(.4,0,.2,1)';
+  }
+  sessionStorage.setItem('collapsed', JSON.stringify(collapsedSections));
+}
+
+/* ─── Bot control ─────────────────────────────────────────── */
+function control(asset, action) {
+  const btn = event.target;
+  btn.disabled = true;
+  btn.textContent = '…';
+  fetch('/api/control/' + asset + '/' + action, { method:'POST' })
+    .then(r => r.json())
+    .then(() => location.reload())
+    .catch(() => { alert('Control request failed'); btn.disabled = false; });
+}
+
+/* ─── Animate score bars ──────────────────────────────────── */
+function animateBars() {
+  const visible = document.querySelectorAll('.section-panel.visible .sbar-fill, .section-panel.all-visible .sbar-fill');
+  visible.forEach(el => {
     const w = el.style.width;
     el.style.width = '0';
-    setTimeout(() => el.style.width = w, 100);
+    requestAnimationFrame(() => requestAnimationFrame(() => { el.style.width = w; }));
   });
+  const prog = document.querySelectorAll('.section-panel.visible .sc-prog-fill, .section-panel.all-visible .sc-prog-fill');
+  prog.forEach(el => {
+    const w = el.style.width;
+    el.style.width = '0';
+    requestAnimationFrame(() => requestAnimationFrame(() => { el.style.width = w; }));
+  });
+}
+
+/* ─── Animate stat counters ───────────────────────────────── */
+function animateCounters() {
+  document.querySelectorAll('.stat-val').forEach(el => {
+    const raw    = el.textContent.trim();
+    const final  = parseFloat(raw.replace(/[^0-9.]/g,''));
+    if (isNaN(final) || final <= 0) return;
+    const isFloat  = raw.includes('.');
+    const suffix   = raw.includes('%') ? '%' : '';
+    const prefix   = raw.startsWith('+') ? '+' : '';
+    const duration = 700;
+    const start    = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+      const val = final * eased;
+      el.textContent = prefix + (isFloat ? val.toFixed(1) : Math.floor(val)) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ─── Open-position pulse dots ────────────────────────────── */
+function updatePulseDots() {
+  fetch('/api/asset-status')
+    .then(r => r.json())
+    .then(d => {
+      ['NSE','GOLD','BTC'].forEach(a => {
+        const key  = a === 'NSE' ? 'nse' : a.toLowerCase();
+        const dot  = document.querySelector('[data-tab="' + key + '"] .pulse-dot');
+        if (dot) dot.style.display = d[a]?.open > 0 ? 'block' : 'none';
+      });
+    })
+    .catch(() => {});
+  // options open
+  const optOpen = {{ options_summary.open }};
+  const optDot = document.querySelector('[data-tab="options"] .pulse-dot');
+  if (optDot) optDot.style.display = optOpen > 0 ? 'block' : 'none';
+}
+
+/* ─── Restore collapsed state ─────────────────────────────── */
+function restoreCollapsed() {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem('collapsed') || '{}');
+    Object.keys(saved).forEach(sec => {
+      if (saved[sec]) {
+        const body  = document.getElementById('body-' + sec);
+        const panel = document.getElementById('panel-' + sec);
+        if (!body) return;
+        body.classList.add('collapsed');
+        const arrow = panel && panel.querySelector('.collapse-arrow');
+        if (arrow) arrow.style.transform = 'rotate(-90deg)';
+        collapsedSections[sec] = true;
+      }
+    });
+  } catch(e) {}
+}
+
+/* ─── Initialise ──────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const saved  = sessionStorage.getItem('activeTab') || 'all';
+  const tabEl  = document.querySelector('[data-tab="' + saved + '"]');
+  if (tabEl) switchTab(saved, tabEl);
+
+  restoreCollapsed();
+  animateCounters();
+  updatePulseDots();
+  labelTableCells();
+
+  // Re-check open counts every 30 s
+  setInterval(updatePulseDots, 30000);
+});
+
+/* ─── Mobile: label each td with its column header ─────────── */
+function labelTableCells() {
+  document.querySelectorAll('.table-wrap table').forEach(table => {
+    const headers = Array.from(table.querySelectorAll('thead th'))
+                        .map(th => th.textContent.trim());
+    table.querySelectorAll('tbody tr').forEach(row => {
+      Array.from(row.querySelectorAll('td')).forEach((td, i) => {
+        if (headers[i]) td.setAttribute('data-label', headers[i]);
+      });
+    });
+  });
+}
+
+/* ─── Keyboard navigation ─────────────────────────────────── */
+document.addEventListener('keydown', e => {
+  const tabs = Array.from(document.querySelectorAll('.nav-tab'));
+  const cur  = tabs.findIndex(t => t.className.includes('act-'));
+  if (e.key === 'ArrowRight' && cur < tabs.length - 1) tabs[cur+1].click();
+  if (e.key === 'ArrowLeft'  && cur > 0)               tabs[cur-1].click();
 });
 </script>
 </body>
