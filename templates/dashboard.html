@@ -474,7 +474,6 @@ tbody td { padding:10px 10px; vertical-align:middle; }
 .footer a { color:var(--muted); text-decoration:none; }
 
 /* ── SWING SECTION ────────────────────────────────────────────── */
---emerald: #34d399;
 .swing-section .section-header::before { background:linear-gradient(180deg,#34d399,transparent); }
 .badge-swing {
   color:#34d399; background:rgba(52,211,153,.12);
@@ -486,56 +485,98 @@ tbody td { padding:10px 10px; vertical-align:middle; }
 /* card grid */
 .swing-cards {
   display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap:12px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap:14px;
 }
 .swing-card {
   background:rgba(255,255,255,0.03);
   border:1px solid var(--border2);
-  border-radius:10px;
-  padding:14px;
-  display:flex; flex-direction:column; gap:10px;
-  transition:transform .2s, border-color .2s, box-shadow .2s;
+  border-radius:12px;
+  padding:16px;
+  display:flex; flex-direction:column; gap:12px;
+  transition:transform .2s, box-shadow .2s;
   position:relative; overflow:hidden;
 }
-.swing-card:hover {
-  transform:translateY(-3px);
-  box-shadow:0 8px 32px rgba(0,0,0,0.4);
-}
-.swing-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-}
-.swing-open::before  { background:linear-gradient(90deg,var(--blue),transparent); border-color:rgba(59,130,246,.25); }
-.swing-win::before   { background:linear-gradient(90deg,var(--green),transparent); border-color:rgba(16,185,129,.3); }
-.swing-loss::before  { background:linear-gradient(90deg,var(--red),transparent); border-color:rgba(239,68,68,.3); }
-.swing-win  { border-color:rgba(16,185,129,.2); background:rgba(16,185,129,.04); }
-.swing-loss { border-color:rgba(239,68,68,.2);  background:rgba(239,68,68,.04); }
+.swing-card:hover { transform:translateY(-3px); box-shadow:0 10px 40px rgba(0,0,0,0.45); }
+.swing-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.swing-open::before { background:linear-gradient(90deg,var(--blue),transparent); }
+.swing-win::before  { background:linear-gradient(90deg,var(--green),transparent); }
+.swing-loss::before { background:linear-gradient(90deg,var(--red),transparent); }
+.swing-win  { border-color:rgba(16,185,129,.25); background:rgba(16,185,129,.04); }
+.swing-loss { border-color:rgba(239,68,68,.25);  background:rgba(239,68,68,.04); }
 
-.sc-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
-.sc-symbol { font-size:16px; font-weight:800; color:#f1f5f9; letter-spacing:-.3px; }
-.sc-score  { flex:1; text-align:right; }
-.sc-score-num { font-size:18px; font-weight:700; color:var(--gold); line-height:1; }
-.sc-strength { font-size:10px; font-weight:700; }
-
-.sc-prices { display:flex; flex-direction:column; gap:5px; }
-.sc-price-row { display:flex; justify-content:space-between; align-items:center; font-size:11.5px; }
-.sc-label { color:var(--muted2); font-size:10px; }
-.sc-val   { font-weight:600; font-variant-numeric:tabular-nums; }
-
-.sc-meta {
-  display:flex; gap:6px; flex-wrap:wrap;
-  font-size:9.5px; color:var(--muted2);
+/* header row */
+.sc-top { display:flex; justify-content:space-between; align-items:flex-start; }
+.sc-symbol { font-size:18px; font-weight:800; color:#f1f5f9; letter-spacing:-.4px; }
+.sc-badge-row { display:flex; flex-direction:column; align-items:flex-end; gap:3px; }
+.sc-score-pill {
+  font-size:11px; font-weight:700; color:var(--gold);
+  background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.3);
+  padding:2px 8px; border-radius:20px;
 }
-.sc-meta span {
-  background:rgba(255,255,255,0.04);
+.sc-strength { font-size:9.5px; font-weight:700; }
+.str-excellent { color:var(--gold); }
+.str-strong    { color:#34d399; }
+.str-good      { color:var(--green); }
+
+/* live price block */
+.sc-live {
+  background:rgba(0,0,0,0.25);
   border:1px solid var(--border);
-  padding:2px 7px; border-radius:4px;
+  border-radius:8px; padding:10px 12px;
+}
+.sc-live-label { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
+.sc-live-price { font-size:22px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1; }
+.sc-live-pnl   { font-size:12px; font-weight:700; margin-top:3px; }
+.sc-live-updated { font-size:9px; color:var(--muted2); margin-top:3px; }
+
+/* progress toward target */
+.sc-progress { }
+.sc-progress-header {
+  display:flex; justify-content:space-between;
+  font-size:9.5px; color:var(--muted2); margin-bottom:5px;
+}
+.sc-progress-bar-bg {
+  height:6px; background:rgba(255,255,255,0.07);
+  border-radius:3px; overflow:hidden;
+}
+.sc-progress-bar-fill {
+  height:6px; border-radius:3px;
+  background:linear-gradient(90deg, var(--blue), #34d399);
+  transition:width .5s ease;
+}
+.sc-progress-bar-fill.negative { background:linear-gradient(90deg, var(--red), #f97316); }
+.sc-dist-row {
+  display:flex; justify-content:space-between;
+  font-size:9.5px; margin-top:5px;
 }
 
-.sc-status-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:11.5px; }
+/* price levels */
+.sc-levels { display:flex; flex-direction:column; gap:6px; }
+.sc-level-row {
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:11.5px; padding:5px 8px;
+  background:rgba(255,255,255,0.03);
+  border-radius:5px; border:1px solid var(--border);
+}
+.sc-level-label { font-size:9.5px; color:var(--muted2); font-weight:600; min-width:55px; }
+.sc-level-val   { font-weight:700; font-variant-numeric:tabular-nums; }
+.sc-t1-hit { text-decoration:line-through; opacity:.6; }
 
-.sc-reasons { display:flex; flex-direction:column; gap:3px; }
-.sc-reason  { font-size:9.5px; color:var(--muted2); line-height:1.4; }
+/* indicators row */
+.sc-indicators {
+  display:flex; gap:6px; flex-wrap:wrap;
+}
+.sc-ind {
+  font-size:9.5px; padding:2px 8px; border-radius:4px;
+  background:rgba(255,255,255,0.04); border:1px solid var(--border);
+  color:var(--muted2);
+}
+
+.sc-status-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.sc-reasons    { display:flex; flex-direction:column; gap:3px; }
+.sc-reason     { font-size:9.5px; color:var(--muted2); line-height:1.5; }
+.sc-reason::before { content:"✦ "; color:var(--muted); }
 
 /* ── RESPONSIVE ───────────────────────────────────────────────── */
 @media(max-width:900px) {
@@ -654,71 +695,127 @@ tbody td { padding:10px 10px; vertical-align:middle; }
     </div>
     <div class="swing-cards">
       {% for p in swing_week_picks %}
-      <div class="swing-card {% if p.status == 'TARGET HIT' %}swing-win{% elif p.status == 'SL HIT' %}swing-loss{% else %}swing-open{% endif %}">
+      {% set is_open = p.status == 'OPEN' %}
+      {% set is_win  = p.status == 'TARGET HIT' %}
+      {% set is_loss = p.status == 'SL HIT' %}
+      {% set pnl     = p.pnl_pct if p.pnl_pct is not none else 0 %}
+      {% set prog    = p.progress_pct if p.progress_pct is not none else 0 %}
+      {% set prog_w  = [prog, 0]|max if prog >= 0 else 0 %}
+
+      <div class="swing-card {% if is_win %}swing-win{% elif is_loss %}swing-loss{% else %}swing-open{% endif %}">
+
+        <!-- Header: symbol + score + strength -->
         <div class="sc-top">
-          <div class="sc-symbol">{{ p.symbol }}</div>
-          <div class="sc-score">
-            <div class="sc-score-num">{{ p.score }}<span style="font-size:10px;color:var(--muted)">/100</span></div>
-            <div class="sbar-bg" style="width:100%;margin-top:4px">
-              <div class="sbar-fill" style="width:{{ p.score }}%"></div>
+          <div>
+            <div class="sc-symbol">{{ p.symbol }}</div>
+            <div style="font-size:9.5px;color:var(--muted2);margin-top:2px">
+              📅 {{ p.scan_date }}  ·  Hold 5 days
             </div>
           </div>
-        </div>
-        <div class="sc-strength str-{{ p.signal_strength|lower }}">{{ p.signal_strength }}</div>
-
-        <div class="sc-prices">
-          <div class="sc-price-row">
-            <span class="sc-label">Entry</span>
-            <span class="sc-val">₹{{ p.entry }}</span>
-          </div>
-          <div class="sc-price-row">
-            <span class="sc-label">T1</span>
-            <span class="sc-val grn">₹{{ p.t1 }}</span>
-          </div>
-          <div class="sc-price-row">
-            <span class="sc-label">T2 Target</span>
-            <span class="sc-val grn" style="font-weight:700">₹{{ p.t2 }}</span>
-          </div>
-          <div class="sc-price-row">
-            <span class="sc-label">Stop Loss</span>
-            <span class="sc-val red">₹{{ p.sl }} <span style="color:var(--muted);font-size:9px">(-{{ p.sl_pct }}%)</span></span>
-          </div>
-          <div class="sc-price-row">
-            <span class="sc-label">R:R</span>
-            <span class="sc-val">1:{{ p.rr_t2 }}</span>
+          <div class="sc-badge-row">
+            <span class="sc-score-pill">{{ p.score }}/100</span>
+            <span class="sc-strength str-{{ (p.signal_strength or 'good')|lower }}">
+              {{ p.signal_strength }}
+            </span>
           </div>
         </div>
 
-        <div class="sc-meta">
-          <span>RSI {{ p.rsi }}</span>
-          <span>Vol {{ p.vol_ratio }}×</span>
-          <span>MACD {{ '✓' if p.macd_bullish else '✗' }}</span>
-        </div>
-
-        <div class="sc-status-row">
-          {% if p.status == 'TARGET HIT' %}
-            <span class="badge badge-win">✓ TARGET HIT</span>
-            {% if p.pnl_pct is not none %}<span class="pnl-pos">+{{ p.pnl_pct }}%</span>{% endif %}
-          {% elif p.status == 'SL HIT' %}
-            <span class="badge badge-loss">✗ SL HIT</span>
-            {% if p.pnl_pct is not none %}<span class="pnl-neg">{{ p.pnl_pct }}%</span>{% endif %}
-          {% else %}
-            <span class="badge badge-open">● OPEN</span>
-            {% if p.exit_price %}<span style="color:var(--blue);font-size:11px">₹{{ p.exit_price }}
-              {% if p.pnl_pct is not none %}
-                <span class="{{ 'pnl-pos' if p.pnl_pct >= 0 else 'pnl-neg' }}">
-                  ({% if p.pnl_pct >= 0 %}+{% endif %}{{ p.pnl_pct }}%)
-                </span>
-              {% endif %}
-            </span>{% endif %}
+        <!-- Live price block -->
+        <div class="sc-live">
+          <div class="sc-live-label">
+            {% if is_open %}Live Price{% elif is_win %}Exit Price (T2 Hit){% else %}Exit Price (SL Hit){% endif %}
+          </div>
+          <div class="sc-live-price {% if is_win %}grn{% elif is_loss %}red{% else %}{% if pnl >= 0 %}grn{% else %}red{% endif %}{% endif %}">
+            ₹{{ p.current_price or p.exit_price or p.entry }}
+          </div>
+          <div class="sc-live-pnl {% if pnl >= 0 %}pnl-pos{% else %}pnl-neg{% endif %}">
+            {% if pnl >= 0 %}▲ +{% else %}▼ {% endif %}{{ pnl }}%
+            &nbsp;·&nbsp;
+            {% if p.pnl_pts is not none %}{% if p.pnl_pts >= 0 %}+{% endif %}₹{{ p.pnl_pts }}{% endif %}
+          </div>
+          {% if p.last_updated %}
+          <div class="sc-live-updated">Updated: {{ p.last_updated }}</div>
           {% endif %}
         </div>
 
+        <!-- Progress bar toward T2 -->
+        {% if is_open %}
+        <div class="sc-progress">
+          <div class="sc-progress-header">
+            <span>Progress → Target</span>
+            <span style="color:{% if prog >= 0 %}var(--green){% else %}var(--red){% endif %}">
+              {{ prog }}%
+            </span>
+          </div>
+          <div class="sc-progress-bar-bg">
+            <div class="sc-progress-bar-fill {% if prog < 0 %}negative{% endif %}"
+                 style="width:{{ [prog_w, 100]|min }}%"></div>
+          </div>
+          <div class="sc-dist-row">
+            <span style="color:var(--red);font-size:9.5px">
+              SL buffer: {{ p.dist_sl_pct }}%
+            </span>
+            <span style="color:var(--green);font-size:9.5px">
+              To T2: {{ p.dist_t2_pct }}%
+            </span>
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Price levels: Entry / T1 / T2 / SL -->
+        <div class="sc-levels">
+          <div class="sc-level-row">
+            <span class="sc-level-label">Entry</span>
+            <span class="sc-level-val">₹{{ p.entry }}</span>
+            <span style="font-size:9px;color:var(--muted2)">base</span>
+          </div>
+          <div class="sc-level-row">
+            <span class="sc-level-label">T1 <span style="font-size:8px">(50% exit)</span></span>
+            <span class="sc-level-val grn {% if p.t1_hit %}sc-t1-hit{% endif %}">
+              ₹{{ p.t1 }}
+            </span>
+            <span style="font-size:9px;color:var(--muted2)">1:{{ p.rr_t1 }}</span>
+          </div>
+          <div class="sc-level-row" style="border-color:rgba(16,185,129,.3)">
+            <span class="sc-level-label">T2 Target</span>
+            <span class="sc-level-val grn" style="font-size:13px">₹{{ p.t2 }}</span>
+            <span style="font-size:9px;color:var(--green)">1:{{ p.rr_t2 }}</span>
+          </div>
+          <div class="sc-level-row" style="border-color:rgba(239,68,68,.25)">
+            <span class="sc-level-label">Stop Loss</span>
+            <span class="sc-level-val red">₹{{ p.sl }}</span>
+            <span style="font-size:9px;color:var(--red)">-{{ p.sl_pct }}%</span>
+          </div>
+        </div>
+
+        <!-- Indicators -->
+        <div class="sc-indicators">
+          <span class="sc-ind">RSI {{ p.rsi }}</span>
+          <span class="sc-ind">Vol {{ p.vol_ratio }}×</span>
+          <span class="sc-ind">MACD {{ '✅' if p.macd_bullish else '❌' }}</span>
+          <span class="sc-ind">EMA21 ₹{{ p.ema21 }}</span>
+        </div>
+
+        <!-- Status -->
+        <div class="sc-status-row">
+          {% if is_win %}
+            <span class="badge badge-win">✓ TARGET HIT</span>
+            <span class="pnl-pos">+{{ pnl }}%</span>
+          {% elif is_loss %}
+            <span class="badge badge-loss">✗ SL HIT</span>
+            <span class="pnl-neg">{{ pnl }}%</span>
+          {% else %}
+            <span class="badge badge-open">● OPEN</span>
+          {% endif %}
+        </div>
+
+        <!-- Reasons -->
         <div class="sc-reasons">
           {% for r in p.reasons[:3] %}
-          <div class="sc-reason">✦ {{ r }}</div>
+          <div class="sc-reason">{{ r }}</div>
           {% endfor %}
         </div>
+
       </div>
       {% endfor %}
     </div>

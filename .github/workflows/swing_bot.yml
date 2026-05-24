@@ -1,13 +1,19 @@
-name: Swing Stock Scanner (Weekly — Monday)
+name: Swing Stock Tracker (Daily Mon–Fri)
 
 on:
   schedule:
-    # Every Monday at 09:15 IST = 03:45 UTC
-    - cron: "45 3 * * 1"
+    # Every Mon–Fri at 15:35 IST = 10:05 UTC (just after NSE close)
+    # Monday  → full scan for new weekly picks + EOD update
+    # Tue–Fri → live price update + EOD Telegram update only
+    - cron: "5 10 * * 1-5"
   workflow_dispatch:
     inputs:
-      force:
-        description: "Force scan even if already done this week"
+      force_scan:
+        description: "Force full scan (FORCE_SWING=1)"
+        required: false
+        default: "0"
+      update_only:
+        description: "Update statuses only, no new scan"
         required: false
         default: "0"
 
@@ -15,9 +21,9 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  swing-scan:
+  swing-run:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: write
 
@@ -34,18 +40,19 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Swing Scanner
+      - name: Run Swing Scanner / Updater
         env:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          FORCE_SWING:      ${{ github.event.inputs.force || '0' }}
+          FORCE_SWING:      ${{ github.event.inputs.force_scan || '0' }}
+          UPDATE_ONLY:      ${{ github.event.inputs.update_only || '0' }}
         run: python run_swing.py
 
-      - name: Commit swing log
+      - name: Commit updated swing log
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main || true
           git add swing_log.json
-          git diff --staged --quiet || git commit -m "chore: weekly swing picks [skip ci]"
+          git diff --staged --quiet || git commit -m "chore: update swing log $(date +'%Y-%m-%d') [skip ci]"
           git push || true
