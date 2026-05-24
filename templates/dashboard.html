@@ -473,6 +473,123 @@ tbody td { padding:10px 10px; vertical-align:middle; }
 }
 .footer a { color:var(--muted); text-decoration:none; }
 
+/* ── OPTIONS SECTION ──────────────────────────────────────────── */
+.options-section .section-header::before { background:linear-gradient(180deg,#a855f7,transparent); }
+.badge-options {
+  color:#a855f7; background:rgba(168,85,247,.12);
+  border:1px solid rgba(168,85,247,.3);
+  font-size:10px; font-weight:800; padding:3px 9px;
+  border-radius:20px; letter-spacing:.5px;
+}
+
+/* Market ticker strip */
+.opt-ticker {
+  display:flex; gap:10px; flex-wrap:wrap; align-items:stretch;
+  padding:14px 20px; border-bottom:1px solid var(--border);
+  background:rgba(0,0,0,.15);
+}
+.opt-index-pill {
+  background:rgba(255,255,255,.04); border:1px solid var(--border2);
+  border-radius:10px; padding:12px 16px;
+  display:flex; flex-direction:column; gap:3px; min-width:150px;
+  transition:transform .2s;
+}
+.opt-index-pill:hover { transform:translateY(-2px); }
+.opt-up { border-color:rgba(16,185,129,.3); }
+.opt-dn { border-color:rgba(239,68,68,.3); }
+
+.opt-idx-name  { font-size:9px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.8px; }
+.opt-idx-price { font-size:22px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.1; }
+.opt-up .opt-idx-price { color:var(--green); }
+.opt-dn .opt-idx-price { color:var(--red); }
+.opt-idx-chg   { font-size:11px; font-weight:600; }
+.opt-up .opt-idx-chg { color:var(--green); }
+.opt-dn .opt-idx-chg { color:var(--red); }
+.opt-idx-exp   { font-size:9px; color:var(--muted2); margin-top:2px; }
+
+/* VIX pill */
+.opt-vix-pill {
+  background:rgba(255,255,255,.04); border:1px solid var(--border2);
+  border-radius:10px; padding:12px 16px;
+  display:flex; flex-direction:column; gap:3px; min-width:180px;
+}
+.opt-vix-low     { border-color:rgba(16,185,129,.35); }
+.opt-vix-medium  { border-color:rgba(245,158,11,.35); }
+.opt-vix-high    { border-color:rgba(239,68,68,.35); }
+.opt-vix-very_high{ border-color:rgba(239,68,68,.6); background:rgba(239,68,68,.06); }
+.opt-vix-label   { font-size:10px; color:var(--muted); line-height:1.4; }
+.opt-vix-block   { font-size:10px; color:var(--red); font-weight:700; margin-top:4px; }
+
+/* Summary mini */
+.opt-summary-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.opt-mini {
+  background:rgba(255,255,255,.04); border:1px solid var(--border);
+  border-radius:8px; padding:8px 12px; text-align:center; min-width:60px;
+}
+.om-label { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.6px; }
+.om-val   { font-size:18px; font-weight:700; color:#f1f5f9; }
+
+.opt-section-label {
+  font-size:11px; color:var(--muted); font-weight:700;
+  text-transform:uppercase; letter-spacing:.7px; margin-bottom:12px;
+}
+
+/* Option cards */
+.opt-cards {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap:14px;
+  margin-bottom:16px;
+}
+.opt-card {
+  border:1px solid var(--border2); border-radius:12px;
+  padding:16px; display:flex; flex-direction:column; gap:10px;
+  background:rgba(255,255,255,.03);
+  position:relative; overflow:hidden;
+  transition:transform .2s, box-shadow .2s;
+}
+.opt-card:hover { transform:translateY(-3px); box-shadow:0 10px 40px rgba(0,0,0,.45); }
+.opt-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.opt-card-call { border-color:rgba(16,185,129,.3); background:rgba(16,185,129,.04); }
+.opt-card-call::before { background:linear-gradient(90deg,var(--green),transparent); }
+.opt-card-put  { border-color:rgba(239,68,68,.3);   background:rgba(239,68,68,.04); }
+.opt-card-put::before  { background:linear-gradient(90deg,var(--red),transparent); }
+
+.opt-card-top  { display:flex; justify-content:space-between; align-items:flex-start; }
+.opt-card-index{ font-size:18px; font-weight:800; color:#f1f5f9; }
+.opt-card-type { font-size:12px; font-weight:700; margin-top:3px; }
+.oc-call { color:var(--green); }
+.oc-put  { color:var(--red); }
+.opt-kz  { font-size:9px; font-weight:700; padding:2px 7px; border-radius:4px;
+           background:rgba(255,255,255,.05); color:var(--muted); border:1px solid var(--border); }
+
+.opt-strike-box {
+  background:rgba(0,0,0,.3); border:1px solid var(--border);
+  border-radius:8px; padding:10px 12px; text-align:center;
+}
+.opt-strike-main { font-size:22px; font-weight:900; color:#f1f5f9; font-variant-numeric:tabular-nums; }
+.opt-card-call .opt-strike-main { color:var(--green); }
+.opt-card-put  .opt-strike-main { color:var(--red); }
+.opt-strike-exp  { font-size:10px; color:var(--muted2); margin-top:2px; }
+.opt-strike-note { font-size:9.5px; color:var(--muted); margin-top:3px; line-height:1.4; }
+
+.opt-levels { display:flex; flex-direction:column; gap:5px; }
+.opt-level-row {
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:11.5px; padding:5px 8px;
+  background:rgba(255,255,255,.02); border-radius:5px; border:1px solid var(--border);
+}
+.opt-ll { font-size:9.5px; color:var(--muted2); font-weight:600; min-width:80px; }
+.opt-lv { font-weight:700; font-variant-numeric:tabular-nums; }
+
+.opt-checklist { display:flex; gap:5px; flex-wrap:wrap; }
+.opt-chk {
+  font-size:9.5px; padding:2px 7px; border-radius:4px; font-weight:600;
+  border:1px solid var(--border);
+}
+.chk-ok { color:var(--green); background:rgba(16,185,129,.08); border-color:rgba(16,185,129,.25); }
+.chk-no { color:var(--red);   background:rgba(239,68,68,.08);  border-color:rgba(239,68,68,.25); }
+
 /* ── SWING SECTION ────────────────────────────────────────────── */
 .swing-section .section-header::before { background:linear-gradient(180deg,#34d399,transparent); }
 .badge-swing {
@@ -654,6 +771,249 @@ tbody td { padding:10px 10px; vertical-align:middle; }
   </div>
 </div>
 
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!--  OPTIONS — Nifty / BankNifty / Sensex                     -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="asset-section options-section">
+  <div class="section-header">
+    <div class="section-title">
+      <span class="asset-badge badge-options">🎯 OPTIONS</span>
+      Nifty · Bank Nifty · Sensex
+      <span style="color:var(--muted);font-size:12px;font-weight:400">— Sure-shot calls only (score ≥ 70/100)</span>
+    </div>
+    <div class="section-right">
+      {% if bot_state.get('OPTIONS',{}).get('paused') %}
+        <div class="status-paused"><div class="status-dot dot-red"></div>PAUSED</div>
+        <button class="btn-ctrl btn-resume" onclick="control('OPTIONS','resume')">▶ Resume</button>
+      {% else %}
+        <div class="status-running"><div class="status-dot dot-green"></div>RUNNING</div>
+        <button class="btn-ctrl btn-pause" onclick="control('OPTIONS','pause')">⏸ Pause</button>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Live Market Ticker -->
+  <div class="opt-ticker">
+    <div class="opt-index-pill {% if options_market.nifty_chg is not none and options_market.nifty_chg >= 0 %}opt-up{% else %}opt-dn{% endif %}">
+      <span class="opt-idx-name">NIFTY</span>
+      <span class="opt-idx-price">{{ '{:,.0f}'.format(options_market.nifty or 0) if options_market.nifty else '—' }}</span>
+      {% if options_market.nifty_chg is not none %}
+      <span class="opt-idx-chg">{% if options_market.nifty_chg >= 0 %}▲{% else %}▼{% endif %} {{ options_market.nifty_chg }}%</span>
+      {% endif %}
+      <span class="opt-idx-exp">Exp: {{ options_expiry.NIFTY }}</span>
+    </div>
+    <div class="opt-index-pill {% if options_market.banknifty_chg is not none and options_market.banknifty_chg >= 0 %}opt-up{% else %}opt-dn{% endif %}">
+      <span class="opt-idx-name">BANKNIFTY</span>
+      <span class="opt-idx-price">{{ '{:,.0f}'.format(options_market.banknifty or 0) if options_market.banknifty else '—' }}</span>
+      {% if options_market.banknifty_chg is not none %}
+      <span class="opt-idx-chg">{% if options_market.banknifty_chg >= 0 %}▲{% else %}▼{% endif %} {{ options_market.banknifty_chg }}%</span>
+      {% endif %}
+      <span class="opt-idx-exp">Exp: {{ options_expiry.BANKNIFTY }}</span>
+    </div>
+    <div class="opt-index-pill {% if options_market.sensex_chg is not none and options_market.sensex_chg >= 0 %}opt-up{% else %}opt-dn{% endif %}">
+      <span class="opt-idx-name">SENSEX</span>
+      <span class="opt-idx-price">{{ '{:,.0f}'.format(options_market.sensex or 0) if options_market.sensex else '—' }}</span>
+      {% if options_market.sensex_chg is not none %}
+      <span class="opt-idx-chg">{% if options_market.sensex_chg >= 0 %}▲{% else %}▼{% endif %} {{ options_market.sensex_chg }}%</span>
+      {% endif %}
+      <span class="opt-idx-exp">Exp: {{ options_expiry.SENSEX }}</span>
+    </div>
+
+    <!-- India VIX -->
+    <div class="opt-vix-pill opt-vix-{{ options_market.vix_risk }}">
+      <span class="opt-idx-name">INDIA VIX</span>
+      <span class="opt-idx-price" style="font-size:20px">{{ options_market.vix }}</span>
+      <span class="opt-vix-label">{{ options_market.vix_label.split('(')[0].strip() }}</span>
+      {% if options_market.vix_block %}
+      <span class="opt-vix-block">⛔ OPTIONS BLOCKED</span>
+      {% endif %}
+    </div>
+
+    <!-- Summary mini cards -->
+    <div class="opt-summary-row">
+      <div class="opt-mini"><div class="om-label">Calls</div><div class="om-val">{{ options_summary.total }}</div></div>
+      <div class="opt-mini"><div class="om-label">Wins</div><div class="om-val" style="color:var(--green)">{{ options_summary.wins }}</div></div>
+      <div class="opt-mini"><div class="om-label">Losses</div><div class="om-val" style="color:var(--red)">{{ options_summary.losses }}</div></div>
+      <div class="opt-mini"><div class="om-label">Win Rate</div><div class="om-val" style="color:var(--gold)">{{ options_summary.win_rate }}%</div></div>
+    </div>
+  </div>
+
+  <!-- Strategy bar -->
+  <div class="strat-bar">
+    <span class="stag">Indices <strong>Nifty · BankNifty · Sensex</strong></span>
+    <span class="stag">Min Score <strong>70/100</strong></span>
+    <span class="stag">KZ1 <strong>09:15–10:00</strong></span>
+    <span class="stag">KZ2 <strong>11:15–11:45</strong></span>
+    <span class="stag">KZ3 <strong>13:30–14:15</strong></span>
+    <span class="stag">VIX block <strong>≥ 25</strong></span>
+    <span class="stag">Strategy <strong>SMC + ICT 15min</strong></span>
+    <span class="stag">Scan <strong>Every 5 min</strong></span>
+  </div>
+
+  <!-- Active calls -->
+  {% if options_active %}
+  <div style="padding:16px 20px 0">
+    <div class="opt-section-label">🔴 Active Options Calls</div>
+    <div class="opt-cards">
+      {% for s in options_active %}
+      {% set is_call = s.option_type == 'CALL' %}
+      <div class="opt-card {% if is_call %}opt-card-call{% else %}opt-card-put{% endif %}">
+
+        <!-- Top row -->
+        <div class="opt-card-top">
+          <div>
+            <div class="opt-card-index">{{ s.index }}</div>
+            <div class="opt-card-type {% if is_call %}oc-call{% else %}oc-put{% endif %}">
+              {{ '🟢 BUY CALL' if is_call else '🔴 BUY PUT' }}
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div class="sc-score-pill">{{ s.score }}/100</div>
+            <div class="opt-kz" style="margin-top:4px">{{ s.kill_zone }}</div>
+          </div>
+        </div>
+
+        <!-- Strike + expiry -->
+        <div class="opt-strike-box">
+          <div class="opt-strike-main">
+            {{ s.strike | int }} {{ s.option_type }}
+          </div>
+          <div class="opt-strike-exp">Expiry: {{ s.expiry }}</div>
+          <div class="opt-strike-note">{{ s.strike_note }}</div>
+        </div>
+
+        <!-- Index levels -->
+        <div class="opt-levels">
+          <div class="opt-level-row">
+            <span class="opt-ll">Entry (Index)</span>
+            <span class="opt-lv">{{ '{:,.0f}'.format(s.entry) }}</span>
+          </div>
+          <div class="opt-level-row" style="border-color:rgba(16,185,129,.3)">
+            <span class="opt-ll">T1</span>
+            <span class="opt-lv grn">{{ '{:,.0f}'.format(s.t1) }}</span>
+          </div>
+          <div class="opt-level-row" style="border-color:rgba(16,185,129,.4)">
+            <span class="opt-ll">T2 Target</span>
+            <span class="opt-lv grn" style="font-weight:800;font-size:13px">{{ '{:,.0f}'.format(s.t2) }}</span>
+            <span style="font-size:9px;color:var(--green)">R:R 1:{{ s.rr }}</span>
+          </div>
+          <div class="opt-level-row" style="border-color:rgba(239,68,68,.3)">
+            <span class="opt-ll">SL (Index)</span>
+            <span class="opt-lv red">{{ '{:,.0f}'.format(s.sl) }}</span>
+            <span style="font-size:9px;color:var(--red)">-{{ s.sl_pct }}%</span>
+          </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="opt-checklist">
+          {% set chk = s.must_have_checklist %}
+          <span class="opt-chk {% if chk.bos_or_choch_15m %}chk-ok{% else %}chk-no{% endif %}">
+            {{ '✓' if chk.bos_or_choch_15m else '✗' }} BOS/CHOCH
+          </span>
+          <span class="opt-chk {% if chk.inside_kill_zone %}chk-ok{% else %}chk-no{% endif %}">
+            {{ '✓' if chk.inside_kill_zone else '✗' }} Kill Zone
+          </span>
+          <span class="opt-chk {% if chk.vix_safe %}chk-ok{% else %}chk-no{% endif %}">
+            {{ '✓' if chk.vix_safe else '✗' }} VIX Safe
+          </span>
+          <span class="opt-chk {% if chk.order_block %}chk-ok{% else %}chk-no{% endif %}">
+            {{ '✓' if chk.order_block else '✗' }} OB
+          </span>
+          <span class="opt-chk {% if chk.liquidity_sweep %}chk-ok{% else %}chk-no{% endif %}">
+            {{ '✓' if chk.liquidity_sweep else '✗' }} Sweep
+          </span>
+        </div>
+
+        <!-- Reasons -->
+        <div class="sc-reasons" style="margin-top:4px">
+          {% for r in s.reasons[:3] %}<div class="sc-reason">{{ r }}</div>{% endfor %}
+        </div>
+
+        <!-- Status -->
+        <div class="sc-status-row" style="margin-top:6px">
+          {% if s.status == 'TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>
+            {% if s.pnl_pct is not none %}<span class="pnl-pos">+{{ s.pnl_pct }}%</span>{% endif %}
+          {% elif s.status == 'SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>
+            {% if s.pnl_pct is not none %}<span class="pnl-neg">{{ s.pnl_pct }}%</span>{% endif %}
+          {% else %}<span class="badge badge-open">● OPEN</span>
+            {% if s.exit_price %}<span class="blu">{{ '{:,.0f}'.format(s.exit_price) }}</span>{% endif %}
+          {% endif %}
+          <span style="font-size:9px;color:var(--muted2);margin-left:auto">{{ s.datetime }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">📡</div>
+    <div class="empty-title">Scanning for sure-shot options calls…</div>
+    <div class="empty-sub">Score ≥ 70/100 required · All 3 must-haves required · VIX must be below 25<br>Scans fire every 5 min during Kill Zones (KZ1 / KZ2 / KZ3)</div>
+  </div>
+  {% endif %}
+
+  <!-- History table -->
+  {% if options_history %}
+  <div style="padding:12px 20px 16px">
+    <div class="opt-section-label" style="border-top:1px solid var(--border);padding-top:14px">📋 Options History</div>
+    <div class="table-wrap" style="margin-top:10px">
+    <table>
+      <thead>
+        <tr>
+          <th>Date/Time</th><th>Index</th><th>Call</th><th>Score</th><th>Strike</th>
+          <th>Expiry</th><th>Entry</th><th>T1</th><th>T2</th><th>SL</th><th>R:R</th>
+          <th>Zone</th><th>VIX</th><th>Live Price</th><th>Status</th><th>P&L %</th><th>Reasons</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for s in options_history %}
+      <tr>
+        <td class="dim nowrap">{{ s.datetime }}</td>
+        <td class="sym">{{ s.index }}</td>
+        <td>
+          {% if s.option_type == 'CALL' %}
+            <span class="dir-badge long">CALL</span>
+          {% else %}
+            <span class="dir-badge short">PUT</span>
+          {% endif %}
+        </td>
+        <td>
+          <div class="score-cell">
+            <span class="score-num">{{ s.score }}</span>
+            <div class="sbar-bg"><div class="sbar-fill" style="width:{{ s.score }}%"></div></div>
+          </div>
+        </td>
+        <td class="num" style="color:var(--gold);font-weight:700">{{ s.strike | int }} {{ s.option_type }}</td>
+        <td class="dim nowrap">{{ s.expiry }}</td>
+        <td class="num">{{ '{:,.0f}'.format(s.entry) }}</td>
+        <td class="num grn">{{ '{:,.0f}'.format(s.t1) }}</td>
+        <td class="num grn" style="font-weight:700">{{ '{:,.0f}'.format(s.t2) }}</td>
+        <td class="num red">{{ '{:,.0f}'.format(s.sl) }}</td>
+        <td class="dim">1:{{ s.rr }}</td>
+        <td>
+          {% set kz = (s.kill_zone if s.kill_zone else '?')|replace(' ','') %}
+          <span class="kz-tag {{ kz }}">{{ s.kill_zone or '?' }}</span>
+        </td>
+        <td class="dim">{{ s.vix }}</td>
+        <td class="num blu">{% if s.exit_price %}{{ '{:,.0f}'.format(s.exit_price) }}{% else %}—{% endif %}</td>
+        <td>
+          {% if s.status == 'TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span>
+          {% elif s.status == 'SL HIT' %}<span class="badge badge-loss">✗ SL HIT</span>
+          {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
+        </td>
+        <td class="{{ 'pnl-pos' if s.pnl_pct is not none and s.pnl_pct >= 0 else 'pnl-neg' if s.pnl_pct is not none else 'dim' }}">
+          {% if s.pnl_pct is not none %}{% if s.pnl_pct >= 0 %}+{% endif %}{{ s.pnl_pct }}%{% else %}—{% endif %}
+        </td>
+        <td><div class="reasons">{{ s.reasons|join(' · ') if s.reasons else '—' }}</div></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+  {% endif %}
+</div>
 
 <!-- ══════════════════════════════════════════════════════════ -->
 <!--  SWING TRADING — Weekly NSE Stock Picks                   -->

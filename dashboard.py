@@ -10,7 +10,8 @@ from signal_logger import (
     LOG_FILE, GOLD_LOG_FILE, BTC_LOG_FILE,
     _load,
 )
-from run_swing import get_swing_data
+from run_swing   import get_swing_data
+from run_options import get_options_data
 from datetime import datetime, timezone, timedelta
 
 app = Flask(__name__)
@@ -63,9 +64,10 @@ def index():
     btc_summary  = get_summary(btc_signals)
     overall      = get_summary(nse_signals + gold_signals + btc_signals)
 
-    bot_state  = _load_bot_state()
-    now        = _ist_now()
-    swing_data = get_swing_data()
+    bot_state    = _load_bot_state()
+    now          = _ist_now()
+    swing_data   = get_swing_data()
+    options_data = get_options_data()
 
     return render_template(
         "dashboard.html",
@@ -83,6 +85,12 @@ def index():
         swing_week_picks=swing_data["week_picks"],
         swing_all_picks=swing_data["all_picks"],
         swing_summary=swing_data["summary"],
+        # options
+        options_active=options_data["active"],
+        options_history=options_data["history"],
+        options_summary=options_data["summary"],
+        options_market=options_data["market"],
+        options_expiry=options_data["expiry"],
         # controls
         bot_state=bot_state,
         now=now,
