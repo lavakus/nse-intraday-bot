@@ -7,13 +7,14 @@ import os, time, json
 from datetime import datetime, timezone, timedelta
 
 from gold_strategy  import score_gold
-from feeds.gold_feed import get_gold_data, get_prev_day_high_low, get_asian_session_range
+from feeds.gold_feed import (get_gold_data, get_prev_day_high_low,
+                              get_asian_session_range, get_daily_data, get_m5_data)
 from feeds.dxy_feed  import get_dxy_data
 from signal_logger   import log_signal
 from notifier        import telegram_send
 from shared.smc_engine import get_kill_zone
 
-THRESHOLD = float(os.environ.get("GOLD_SCORE", "65"))
+THRESHOLD = float(os.environ.get("GOLD_SCORE", "120"))
 BOT_STATE_FILE = "bot_state.json"
 GOLD_LOG_FILE  = "gold_signals_log.json"
 
@@ -34,33 +35,42 @@ def _is_paused() -> bool:
 
 
 def _format_gold_alert(sig: dict) -> str:
-    tp = sig.get("trade_params", {})
-    ph = sig.get("phase_scores", {})
+    tp  = sig.get("trade_params", {})
+    ph  = sig.get("phase_scores", {})
     chk = sig.get("must_have_checklist", {})
-    bar = "#" * int(sig["score"] // 15) + "." * (10 - int(sig["score"] // 15))
+    conf = sig.get("confluence_str", f"{sig.get('confluence', '?')}/5")
+    filled = min(10, int(sig["score"] // 15))
+    bar = "#" * filled + "." * (10 - filled)
+
+    def tick(key):
+        return "OK" if chk.get(key) else "XX"
 
     lines = [
         f"*** GOLD SIGNAL — {sig['signal']} ***",
         f"",
-        f"Asset     : Gold (XAUUSD)",
-        f"Score     : {sig['score']}/150  ({sig['score_pct']}%)  [{bar}]",
-        f"Strength  : {sig['signal_strength']}",
-        f"Kill Zone : {sig['kill_zone']}",
-        f"DXY       : {'Confirms' if sig.get('dxy_confirmation') else 'Not confirmed'}",
+        f"Asset      : Gold (XAUUSD)",
+        f"Score      : {sig['score']}/150  ({sig['score_pct']}%)  [{bar}]",
+        f"Confluence : {conf} points active",
+        f"Strength   : {sig['signal_strength']}",
+        f"Kill Zone  : {sig.get('kill_zone', '?')}",
+        f"DXY        : {'Confirms' if sig.get('dxy_confirmation') else 'Not confirmed'}",
         f"",
         f"Entry  : ${tp.get('entry', '?')}",
         f"SL     : ${tp.get('sl', '?')}  ({tp.get('sl_pct', '?')}%)",
         f"T1     : ${tp.get('t1', '?')}  (RR 1:{tp.get('rr_t1', '?')})",
         f"T2     : ${tp.get('t2', '?')}  (RR 1:{tp.get('rr_t2', '?')})",
         f"",
-        f"SMC Structure  : {ph.get('smc_structure','?')}/60",
-        f"ICT Gold       : {ph.get('ict_gold_filters','?')}/40",
-        f"PA + Boosters  : {ph.get('pa_boosters','?')}/50",
+        f"--- ICT + SMC Confluence Checklist ---",
+        f"{tick('htf_bias_clear')}        HTF Daily Bias Clear",
+        f"{tick('premium_discount_zone')} Premium/Discount Zone",
+        f"{tick('kill_zone_active')}      Kill Zone Active (London/NY)",
+        f"{tick('judas_swing')}           Judas Swing (Asian Range Sweep)",
+        f"{tick('ob_or_fvg_present')}     H4 Order Block / FVG",
         f"",
-        f"{'OK' if chk.get('bos_or_choch_1h') else 'XX'}  BOS/CHOCH 1H",
-        f"{'OK' if chk.get('order_block_valid') else 'XX'}  Order Block",
-        f"{'OK' if chk.get('liquidity_sweep') else 'XX'}  Liquidity Sweep",
-        f"{'OK' if chk.get('inside_kill_zone') else 'XX'}  Kill Zone",
+        f"Phase Breakdown:",
+        f"  SMC Structure  : {ph.get('smc_structure', '?')}/60",
+        f"  ICT Filters    : {ph.get('ict_gold_filters', '?')}/40",
+        f"  PA Boosters    : {ph.get('pa_boosters', '?')}/50",
         f"",
     ] + [f"  + {r}" for r in sig.get("reasons", [])] + [
         f"",
@@ -76,18 +86,22 @@ def scan_gold_once() -> dict | None:
     print(f"[GOLD] Scanning — {ist.strftime('%H:%M IST')}")
 
     try:
-        data = get_gold_data()
+        data     = get_gold_data()
         if data["price"] is None:
             print("[GOLD] No price data")
             return None
 
         pdh, pdl = get_prev_day_high_low()
         dxy      = get_dxy_data()
+        df_daily = get_daily_data()
+        df_5m    = get_m5_data()
 
         sig = score_gold(
-            df_4h  = data["df_4h"],
-            df_1h  = data["df_1h"],
-            df_15m = data["df_15m"],
+            df_4h   = data["df_4h"],
+            df_1h   = data["df_1h"],
+            df_15m  = data["df_15m"],
+            df_daily= df_daily,
+            df_5m   = df_5m,
             pdh=pdh, pdl=pdl,
             dxy_data=dxy,
             ist_time=ist,

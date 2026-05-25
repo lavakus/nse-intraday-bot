@@ -82,3 +82,33 @@ def get_asian_session_range(df_1h: pd.DataFrame) -> dict:
                 "low":  round(float(asian["low"].min()),  2),
             }
     return {"high": None, "low": None}
+
+
+def get_daily_data() -> pd.DataFrame:
+    """
+    Download daily OHLCV for Gold (GC=F) — last 60 trading days.
+    Used by gold_strategy for HTF bias detection (PDH/PDL, daily BOS/CHOCH).
+    Returns DataFrame indexed in IST with lowercase columns.
+    """
+    try:
+        df = _clean(yf.download(SYMBOL, period="60d", interval="1d",
+                                progress=False, auto_adjust=True))
+        return df
+    except Exception as e:
+        print(f"[GOLD FEED] get_daily_data error: {e}")
+        return pd.DataFrame()
+
+
+def get_m5_data() -> pd.DataFrame:
+    """
+    Download 5-minute OHLCV for Gold (GC=F) — last 2 days.
+    Used by gold_strategy for M5 confirmation entry (refined entry candle).
+    Returns DataFrame indexed in IST with lowercase columns.
+    """
+    try:
+        df = _clean(yf.download(SYMBOL, period="2d", interval="5m",
+                                progress=False, auto_adjust=True))
+        return df
+    except Exception as e:
+        print(f"[GOLD FEED] get_m5_data error: {e}")
+        return pd.DataFrame()
