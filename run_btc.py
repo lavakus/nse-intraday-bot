@@ -109,9 +109,12 @@ def scan_btc_once() -> dict | None:
         print(f"[BTC] Kill Zone: {kz} (pts={kz_pts})")
 
         if sig and sig.get("score", 0) >= THRESHOLD:
+            tp = sig.get("trade_params", {})
+            ent = sig.get("entry", tp.get("entry", "?"))
+            t2  = sig.get("t2",    tp.get("t2", sig.get("target", "?")))
             print(f"[BTC] STRONG: {sig['signal']} "
                   f"score={sig['score']}/150 [{sig['signal_strength']}] "
-                  f"entry=${sig['entry']:,} T2=${sig['t2']:,}")
+                  f"entry=${ent:,} T2=${t2:,}")
             return sig
         elif sig and isinstance(sig, dict) and sig.get("score", 0) > 0:
             print(f"[BTC] Signal found but score {sig.get('score',0)}/150 < threshold {THRESHOLD}")
