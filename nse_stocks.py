@@ -98,13 +98,13 @@ def get_nse_stocks(force_refresh=False) -> list:
     # Return from cache if same day
     if not force_refresh and os.path.exists(CACHE_FILE):
         try:
-            with open(CACHE_FILE) as f:
+            with open(CACHE_FILE, encoding="utf-8") as f:
                 cache = json.load(f)
             if cache.get("date") == today_str and len(cache.get("stocks", [])) > 50:
                 print(f"[NSE] Using cached list: {len(cache['stocks'])} stocks")
                 return cache["stocks"]
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[NSE] Cache read failed: {e}")
 
     print("[NSE] Fetching fresh stock list from NSE...")
 
@@ -117,10 +117,10 @@ def get_nse_stocks(force_refresh=False) -> list:
 
     # Save cache
     try:
-        with open(CACHE_FILE, "w") as f:
+        with open(CACHE_FILE, "w", encoding="utf-8") as f:
             json.dump({"date": today_str, "stocks": stocks}, f)
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[NSE] Cache write failed: {e}")
 
     return stocks
 

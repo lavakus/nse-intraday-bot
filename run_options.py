@@ -32,20 +32,26 @@ def _now_ist() -> datetime:
 
 def _load_log() -> list:
     try:
-        with open(OPTIONS_LOG) as f:
+        with open(OPTIONS_LOG, encoding="utf-8") as f:
             return json.load(f)
-    except Exception:
+    except FileNotFoundError:
+        return []
+    except Exception as e:
+        print(f"[OPTIONS] Failed to load log: {e}")
         return []
 
 def _save_log(data: list):
-    with open(OPTIONS_LOG, "w") as f:
+    with open(OPTIONS_LOG, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, default=str)
 
 def _is_paused() -> bool:
     try:
-        with open(BOT_STATE_FILE) as f:
+        with open(BOT_STATE_FILE, encoding="utf-8") as f:
             return json.load(f).get("OPTIONS", {}).get("paused", False)
-    except Exception:
+    except FileNotFoundError:
+        return False
+    except Exception as e:
+        print(f"[OPTIONS] bot_state read error: {e}")
         return False
 
 
@@ -87,8 +93,8 @@ def update_options_statuses() -> list:
                     rec["status"] = "TARGET HIT"; changed += 1
                 elif price >= sl:
                     rec["status"] = "SL HIT"; changed += 1
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[OPTIONS] Status update error for {rec.get('index','?')}: {e}")
 
     if changed:
         _save_log(data)

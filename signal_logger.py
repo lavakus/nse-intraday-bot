@@ -41,10 +41,10 @@ def _load(log_file: str = LOG_FILE) -> list:
     # 1) Try local file
     if os.path.exists(log_file):
         try:
-            with open(log_file, "r") as f:
+            with open(log_file, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[LOGGER] Failed to read {log_file}: {e}")
     # 2) Fallback: fetch from GitHub (for Render / remote host)
     if log_file == LOG_FILE:          # only NSE log is on GitHub
         try:
@@ -52,13 +52,13 @@ def _load(log_file: str = LOG_FILE) -> list:
             r = _req.get(GITHUB_RAW, timeout=10)
             if r.status_code == 200:
                 return r.json()
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[LOGGER] GitHub fallback failed: {e}")
     return []
 
 
 def _save(data: list, log_file: str = LOG_FILE):
-    with open(log_file, "w") as f:
+    with open(log_file, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, default=str)
 
 
@@ -117,10 +117,10 @@ def log_evaluation(sym: str, score: int, blocked_reason: str, phase_scores: dict
             "blocked_reason": blocked_reason,
             "phase_scores":  phase_scores,
         }
-        with open(EVAL_FILE, "a") as f:
+        with open(EVAL_FILE, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry, default=str) + "\n")
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[LOGGER] log_evaluation failed: {e}")
 
 
 def _get_live_price(rec: dict) -> float | None:
@@ -181,8 +181,8 @@ def _update_file_statuses(log_file: str) -> tuple[list, int]:
                     changed += 1
                 else:
                     rec["exit_price"] = price
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[LOGGER] Status update error for record {rec.get('id','?')}: {e}")
 
     if changed:
         _save(data, log_file)

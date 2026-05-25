@@ -45,13 +45,16 @@ def _today_str() -> str:
 
 def _load_log() -> list:
     try:
-        with open(SWING_LOG) as f:
+        with open(SWING_LOG, encoding="utf-8") as f:
             return json.load(f)
-    except Exception:
+    except FileNotFoundError:
+        return []
+    except Exception as e:
+        print(f"[SWING] Failed to load log: {e}")
         return []
 
 def _save_log(data: list):
-    with open(SWING_LOG, "w") as f:
+    with open(SWING_LOG, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, default=str)
 
 

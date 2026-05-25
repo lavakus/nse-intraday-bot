@@ -28,8 +28,8 @@ def _scan_one(symbol: str, ist_time: datetime) -> dict | None:
         sig = score_stock(df5, df15, symbol, pdh, pdl, ist_time)
         if sig and sig.get("score", 0) >= STRONG_SCORE:
             return sig
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[SCREENER] {symbol}: {e}")
     return None
 
 

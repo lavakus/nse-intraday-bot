@@ -7,10 +7,13 @@ import os, sys, time, requests
 from datetime import datetime, timezone, timedelta
 
 # ── CONFIG FROM ENV ────────────────────────────────────────────
-TOKEN     = os.environ.get("TELEGRAM_TOKEN",   "8856759442:AAFLBXDVV9OESxbiKj-HRIOfeGFtSWqOdRM")
-CHAT_ID   = os.environ.get("TELEGRAM_CHAT_ID", "8873804319")
+TOKEN     = os.environ.get("TELEGRAM_TOKEN", "")
+CHAT_ID   = os.environ.get("TELEGRAM_CHAT_ID", "")
 THRESHOLD = float(os.environ.get("STRONG_SCORE", "65"))
 BASE      = f"https://api.telegram.org/bot{TOKEN}"
+
+if not TOKEN or not CHAT_ID:
+    print("[WARNING] TELEGRAM_TOKEN / TELEGRAM_CHAT_ID not set — alerts will fail")
 
 
 # ── MARKET HOURS CHECK ─────────────────────────────────────────
@@ -128,8 +131,8 @@ def main():
             sig = score_stock(df5, df15, sym, pdh, pdl, ist)
             if sig and sig.get("score", 0) >= THRESHOLD:
                 return sig
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[SCAN] {sym}: {e}")
         return None
 
     strong = []

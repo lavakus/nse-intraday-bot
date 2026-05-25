@@ -23,9 +23,12 @@ def _now_ist() -> datetime:
 
 def _is_paused() -> bool:
     try:
-        with open(BOT_STATE_FILE) as f:
+        with open(BOT_STATE_FILE, encoding="utf-8") as f:
             return json.load(f).get("GOLD", {}).get("paused", False)
-    except Exception:
+    except FileNotFoundError:
+        return False
+    except Exception as e:
+        print(f"[GOLD] bot_state read error: {e}")
         return False
 
 
