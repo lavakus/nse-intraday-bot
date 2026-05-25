@@ -248,13 +248,15 @@ body{
 .nav-tab.act-nse{color:var(--blue);background:var(--blue-d);border-color:var(--blue-b);box-shadow:0 0 16px rgba(59,130,246,.12)}
 .nav-tab.act-gold{color:var(--gold);background:var(--gold-d);border-color:var(--gold-b);box-shadow:0 0 16px rgba(245,158,11,.12)}
 .nav-tab.act-btc{color:var(--orange);background:var(--orange-d);border-color:var(--orange-b);box-shadow:0 0 16px rgba(249,115,22,.12)}
+.nav-tab.act-backtest{color:var(--purple);background:var(--purple-d);border-color:var(--purple-b);box-shadow:0 0 16px rgba(124,58,237,.15)}
 
-.nav-tab.act-all    .tab-badge{background:rgba(168,85,247,.25);color:var(--purple);border-color:var(--purple-b)}
-.nav-tab.act-swing  .tab-badge{background:var(--emerald-g);color:var(--emerald);border-color:var(--emerald-b)}
-.nav-tab.act-options .tab-badge{background:var(--purple-g);color:var(--purple);border-color:var(--purple-b)}
-.nav-tab.act-nse    .tab-badge{background:var(--blue-g);color:var(--blue);border-color:var(--blue-b)}
-.nav-tab.act-gold   .tab-badge{background:var(--gold-g);color:var(--gold);border-color:var(--gold-b)}
-.nav-tab.act-btc    .tab-badge{background:var(--orange-g);color:var(--orange);border-color:var(--orange-b)}
+.nav-tab.act-all      .tab-badge{background:rgba(168,85,247,.25);color:var(--purple);border-color:var(--purple-b)}
+.nav-tab.act-swing    .tab-badge{background:var(--emerald-g);color:var(--emerald);border-color:var(--emerald-b)}
+.nav-tab.act-options  .tab-badge{background:var(--purple-g);color:var(--purple);border-color:var(--purple-b)}
+.nav-tab.act-nse      .tab-badge{background:var(--blue-g);color:var(--blue);border-color:var(--blue-b)}
+.nav-tab.act-gold     .tab-badge{background:var(--gold-g);color:var(--gold);border-color:var(--gold-b)}
+.nav-tab.act-btc      .tab-badge{background:var(--orange-g);color:var(--orange);border-color:var(--orange-b)}
+.nav-tab.act-backtest .tab-badge{background:var(--purple-g);color:var(--purple);border-color:var(--purple-b)}
 
 .nav-tab[data-open="true"] .pulse-dot{display:block}
 
@@ -1647,11 +1649,11 @@ td{padding:10px 11px;vertical-align:middle}
 ═══════════════════════════════════════════════════════════════ -->
 <script>
 /* ─── Constants ───────────────────────────────────────────── */
-const SECTION_TABS = ['swing','options','nse','gold','btc'];
-const ALL_TABS     = ['all','swing','options','nse','gold','btc'];
+const SECTION_TABS = ['swing','options','nse','gold','btc','backtest'];
+const ALL_TABS     = ['all','swing','options','nse','gold','btc','backtest'];
 const ACCENT       = {
   all:'act-all', swing:'act-swing', options:'act-options',
-  nse:'act-nse', gold:'act-gold',   btc:'act-btc',
+  nse:'act-nse', gold:'act-gold',   btc:'act-btc', backtest:'act-backtest',
 };
 let collapsedSections = {};
 
