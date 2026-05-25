@@ -31,10 +31,10 @@ def _log_file_for(asset: str) -> str:
     return LOG_FILE   # NSE default
 
 # When running on Render (no local file), fetch from GitHub raw URL
-GITHUB_RAW = os.environ.get(
-    "SIGNALS_JSON_URL",
-    "https://raw.githubusercontent.com/lavakus/nse-intraday-bot/main/signals_log.json"
-)
+_BASE_RAW = "https://raw.githubusercontent.com/lavakus/nse-intraday-bot/main"
+GITHUB_RAW      = os.environ.get("SIGNALS_JSON_URL",      f"{_BASE_RAW}/signals_log.json")
+GITHUB_RAW_GOLD = os.environ.get("GOLD_SIGNALS_JSON_URL", f"{_BASE_RAW}/gold_signals_log.json")
+GITHUB_RAW_BTC  = os.environ.get("BTC_SIGNALS_JSON_URL",  f"{_BASE_RAW}/btc_signals_log.json")
 
 
 def _load(log_file: str = LOG_FILE) -> list:
@@ -45,15 +45,24 @@ def _load(log_file: str = LOG_FILE) -> list:
                 return json.load(f)
         except Exception as e:
             print(f"[LOGGER] Failed to read {log_file}: {e}")
+
     # 2) Fallback: fetch from GitHub (for Render / remote host)
-    if log_file == LOG_FILE:          # only NSE log is on GitHub
+    # All three log files are committed to the repo by GitHub Actions workflows
+    url_map = {
+        LOG_FILE:      GITHUB_RAW,
+        GOLD_LOG_FILE: GITHUB_RAW_GOLD,
+        BTC_LOG_FILE:  GITHUB_RAW_BTC,
+    }
+    raw_url = url_map.get(log_file)
+    if raw_url:
         try:
             import requests as _req
-            r = _req.get(GITHUB_RAW, timeout=10)
+            r = _req.get(raw_url, timeout=10)
             if r.status_code == 200:
+                print(f"[LOGGER] Loaded {log_file} from GitHub fallback")
                 return r.json()
         except Exception as e:
-            print(f"[LOGGER] GitHub fallback failed: {e}")
+            print(f"[LOGGER] GitHub fallback failed for {log_file}: {e}")
     return []
 
 

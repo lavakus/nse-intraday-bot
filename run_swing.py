@@ -26,6 +26,13 @@ SWING_LOG = "swing_log.json"
 TOP_N     = 7
 MIN_SCORE = 55
 
+# GitHub raw fallback so the dashboard (on Render / remote) can read the log
+# even when the local file doesn't exist (bot runs on GitHub Actions)
+_SWING_LOG_URL = os.environ.get(
+    "SWING_LOG_URL",
+    "https://raw.githubusercontent.com/lavakus/nse-intraday-bot/main/swing_log.json"
+)
+
 
 # ── Time helpers ─────────────────────────────────────────────────
 
@@ -44,14 +51,25 @@ def _today_str() -> str:
 # ── Log helpers ───────────────────────────────────────────────────
 
 def _load_log() -> list:
+    # 1) Try local file first
     try:
         with open(SWING_LOG, encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
-        return []
+        pass
     except Exception as e:
-        print(f"[SWING] Failed to load log: {e}")
-        return []
+        print(f"[SWING] Failed to load local log: {e}")
+
+    # 2) Fallback: fetch from GitHub (for Render / remote dashboard)
+    try:
+        import requests as _req
+        r = _req.get(_SWING_LOG_URL, timeout=10)
+        if r.status_code == 200:
+            print("[SWING] Loaded log from GitHub fallback")
+            return r.json()
+    except Exception as e:
+        print(f"[SWING] GitHub fallback failed: {e}")
+    return []
 
 def _save_log(data: list):
     with open(SWING_LOG, "w", encoding="utf-8") as f:

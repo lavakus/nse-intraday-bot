@@ -27,14 +27,14 @@ def _ist_now() -> str:
 
 def _load_bot_state() -> dict:
     try:
-        with open(BOT_STATE_FILE) as f:
+        with open(BOT_STATE_FILE, encoding="utf-8") as f:
             return json.load(f)
     except Exception:
         return {"NSE": {"paused": False}, "GOLD": {"paused": False}, "BTC": {"paused": False}}
 
 
 def _save_bot_state(state: dict):
-    with open(BOT_STATE_FILE, "w") as f:
+    with open(BOT_STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2)
 
 

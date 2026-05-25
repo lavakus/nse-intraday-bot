@@ -26,19 +26,36 @@ OPTIONS_LOG    = "options_log.json"
 BOT_STATE_FILE = "bot_state.json"
 INDICES        = ["NIFTY", "BANKNIFTY", "SENSEX"]
 
+# GitHub raw fallback so the dashboard can read the log even on Render/remote
+_OPTIONS_LOG_URL = os.environ.get(
+    "OPTIONS_LOG_URL",
+    "https://raw.githubusercontent.com/lavakus/nse-intraday-bot/main/options_log.json"
+)
+
 
 def _now_ist() -> datetime:
     return datetime.now(timezone(timedelta(hours=5, minutes=30)))
 
 def _load_log() -> list:
+    # 1) Try local file first
     try:
         with open(OPTIONS_LOG, encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
-        return []
+        pass
     except Exception as e:
-        print(f"[OPTIONS] Failed to load log: {e}")
-        return []
+        print(f"[OPTIONS] Failed to load local log: {e}")
+
+    # 2) Fallback: fetch from GitHub (for Render / remote dashboard)
+    try:
+        import requests as _req
+        r = _req.get(_OPTIONS_LOG_URL, timeout=10)
+        if r.status_code == 200:
+            print("[OPTIONS] Loaded log from GitHub fallback")
+            return r.json()
+    except Exception as e:
+        print(f"[OPTIONS] GitHub fallback failed: {e}")
+    return []
 
 def _save_log(data: list):
     with open(OPTIONS_LOG, "w", encoding="utf-8") as f:
