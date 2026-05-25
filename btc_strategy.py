@@ -30,7 +30,7 @@ from shared.smc_engine import (
 
 # ── Asset constants ─────────────────────────────────────────────
 ASSET      = "BTC"
-MIN_SCORE  = 65
+MIN_SCORE  = 60
 MAX_SL_PCT = 0.015     # 1.5 % (crypto is more volatile)
 MIN_RR_T1  = 3.0
 MIN_RR_T2  = 5.0
@@ -107,16 +107,24 @@ def score_btc(df_weekly: pd.DataFrame, df_4h: pd.DataFrame,
     # PHASE 1 — SMC Structure on 4H (REQUIRED)
     # ════════════════════════════════════════
 
+    # Try 4H BOS/CHOCH first — gives full 25 pts
     struct = detect_bos_choch(df_4h, left=3, right=3)
     if not struct["bos"] and not struct["choch"]:
-        return {}
-    direction = struct["direction"]
-    if not direction:
-        return {}
-
-    phase1  = 25
-    reasons = []
-    reasons.append(f"{'BOS' if struct['bos'] else 'CHOCH'} confirmed 4H ({direction})")
+        # Fallback: 1H BOS/CHOCH — gives 18 pts (less conviction than 4H)
+        struct = detect_bos_choch(df_1h, left=2, right=2)
+        if not struct["bos"] and not struct["choch"]:
+            return {}
+        direction = struct["direction"]
+        if not direction:
+            return {}
+        phase1  = 18
+        reasons = [f"{'BOS' if struct['bos'] else 'CHOCH'} confirmed 1H ({direction}) — 4H pending"]
+    else:
+        direction = struct["direction"]
+        if not direction:
+            return {}
+        phase1  = 25
+        reasons = [f"{'BOS' if struct['bos'] else 'CHOCH'} confirmed 4H ({direction})"]
 
     # Order Block — 4H first, then 1H fallback
     ob = detect_order_block(df_4h, direction)
@@ -127,14 +135,17 @@ def score_btc(df_weekly: pd.DataFrame, df_4h: pd.DataFrame,
     phase1 += 20
     reasons.append(f"Unmitigated OB {ob['body_bot']:.2f}–{ob['body_top']:.2f}")
 
-    # Liquidity Sweep — 4H or Daily
+    # Liquidity Sweep — bonus points (not a hard block)
     swept, sweep_lvl = detect_liquidity_sweep(df_4h, direction, pdh, pdl)
     if not swept:
         swept, sweep_lvl = detect_liquidity_sweep(df_1h, direction, pdh, pdl)
     if not swept:
-        return {}
-    phase1 += 15
-    reasons.append(f"Liquidity sweep at {sweep_lvl:.2f}")
+        swept, sweep_lvl = detect_liquidity_sweep(df_15m, direction, pdh, pdl)
+    if swept:
+        phase1 += 15
+        reasons.append(f"Liquidity sweep at {sweep_lvl:.2f}")
+    else:
+        reasons.append("No liquidity sweep — structure + OB entry")
 
     # ════════════════════════════════════════
     # PHASE 2 — ICT + Crypto-specific filters

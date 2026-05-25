@@ -48,7 +48,7 @@ from shared.smc_engine import (
 )
 from feeds.index_feed import nearest_strike, next_expiry, STRIKE_STEP
 
-MIN_SCORE  = 70
+MIN_SCORE  = 62
 ASSET_MAP  = {
     "NIFTY":     "NSE",   # uses NSE kill zone table
     "BANKNIFTY": "NSE",

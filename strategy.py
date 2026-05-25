@@ -546,12 +546,13 @@ def score_stock(df5: pd.DataFrame, df15: pd.DataFrame, symbol: str,
     phase1 += 20
     reasons.append(f"Unmitigated OB {ob['body_bot']:.1f}–{ob['body_top']:.1f}")
 
-    # 1c. Liquidity Sweep (REQUIRED)
+    # 1c. Liquidity Sweep — bonus points (not a hard block)
     swept, sweep_lvl = _detect_liquidity_sweep(df5, direction, pdh, pdl)
-    if not swept:
-        return {}
-    phase1 += 15
-    reasons.append(f"Liquidity sweep at {sweep_lvl:.1f}")
+    if swept:
+        phase1 += 15
+        reasons.append(f"Liquidity sweep confirmed at {sweep_lvl:.1f}")
+    else:
+        reasons.append("No liquidity sweep yet — watch for confirmation")
 
     # ════════════════════════════════════════════
     # PHASE 2  —  ICT Time & Price
@@ -637,7 +638,7 @@ def score_stock(df5: pd.DataFrame, df15: pd.DataFrame, symbol: str,
     # ════════════════════════════════════════════
 
     total = phase1 + phase2 + phase3 + phase4
-    if total < 65:
+    if total < 60:
         return {}
 
     # ── Trade parameters — hard rules ─────────────────────────────

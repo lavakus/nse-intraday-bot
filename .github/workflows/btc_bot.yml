@@ -47,7 +47,7 @@ jobs:
         env:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          BTC_SCORE:        "65"
+          BTC_SCORE:        "60"
           FORCE_SCAN:       ${{ github.event.inputs.force_scan || '0' }}
         run: python run_btc.py
 

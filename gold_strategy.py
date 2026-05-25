@@ -29,7 +29,7 @@ from shared.smc_engine import (
 
 # ── Asset constants ─────────────────────────────────────────────
 ASSET       = "GOLD"
-MIN_SCORE   = 65
+MIN_SCORE   = 60
 MAX_SL_PCT  = 0.006    # 0.6 %
 MIN_RR_T1   = 2.0
 MIN_RR_T2   = 3.5
@@ -114,14 +114,15 @@ def score_gold(df_4h: pd.DataFrame, df_1h: pd.DataFrame,
     phase1 += 20
     reasons.append(f"Unmitigated OB {ob['body_bot']:.2f}–{ob['body_top']:.2f}")
 
-    # Liquidity sweep — 15min first, 1H fallback
+    # Liquidity sweep — bonus points (not a hard block)
     swept, sweep_lvl = detect_liquidity_sweep(df_15m, direction, pdh, pdl)
     if not swept:
         swept, sweep_lvl = detect_liquidity_sweep(df_1h, direction, pdh, pdl)
-    if not swept:
-        return {}
-    phase1 += 15
-    reasons.append(f"Liquidity sweep at {sweep_lvl:.2f}")
+    if swept:
+        phase1 += 15
+        reasons.append(f"Liquidity sweep at {sweep_lvl:.2f}")
+    else:
+        reasons.append("No liquidity sweep yet — structure + OB entry")
 
     # ════════════════════════════════════════
     # PHASE 2 — ICT + Gold-specific filters

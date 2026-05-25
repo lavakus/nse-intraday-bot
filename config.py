@@ -3,7 +3,7 @@ TELEGRAM_TOKEN   = "8856759442:AAFLBXDVV9OESxbiKj-HRIOfeGFtSWqOdRM"
 TELEGRAM_CHAT_ID = "8873804319"
 
 # ── STRATEGY  (SMC + ICT, 150-pt scale) ────────────────────────
-STRONG_SCORE   = 65     # minimum score to fire an alert  (out of 150)
+STRONG_SCORE   = 60     # minimum score to fire an alert  (out of 150)
 SCAN_WORKERS   = 6      # parallel threads
 SCAN_INTERVAL  = 5      # minutes between scans during market hours
 MAX_STOCKS     = 250    # scan top-N from live NSE list
