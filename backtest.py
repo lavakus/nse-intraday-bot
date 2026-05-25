@@ -124,38 +124,52 @@ def check_outcome(
 
 def backtest_gold(days: int) -> list:
     print(f"\n{'='*62}")
-    print(f"  GOLD (XAUUSD) Backtest  —  last {days} days")
+    print(f"  GOLD (XAUUSD) Backtest  —  last {days} days  [ICT+SMC]")
     print(f"{'='*62}")
     print("  Downloading data from Yahoo Finance...")
 
     # GC=F = Gold Futures (most liquid Gold ticker on Yahoo Finance)
-    df_1h  = fetch("GC=F",      "1h",  min(days + 30, 720))
-    df_15m = fetch("GC=F",      "15m", min(days, 50))   # 15m max ~58 days
-    df_dxy = fetch("DX-Y.NYB",  "1h",  min(days + 30, 720))
+    df_1h    = fetch("GC=F",     "1h",  min(days + 30, 720))
+    df_15m   = fetch("GC=F",     "15m", min(days, 50))   # 15m max ~58 days
+    df_daily = fetch("GC=F",     "1d",  min(days + 300, 600)) # for HTF bias (need 20+ trading days)
+    df_dxy   = fetch("DX-Y.NYB", "1h",  min(days + 30, 720))
 
     if df_1h.empty or df_15m.empty:
         print("  [!] Insufficient data — check internet / try fewer days")
         return []
 
     df_4h = resample_4h(df_1h)
-    print(f"  4H: {len(df_4h)} bars  |  1H: {len(df_1h)} bars  |  15m: {len(df_15m)} bars")
+    print(f"  Daily: {len(df_daily)} | 4H: {len(df_4h)} | "
+          f"1H: {len(df_1h)} | 15m: {len(df_15m)} bars")
 
     from gold_strategy import score_gold
 
+    # New ICT+SMC threshold: 4/5 confluence = 120/150
+    MIN_SCORE  = 120
     results    = []
-    last_trade = {}          # direction → last signal bar_ts
-    COOLDOWN   = 8 * 3600   # 8 hours cooldown same-direction
+    last_trade = {}        # direction → last signal bar_ts
+    COOLDOWN   = 8 * 3600  # 8-hour same-direction cooldown
 
-    for i, bar_ts in enumerate(df_4h.index.tolist()):
-        if i < 20:
+    # ── Iterate 1H bars (not 4H) so both kill zones are captured ──
+    # London 12:30–15:30 IST and NY 18:30–21:30 IST both land on 1H bars.
+    # We filter to only hours that could fall inside a kill zone to save time.
+    KILL_ZONE_HOURS = {12, 13, 14, 15, 18, 19, 20, 21}
+
+    for i, bar_ts in enumerate(df_1h.index.tolist()):
+        if i < 30:
             continue  # need lookback
 
-        s4h  = slice_to(df_4h,  bar_ts)
-        s1h  = slice_to(df_1h,  bar_ts)
-        s15m = slice_to(df_15m, bar_ts)
-
-        if len(s15m) < 30 or len(s1h) < 15:
+        # Quick pre-filter: skip hours outside both kill zones
+        if bar_ts.hour not in KILL_ZONE_HOURS:
             continue
+
+        s4h     = slice_to(df_4h,    bar_ts)
+        s1h     = slice_to(df_1h,    bar_ts)
+        s15m    = slice_to(df_15m,   bar_ts)
+        s_daily = slice_to(df_daily, bar_ts)
+
+        if len(s15m) < 30 or len(s1h) < 15 or len(s4h) < 25:
+            continue  # need enough bars for BOS/CHOCH + OB detection
 
         pdh, pdl = get_pdh_pdl(df_1h, bar_ts)
 
@@ -170,6 +184,7 @@ def backtest_gold(days: int) -> list:
         try:
             sig = score_gold(
                 df_4h=s4h, df_1h=s1h, df_15m=s15m,
+                df_daily=s_daily,
                 pdh=pdh, pdl=pdl,
                 dxy_data=dxy_data,
                 ist_time=bar_ts.to_pydatetime(),
@@ -177,10 +192,13 @@ def backtest_gold(days: int) -> list:
         except Exception:
             continue
 
-        if not sig:
+        # sig={} when hard-blocked outside kill zone; skip low-score signals
+        if not sig or sig.get("score", 0) < MIN_SCORE:
             continue
 
-        direction = sig["direction"]
+        direction = sig.get("direction")
+        if not direction:
+            continue
 
         # 8-hour cooldown per direction
         prev_ts = last_trade.get(direction)
@@ -196,11 +214,9 @@ def backtest_gold(days: int) -> list:
         if future_15m.empty:
             continue   # too close to end of dataset
 
-        # Check T1 (partial TP) and T2 (full TP) — WIN if T1 hit before SL
+        # T1 = primary outcome (conservative, 1.5R), T2 for reference (3R)
         out_t1 = check_outcome(future_15m, ent, sl, t1, direction)
         out_t2 = check_outcome(future_15m, ent, sl, t2, direction)
-
-        # Primary outcome = T1 (conservative — wins count at 1:2 RR)
         outcome = out_t1
         rr_used = sig["trade_params"]["rr_t1"]
 
@@ -213,10 +229,10 @@ def backtest_gold(days: int) -> list:
             "sl":        round(sl,  2),
             "t1":        round(t1,  2),
             "t2":        round(t2,  2),
-            "tp":        round(t1,  2),   # report T1 as primary TP
+            "tp":        round(t1,  2),
             "rr":        round(rr_used, 1),
             "outcome":   outcome,
-            "out_t2":    out_t2,          # T2 outcome for reference
+            "out_t2":    out_t2,
         })
         last_trade[direction] = bar_ts
 
@@ -374,9 +390,9 @@ def print_report(results: list, asset: str) -> dict | None:
     # ── Score bracket breakdown ──────────────────────────────────
     print(f"\n  Win Rate by Score Range:")
     for lo, hi, label in [
-        (60,  74, "60-74 (Weak)  "),
-        (75,  89, "75-89 (Good)  "),
-        (90, 150, "90+   (Excellent)"),
+        (60,  89, "60-89  (Low)     "),
+        (90,  119, "90-119 (Medium) "),
+        (120, 150, "120+   (High)   "),
     ]:
         grp   = [r for r in closed if lo <= r["score"] <= hi]
         g_win = [r for r in grp   if r["outcome"] == "WIN"]
@@ -440,9 +456,9 @@ def save_results(gold_data: list, btc_data: list, days: int):
                 streak += 1; max_streak = max(max_streak, streak)
             else:
                 streak = 0
-        # score bracket breakdown
+        # score bracket breakdown (120+ = new ICT+SMC threshold)
         brackets = []
-        for lo, hi, lbl in [(60,74,"60-74"),(75,89,"75-89"),(90,150,"90+")]:
+        for lo, hi, lbl in [(60,89,"60-89"),(90,119,"90-119"),(120,150,"120+")]:
             grp   = [r for r in closed if lo <= r["score"] <= hi]
             g_win = [r for r in grp   if r["outcome"] == "WIN"]
             wr    = round(len(g_win)/len(grp)*100, 1) if grp else 0

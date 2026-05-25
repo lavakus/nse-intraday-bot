@@ -91,7 +91,7 @@ def get_daily_data() -> pd.DataFrame:
     Returns DataFrame indexed in IST with lowercase columns.
     """
     try:
-        df = _clean(yf.download(SYMBOL, period="60d", interval="1d",
+        df = _clean(yf.download(SYMBOL, period="270d", interval="1d",
                                 progress=False, auto_adjust=True))
         return df
     except Exception as e:

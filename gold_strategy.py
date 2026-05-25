@@ -71,7 +71,7 @@ OTE_HIGH = 0.79            # 79% retracement
 OB_MOVE_FACTOR = 2.0       # next candle body must be >= 2× OB body
 
 # ── Daily bias lookback ──────────────────────────────────────────
-DAILY_LOOKBACK = 50        # 50-period high/low
+DAILY_LOOKBACK = 20        # 20-trading-day high/low (~1 month)
 
 # ── Best trading days (isoweekday: 1=Mon … 7=Sun) ───────────────
 BEST_DAYS = {2, 3, 4}      # Tue, Wed, Thu
@@ -352,9 +352,8 @@ def get_asian_range_ist(df_15m: pd.DataFrame) -> dict:
 
         asian_start = ASIAN_IST_START_H * 100 + ASIAN_IST_START_M   # 530
         asian_end   = ASIAN_IST_END_H   * 100 + ASIAN_IST_END_M     # 1230
-        asian = day_bars[
-            day_bars.index.map(_hhmm).between(asian_start, asian_end - 1)
-        ]
+        hhmm_vals = pd.Series(day_bars.index.map(_hhmm), index=day_bars.index)
+        asian = day_bars[hhmm_vals.between(asian_start, asian_end - 1)]
         if len(asian) >= 4:                      # need at least 1 hour of bars
             return {
                 "high":  round(float(asian["high"].max()), 2),
