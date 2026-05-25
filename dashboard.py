@@ -3,7 +3,7 @@ Flask web dashboard — unified view for NSE India, Gold, and Bitcoin signals.
 Run with:  python dashboard.py
 Then open: http://localhost:5000
 """
-import os, json
+import os, json, threading
 from flask import Flask, render_template, Response, request, jsonify
 from signal_logger import (
     get_all, get_summary,
@@ -12,6 +12,7 @@ from signal_logger import (
 )
 from run_swing   import get_swing_data
 from run_options import get_options_data
+from backtest    import load_backtest_results, backtest_gold, backtest_btc, save_results
 from datetime import datetime, timezone, timedelta
 
 app = Flask(__name__)
@@ -69,6 +70,8 @@ def index():
     swing_data   = get_swing_data()
     options_data = get_options_data()
 
+    backtest_data = load_backtest_results()
+
     return render_template(
         "dashboard.html",
         # per-asset intraday
@@ -91,6 +94,8 @@ def index():
         options_summary=options_data["summary"],
         options_market=options_data["market"],
         options_expiry=options_data["expiry"],
+        # backtest
+        backtest=backtest_data,
         # controls
         bot_state=bot_state,
         now=now,
@@ -144,6 +149,32 @@ def api_control(asset: str, action: str):
     state.setdefault(asset, {})["paused"] = (action == "pause")
     _save_bot_state(state)
     return jsonify({"asset": asset, "paused": state[asset]["paused"]})
+
+
+@app.route("/api/backtest")
+def api_backtest():
+    """Return saved backtest results as JSON."""
+    data = load_backtest_results()
+    return Response(json.dumps(data, default=str), mimetype="application/json")
+
+
+@app.route("/api/run-backtest", methods=["POST"])
+def api_run_backtest():
+    """Trigger a fresh backtest run in background thread."""
+    days = int(request.json.get("days", 50)) if request.is_json else 50
+
+    def _run():
+        try:
+            gold = backtest_gold(days)
+            btc  = backtest_btc(days)
+            save_results(gold, btc, days)
+        except Exception as e:
+            print(f"[BACKTEST] Background run error: {e}")
+
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    return jsonify({"status": "running", "days": days,
+                    "message": "Backtest started — refresh in ~2 minutes"})
 
 
 if __name__ == "__main__":

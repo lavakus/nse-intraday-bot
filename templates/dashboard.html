@@ -972,6 +972,10 @@ td{padding:10px 11px;vertical-align:middle}
       {{ btc_summary.total }}
     </span>
   </div>
+  <div class="nav-tab" data-tab="backtest" onclick="switchTab('backtest',this)" title="Strategy Backtest Results">
+    <span class="tab-icon">📊</span> Backtest
+    <span class="tab-badge" id="cnt-bt">{{ backtest.GOLD.total|default(0) + backtest.BTC.total|default(0) }}</span>
+  </div>
 </nav>
 
 
@@ -1429,6 +1433,206 @@ td{padding:10px 11px;vertical-align:middle}
 </div>
 
 
+<!-- ═══════════════════════════════════════════════════════════
+     BACKTEST SECTION
+═══════════════════════════════════════════════════════════ -->
+<div class="section-panel" id="panel-backtest" data-section="backtest">
+  <div class="content-card" style="border-top:3px solid var(--purple)">
+    <div class="content-card-header" onclick="toggleSection('backtest')">
+      <div class="card-title">
+        <span class="section-badge" style="background:var(--purple-g);color:var(--purple);border-color:var(--purple-b)">📊 BACKTEST</span>
+        Strategy Win Rate — Gold &amp; BTC (Last {{ backtest.period_days|default(50) }} Days)
+      </div>
+      <div class="card-title-right">
+        <button class="btn-ctrl" style="background:var(--purple-g);color:var(--purple);border-color:var(--purple-b)"
+          onclick="event.stopPropagation();runBacktest()">&#9654; Re-run</button>
+        <span class="collapse-arrow">▼</span>
+      </div>
+    </div>
+    <div class="card-body" id="body-backtest">
+
+      {% if backtest %}
+      <div style="padding:10px 22px 4px;font-size:11px;color:var(--muted)">
+        Last run: <strong>{{ backtest.generated_at }}</strong> &nbsp;·&nbsp;
+        Period: <strong>{{ backtest.period_days }} days</strong>
+        <span id="bt-run-msg" style="margin-left:12px;color:var(--purple);font-weight:700"></span>
+      </div>
+
+      <!-- ── Summary cards ── -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px 22px">
+
+        <!-- GOLD card -->
+        {% set g = backtest.GOLD %}
+        {% if g %}
+        <div style="border:1px solid var(--gold-b);border-radius:var(--r);padding:20px;background:var(--gold-d)">
+          <div style="font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.8px;margin-bottom:12px">GOLD (XAUUSD)</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+            <div style="text-align:center">
+              <div style="font-size:28px;font-weight:900;color:{{ 'var(--green)' if g.win_rate >= 50 else 'var(--gold)' if g.win_rate >= 35 else 'var(--red)' }}">{{ g.win_rate }}%</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">Win Rate</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:28px;font-weight:900;color:{{ 'var(--green)' if g.profit_factor >= 1 else 'var(--red)' }}">{{ g.profit_factor }}x</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">Profit Factor</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:28px;font-weight:900;color:{{ 'var(--green)' if g.expectancy >= 0 else 'var(--red)' }}">{{ '%+.2f'|format(g.expectancy) }}R</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">Expectancy</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <div style="background:rgba(255,255,255,.7);border:1px solid var(--border2);border-radius:8px;padding:7px 12px;text-align:center;flex:1">
+              <div style="font-size:18px;font-weight:800">{{ g.total }}</div><div style="font-size:9px;color:var(--muted)">Signals</div>
+            </div>
+            <div style="background:rgba(16,185,129,.08);border:1px solid var(--green-b);border-radius:8px;padding:7px 12px;text-align:center;flex:1">
+              <div style="font-size:18px;font-weight:800;color:var(--green)">{{ g.wins }}</div><div style="font-size:9px;color:var(--muted)">Wins</div>
+            </div>
+            <div style="background:rgba(220,38,38,.06);border:1px solid var(--red-b);border-radius:8px;padding:7px 12px;text-align:center;flex:1">
+              <div style="font-size:18px;font-weight:800;color:var(--red)">{{ g.losses }}</div><div style="font-size:9px;color:var(--muted)">Losses</div>
+            </div>
+            <div style="background:rgba(255,255,255,.7);border:1px solid var(--border2);border-radius:8px;padding:7px 12px;text-align:center;flex:1">
+              <div style="font-size:18px;font-weight:800">1:{{ g.avg_rr }}</div><div style="font-size:9px;color:var(--muted)">Avg R:R</div>
+            </div>
+          </div>
+          <!-- Score brackets -->
+          {% if g.score_brackets %}
+          <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Win Rate by Score</div>
+          {% for b in g.score_brackets %}
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+            <div style="font-size:10px;color:var(--muted);min-width:55px">{{ b.label }}</div>
+            <div style="flex:1;background:var(--bg2);border-radius:4px;height:8px;overflow:hidden">
+              <div style="height:100%;width:{{ b.win_rate }}%;background:{{ 'var(--green)' if b.win_rate>=50 else 'var(--gold)' if b.win_rate>=30 else 'var(--red)' }};border-radius:4px;transition:width .6s"></div>
+            </div>
+            <div style="font-size:11px;font-weight:700;min-width:38px;text-align:right;color:{{ 'var(--green)' if b.win_rate>=50 else 'var(--gold)' if b.win_rate>=30 else 'var(--red)' }}">{{ b.win_rate }}%</div>
+            <div style="font-size:9px;color:var(--muted2)">({{ b.trades }})</div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- BTC card -->
+        {% set b = backtest.BTC %}
+        {% if b %}
+        <div style="border:1px solid var(--orange-b);border-radius:var(--r);padding:20px;background:var(--orange-d)">
+          <div style="font-size:11px;font-weight:800;color:var(--orange);letter-spacing:.8px;margin-bottom:12px">BITCOIN (BTCUSD)</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+            <div style="text-align:center">
+              <div style="font-size:28px;font-weight:900;color:{{ 'var(--green)' if b.win_rate >= 50 else 'var(--gold)' if b.win_rate >= 35 else 'var(--red)' }}">{{ b.win_rate }}%</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">Win Rate</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:28px;font-weight:900;color:{{ 'var(--green)' if b.profit_factor >= 1 else 'var(--red)' }}">{{ b.profit_factor }}x</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">Profit Factor</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:28px;font-weight:900;color:{{ 'var(--green)' if b.expectancy >= 0 else 'var(--red)' }}">{{ '%+.2f'|format(b.expectancy) }}R</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">Expectancy</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <div style="background:rgba(255,255,255,.7);border:1px solid var(--border2);border-radius:8px;padding:7px 12px;text-align:center;flex:1">
+              <div style="font-size:18px;font-weight:800">{{ b.total }}</div><div style="font-size:9px;color:var(--muted)">Signals</div>
+            </div>
+            <div style="background:rgba(16,185,129,.08);border:1px solid var(--green-b);border-radius:8px;padding:7px 12px;text-align:center;flex:1">
+              <div style="font-size:18px;font-weight:800;color:var(--green)">{{ b.wins }}</div><div style="font-size:9px;color:var(--muted)">Wins</div>
+            </div>
+            <div style="background:rgba(220,38,38,.06);border:1px solid var(--red-b);border-radius:8px;padding:7px 12px;text-align:center;flex:1">
+              <div style="font-size:18px;font-weight:800;color:var(--red)">{{ b.losses }}</div><div style="font-size:9px;color:var(--muted)">Losses</div>
+            </div>
+            <div style="background:rgba(255,255,255,.7);border:1px solid var(--border2);border-radius:8px;padding:7px 12px;text-align:center;flex:1">
+              <div style="font-size:18px;font-weight:800">1:{{ b.avg_rr }}</div><div style="font-size:9px;color:var(--muted)">Avg R:R</div>
+            </div>
+          </div>
+          {% if b.score_brackets %}
+          <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Win Rate by Score</div>
+          {% for br in b.score_brackets %}
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+            <div style="font-size:10px;color:var(--muted);min-width:55px">{{ br.label }}</div>
+            <div style="flex:1;background:var(--bg2);border-radius:4px;height:8px;overflow:hidden">
+              <div style="height:100%;width:{{ br.win_rate }}%;background:{{ 'var(--green)' if br.win_rate>=50 else 'var(--gold)' if br.win_rate>=30 else 'var(--red)' }};border-radius:4px;transition:width .6s"></div>
+            </div>
+            <div style="font-size:11px;font-weight:700;min-width:38px;text-align:right;color:{{ 'var(--green)' if br.win_rate>=50 else 'var(--gold)' if br.win_rate>=30 else 'var(--red)' }}">{{ br.win_rate }}%</div>
+            <div style="font-size:9px;color:var(--muted2)">({{ br.trades }})</div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- ── Trade Tables ── -->
+      {% for asset_key, asset_label, accent in [('GOLD','Gold Trades','--gold'),('BTC','BTC Trades','--orange')] %}
+      {% set ad = backtest[asset_key] %}
+      {% if ad and ad.trades %}
+      <div style="padding:0 22px 22px">
+        <div style="font-size:12px;font-weight:800;color:var({{ accent }});margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">
+          {{ asset_label }} — {{ ad.total }} signals
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>#</th><th>Date / Time</th><th>Direction</th>
+              <th>Score</th><th>Entry</th><th>SL</th>
+              <th>T1 Target</th><th>R:R</th><th>T1 Result</th><th>T2 Result</th>
+            </tr></thead>
+            <tbody>
+            {% for t in ad.trades %}
+            <tr>
+              <td class="dim">{{ loop.index }}</td>
+              <td class="dim nowrap">{{ t.time }}</td>
+              <td><span class="dir-badge {{ 'long' if t.direction=='LONG' else 'short' }}">{{ t.direction }}</span></td>
+              <td>
+                <div class="score-cell">
+                  <span class="score-num">{{ t.score }}</span>
+                  <div class="sbar-bg"><div class="sbar-fill" style="width:{{ ((t.score or 0)/150*100)|int }}%"></div></div>
+                </div>
+              </td>
+              <td class="num">{{ t.entry }}</td>
+              <td class="num red">{{ t.sl }}</td>
+              <td class="num grn">{{ t.tp }}</td>
+              <td class="dim">1:{{ t.rr }}</td>
+              <td>
+                {% if t.outcome == 'WIN' %}<span class="badge badge-win">WIN</span>
+                {% elif t.outcome == 'LOSS' %}<span class="badge badge-loss">LOSS</span>
+                {% else %}<span class="badge badge-open">OPEN</span>{% endif %}
+              </td>
+              <td>
+                {% set t2 = t.get('out_t2', t.get('out_t2','')) if t is mapping else '' %}
+                {% if t2 == 'WIN' %}<span class="badge badge-win">WIN</span>
+                {% elif t2 == 'LOSS' %}<span class="badge badge-loss">LOSS</span>
+                {% elif t2 == 'OPEN' %}<span class="badge badge-open">OPEN</span>
+                {% else %}<span class="dim">—</span>{% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      {% else %}
+      <!-- No backtest data yet -->
+      <div style="padding:60px 22px;text-align:center">
+        <div style="font-size:48px;margin-bottom:16px">📊</div>
+        <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px">No Backtest Data Yet</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:24px">
+          Run the backtester to see your strategy's historical win rate, profit factor, and trade-by-trade results.
+        </div>
+        <button onclick="runBacktest()" style="padding:12px 28px;background:var(--purple);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(124,58,237,.3)">
+          Run Backtest Now
+        </button>
+        <div style="font-size:11px;color:var(--muted2);margin-top:12px">Takes ~2 minutes · Downloads 60 days of data</div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+
 <div class="footer">
   Auto-refreshes every 60 s &nbsp;·&nbsp; Strategy: SMC + ICT + Price Action &nbsp;·&nbsp;
   Live prices via yfinance &nbsp;·&nbsp; Pause/Resume writes to bot_state.json &nbsp;·&nbsp;
@@ -1628,6 +1832,19 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' && cur < tabs.length - 1) tabs[cur+1].click();
   if (e.key === 'ArrowLeft'  && cur > 0)               tabs[cur-1].click();
 });
+
+/* ─── Run Backtest ────────────────────────────────────────── */
+function runBacktest() {
+  const msg = document.getElementById('bt-run-msg');
+  if (msg) msg.textContent = 'Running... (~2 min)';
+  fetch('/api/run-backtest', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({days:50})})
+    .then(r => r.json())
+    .then(d => {
+      if (msg) msg.textContent = d.message || 'Started!';
+      setTimeout(() => location.reload(), 130000);  // auto-reload after ~2 min
+    })
+    .catch(() => { if (msg) msg.textContent = 'Error — check console'; });
+}
 </script>
 </body>
 </html>

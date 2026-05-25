@@ -5,3 +5,6 @@ __pycache__/
 *.log
 nse_stock_cache.json
 evaluations_log.jsonl
+
+# MT5 auto-trader credentials — NEVER commit this file
+mt5_config.json
