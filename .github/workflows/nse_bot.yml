@@ -2,15 +2,15 @@ name: NSE Intraday Bot
 
 on:
   schedule:
-    # Every 5 min during NSE kill zones (Mon–Fri, UTC):
-    # KZ1  09:15–10:00 IST = 03:45–04:30 UTC
-    # KZ2  11:15–11:45 IST = 05:45–06:15 UTC
-    # KZ3  13:30–14:15 IST = 08:00–08:45 UTC
-    - cron: "45,50,55 3 * * 1-5"
-    - cron: "0,5,10,15,20,25,30 4 * * 1-5"
-    - cron: "45,50,55 5 * * 1-5"
-    - cron: "0,5,10,15 6 * * 1-5"
-    - cron: "0,5,10,15,20,25,30,35,40,45 8 * * 1-5"
+    # Every 15 min during full NSE market hours (Mon–Fri)
+    # 9:15 AM – 3:20 PM IST  =  3:45 AM – 9:50 AM UTC
+    - cron: "45 3 * * 1-5"
+    - cron: "0,15,30,45 4 * * 1-5"
+    - cron: "0,15,30,45 5 * * 1-5"
+    - cron: "0,15,30,45 6 * * 1-5"
+    - cron: "0,15,30,45 7 * * 1-5"
+    - cron: "0,15,30,45 8 * * 1-5"
+    - cron: "0,15,30,45 9 * * 1-5"
   workflow_dispatch:
     inputs:
       force_scan:

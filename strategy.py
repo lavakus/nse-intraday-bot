@@ -494,19 +494,15 @@ def score_stock(df5: pd.DataFrame, df15: pd.DataFrame, symbol: str,
     if ist_time is None:
         ist_time = datetime.now(timezone(timedelta(hours=5, minutes=30)))
 
-    is_thursday = ist_time.weekday() == 3
-
-    # ── Hard rule: no entries after 14:30 ─────────────────────────
+    # ── Market hours only (9:15–15:20 IST) ──────────────────────────
     t = ist_time.hour * 100 + ist_time.minute
-    if t >= 1430:
+    if t < 915 or t > 1520:
         return {}
 
-    # ── Kill zone check (REQUIRED) ────────────────────────────────
+    # ── Kill zone — bonus points only (NOT a hard block) ─────────
+    # KZ active  → +15 pts (higher conviction entry)
+    # KZ inactive → 0 pts  (still fires if rest of setup is strong)
     kill_zone, kz_pts = _get_kill_zone(ist_time.hour, ist_time.minute)
-    if kz_pts == 0:        # not in KZ1 / KZ2 / KZ3
-        return {}
-    if is_thursday and kill_zone != "KZ3":
-        return {}
 
     # ── Prepare indicators ────────────────────────────────────────
     df5  = _vwap(_vol_ma(_rsi(df5.copy())))

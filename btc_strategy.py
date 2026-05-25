@@ -88,10 +88,10 @@ def score_btc(df_weekly: pd.DataFrame, df_4h: pd.DataFrame,
     if ist_time is None:
         ist_time = datetime.now(timezone(timedelta(hours=5, minutes=30)))
 
-    # ── Kill zone check (REQUIRED) ─────────────────────────────
+    # ── Kill zone — bonus points only (NOT a hard block) ─────────
+    # KZ active  → +15 pts added in Phase 2
+    # KZ inactive → 0 pts, still fires if 4H BOS + OB + other signals align
     kill_zone, kz_pts = get_kill_zone(ASSET, ist_time.hour, ist_time.minute)
-    if kz_pts == 0:
-        return {}
 
     # ── Prepare indicators on 15min ────────────────────────────
     df15  = add_rsi(add_vol_ma(add_vwap(df_15m.copy())))

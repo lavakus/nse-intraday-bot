@@ -2,13 +2,8 @@ name: Bitcoin (BTCUSDT) Bot
 
 on:
   schedule:
-    # IST Kill Zones → UTC (BTC is 24/7, all days):
-    #   KZ-A  05:30–07:30 IST = 00:00–02:00 UTC
-    #   KZ-L  13:30–15:30 IST = 08:00–10:00 UTC
-    #   KZ-NY 18:30–20:30 IST = 13:00–15:00 UTC
-    - cron: "0,15,30,45 0-1 * * *"     # Asian KZ (every day)
-    - cron: "0,15,30,45 8-9 * * *"     # London KZ (every day)
-    - cron: "0,15,30,45 13-14 * * *"   # New York KZ (every day)
+    # Every 30 min, 24/7 — BTC never sleeps
+    - cron: "0,30 * * * *"
   workflow_dispatch:
     inputs:
       force_scan:

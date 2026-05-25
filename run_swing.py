@@ -293,8 +293,8 @@ def _format_monday_alert(picks: list) -> str:
     ist  = _now_ist()
     week = _week_key()
     lines = [
-        f"📈 WEEKLY SWING PICKS — {week}",
-        f"📅 {ist.strftime('%A %d %b %Y')}  |  Hold: Mon→Fri (5 days)",
+        f"📈 SWING PICKS — {ist.strftime('%d %b %Y')}  ({week})",
+        f"📅 {ist.strftime('%A')}  |  Hold: 3–5 days  |  Exit by Friday 15:20 IST",
         f"🎯 Strategy: EMA Trend + RSI + Volume Breakout  |  Min score 55/100",
         f"",
         f"{'Rk':<3} {'Symbol':<13} {'Sc':>4} {'Entry':>8} {'T1':>8} {'T2':>9} {'SL':>8} {'R:R':>5}",
@@ -361,41 +361,44 @@ def get_swing_data() -> dict:
 # ── Entry point ───────────────────────────────────────────────────
 
 def main():
-    ist     = _now_ist()
-    week    = _week_key()
-    weekday = ist.weekday()   # 0=Mon … 4=Fri
+    ist      = _now_ist()
+    week     = _week_key()
+    today    = _today_str()
 
-    force_scan   = os.environ.get("FORCE_SWING",  "0") == "1"
-    update_only  = os.environ.get("UPDATE_ONLY",  "0") == "1"
+    force_scan  = os.environ.get("FORCE_SWING",  "0") == "1"
+    update_only = os.environ.get("UPDATE_ONLY",  "0") == "1"
 
     print(f"[SWING] {ist.strftime('%A %d %b %Y %H:%M IST')}  {week}")
 
-    # ── Daily status update (runs every market day) ───────────────
+    # ── Daily status update (always runs first) ───────────────────
     updated_data = update_swing_statuses()
     open_count   = sum(1 for r in updated_data if r.get("status") == "OPEN")
-    print(f"[SWING] {open_count} open positions after update")
+    print(f"[SWING] {open_count} open position(s) after update")
 
-    # ── Send EOD Telegram update (Tue–Fri, or any day if update_only) ──
-    if update_only or (weekday > 0):          # not Monday
+    if update_only:
         send_eod_update()
-        if not force_scan:
-            return
+        return
 
-    # ── Monday: full scan for new picks ──────────────────────────
-    if weekday == 0 or force_scan:
-        existing = _load_log()
-        if any(r.get("week") == week for r in existing) and not force_scan:
-            print(f"[SWING] Already scanned {week}. Use FORCE_SWING=1 to re-scan.")
-            return
+    # ── Full scan EVERY market day — no Monday-only restriction ──
+    # Picks already found today won't be duplicated (date check below)
+    existing = _load_log()
+    already_scanned_today = any(r.get("scan_date") == today for r in existing)
 
-        picks = scan_swing()
-        if not picks:
-            print("[SWING] No qualifying stocks this week")
+    if already_scanned_today and not force_scan:
+        print(f"[SWING] Already scanned today ({today}). Sending EOD update.")
+        send_eod_update()
+        return
+
+    picks = scan_swing()
+    if not picks:
+        print("[SWING] No qualifying stocks today")
+        # Only send "no picks" message on Monday so we don't spam daily
+        if ist.weekday() == 0:
             telegram_send(
-                f"📊 Swing Scan {week}: No qualifying stocks found.\n"
-                f"Market may be in a correction — no swing trades this week."
+                f"📊 Swing Scan {today}: No qualifying stocks found.\n"
+                f"Market may be choppy — no swing trades today."
             )
-            return
+        return
 
         existing.extend(picks)
         _save_log(existing)

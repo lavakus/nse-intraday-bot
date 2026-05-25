@@ -113,10 +113,9 @@ def score_options(index: str, df_15m: pd.DataFrame,
     if vix >= 25:
         return {}
 
-    # ── BLOCK 2: Kill Zone ───────────────────────────────────────
+    # ── Kill Zone — bonus points (NOT a hard block) ──────────────
+    # Active KZ → +15 pts; outside KZ → 0 pts but can still fire
     kz, kz_pts = get_kill_zone("NSE", ist_time.hour, ist_time.minute)
-    if kz_pts == 0:
-        return {}
 
     # ── Prepare indicators ────────────────────────────────────────
     df15 = add_rsi(add_vol_ma(add_vwap(df_15m.copy())))
@@ -233,7 +232,10 @@ def score_options(index: str, df_15m: pd.DataFrame,
 
     # ── Kill Zone bonus ───────────────────────────────────────────
     score += kz_pts
-    reasons.append(f"Kill Zone {kz} active (+{kz_pts}pts)")
+    if kz_pts > 0:
+        reasons.append(f"Kill Zone {kz} active (+{kz_pts}pts)")
+    else:
+        reasons.append(f"Zone: {kz} (no KZ bonus — structure + momentum driving signal)")
 
     # ── VIX bonus (cheap options = more confidence) ───────────────
     if vix < 14:

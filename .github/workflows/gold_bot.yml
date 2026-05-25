@@ -2,14 +2,9 @@ name: Gold (XAUUSD) Bot
 
 on:
   schedule:
-    # IST Kill Zones → UTC:
-    #   KZ-A  05:30–07:30 IST = 00:00–02:00 UTC
-    #   KZ-L  13:30–15:30 IST = 08:00–10:00 UTC
-    #   KZ-NY 18:30–20:30 IST = 13:00–15:00 UTC
-    # Gold trades Mon–Fri (forex hours)
-    - cron: "0,15,30,45 0-1 * * 1-5"    # Asian KZ
-    - cron: "0,15,30,45 8-9 * * 1-5"    # London KZ
-    - cron: "0,15,30,45 13-14 * * 1-5"  # New York KZ
+    # Every 30 min during Gold trading hours Mon–Fri
+    # Gold active: 5:30 AM – 11:30 PM IST = 0:00–18:00 UTC
+    - cron: "0,30 0-17 * * 1-5"
   workflow_dispatch:
     inputs:
       force_scan:

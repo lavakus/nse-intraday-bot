@@ -2,9 +2,10 @@ name: Swing Stock Tracker (Daily Mon–Fri)
 
 on:
   schedule:
-    # Every Mon–Fri at 15:35 IST = 10:05 UTC (just after NSE close)
-    # Monday  → full scan for new weekly picks + EOD update
-    # Tue–Fri → live price update + EOD Telegram update only
+    # Runs twice daily Mon–Fri:
+    # 1) 9:20 AM IST = 3:50 UTC  — morning scan for fresh picks
+    # 2) 3:35 PM IST = 10:05 UTC — EOD status update + Telegram summary
+    - cron: "50 3 * * 1-5"
     - cron: "5 10 * * 1-5"
   workflow_dispatch:
     inputs:
