@@ -1,9 +1,29 @@
 """
 Notifier — Telegram alerts for SMC + ICT signals.
+Credentials always read from environment variables first,
+falling back to config.py for local development.
 """
+import os
 import requests
-from config import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
 
+# Env vars take priority (GitHub Actions secrets), then config.py for local dev
+_TOKEN   = os.environ.get("TELEGRAM_TOKEN")   or ""
+_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID") or ""
+
+# Fallback: config.py (local dev only — never rely on this in production)
+if not _TOKEN or not _CHAT_ID:
+    try:
+        from config import TELEGRAM_TOKEN as _CFG_TOKEN, TELEGRAM_CHAT_ID as _CFG_CHAT
+        _TOKEN   = _TOKEN   or _CFG_TOKEN
+        _CHAT_ID = _CHAT_ID or _CFG_CHAT
+    except Exception:
+        pass
+
+if not _TOKEN:
+    print("[NOTIFIER] WARNING: TELEGRAM_TOKEN not set — alerts will fail")
+
+TELEGRAM_TOKEN   = _TOKEN
+TELEGRAM_CHAT_ID = _CHAT_ID
 BASE = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
 
@@ -88,8 +108,9 @@ def _send_telegram(sig: dict) -> bool:
 
 # ── PLAIN UTILITY (bot commands, greetings, etc.) ──────────────
 
-def telegram_send(text: str, chat_id: str = TELEGRAM_CHAT_ID,
+def telegram_send(text: str, chat_id: str = None,
                   markup: dict = None) -> bool:
+    chat_id = chat_id or TELEGRAM_CHAT_ID
     payload = {"chat_id": chat_id, "text": text}
     if markup:
         payload["reply_markup"] = markup

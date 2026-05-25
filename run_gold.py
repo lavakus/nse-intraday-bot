@@ -11,6 +11,7 @@ from feeds.gold_feed import get_gold_data, get_prev_day_high_low, get_asian_sess
 from feeds.dxy_feed  import get_dxy_data
 from signal_logger   import log_signal
 from notifier        import telegram_send
+from shared.smc_engine import get_kill_zone
 
 THRESHOLD = float(os.environ.get("GOLD_SCORE", "65"))
 BOT_STATE_FILE = "bot_state.json"
@@ -92,13 +93,21 @@ def scan_gold_once() -> dict | None:
             ist_time=ist,
         )
 
+        kz, kz_pts = get_kill_zone("GOLD", ist.hour, ist.minute)
+        print(f"[GOLD] Kill Zone: {kz} (pts={kz_pts}) | Price={data['price']}")
+
         if sig and sig.get("score", 0) >= THRESHOLD:
             print(f"[GOLD] STRONG: {sig['signal']} "
                   f"score={sig['score']}/150 [{sig['signal_strength']}] "
                   f"entry={sig['entry']} T1={sig['t1']} T2={sig['t2']}")
             return sig
+        elif sig and isinstance(sig, dict) and sig.get("score", 0) > 0:
+            print(f"[GOLD] Signal found but score {sig.get('score',0)}/150 < threshold {THRESHOLD}")
         else:
-            print("[GOLD] No qualifying signal this scan")
+            if kz_pts == 0:
+                print(f"[GOLD] Blocked — not in a kill zone (current: {kz})")
+            else:
+                print("[GOLD] Blocked — BOS/CHOCH, Order Block, or Liquidity Sweep not confirmed")
     except Exception as e:
         print(f"[GOLD] Scan error: {e}")
     return None

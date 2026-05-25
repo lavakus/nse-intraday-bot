@@ -12,6 +12,7 @@ from feeds.funding_rate import get_funding_rate
 from feeds.fear_greed   import get_fear_greed
 from signal_logger       import log_signal
 from notifier            import telegram_send
+from shared.smc_engine   import get_kill_zone
 
 THRESHOLD      = float(os.environ.get("BTC_SCORE", "65"))
 BOT_STATE_FILE = "bot_state.json"
@@ -104,13 +105,21 @@ def scan_btc_once() -> dict | None:
             ist_time   = ist,
         )
 
+        kz, kz_pts = get_kill_zone("BTC", ist.hour, ist.minute)
+        print(f"[BTC] Kill Zone: {kz} (pts={kz_pts})")
+
         if sig and sig.get("score", 0) >= THRESHOLD:
             print(f"[BTC] STRONG: {sig['signal']} "
                   f"score={sig['score']}/150 [{sig['signal_strength']}] "
                   f"entry=${sig['entry']:,} T2=${sig['t2']:,}")
             return sig
+        elif sig and isinstance(sig, dict) and sig.get("score", 0) > 0:
+            print(f"[BTC] Signal found but score {sig.get('score',0)}/150 < threshold {THRESHOLD}")
         else:
-            print("[BTC] No qualifying signal this scan")
+            if kz_pts == 0:
+                print(f"[BTC] Blocked — not in a kill zone (current: {kz})")
+            else:
+                print("[BTC] Blocked — BOS/CHOCH on 4H, Order Block, or Liquidity Sweep not confirmed")
     except Exception as e:
         print(f"[BTC] Scan error: {e}")
     return None
