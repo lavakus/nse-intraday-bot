@@ -2,14 +2,14 @@ name: Options Scanner (Nifty / BankNifty / Sensex)
 
 on:
   schedule:
-    # Every 5 min during NSE kill zones (Mon–Fri)
-    # KZ1: 09:15–10:00 IST = 03:45–04:30 UTC
+    # Every 5 min during NSE kill zones (Mon–Fri, UTC):
+    # KZ1  09:15–10:00 IST = 03:45–04:30 UTC
+    # KZ2  11:15–11:45 IST = 05:45–06:15 UTC
+    # KZ3  13:30–14:15 IST = 08:00–08:45 UTC
     - cron: "45,50,55 3 * * 1-5"
     - cron: "0,5,10,15,20,25,30 4 * * 1-5"
-    # KZ2: 11:15–11:45 IST = 05:45–06:15 UTC
     - cron: "45,50,55 5 * * 1-5"
     - cron: "0,5,10,15 6 * * 1-5"
-    # KZ3: 13:30–14:15 IST = 08:00–08:45 UTC
     - cron: "0,5,10,15,20,25,30,35,40,45 8 * * 1-5"
   workflow_dispatch:
     inputs:
@@ -39,20 +39,28 @@ jobs:
           cache: "pip"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install --upgrade pip setuptools wheel
+          pip install --no-cache-dir -r requirements.txt
 
       - name: Run Options Scanner
+        id: scan
+        continue-on-error: true
         env:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           UPDATE_ONLY:      ${{ github.event.inputs.update_only || '0' }}
         run: python run_options.py
 
+      - name: Report scan outcome
+        if: steps.scan.outcome == 'failure'
+        run: echo "::warning::Options scan step failed — check logs above. Committing any partial output."
+
       - name: Commit options log
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main || true
-          git add options_log.json
+          [ -f options_log.json ] && git add options_log.json || true
           git diff --staged --quiet || git commit -m "chore: update options log [skip ci]"
           git push || true

@@ -38,9 +38,13 @@ jobs:
           cache: "pip"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install --upgrade pip setuptools wheel
+          pip install --no-cache-dir -r requirements.txt
 
       - name: Run Swing Scanner / Updater
+        id: swing
+        continue-on-error: true
         env:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -48,11 +52,15 @@ jobs:
           UPDATE_ONLY:      ${{ github.event.inputs.update_only || '0' }}
         run: python run_swing.py
 
+      - name: Report swing outcome
+        if: steps.swing.outcome == 'failure'
+        run: echo "::warning::Swing scanner step failed — check logs above. Committing any partial output."
+
       - name: Commit updated swing log
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main || true
-          git add swing_log.json
+          [ -f swing_log.json ] && git add swing_log.json || true
           git diff --staged --quiet || git commit -m "chore: update swing log $(date +'%Y-%m-%d') [skip ci]"
           git push || true

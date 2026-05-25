@@ -2,8 +2,21 @@ name: NSE Intraday Bot
 
 on:
   schedule:
-    - cron: "*/5 3-10 * * 1-5"
+    # Every 5 min during NSE kill zones (Mon–Fri, UTC):
+    # KZ1  09:15–10:00 IST = 03:45–04:30 UTC
+    # KZ2  11:15–11:45 IST = 05:45–06:15 UTC
+    # KZ3  13:30–14:15 IST = 08:00–08:45 UTC
+    - cron: "45,50,55 3 * * 1-5"
+    - cron: "0,5,10,15,20,25,30 4 * * 1-5"
+    - cron: "45,50,55 5 * * 1-5"
+    - cron: "0,5,10,15 6 * * 1-5"
+    - cron: "0,5,10,15,20,25,30,35,40,45 8 * * 1-5"
   workflow_dispatch:
+    inputs:
+      force_scan:
+        description: "Force scan even outside kill zone"
+        required: false
+        default: "0"
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -26,20 +39,30 @@ jobs:
           cache: "pip"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install --upgrade pip setuptools wheel
+          pip install --no-cache-dir -r requirements.txt
 
       - name: Run NSE scan
+        id: scan
+        continue-on-error: true          # workflow continues even if script errors
         env:
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           STRONG_SCORE:     "65"
+          FORCE_SCAN:       ${{ github.event.inputs.force_scan || '0' }}
         run: python run_scan.py
+
+      - name: Report scan outcome
+        if: steps.scan.outcome == 'failure'
+        run: echo "::warning::NSE scan step failed — check logs above. Committing any partial output."
 
       - name: Commit updated signals log
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main || true
-          git add signals_log.json
-          git diff --staged --quiet || git commit -m "chore: update signals log [skip ci]"
+          # Add log file only if it exists
+          [ -f signals_log.json ] && git add signals_log.json || true
+          git diff --staged --quiet || git commit -m "chore: update NSE signals log [skip ci]"
           git push || true
