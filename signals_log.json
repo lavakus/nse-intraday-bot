@@ -26,5 +26,52 @@
     "exit_price": 471.0,
     "pnl_pts": -5.2,
     "pnl_pct": -1.09
+  },
+  {
+    "id": 2,
+    "datetime": "2026-05-25 08:42",
+    "date": "2026-05-25",
+    "asset": "BAJAJFINSV",
+    "symbol": "BAJAJFINSV",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_time_price": 15,
+      "price_action": 17,
+      "boosters": 3
+    },
+    "must_have_checklist": {
+      "bos_or_choch_15min": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 1807.5,
+    "t1": 1814.25,
+    "target": 1821.0,
+    "sl": 1803.0,
+    "rr": 3.0,
+    "sl_pct": 0.25,
+    "rsi": 63.3,
+    "vwap": 1798.23,
+    "vol_ratio": 0.3,
+    "reasons": [
+      "BOS confirmed 15min (LONG)",
+      "Unmitigated OB 1805.5\u20131806.7",
+      "Liquidity sweep at 1806.2",
+      "Kill Zone KZ3 active (+15pts)",
+      "Strong rejection candle at OB",
+      "5min HH/HL (or LH/LL) aligns with 15min bias",
+      "RSI 63 \u2014 ideal entry zone (40\u201365)"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
