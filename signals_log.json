@@ -69,10 +69,10 @@
       "5min HH/HL (or LH/LL) aligns with 15min bias",
       "RSI 63 \u2014 ideal entry zone (40\u201365)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1800.300048828125,
+    "pnl_pts": -7.2,
+    "pnl_pct": -0.4
   },
   {
     "id": 3,
@@ -117,7 +117,7 @@
       "Tight OR \u20b91.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 301.45001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -167,7 +167,7 @@
       "Tight OR \u20b95.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1299.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   }
