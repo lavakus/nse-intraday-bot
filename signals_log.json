@@ -73,5 +73,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 3,
+    "datetime": "2026-05-26 07:03",
+    "date": "2026-05-26",
+    "asset": "ITC",
+    "symbol": "ITC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 301.6,
+    "t1": 300.48,
+    "target": 299.35,
+    "sl": 302.35,
+    "rr": 3.0,
+    "sl_pct": 0.25,
+    "rsi": 29.4,
+    "vwap": 302.61,
+    "vol_ratio": 1.84,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.8x",
+      "Price below VWAP \u20b9302.6",
+      "Below OR Low \u20b9302.7",
+      "Volume spike 1.8x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "Tight OR \u20b91.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
