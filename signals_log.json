@@ -120,5 +120,55 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 4,
+    "datetime": "2026-05-26 08:27",
+    "date": "2026-05-26",
+    "asset": "AXISBANK",
+    "symbol": "AXISBANK",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1299.7,
+    "t1": 1288.45,
+    "target": 1277.2,
+    "sl": 1307.2,
+    "rr": 3.0,
+    "sl_pct": 0.58,
+    "rsi": 52.9,
+    "vwap": 1304.26,
+    "vol_ratio": 1.78,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.8x",
+      "Price below VWAP \u20b91304.3",
+      "Below OR Low \u20b91305.9",
+      "Volume spike 1.8x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 53 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91293.9 \u2014 clear T2 target",
+      "Round number level confluence",
+      "Tight OR \u20b95.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
