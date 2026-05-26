@@ -1,22 +1,23 @@
 """
-Standalone scan script — runs on GitHub Actions (or any server).
-Reads credentials from environment variables.
-No desktop. Telegram only.
+Standalone NSE scan script — runs on GitHub Actions every 15 min.
+Implements: ORB + VWAP Pullback + Breakout+Retest strategy.
+Sends Telegram alert when score >= 80/150.
 """
 import os, sys, time, requests
 from datetime import datetime, timezone, timedelta
 
-# ── CONFIG FROM ENV ────────────────────────────────────────────
+# ── CONFIG FROM ENV ─────────────────────────────────────────────
 TOKEN     = os.environ.get("TELEGRAM_TOKEN", "")
 CHAT_ID   = os.environ.get("TELEGRAM_CHAT_ID", "")
-THRESHOLD = float(os.environ.get("STRONG_SCORE", "65"))
+THRESHOLD = float(os.environ.get("STRONG_SCORE", "80"))
+CAPITAL   = float(os.environ.get("CAPITAL", "100000"))
 BASE      = f"https://api.telegram.org/bot{TOKEN}"
 
 if not TOKEN or not CHAT_ID:
     print("[WARNING] TELEGRAM_TOKEN / TELEGRAM_CHAT_ID not set — alerts will fail")
 
 
-# ── MARKET HOURS CHECK ─────────────────────────────────────────
+# ── MARKET HOURS CHECK ──────────────────────────────────────────
 
 def _now_ist() -> datetime:
     return datetime.now(timezone(timedelta(hours=5, minutes=30)))
@@ -24,15 +25,15 @@ def _now_ist() -> datetime:
 
 def is_market_open() -> bool:
     ist = _now_ist()
-    if ist.weekday() >= 5:
+    if ist.weekday() >= 5:         # Saturday / Sunday
         return False
     t = ist.hour * 100 + ist.minute
     return 915 <= t <= 1530
 
 
-# ── TELEGRAM SEND ──────────────────────────────────────────────
+# ── TELEGRAM SEND ───────────────────────────────────────────────
 
-def send(text: str):
+def send(text: str) -> bool:
     try:
         r  = requests.post(f"{BASE}/sendMessage",
                            json={"chat_id": CHAT_ID, "text": text},
@@ -46,27 +47,43 @@ def send(text: str):
         return False
 
 
+# ── ALERT FORMATTER ─────────────────────────────────────────────
+
+_SETUP_LABELS = {
+    "BREAKOUT_RETEST": "Breakout + Retest",
+    "VWAP_PULLBACK":   "VWAP Pullback",
+    "ORB":             "ORB Breakout",
+}
+
+
 def format_alert(sig: dict) -> str:
-    action   = sig.get("signal", "BUY")
-    score    = sig.get("score", 0)
-    pct      = sig.get("score_pct", round(score / 150 * 100, 1))
-    strength = sig.get("signal_strength", "GOOD")
-    kz       = sig.get("kill_zone", "?")
-    ph       = sig.get("phase_scores", {})
-    tp       = sig.get("trade_params", {})
-    entry    = tp.get("entry",    sig.get("entry", "?"))
-    sl       = tp.get("sl",       sig.get("sl",    "?"))
-    t1       = tp.get("t1",       sig.get("t1",    "?"))
-    t2       = tp.get("t2",       sig.get("t2",    sig.get("target", "?")))
-    rr       = tp.get("rr_ratio", sig.get("rr",    "?"))
-    sl_pct   = tp.get("sl_pct",   "?")
-    chk      = sig.get("must_have_checklist", {})
-    bar      = "#" * int(score // 15) + "." * (10 - int(score // 15))
+    action     = sig.get("signal", "BUY")
+    score      = sig.get("score", 0)
+    pct        = sig.get("score_pct", round(score / 150 * 100, 1))
+    strength   = sig.get("signal_strength", "GOOD")
+    kz         = sig.get("kill_zone", "?")
+    setup_raw  = sig.get("setup", "?")
+    setup_lbl  = _SETUP_LABELS.get(setup_raw, setup_raw)
+    ph         = sig.get("phase_scores", {})
+    tp         = sig.get("trade_params", {})
+    chk        = sig.get("must_have_checklist", {})
+    or_info    = sig.get("opening_range", {})
+
+    entry   = tp.get("entry",    sig.get("entry",  "?"))
+    sl      = tp.get("sl",       sig.get("sl",     "?"))
+    t1      = tp.get("t1",       sig.get("t1",     "?"))
+    t2      = tp.get("t2",       sig.get("t2",     sig.get("target", "?")))
+    rr      = tp.get("rr_ratio", sig.get("rr",     "?"))
+    sl_pct  = tp.get("sl_pct",   "?")
+    shares  = tp.get("shares",   sig.get("shares", "?"))
+    risk_rs = tp.get("risk_amt", round(CAPITAL * 0.01, 0))
+    bar     = "#" * int(score // 15) + "." * (10 - int(score // 15))
 
     lines = [
         f"*** NSE INTRADAY  —  {action} SIGNAL ***",
         f"",
         f"Stock     : {sig['symbol']}",
+        f"Setup     : {setup_lbl}",
         f"Direction : {action}",
         f"Score     : {score}/150  ({pct}%)  [{bar}]",
         f"Strength  : {strength}",
@@ -75,47 +92,62 @@ def format_alert(sig: dict) -> str:
         f"--- TRADE PARAMETERS ---",
         f"Entry  : Rs {entry}",
         f"SL     : Rs {sl}  ({sl_pct}%)",
-        f"T1     : Rs {t1}  (50% partial exit)",
-        f"T2     : Rs {t2}  (full target)",
-        f"R:R    : 1:{rr}",
+        f"T1     : Rs {t1}  (exit 50% of position)",
+        f"T2     : Rs {t2}  (full target, RR 1:{rr})",
+        f"",
+        f"Qty    : {shares} shares",
+        f"Risk   : Rs {int(risk_rs)} (1% capital)",
+        f"",
+        f"--- OPENING RANGE ---",
+        f"OR High : Rs {or_info.get('high', '?')}",
+        f"OR Low  : Rs {or_info.get('low',  '?')}",
+        f"OR Range: Rs {or_info.get('range','?')}",
         f"",
         f"--- PHASE SCORES ---",
-        f"SMC Structure  : {ph.get('smc_structure', '?')}/60",
-        f"ICT Time/Price : {ph.get('ict_time_price', '?')}/40",
-        f"Price Action   : {ph.get('price_action', '?')}/27",
-        f"Boosters       : {ph.get('boosters', '?')}/23",
+        f"Setup Quality  : {ph.get('setup_quality',  '?')}/60",
+        f"Trend Filters  : {ph.get('trend_filters',  '?')}/40",
+        f"Entry Quality  : {ph.get('entry_quality',  '?')}/30",
+        f"Boosters       : {ph.get('boosters',       '?')}/20",
         f"",
         f"--- CHECKLIST ---",
-        f"{'OK' if chk.get('bos_or_choch_15min') else 'XX'}  BOS/CHOCH 15min",
-        f"{'OK' if chk.get('order_block_valid')   else 'XX'}  Order Block",
-        f"{'OK' if chk.get('liquidity_sweep')     else 'XX'}  Liquidity Sweep",
-        f"{'OK' if chk.get('inside_kill_zone')    else 'XX'}  Kill Zone",
+        f"{'OK' if chk.get('setup_detected')   else 'XX'}  Setup confirmed",
+        f"{'OK' if chk.get('vwap_aligned')     else 'XX'}  VWAP aligned",
+        f"{'OK' if chk.get('volume_confirmed') else 'XX'}  Volume {sig.get('vol_ratio','?')}x",
+        f"{'OK' if chk.get('inside_kill_zone') else 'XX'}  Kill Zone active",
+        f"{'OK' if chk.get('rr_valid')         else 'XX'}  R:R >= 1.5:1",
         f"",
         f"--- SIGNALS ---",
     ] + [f"  + {r}" for r in sig.get("reasons", [])] + [
         f"",
-        f"RSI:{sig.get('rsi','?')}  VWAP:Rs{sig.get('vwap','?')}  Vol:{sig.get('vol_ratio','?')}x",
+        f"VWAP: Rs{sig.get('vwap','?')}  RSI:{sig.get('rsi','?')}  "
+        f"Gap:{sig.get('gap_pct','?')}%",
         f"",
-        f"Move SL to breakeven at T1. Risk 0.5% of capital.",
-        f"Trade at your own risk.",
+        f"Exit Rules:",
+        f"  - Hard SL at setup candle low",
+        f"  - Move SL to breakeven after T1",
+        f"  - MANDATORY exit by 3:15 PM IST",
+        f"  - False breakout: exit if price reverses inside OR within 2 bars",
+        f"",
+        f"Max 3 trades/day | 2% daily loss limit",
+        f"Trade NSE at your own risk.",
     ]
     return "\n".join(lines)
 
 
-# ── MAIN SCAN ──────────────────────────────────────────────────
+# ── MAIN SCAN ───────────────────────────────────────────────────
 
 def main():
     ist = _now_ist()
-    print(f"NSE SMC Scan — threshold={THRESHOLD}/150  "
+    print(f"NSE Intraday Scan — threshold={THRESHOLD}/150  "
           f"time={ist.strftime('%H:%M IST %A')}")
 
     if not is_market_open():
         print(f"Market closed ({ist.strftime('%A %H:%M IST')}). Skipping scan.")
         sys.exit(0)
 
-    from nse_stocks  import get_nse_stocks
+    from nse_stocks   import get_nse_stocks
     from data_fetcher import get_intraday_data, get_prev_day_high_low
-    from strategy    import score_stock
+    from strategy     import score_stock
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
     stocks = get_nse_stocks()[:250]
@@ -128,7 +160,8 @@ def main():
             if df5.empty or df15.empty:
                 return None
             pdh, pdl = get_prev_day_high_low(sym)
-            sig = score_stock(df5, df15, sym, pdh, pdl, ist)
+            sig = score_stock(df5, df15, sym, pdh, pdl, ist,
+                              capital=CAPITAL)
             if sig and sig.get("score", 0) >= THRESHOLD:
                 return sig
         except Exception as e:
@@ -141,32 +174,34 @@ def main():
             r = fut.result()
             if r:
                 strong.append(r)
-                print(f"  STRONG: {r['symbol']} {r['signal']} "
+                print(f"  STRONG: {r['symbol']:12s} {r['signal']:4s} "
+                      f"setup={r.get('setup','?'):18s} "
                       f"score={r['score']}/150 [{r['signal_strength']}]")
 
     strong.sort(key=lambda x: x["score"], reverse=True)
     print(f"\nResult: {len(strong)} strong signal(s)")
 
-    # ── Log signals to signals_log.json ───────────────────────
+    # ── Log signals ─────────────────────────────────────────────
     try:
         from signal_logger import log_signal, update_statuses
-        update_statuses()          # refresh open trade statuses
+        update_statuses()
         for s in strong[:10]:
             log_signal(s)
         print(f"[LOG] {len(strong[:10])} signal(s) written to signals_log.json")
     except Exception as e:
         print(f"[LOG ERROR] {e}")
 
-    # ── Send to Telegram ───────────────────────────────────────
+    # ── Send to Telegram ─────────────────────────────────────────
     if strong:
-        send(f"NSE SMC SCAN — {len(strong)} strong setup(s) found "
-             f"(score {THRESHOLD}+/150)")
+        send(f"NSE Intraday Scan — {len(strong)} setup(s) found "
+             f"(score {THRESHOLD:.0f}+/150)  "
+             f"{ist.strftime('%H:%M IST')}")
         time.sleep(1)
         for s in strong[:5]:       # cap at 5 alerts per scan
             send(format_alert(s))
             time.sleep(0.5)
     else:
-        print("No strong setups in this kill zone. No Telegram message sent.")
+        print("No strong setups this scan. No Telegram message sent.")
 
 
 if __name__ == "__main__":
