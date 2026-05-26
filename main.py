@@ -134,11 +134,12 @@ def market_watcher():
             kz_note = "Only KZ3 entries today (Thursday expiry)." if is_thu else \
                       "Active kill zones: KZ1 (9:15-10:00), KZ2 (11:15-11:45), KZ3 (13:30-14:15)."
             telegram_send(
-                f"Good morning!\n\n"
-                f"SMC + ICT Bot starting.\n"
-                f"Strategy: 150-pt scoring — minimum {STRONG_SCORE}/150 to alert.\n"
-                f"Session limit: {MAX_TRADES_PER_SESSION} trades, "
-                f"block after {MAX_CONSECUTIVE_LOSSES} consecutive losses.\n\n"
+                f"Good morning! NSE Intraday Bot starting.\n\n"
+                f"Strategy : ORB + VWAP Pullback + Breakout+Retest\n"
+                f"Scoring  : 150-pt scale — min {STRONG_SCORE}/150 to alert\n"
+                f"Risk     : 1% capital per trade  |  T1=1.5R  T2=PDH/PDL\n"
+                f"Session  : max {MAX_TRADES_PER_SESSION} trades, "
+                f"block after {MAX_CONSECUTIVE_LOSSES} consecutive losses\n\n"
                 f"{kz_note}"
             )
             greeted_today = today
@@ -194,7 +195,7 @@ def market_watcher():
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  NSE INTRADAY BOT  —  SMC + ICT Strategy")
+    print("  NSE INTRADAY BOT  —  ORB + VWAP + Breakout+Retest")
     print(f"  Score threshold  : {STRONG_SCORE}/150")
     print(f"  Scan interval    : every {SCAN_INTERVAL} min")
     print(f"  Max trades/day   : {MAX_TRADES_PER_SESSION}")
@@ -203,12 +204,14 @@ if __name__ == "__main__":
     print("=" * 60)
 
     telegram_send(
-        f"NSE SMC + ICT Bot started.\n\n"
-        f"Scoring: 150-pt scale (min {STRONG_SCORE} to alert).\n"
-        f"Scanning during Kill Zones only:\n"
-        f"  KZ1 : 09:15–10:00\n"
-        f"  KZ2 : 11:15–11:45\n"
-        f"  KZ3 : 13:30–14:15\n\n"
+        f"NSE Intraday Bot started.\n\n"
+        f"Strategy : ORB + VWAP Pullback + Breakout+Retest\n"
+        f"Score    : 150-pt scale (min {STRONG_SCORE} to alert)\n"
+        f"Risk     : 1% capital per trade\n\n"
+        f"Kill Zones:\n"
+        f"  KZ1 : 09:31 - 10:30\n"
+        f"  KZ2 : 11:15 - 11:45\n"
+        f"  KZ3 : 13:30 - 14:30\n\n"
         f"Max {MAX_TRADES_PER_SESSION} trades/day. "
         f"Session blocked after {MAX_CONSECUTIVE_LOSSES} consecutive losses."
     )
