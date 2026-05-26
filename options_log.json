@@ -1,0 +1,62 @@
+[
+  {
+    "index": "SENSEX",
+    "symbol": "SENSEX",
+    "direction": "SHORT",
+    "option_type": "PUT",
+    "signal": "PUT",
+    "score": 62,
+    "score_pct": 62.0,
+    "signal_strength": "WEAK",
+    "kill_zone": "KZ3",
+    "vix": 16.05,
+    "entry": 76176.6,
+    "sl": 76300,
+    "sl_pct": 0.12,
+    "t1": 76000,
+    "t2": 75900,
+    "rr": 3.0,
+    "strike": 76200,
+    "strike_atm": 76200,
+    "strike_otm1": 76100,
+    "strike_otm2": 76000,
+    "strike_note": "ATM \u2014 balanced risk/reward",
+    "expiry": "29 May 2026",
+    "strike_step": 100,
+    "rsi": 38.6,
+    "vwap": NaN,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH 15min \u2192 PUT",
+      "OB 76223\u201376266",
+      "FVG 76295\u201376310",
+      "5min structure aligns with 15min",
+      "RSI 39 \u2014 acceptable",
+      "Price at round strike 76200",
+      "Rejection candle at OB \u2014 strong confirmation",
+      "Kill Zone KZ3 active (+15pts)"
+    ],
+    "phase_scores": {
+      "structure_quality": 40,
+      "momentum": 22,
+      "confidence": 0
+    },
+    "must_have_checklist": {
+      "bos_or_choch_15m": true,
+      "inside_kill_zone": true,
+      "vix_safe": true,
+      "order_block": true,
+      "liquidity_sweep": false
+    },
+    "asset": "OPTIONS",
+    "datetime": "2026-05-26 13:59",
+    "date": "2026-05-26",
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null,
+    "timestamp": "2026-05-26T13:59:49.702355+05:30",
+    "vix_label": "LOW-MODERATE (good to buy)",
+    "id": 1
+  }
+]
