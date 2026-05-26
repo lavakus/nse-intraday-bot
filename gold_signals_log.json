@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "datetime": "2026-05-25 19:36",
+    "date": "2026-05-25",
+    "asset": "GOLD",
+    "symbol": "XAUUSD",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 120,
+    "score_pct": 80.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "London Open",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_gold_filters": 60,
+      "pa_boosters": 0
+    },
+    "must_have_checklist": {
+      "htf_bias_clear": true,
+      "premium_discount_zone": true,
+      "kill_zone_active": true,
+      "judas_swing": false,
+      "ob_or_fvg_present": true
+    },
+    "entry": 4500.0,
+    "t1": 4530.0,
+    "target": 4560.0,
+    "sl": 4480.0,
+    "rr": 3.0,
+    "sl_pct": 0.44,
+    "rsi": null,
+    "vwap": null,
+    "vol_ratio": 1.0,
+    "reasons": [
+      "[3] London Open",
+      "[1] Bullish bias",
+      "[2] Discount zone",
+      "[5] H4 OB"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  }
+]

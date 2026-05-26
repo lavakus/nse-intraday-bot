@@ -586,23 +586,27 @@ def detect_m5_confirmation(df_5m: pd.DataFrame, direction: str,
 # ══════════════════════════════════════════════════════════════════
 
 def _calc_trade_params(entry: float, ob: dict, fvg: dict,
-                       direction: str) -> dict:
+                       direction: str,
+                       asian_range: dict = None) -> dict:
     """
-    SL  = 5 pips ($0.50) below OB low  (LONG)
-          5 pips ($0.50) above OB high (SHORT)
-    TP1 = 1.5 × risk
-    TP2 = 3.0 × risk
-    Falls back to FVG geometry if OB not valid.
+    SL  = $0.50 below OB low (LONG) / above OB high (SHORT).
+    Falls back to FVG geometry, then Asian session range extremes.
+    TP1 = 1.5 × risk,  TP2 = 3.0 × risk.
     """
     empty = {"valid": False}
 
-    # Determine zone boundaries
+    # Determine zone boundaries — OB first, then FVG, then Asian range
     if ob.get("valid"):
         zone_high = ob.get("high") or 0
         zone_low  = ob.get("low")  or 0
     elif fvg.get("valid"):
         zone_high = fvg.get("top") or 0
         zone_low  = fvg.get("bot") or 0
+    elif asian_range and asian_range.get("valid"):
+        # ICT fallback: Asian session extremes are natural S/R levels.
+        # When Judas Swing is confirmed the swept Asian extreme IS the SL.
+        zone_high = float(asian_range.get("high") or 0)
+        zone_low  = float(asian_range.get("low")  or 0)
     else:
         return empty
 
@@ -785,7 +789,7 @@ def score_gold(df_4h: pd.DataFrame,
     # ENTRY PRICE + TRADE PARAMETERS
     # ═══════════════════════════════════════════════
     entry = round(float(df_15m["close"].iloc[-1]), 2)
-    tp    = _calc_trade_params(entry, ob, fvg, direction)
+    tp    = _calc_trade_params(entry, ob, fvg, direction, asian_range=asian_range)
     if not tp["valid"]:
         return {}
 
