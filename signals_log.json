@@ -116,10 +116,10 @@
       "Kill Zone: DEAD (+0 pts)",
       "Tight OR \u20b91.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 301.45001220703125,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 291.8500061035156,
+    "pnl_pts": 9.75,
+    "pnl_pct": 3.23
   },
   {
     "id": 4,
@@ -167,7 +167,7 @@
       "Tight OR \u20b95.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1299.300048828125,
+    "exit_price": 1305.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   }
