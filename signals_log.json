@@ -170,5 +170,52 @@
     "exit_price": 1305.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 5,
+    "datetime": "2026-05-27 07:58",
+    "date": "2026-05-27",
+    "asset": "INFY",
+    "symbol": "INFY",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 83,
+    "score_pct": 55.3,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 8,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1160.9,
+    "t1": 1153.6,
+    "target": 1146.29,
+    "sl": 1165.77,
+    "rr": 3.0,
+    "sl_pct": 0.42,
+    "rsi": 49.3,
+    "vwap": 1161.12,
+    "vol_ratio": 1.62,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=1.6x",
+      "Price below VWAP \u20b91161.1",
+      "Volume spike 1.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 49 \u2014 ideal short zone (35\u201360)",
+      "Tight OR \u20b911.5 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
