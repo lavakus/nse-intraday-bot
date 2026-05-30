@@ -134,7 +134,10 @@ def _row_to_dict(row: pd.Series) -> dict:
     """Convert a CSV row (all-strings) to typed dict for dashboard/template use."""
     def _f(v):
         try:
-            return float(v) if v not in ("", None, "nan", "None") else None
+            s = str(v).strip()
+            if s.lower() in ("", "nan", "none", "nat", "<na>"):
+                return None
+            return float(s)
         except Exception:
             return None
 
