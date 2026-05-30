@@ -20,3 +20,15 @@ MARKET_CLOSE   = "15:30"
 MAX_TRADES_PER_SESSION  = 3    # hard cap per trading day
 DAILY_LOSS_LIMIT_PCT    = 0.02 # 2% daily loss limit → stop trading
 MAX_CONSECUTIVE_LOSSES  = 2    # block session after N losses in a row
+
+# ── SWING TRADING (5-Layer SMC, score out of 10) ─────────────────
+SWING_MIN_SCORE      = 7.0    # minimum score to generate a signal
+SWING_STOP_LOSS_PCT  = 0.025  # 2.5% maximum stop loss
+SWING_TARGET1_PCT    = 0.06   # 6%  first target (book 50%)
+SWING_TARGET2_PCT    = 0.10   # 10% final target
+SWING_MAX_HOLD_DAYS  = 15     # force-close after N days
+SWING_TOP_N          = 5      # top picks to alert per day
+SWING_SCAN_STOCKS    = 200    # max stocks to scan per day
+CALL_OI_INCREASE_MIN = 0.30   # 30% call OI increase → Layer 5 pass
+PCR_MIN              = 0.8    # put-call ratio lower bound
+PCR_MAX              = 1.3    # put-call ratio upper bound

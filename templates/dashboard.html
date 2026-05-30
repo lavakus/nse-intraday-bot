@@ -655,6 +655,16 @@ td{padding:10px 11px;vertical-align:middle}
 .sc-reason::before{content:"✦ ";color:var(--muted)}
 .sc-status-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 
+/* ── 5-Layer bars ───────────────────────────────────────────── */
+.sc-layers{display:flex;flex-direction:column;gap:5px}
+.sc-layer-row{display:flex;align-items:center;gap:7px;font-size:9.5px}
+.sc-layer-lbl{color:var(--muted2);font-weight:600;min-width:74px;font-size:9px}
+.sc-layer-bar{flex:1;height:5px;background:rgba(0,0,0,.07);border-radius:3px;overflow:hidden}
+.sc-layer-fill{height:100%;background:linear-gradient(90deg,var(--emerald),var(--blue));border-radius:3px;transition:width .5s ease}
+.sc-layer-val{font-size:9px;color:var(--muted);font-weight:700;min-width:24px;text-align:right}
+.sc-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:1px}
+.sc-meta-chip{font-size:9px;padding:2px 7px;border-radius:5px;background:var(--glass2);border:1px solid var(--border);color:var(--muted2);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
 /* ═══════════════════════════════════════════════════════════════
    ASSET TAG + MISC
 ═══════════════════════════════════════════════════════════════ */
@@ -1036,7 +1046,7 @@ td{padding:10px 11px;vertical-align:middle}
     <div class="content-card-header" onclick="toggleSection('swing')">
       <div class="card-title">
         <span class="section-badge badge-swing">📈 SWING PICKS</span>
-        Weekly NSE Swing Stocks — Mon→Fri (5 days)
+        NSE F&amp;O Swing Signals — 5-Layer Smart Money (Daily Scan)
       </div>
       <div class="card-title-right">
         <span class="badge badge-win">{{ swing_summary.wins }} wins</span>
@@ -1048,19 +1058,20 @@ td{padding:10px 11px;vertical-align:middle}
     </div>
     <div class="card-body" id="body-swing">
       <div class="strat-bar">
-        <span class="stag">Universe <strong>NIFTY 50 + Midcaps (75+)</strong></span>
-        <span class="stag">Hold <strong>Mon→Fri (5 days)</strong></span>
-        <span class="stag">Score <strong>≥ 55/100</strong></span>
-        <span class="stag">Max SL <strong>4%</strong></span>
-        <span class="stag">Min R:R <strong>1:2.0</strong></span>
-        <span class="stag">Filter <strong>Price &gt; EMA200 &gt; EMA50</strong></span>
-        <span class="stag">Scan <strong>Every Monday 09:15 IST</strong></span>
+        <span class="stag">Universe <strong>All NSE F&amp;O Stocks (~200)</strong></span>
+        <span class="stag">Hold <strong>Max 15 days</strong></span>
+        <span class="stag">Score <strong>≥ 7.0/10</strong></span>
+        <span class="stag">Max SL <strong>2.5%</strong></span>
+        <span class="stag">T1 <strong>+6%  (50% exit)</strong></span>
+        <span class="stag">T2 <strong>+10% (full exit)</strong></span>
+        <span class="stag">Scan <strong>Daily 15:35 IST</strong></span>
+        <span class="stag">Layers <strong>BoS · FVG · LiqGrab · Sector · Inst+OI</strong></span>
       </div>
 
       {% if swing_week_picks %}
       <div style="padding:6px 22px 0">
         <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:12px 0">
-          This Week — {{ swing_summary.week }}
+          Recent Signals — Last 14 Days  ({{ swing_summary.week }})
         </div>
       </div>
       <div class="swing-cards">
@@ -1070,9 +1081,9 @@ td{padding:10px 11px;vertical-align:middle}
         <div class="swing-card {{ 'sw-win' if p.status=='TARGET HIT' else 'sw-loss' if p.status=='SL HIT' else 'sw-open' }}"
              style="animation:fadeSlideIn .4s ease {{ loop.index0*0.08 }}s both">
           <div class="sc-top">
-            <div><div class="sc-sym">{{ p.symbol }}</div><div class="sc-date">📅 {{ p.scan_date }} · 5 days</div></div>
+            <div><div class="sc-sym">{{ p.symbol }}</div><div class="sc-date">📅 {{ p.date or p.scan_date }} · max 15d hold</div></div>
             <div class="sc-badge-col">
-              <span class="sc-score-pill">{{ p.score }}/100</span>
+              <span class="sc-score-pill">{{ p.score }}/10</span>
               <span class="sc-str str-{{ (p.signal_strength or 'good')|lower }}">{{ p.signal_strength }}</span>
             </div>
           </div>
@@ -1095,11 +1106,20 @@ td{padding:10px 11px;vertical-align:middle}
             <div class="sc-level-row" style="border-color:var(--green-b)"><span class="sc-ll">T2 Target</span><span class="sc-lv grn" style="font-size:13px;font-weight:900">₹{{ p.t2 }}</span><span style="font-size:9px;color:var(--green)">1:{{ p.rr_t2 }}</span></div>
             <div class="sc-level-row" style="border-color:var(--red-b)"><span class="sc-ll">Stop Loss</span><span class="sc-lv red">₹{{ p.sl }}</span><span style="font-size:9px;color:var(--red)">-{{ p.sl_pct }}%</span></div>
           </div>
-          <div class="sc-inds">
-            <span class="sc-ind">RSI {{ p.rsi }}</span>
-            <span class="sc-ind">Vol {{ p.vol_ratio }}×</span>
-            <span class="sc-ind">MACD {{ '✅' if p.macd_bullish else '❌' }}</span>
-            <span class="sc-ind">EMA21 ₹{{ p.ema21 }}</span>
+          <div class="sc-layers">
+            {% for lname, lval in [('L1 Structure', p.layer1), ('L2 FVG+OB', p.layer2), ('L3 Liq Grab', p.layer3), ('L4 Sector', p.layer4), ('L5 Inst+OI', p.layer5)] %}
+            <div class="sc-layer-row">
+              <span class="sc-layer-lbl">{{ lname }}</span>
+              <div class="sc-layer-bar"><div class="sc-layer-fill" style="width:{{ ((lval or 0)/2*100)|int }}%"></div></div>
+              <span class="sc-layer-val">{{ lval or 0 }}/2</span>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="sc-meta">
+            {% if p.sector %}<span class="sc-meta-chip">📊 {{ p.sector }}</span>{% endif %}
+            {% if p.bulk_buyers %}<span class="sc-meta-chip">🏦 {{ p.bulk_buyers }}</span>{% endif %}
+            {% if p.pcr is not none and p.pcr %}<span class="sc-meta-chip">PCR {{ p.pcr }}</span>{% endif %}
+            {% if p.call_oi_chg is not none and p.call_oi_chg %}<span class="sc-meta-chip">CE OI {{ "{:+.0f}%".format((p.call_oi_chg or 0)*100) }}</span>{% endif %}
           </div>
           <div class="sc-status-row">
             {% if p.status=='TARGET HIT' %}<span class="badge badge-win">✓ TARGET HIT</span><span class="pnl-pos">+{{ pnl }}%</span>
@@ -1111,7 +1131,7 @@ td{padding:10px 11px;vertical-align:middle}
         {% endfor %}
       </div>
       {% else %}
-      <div class="empty-state"><div class="empty-icon">📅</div><div class="empty-title">No picks this week yet</div><div class="empty-sub">Scanner runs every Monday 09:15 IST<br>Picks top 7 NSE stocks for the week</div></div>
+      <div class="empty-state"><div class="empty-icon">📡</div><div class="empty-title">No recent swing signals</div><div class="empty-sub">Scanner runs daily at 15:35 IST<br>Scores all NSE F&amp;O stocks across 5 SMC layers (min 7.0/10)</div></div>
       {% endif %}
 
       {% if swing_all_picks %}
@@ -1119,21 +1139,36 @@ td{padding:10px 11px;vertical-align:middle}
       <div style="padding:14px 22px 4px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.7px">All Historical Picks</div></div>
       <div class="table-wrap" style="padding:0 22px 18px">
       <table>
-        <thead><tr><th>Week</th><th>Symbol</th><th>Score/100</th><th>Strength</th><th>Entry</th><th>T1</th><th>T2</th><th>SL</th><th>R:R</th><th>Live</th><th>Status</th><th>P&amp;L%</th><th>RSI</th><th>Vol</th><th>Reasons</th></tr></thead>
+        <thead><tr><th>Date</th><th>Symbol</th><th>Score/10</th><th>Strength</th><th>Entry</th><th>T1</th><th>T2</th><th>SL</th><th>R:R</th><th>Live</th><th>Status</th><th>P&amp;L%</th><th>Layers</th><th>Sector</th><th>Reasons</th></tr></thead>
         <tbody>
         {% for p in swing_all_picks %}
         <tr class="trow-anim" style="animation-delay:{{ loop.index0*0.03 }}s">
-          <td class="dim nowrap">{{ p.week }}</td>
+          <td class="dim nowrap">{{ p.date or p.scan_date or '—' }}</td>
           <td class="sym">{{ p.symbol }}</td>
-          <td><div class="score-cell"><span class="score-num" style="font-size:11px">{{ p.score }}</span><div class="sbar-bg"><div class="sbar-fill" style="width:{{ p.score }}%"></div></div></div></td>
+          <td>
+            <div class="score-cell">
+              <span class="score-num" style="font-size:11px">{{ p.score }}</span>
+              <div class="sbar-bg"><div class="sbar-fill" style="width:{{ ((p.score or 0)/10*100)|int }}%"></div></div>
+            </div>
+          </td>
           <td><span class="str str-{{ (p.signal_strength or 'good')|lower }}">{{ p.signal_strength }}</span></td>
-          <td class="num">₹{{ p.entry }}</td><td class="num grn">₹{{ p.t1 }}</td>
-          <td class="num grn" style="font-weight:700">₹{{ p.t2 }}</td><td class="num red">₹{{ p.sl }}</td>
+          <td class="num">₹{{ p.entry }}</td>
+          <td class="num grn">₹{{ p.t1 }}</td>
+          <td class="num grn" style="font-weight:700">₹{{ p.t2 }}</td>
+          <td class="num red">₹{{ p.sl }}</td>
           <td class="dim">1:{{ p.rr_t2 }}</td>
           <td class="num blu">{% if p.exit_price %}₹{{ p.exit_price }}{% else %}—{% endif %}</td>
-          <td>{% if p.status=='TARGET HIT' %}<span class="badge badge-win">✓ HIT</span>{% elif p.status=='SL HIT' %}<span class="badge badge-loss">✗ SL</span>{% else %}<span class="badge badge-open">● OPEN</span>{% endif %}</td>
-          <td class="{{ 'pnl-pos' if p.pnl_pct is not none and p.pnl_pct>=0 else 'pnl-neg' if p.pnl_pct is not none else 'dim' }}">{% if p.pnl_pct is not none %}{% if p.pnl_pct>=0 %}+{% endif %}{{ p.pnl_pct }}%{% else %}—{% endif %}</td>
-          <td class="dim">{{ p.rsi }}</td><td class="dim">{{ p.vol_ratio }}×</td>
+          <td>
+            {% if p.status=='TARGET HIT' %}<span class="badge badge-win">✓ HIT</span>
+            {% elif p.status=='SL HIT' %}<span class="badge badge-loss">✗ SL</span>
+            {% elif p.status=='EXPIRED' %}<span class="badge" style="color:var(--muted)">⏱ EXP</span>
+            {% else %}<span class="badge badge-open">● OPEN</span>{% endif %}
+          </td>
+          <td class="{{ 'pnl-pos' if p.pnl_pct is not none and p.pnl_pct>=0 else 'pnl-neg' if p.pnl_pct is not none else 'dim' }}">
+            {% if p.pnl_pct is not none %}{% if p.pnl_pct>=0 %}+{% endif %}{{ p.pnl_pct }}%{% else %}—{% endif %}
+          </td>
+          <td class="dim" style="font-size:9.5px">{{ p.layers_passed or 0 }}/5 layers</td>
+          <td class="dim" style="font-size:9.5px">{{ p.sector or '—' }}</td>
           <td><div class="reasons">{{ p.reasons|join(' · ') if p.reasons else '—' }}</div></td>
         </tr>{% endfor %}
         </tbody>

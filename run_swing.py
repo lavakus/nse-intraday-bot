@@ -1,82 +1,244 @@
 """
-Swing Stock Scanner + Daily Tracker — NSE India (5-day Mon–Fri holds)
-=====================================================================
-Monday  → scan full watchlist, pick top 7, send Telegram alert
-Tue–Fri → fetch live prices, update P&L, check target/SL hit, send EOD update
+NSE F&O 5-Layer Smart Money Swing Scanner — Daily Runner
+=========================================================
+• Scans all NSE F&O stocks every market day at 15:35 IST
+• 5-layer SMC scoring (out of 10), threshold 7.0
+• Stores signals in swing_trades.csv (live tracker)
+• Sends Telegram alert with layer breakdown
 
-GitHub Actions runs this file every market day at 15:35 IST (10:05 UTC).
-On Monday it scans for new picks. On other days it just updates statuses.
-
-Local usage:
-  python run_swing.py            # auto-detects day
-  FORCE_SWING=1 python run_swing.py   # force full scan (any day)
-  UPDATE_ONLY=1 python run_swing.py   # force status update only
+Usage:
+  python run_swing.py             # auto-detect (scan + status update)
+  FORCE_SWING=1 python run_swing.py   # force re-scan today
+  UPDATE_ONLY=1 python run_swing.py   # status update only
 """
-
-import os, json, time
+import os, sys, time, traceback
 from datetime import datetime, timezone, timedelta, date
 
 import yfinance as yf
 import pandas as pd
+import numpy as np
 
-from swing_strategy import score_swing, SWING_WATCHLIST
-from notifier       import telegram_send
+from swing_strategy  import score_swing, MAX_HOLD
+from notifier        import telegram_send
+from feeds.sector_feed   import prefetch_sectors, check_sector_momentum
+from feeds.nse_bulk_deals import get_bulk_block_buys, has_institutional_buy
+from feeds.options_feed   import check_options_oi, make_nse_session
 
-SWING_LOG = "swing_log.json"
-TOP_N     = 7
-MIN_SCORE = 55
+try:
+    from config import (
+        SWING_MIN_SCORE, SWING_TOP_N, SWING_SCAN_STOCKS,
+        CALL_OI_INCREASE_MIN, PCR_MIN, PCR_MAX,
+    )
+except ImportError:
+    SWING_MIN_SCORE      = 7.0
+    SWING_TOP_N          = 5
+    SWING_SCAN_STOCKS    = 200
+    CALL_OI_INCREASE_MIN = 0.30
+    PCR_MIN              = 0.8
+    PCR_MAX              = 1.3
 
-# GitHub raw fallback so the dashboard (on Render / remote) can read the log
-# even when the local file doesn't exist (bot runs on GitHub Actions)
-_SWING_LOG_URL = os.environ.get(
-    "SWING_LOG_URL",
-    "https://raw.githubusercontent.com/lavakus/nse-intraday-bot/main/swing_log.json"
-)
+# ── CSV paths ─────────────────────────────────────────────────────
+TRADES_CSV = "swing_trades.csv"
+
+TRADES_COLS = [
+    "id", "date", "symbol", "score", "signal_strength",
+    "entry", "sl", "sl_pct", "t1", "t2", "rr_t1", "rr_t2",
+    "sector", "layers_passed",
+    "layer1", "layer2", "layer3", "layer4", "layer5",
+    "bulk_buyers", "pcr", "call_oi_chg", "put_oi_chg",
+    "status", "current_price", "exit_price", "pnl_pct", "pnl_pts",
+    "exit_date", "exit_reason", "t1_hit", "days_held",
+    "progress_pct", "dist_sl_pct", "dist_t2_pct",
+    "last_updated", "reasons",
+]
+
+# ── Fallback F&O stock list (used when NSE API is unavailable) ────
+_FNO_FALLBACK = [
+    "RELIANCE", "TCS", "INFY", "HDFCBANK", "ICICIBANK", "SBIN",
+    "BHARTIARTL", "KOTAKBANK", "LT", "AXISBANK", "HINDUNILVR", "ITC",
+    "SUNPHARMA", "BAJFINANCE", "MARUTI", "TATAMOTORS", "ONGC", "NTPC",
+    "POWERGRID", "JSWSTEEL", "TATASTEEL", "WIPRO", "HCLTECH", "TECHM",
+    "DRREDDY", "CIPLA", "DIVISLAB", "APOLLOHOSP", "BAJAJFINSV",
+    "ADANIGREEN", "ADANIPORTS", "ADANIENT", "TATACONSUM", "BRITANNIA",
+    "NESTLEIND", "DABUR", "MARICO", "COLPAL", "GODREJCP",
+    "VEDL", "HINDALCO", "COALINDIA", "SAIL", "NMDC",
+    "BPCL", "IOC", "GAIL", "IGL", "MGL",
+    "DLF", "GODREJPROP", "OBEROIRLTY", "PRESTIGE",
+    "BAJAJ-AUTO", "HEROMOTOCO", "EICHERMOT", "MOTHERSON",
+    "ZOMATO", "NAUKRI", "IRCTC", "TRENT", "DMART",
+    "MUTHOOTFIN", "CHOLAFIN", "HDFCLIFE", "SBILIFE", "ICICIGI",
+    "HAL", "BEL", "BHEL", "RVNL", "ABB", "SIEMENS",
+    "HAVELLS", "POLYCAB", "SUZLON",
+    "INDUSINDBK", "FEDERALBNK", "BANDHANBNK",
+    "MPHASIS", "PERSISTENT", "COFORGE", "LTIM", "OFSS",
+    "AUROPHARMA", "TORNTPHARM", "IPCALAB", "GLENMARK",
+    "BALKRISIND", "EXIDEIND", "APOLLOTYRE", "BHARATFORG",
+    "ANGELONE", "CDSL", "BSE",
+    "PNB", "BANKBARODA", "CANBK", "IDFCFIRSTB",
+    "JINDALSTEL", "APLAPOLLO", "NATIONALUM",
+    "TATAPOWER", "CESC", "TORNTPOWER",
+    "HDFCAMC", "ABCAPITAL", "LICHSGFIN", "POONAWALLA",
+    "YESBANK", "RBLBANK", "AUBANK",
+    "KPITTECH", "TATAELXSI", "CYIENT",
+    "MRF", "BOSCHLTD", "MINDA",
+    "LALPATHLAB", "METROPOLIS", "BIOCON",
+    "PHOENIXLTD", "SOBHA", "MAHLIFE",
+    "PAYTM", "NYKAA", "DEVYANI", "JUBLFOOD",
+    "ABBOTINDIA", "NATCOPHARM", "ZYDUSLIFE", "ALKEM",
+    "GRINDWELL", "CUMMINSIND", "KEI", "RATNAMANI",
+]
 
 
-# ── Time helpers ─────────────────────────────────────────────────
+# ── Time helpers ──────────────────────────────────────────────────
 
 def _now_ist() -> datetime:
     return datetime.now(timezone(timedelta(hours=5, minutes=30)))
+
+def _today_str() -> str:
+    return _now_ist().strftime("%Y-%m-%d")
 
 def _week_key(dt: datetime = None) -> str:
     d = (dt or _now_ist()).date()
     y, w, _ = d.isocalendar()
     return f"{y}-W{w:02d}"
 
-def _today_str() -> str:
-    return _now_ist().strftime("%Y-%m-%d")
+
+# ── CSV helpers ───────────────────────────────────────────────────
+
+def _load_trades() -> pd.DataFrame:
+    if os.path.exists(TRADES_CSV):
+        try:
+            df = pd.read_csv(TRADES_CSV, dtype=str)
+            # Ensure all expected columns exist
+            for col in TRADES_COLS:
+                if col not in df.columns:
+                    df[col] = ""
+            return df[TRADES_COLS]
+        except Exception as e:
+            print(f"[SWING] CSV load error: {e}")
+    return pd.DataFrame(columns=TRADES_COLS)
 
 
-# ── Log helpers ───────────────────────────────────────────────────
+def _save_trades(df: pd.DataFrame):
+    df.to_csv(TRADES_CSV, index=False)
 
-def _load_log() -> list:
-    # 1) Try local file first
+
+def _next_id(df: pd.DataFrame) -> int:
+    if df.empty or "id" not in df.columns:
+        return 1
+    ids = pd.to_numeric(df["id"], errors="coerce").dropna()
+    return int(ids.max()) + 1 if len(ids) > 0 else 1
+
+
+def _row_to_dict(row: pd.Series) -> dict:
+    """Convert a CSV row (all-strings) to typed dict for dashboard/template use."""
+    def _f(v):
+        try:
+            return float(v) if v not in ("", None, "nan", "None") else None
+        except Exception:
+            return None
+
+    def _s(v):
+        return str(v) if v not in ("", None, "nan", "None") else None
+
+    def _b(v):
+        return str(v).lower() in ("true", "1", "yes")
+
+    reasons_raw = _s(row.get("reasons", "")) or ""
+    reasons = [r.strip() for r in reasons_raw.split("|") if r.strip()]
+
+    return {
+        "id":             _s(row.get("id")),
+        "date":           _s(row.get("date")),
+        "scan_date":      _s(row.get("date")),   # alias for template compat
+        "week":           _week_key() if not _s(row.get("date")) else _week_from_date(_s(row.get("date"))),
+        "symbol":         _s(row.get("symbol")) or "",
+        "score":          _f(row.get("score")) or 0,
+        "score_pct":      round((_f(row.get("score")) or 0) / 10 * 100, 1),
+        "signal_strength": _s(row.get("signal_strength")) or "FAIR",
+        "entry":          _f(row.get("entry")) or 0,
+        "sl":             _f(row.get("sl")) or 0,
+        "sl_pct":         _f(row.get("sl_pct")) or 0,
+        "t1":             _f(row.get("t1")) or 0,
+        "t2":             _f(row.get("t2")) or 0,
+        "rr_t1":          _f(row.get("rr_t1")) or 0,
+        "rr_t2":          _f(row.get("rr_t2")) or 0,
+        "sector":         _s(row.get("sector")),
+        "layers_passed":  int(_f(row.get("layers_passed")) or 0),
+        "layer1":         _f(row.get("layer1")) or 0,
+        "layer2":         _f(row.get("layer2")) or 0,
+        "layer3":         _f(row.get("layer3")) or 0,
+        "layer4":         _f(row.get("layer4")) or 0,
+        "layer5":         _f(row.get("layer5")) or 0,
+        "bulk_buyers":    _s(row.get("bulk_buyers")),
+        "pcr":            _f(row.get("pcr")),
+        "call_oi_chg":    _f(row.get("call_oi_chg")),
+        "put_oi_chg":     _f(row.get("put_oi_chg")),
+        "status":         _s(row.get("status")) or "OPEN",
+        "current_price":  _f(row.get("current_price")),
+        "exit_price":     _f(row.get("exit_price")),
+        "pnl_pct":        _f(row.get("pnl_pct")),
+        "pnl_pts":        _f(row.get("pnl_pts")),
+        "exit_date":      _s(row.get("exit_date")),
+        "exit_reason":    _s(row.get("exit_reason")),
+        "t1_hit":         _b(row.get("t1_hit")),
+        "days_held":      int(_f(row.get("days_held")) or 0),
+        "progress_pct":   _f(row.get("progress_pct")) or 0,
+        "dist_sl_pct":    _f(row.get("dist_sl_pct")) or 0,
+        "dist_t2_pct":    _f(row.get("dist_t2_pct")) or 0,
+        "last_updated":   _s(row.get("last_updated")),
+        "reasons":        reasons,
+        # Legacy compat
+        "rsi":            None,
+        "vol_ratio":      None,
+        "macd_bullish":   None,
+        "ema21":          None,
+        "rank":           1,
+    }
+
+
+def _week_from_date(date_str: str) -> str:
     try:
-        with open(SWING_LOG, encoding="utf-8") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        pass
-    except Exception as e:
-        print(f"[SWING] Failed to load local log: {e}")
+        d = datetime.strptime(date_str, "%Y-%m-%d").date()
+        y, w, _ = d.isocalendar()
+        return f"{y}-W{w:02d}"
+    except Exception:
+        return _week_key()
 
-    # 2) Fallback: fetch from GitHub (for Render / remote dashboard)
+
+# ── NSE F&O stock list ────────────────────────────────────────────
+
+def _fetch_fno_list() -> list:
+    """
+    Try NSE API for live F&O stock list.
+    Falls back to built-in list on any failure.
+    """
+    import requests
     try:
-        import requests as _req
-        r = _req.get(_SWING_LOG_URL, timeout=10)
+        s = requests.Session()
+        s.headers.update({
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "Accept":     "application/json",
+            "Referer":    "https://www.nseindia.com/",
+        })
+        s.get("https://www.nseindia.com/", timeout=8)
+        time.sleep(0.5)
+        url = ("https://www.nseindia.com/api/"
+               "equity-stockIndices?index=SECURITIES%20IN%20F%26O")
+        r   = s.get(url, timeout=12)
         if r.status_code == 200:
-            print("[SWING] Loaded log from GitHub fallback")
-            return r.json()
+            data = r.json().get("data", [])
+            syms = [row["symbol"] for row in data if row.get("symbol")]
+            if len(syms) >= 50:
+                print(f"[SWING] NSE F&O list: {len(syms)} stocks")
+                return syms[:SWING_SCAN_STOCKS]
     except Exception as e:
-        print(f"[SWING] GitHub fallback failed: {e}")
-    return []
-
-def _save_log(data: list):
-    with open(SWING_LOG, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, default=str)
+        print(f"[SWING] F&O list fetch failed: {e}")
+    print(f"[SWING] Using built-in F&O list ({len(_FNO_FALLBACK)} stocks)")
+    return _FNO_FALLBACK[:SWING_SCAN_STOCKS]
 
 
-# ── Live price fetch ──────────────────────────────────────────────
+# ── Live price + daily data ───────────────────────────────────────
 
 def _fetch_live(symbol: str) -> float | None:
     try:
@@ -85,37 +247,27 @@ def _fetch_live(symbol: str) -> float | None:
     except Exception:
         return None
 
+
 def _fetch_daily(symbol: str) -> pd.DataFrame | None:
     try:
         tk = yf.Ticker(f"{symbol}.NS")
         df = tk.history(period="18mo", interval="1d", auto_adjust=True)
-        if df.empty or len(df) < 60:
+        if df.empty or len(df) < 50:
             return None
         df.columns = [c.lower() for c in df.columns]
-        return df[["open","high","low","close","volume"]].dropna()
+        return df[["open", "high", "low", "close", "volume"]].dropna()
     except Exception:
         return None
 
 
 # ── Progress calculator ───────────────────────────────────────────
 
-def _calc_progress(rec: dict, price: float) -> dict:
-    """
-    For a live price, calculate how far the trade has moved
-    toward target and away from SL.
-    Returns progress_pct (0–100 toward T2) and day_pnl_pct.
-    """
-    entry = float(rec.get("entry", price))
-    t2    = float(rec.get("t2", price))
-    sl    = float(rec.get("sl", price))
+def _calc_progress(entry: float, t2: float, sl: float, price: float) -> dict:
     total_move = t2 - entry
     done_move  = price - entry
     progress   = round(done_move / total_move * 100, 1) if total_move > 0 else 0
-
-    # Distance to SL and T2 in %
-    dist_sl = round((price - sl) / price * 100, 2)
-    dist_t2 = round((t2 - price) / price * 100, 2)
-
+    dist_sl    = round((price - sl)  / price * 100, 2)
+    dist_t2    = round((t2   - price) / price * 100, 2)
     return {
         "progress_pct": max(min(progress, 100), -50),
         "dist_sl_pct":  dist_sl,
@@ -123,205 +275,340 @@ def _calc_progress(rec: dict, price: float) -> dict:
     }
 
 
-# ── Status updater ────────────────────────────────────────────────
+# ── Status updater (runs every day on OPEN positions) ─────────────
 
-def update_swing_statuses(silent: bool = False) -> list:
-    """
-    Fetch live prices for every OPEN swing pick.
-    Updates: current_price, pnl_pct, pnl_pts, progress_pct,
-             dist_sl_pct, dist_t2_pct, last_updated.
-    Marks TARGET HIT / SL HIT when crossed.
-    Returns updated data list.
-    """
-    data    = _load_log()
-    changed = 0
+def update_swing_statuses(silent: bool = False) -> pd.DataFrame:
+    """Fetch live prices for all OPEN trades, update P&L and status."""
+    df = _load_trades()
+    if df.empty:
+        return df
 
-    open_picks = [r for r in data if r.get("status") == "OPEN"]
-    if not open_picks:
-        return data
+    open_mask = df["status"] == "OPEN"
+    open_rows = df[open_mask]
+
+    if open_rows.empty:
+        return df
 
     if not silent:
-        print(f"[SWING] Updating {len(open_picks)} open positions…")
+        print(f"[SWING] Updating {len(open_rows)} open position(s)…")
 
-    for rec in open_picks:
-        price = _fetch_live(rec["symbol"])
+    ist = _now_ist()
+    today_str = _today_str()
+    changed = False
+
+    for idx, row in open_rows.iterrows():
+        sym   = str(row["symbol"])
+        price = _fetch_live(sym)
         if price is None:
             continue
 
-        entry = float(rec["entry"])
-        t1    = float(rec.get("t1", rec["entry"]))
-        t2    = float(rec["t2"])
-        sl    = float(rec["sl"])
+        entry = float(row["entry"]) if row["entry"] not in ("", None) else price
+        t1    = float(row["t1"])   if row["t1"]    not in ("", None) else price
+        t2    = float(row["t2"])   if row["t2"]    not in ("", None) else price
+        sl    = float(row["sl"])   if row["sl"]    not in ("", None) else price * 0.975
 
-        prog = _calc_progress(rec, price)
+        # Days held
+        try:
+            entry_date = datetime.strptime(str(row["date"]), "%Y-%m-%d").date()
+            days_held  = (date.today() - entry_date).days
+        except Exception:
+            days_held = 0
 
-        rec["current_price"]  = price
-        rec["exit_price"]     = price          # compat alias
-        rec["pnl_pct"]        = round((price - entry) / entry * 100, 2)
-        rec["pnl_pts"]        = round(price - entry, 2)
-        rec["progress_pct"]   = prog["progress_pct"]
-        rec["dist_sl_pct"]    = prog["dist_sl_pct"]
-        rec["dist_t2_pct"]    = prog["dist_t2_pct"]
-        rec["t1_hit"]         = price >= t1
-        rec["last_updated"]   = _now_ist().strftime("%Y-%m-%d %H:%M IST")
+        pnl_pct = round((price - entry) / entry * 100, 2)
+        pnl_pts = round(price - entry, 2)
+        prog    = _calc_progress(entry, t2, sl, price)
 
+        df.at[idx, "current_price"] = price
+        df.at[idx, "exit_price"]    = price
+        df.at[idx, "pnl_pct"]       = pnl_pct
+        df.at[idx, "pnl_pts"]       = pnl_pts
+        df.at[idx, "progress_pct"]  = prog["progress_pct"]
+        df.at[idx, "dist_sl_pct"]   = prog["dist_sl_pct"]
+        df.at[idx, "dist_t2_pct"]   = prog["dist_t2_pct"]
+        df.at[idx, "t1_hit"]        = str(price >= t1)
+        df.at[idx, "days_held"]     = days_held
+        df.at[idx, "last_updated"]  = ist.strftime("%Y-%m-%d %H:%M IST")
+
+        # Status transitions
         if price >= t2:
-            rec["status"]     = "TARGET HIT"
-            rec["exit_price"] = price
+            df.at[idx, "status"]      = "TARGET HIT"
+            df.at[idx, "exit_price"]  = price
+            df.at[idx, "exit_date"]   = today_str
+            df.at[idx, "exit_reason"] = "T2 Hit"
+            changed = True
             if not silent:
-                print(f"  ✓ {rec['symbol']} TARGET HIT @ ₹{price}  (+{rec['pnl_pct']}%)")
-            changed += 1
+                print(f"  TARGET HIT {sym} @ ₹{price}  (+{pnl_pct}%)")
         elif price <= sl:
-            rec["status"]     = "SL HIT"
-            rec["exit_price"] = price
+            df.at[idx, "status"]      = "SL HIT"
+            df.at[idx, "exit_price"]  = price
+            df.at[idx, "exit_date"]   = today_str
+            df.at[idx, "exit_reason"] = "SL Hit"
+            changed = True
             if not silent:
-                print(f"  ✗ {rec['symbol']} SL HIT @ ₹{price}  ({rec['pnl_pct']}%)")
-            changed += 1
+                print(f"  SL HIT {sym} @ ₹{price}  ({pnl_pct}%)")
+        elif days_held >= MAX_HOLD:
+            df.at[idx, "status"]      = "EXPIRED"
+            df.at[idx, "exit_price"]  = price
+            df.at[idx, "exit_date"]   = today_str
+            df.at[idx, "exit_reason"] = f"Max hold ({MAX_HOLD}d)"
+            changed = True
+            if not silent:
+                print(f"  EXPIRED {sym}  {pnl_pct:+.2f}%")
         else:
-            arrow = "▲" if rec["pnl_pct"] >= 0 else "▼"
+            arrow = "▲" if pnl_pct >= 0 else "▼"
             if not silent:
-                print(f"  {arrow} {rec['symbol']:<14} ₹{price:<10} "
-                      f"P&L {rec['pnl_pct']:+.2f}%  "
-                      f"→T2 {rec['dist_t2_pct']:.1f}%  SL buffer {rec['dist_sl_pct']:.1f}%")
+                print(f"  {arrow} {sym:<14} ₹{price:<10}  "
+                      f"P&L {pnl_pct:+.2f}%  "
+                      f"→T2 {prog['dist_t2_pct']:.1f}%  "
+                      f"SL buffer {prog['dist_sl_pct']:.1f}%")
 
-    _save_log(data)       # always save (prices updated)
-    return data
+        time.sleep(0.15)
+
+    _save_trades(df)
+    return df
 
 
 # ── EOD Telegram update ───────────────────────────────────────────
 
 def send_eod_update():
-    """Send daily EOD update of all open swing positions."""
-    data  = _load_log()
-    week  = _week_key()
-    open_ = [r for r in data if r.get("status") == "OPEN" and r.get("week") == week]
-    hits  = [r for r in data if r.get("status") == "TARGET HIT" and r.get("week") == week]
-    sls   = [r for r in data if r.get("status") == "SL HIT"    and r.get("week") == week]
+    df = _load_trades()
+    if df.empty:
+        return
 
-    if not (open_ or hits or sls):
+    open_  = df[df["status"] == "OPEN"]
+    hits   = df[df["status"] == "TARGET HIT"]
+    sls    = df[df["status"] == "SL HIT"]
+
+    if open_.empty and hits.empty and sls.empty:
         return
 
     ist   = _now_ist()
     lines = [
-        f"📊 SWING EOD UPDATE — {ist.strftime('%A %d %b')}  {week}",
-        f"",
+        f"📊 SWING EOD — {ist.strftime('%A %d %b')}",
+        "",
     ]
 
-    if open_:
+    if not open_.empty:
         lines.append("── Open Positions ──")
-        for r in open_:
-            pnl  = r.get("pnl_pct", 0) or 0
-            prog = r.get("progress_pct", 0) or 0
+        for _, r in open_.iterrows():
+            pnl  = float(r.get("pnl_pct") or 0)
+            prog = float(r.get("progress_pct") or 0)
             bar  = "█" * max(0, int(prog / 10)) + "░" * max(0, 10 - int(prog / 10))
             arrow = "▲" if pnl >= 0 else "▼"
             lines.append(
-                f"{arrow} {r['symbol']:<14}  ₹{r.get('current_price','?'):<10}"
-                f"  P&L {pnl:+.2f}%  [{bar}] {prog:.0f}% to T2"
-            )
-            lines.append(
-                f"   Entry ₹{r['entry']}  |  T2 ₹{r['t2']}  |  SL ₹{r['sl']}"
+                f"{arrow} {r['symbol']:<14}  ₹{r.get('current_price','?')}"
+                f"  P&L {pnl:+.2f}%  [{bar}] {prog:.0f}% → T2"
             )
 
-    if hits:
-        lines.append("")
-        lines.append("✅ Target Hit Today")
-        for r in hits:
+    if not hits.empty:
+        lines += ["", "✅ Target Hit"]
+        for _, r in hits.iterrows():
             lines.append(f"  ✓ {r['symbol']}  +{r.get('pnl_pct',0):.2f}%  @ ₹{r.get('exit_price','?')}")
 
-    if sls:
-        lines.append("")
-        lines.append("❌ SL Hit Today")
-        for r in sls:
+    if not sls.empty:
+        lines += ["", "❌ SL Hit"]
+        for _, r in sls.iterrows():
             lines.append(f"  ✗ {r['symbol']}  {r.get('pnl_pct',0):.2f}%  @ ₹{r.get('exit_price','?')}")
 
-    lines += ["", "⚠ Exit all positions by Friday 15:20 IST."]
+    lines += ["", "⚠ Max hold 15 days. No overnight positions beyond MAX_HOLD."]
     telegram_send("\n".join(lines))
 
 
-# ── Full week scanner (Monday) ────────────────────────────────────
+# ── Main scan ─────────────────────────────────────────────────────
 
 def scan_swing() -> list:
-    """Score all watchlist stocks and return top picks sorted by score."""
-    ist  = _now_ist()
-    week = _week_key()
-    print(f"[SWING] Full scan — {ist.strftime('%A %d %b %Y')}  {week}")
-    print(f"[SWING] Scanning {len(SWING_WATCHLIST)} stocks…")
+    """
+    Full daily scan: score all F&O stocks across 5 SMC layers.
+    Returns list of signal dicts (score >= SWING_MIN_SCORE).
+    """
+    ist      = _now_ist()
+    today    = _today_str()
+    fno_list = _fetch_fno_list()
 
-    results = []
-    for i, sym in enumerate(SWING_WATCHLIST, 1):
-        print(f"  [{i:>2}/{len(SWING_WATCHLIST)}] {sym:<18}", end=" ", flush=True)
+    print(f"[SWING] Scan start — {ist.strftime('%A %d %b %Y %H:%M IST')}")
+    print(f"[SWING] Scanning {len(fno_list)} F&O stocks …")
+
+    # ── Pre-fetch shared data (one call for all stocks) ───────────
+    print("[SWING] Pre-fetching sector indices…")
+    sector_cache = prefetch_sectors()
+
+    print("[SWING] Pre-fetching bulk/block deals…")
+    bulk_index   = get_bulk_block_buys()
+
+    # NSE session for options (reused across stocks)
+    nse_session  = None
+
+    # Symbols already OPEN — don't double-signal
+    existing_df  = _load_trades()
+    open_symbols = set(existing_df[existing_df["status"] == "OPEN"]["symbol"].values)
+
+    qualified = []
+
+    for i, sym in enumerate(fno_list, 1):
+        print(f"  [{i:>3}/{len(fno_list)}] {sym:<18}", end="", flush=True)
+
+        if sym in open_symbols:
+            print("already open — skip")
+            continue
+
         df = _fetch_daily(sym)
         if df is None:
-            print("no data"); continue
+            print("no data")
+            continue
 
-        sig = score_swing(sym, df)
-        if sig and sig.get("score", 0) >= MIN_SCORE:
-            price = _fetch_live(sym) or sig["entry"]
-            sig["week"]          = week
-            sig["scan_date"]     = ist.strftime("%Y-%m-%d")
-            sig["status"]        = "OPEN"
-            sig["current_price"] = price
-            sig["exit_price"]    = price
-            sig["pnl_pct"]       = round((price - sig["entry"]) / sig["entry"] * 100, 2)
-            sig["pnl_pts"]       = round(price - sig["entry"], 2)
-            sig["progress_pct"]  = _calc_progress(sig, price)["progress_pct"]
-            sig["dist_sl_pct"]   = _calc_progress(sig, price)["dist_sl_pct"]
-            sig["dist_t2_pct"]   = _calc_progress(sig, price)["dist_t2_pct"]
-            sig["t1_hit"]        = False
-            sig["last_updated"]  = ist.strftime("%Y-%m-%d %H:%M IST")
-            results.append(sig)
-            print(f"✓ score={sig['score']}/100 [{sig['signal_strength']}] "
-                  f"entry=₹{sig['entry']}  T2=₹{sig['t2']}  SL=₹{sig['sl']}")
-        else:
-            print(f"score={sig.get('score',0) if sig else 0} — skip")
+        # Fetch sector + bulk (fast, cached)
+        sector = check_sector_momentum(sym, df, sector_cache)
+        bulk   = has_institutional_buy(sym, bulk_index)
 
-        time.sleep(0.3)
+        # Quick pre-score (layers 1-4 only — no options yet)
+        pre = score_swing(sym, df, sector_result=sector, bulk_result=bulk)
+        if pre is None:
+            print(f"score<4.0 — skip")
+            time.sleep(0.1)
+            continue
 
-    results.sort(key=lambda x: x["score"], reverse=True)
-    top = results[:TOP_N]
-    print(f"\n[SWING] {len(results)} qualify → Top {len(top)} selected")
+        pre_score = pre["layer1"] + pre["layer2"] + pre["layer3"] + pre["layer4"]
 
-    # Auto-assign rank IDs
-    for rank, p in enumerate(top, 1):
-        p["id"]   = rank
-        p["rank"] = rank
+        # Only call options API for stocks with promising pre-score
+        options = None
+        if pre_score >= 4.5:
+            if nse_session is None:
+                nse_session = make_nse_session()
+            price = float(df["close"].iloc[-1])
+            options = check_options_oi(
+                sym, price,
+                pcr_min=PCR_MIN, pcr_max=PCR_MAX,
+                call_oi_min=CALL_OI_INCREASE_MIN,
+                session=nse_session,
+            )
+            time.sleep(0.4)
 
+        # Final score with all 5 layers
+        sig = score_swing(
+            sym, df,
+            sector_result=sector,
+            bulk_result=bulk,
+            options_result=options,
+        )
+
+        if sig is None or sig["score"] < SWING_MIN_SCORE:
+            score_val = sig["score"] if sig else 0
+            print(f"score {score_val:.1f}/10 — below threshold")
+            time.sleep(0.1)
+            continue
+
+        qualified.append(sig)
+        print(
+            f"✓ score={sig['score']}/10 [{sig['signal_strength']}]  "
+            f"layers={sig['layers_passed']}/5  "
+            f"entry=₹{sig['entry']}  T2=₹{sig['t2']}  SL=₹{sig['sl']}"
+        )
+        time.sleep(0.1)
+
+    qualified.sort(key=lambda x: x["score"], reverse=True)
+    top = qualified[:SWING_TOP_N]
+    print(f"\n[SWING] {len(qualified)} qualify → Top {len(top)} selected")
     return top
 
 
-def _format_monday_alert(picks: list) -> str:
+def _add_signals_to_csv(picks: list, today: str):
+    """Append new signals to swing_trades.csv."""
+    df = _load_trades()
+    next_id = _next_id(df)
+
+    new_rows = []
+    for i, sig in enumerate(picks):
+        reasons_str = " | ".join(sig.get("reasons") or [])
+        row = {
+            "id":             next_id + i,
+            "date":           today,
+            "symbol":         sig["symbol"],
+            "score":          sig["score"],
+            "signal_strength": sig["signal_strength"],
+            "entry":          sig["entry"],
+            "sl":             sig["sl"],
+            "sl_pct":         sig["sl_pct"],
+            "t1":             sig["t1"],
+            "t2":             sig["t2"],
+            "rr_t1":          sig["rr_t1"],
+            "rr_t2":          sig["rr_t2"],
+            "sector":         sig.get("sector") or "",
+            "layers_passed":  sig["layers_passed"],
+            "layer1":         sig["layer1"],
+            "layer2":         sig["layer2"],
+            "layer3":         sig["layer3"],
+            "layer4":         sig["layer4"],
+            "layer5":         sig["layer5"],
+            "bulk_buyers":    sig.get("bulk_buyers") or "",
+            "pcr":            sig.get("pcr") or "",
+            "call_oi_chg":    sig.get("call_oi_chg") or "",
+            "put_oi_chg":     sig.get("put_oi_chg") or "",
+            "status":         "OPEN",
+            "current_price":  sig["entry"],
+            "exit_price":     "",
+            "pnl_pct":        0.0,
+            "pnl_pts":        0.0,
+            "exit_date":      "",
+            "exit_reason":    "",
+            "t1_hit":         False,
+            "days_held":      0,
+            "progress_pct":   0.0,
+            "dist_sl_pct":    "",
+            "dist_t2_pct":    "",
+            "last_updated":   _now_ist().strftime("%Y-%m-%d %H:%M IST"),
+            "reasons":        reasons_str,
+        }
+        new_rows.append(row)
+
+    new_df = pd.DataFrame(new_rows, columns=TRADES_COLS)
+    combined = pd.concat([df, new_df], ignore_index=True)
+    _save_trades(combined)
+    print(f"[SWING] Saved {len(new_rows)} new signals to {TRADES_CSV}")
+
+
+# ── Telegram alert ────────────────────────────────────────────────
+
+def _format_signal_alert(picks: list, today: str) -> str:
     ist  = _now_ist()
     week = _week_key()
     lines = [
-        f"📈 SWING PICKS — {ist.strftime('%d %b %Y')}  ({week})",
-        f"📅 {ist.strftime('%A')}  |  Hold: 3–5 days  |  Exit by Friday 15:20 IST",
-        f"🎯 Strategy: EMA Trend + RSI + Volume Breakout  |  Min score 55/100",
-        f"",
-        f"{'Rk':<3} {'Symbol':<13} {'Sc':>4} {'Entry':>8} {'T1':>8} {'T2':>9} {'SL':>8} {'R:R':>5}",
-        "─" * 60,
+        f"📈 SWING SIGNALS — {ist.strftime('%d %b %Y')}  ({week})",
+        f"📊 5-Layer SMC Strategy  |  Score ≥ {SWING_MIN_SCORE}/10  |  Hold max {MAX_HOLD} days",
+        f"{'━'*44}",
     ]
-    for rank, p in enumerate(picks, 1):
-        lines.append(
-            f"#{rank:<2} {p['symbol']:<13} {p['score']:>3}/100 "
-            f"₹{p['entry']:>7} ₹{p['t1']:>7} ₹{p['t2']:>8} ₹{p['sl']:>7} 1:{p['rr_t2']}"
-        )
 
-    if picks:
-        p = picks[0]
+    for rank, p in enumerate(picks, 1):
+        def bar(v):
+            filled = int(v)
+            half   = 1 if (v - filled) >= 0.5 else 0
+            return "█" * filled + ("▌" if half else "") + "░" * (2 - filled - half)
+
         lines += [
             f"",
-            f"★ TOP PICK: {p['symbol']}  [{p['signal_strength']}]  Score {p['score']}/100",
-            f"  Entry : ₹{p['entry']}",
-            f"  T1    : ₹{p['t1']}  (R:R 1:{p['rr_t1']}) — book 50% here",
-            f"  T2    : ₹{p['t2']}  (R:R 1:{p['rr_t2']}) — full exit or Fri close",
-            f"  SL    : ₹{p['sl']}  (-{p['sl_pct']}%) — strict stop",
-            f"  RSI {p['rsi']} | Vol {p['vol_ratio']}× | MACD {'✅' if p['macd_bullish'] else '❌'}",
-            f"  Why: {' · '.join(p['reasons'][:3])}",
+            f"#{rank} {p['symbol']}  [{p['signal_strength']}  {p['score']}/10]"
+            + (f"  ({p.get('sector') or ''})" if p.get("sector") else ""),
+            f"  Entry ₹{p['entry']}  |  SL ₹{p['sl']} (-{p['sl_pct']}%)",
+            f"  T1  ₹{p['t1']} (+{round(p['t1']/p['entry']*100-100,1)}%)  R:R 1:{p['rr_t1']}",
+            f"  T2  ₹{p['t2']} (+{round(p['t2']/p['entry']*100-100,1)}%)  R:R 1:{p['rr_t2']}",
+            f"  L1 Structure {bar(p['layer1'])}  "
+            f"L2 FVG+OB {bar(p['layer2'])}  "
+            f"L3 LiqGrab {bar(p['layer3'])}",
+            f"  L4 Sector {bar(p['layer4'])}  "
+            f"L5 Inst+OI {bar(p['layer5'])}  "
+            f"({p['layers_passed']}/5 layers)",
         ]
+        if p.get("bulk_buyers"):
+            lines.append(f"  Buyers: {p['bulk_buyers']}")
+        if p.get("pcr") is not None:
+            coc = (p.get("call_oi_chg") or 0) * 100
+            lines.append(f"  PCR {p['pcr']:.2f} | CE OI {coc:+.0f}%")
+        if p.get("reasons"):
+            lines.append(f"  → {' · '.join(p['reasons'][:3])}")
 
     lines += [
-        "", "⚠ Max 1–2% capital risk per trade. Exit ALL by Fri 15:20 IST.",
-        "You will get an EOD update every day this week.",
+        f"",
+        f"{'━'*44}",
+        f"⚠ Max SL 2.5%  |  Book 50% at T1  |  Exit all at T2 or day {MAX_HOLD}",
     ]
     return "\n".join(lines)
 
@@ -330,87 +617,122 @@ def _format_monday_alert(picks: list) -> str:
 
 def get_swing_data() -> dict:
     """
-    Load swing log, refresh live prices for OPEN picks, return dashboard dict.
-    This is called on every dashboard page load.
+    Load swing_trades.csv, refresh OPEN position prices, return
+    dashboard-compatible dict.
+
+    Called on every dashboard page load — keep it fast.
     """
-    data = update_swing_statuses(silent=True)
-    week = _week_key()
+    updated_df = update_swing_statuses(silent=True)
 
-    week_picks = [r for r in data if r.get("week") == week]
-    wins       = [r for r in data if r.get("status") == "TARGET HIT"]
-    losses     = [r for r in data if r.get("status") == "SL HIT"]
-    open_      = [r for r in data if r.get("status") == "OPEN"]
-    closed     = len(wins) + len(losses)
+    if updated_df.empty:
+        return {
+            "week_picks":  [],
+            "all_picks":   [],
+            "summary": {
+                "total": 0, "wins": 0, "losses": 0, "open": 0,
+                "win_rate": 0, "avg_score": 0, "week": _week_key(),
+            },
+        }
 
-    summary = {
-        "total":     len(data),
-        "wins":      len(wins),
-        "losses":    len(losses),
-        "open":      len(open_),
-        "win_rate":  round(len(wins) / closed * 100, 1) if closed > 0 else 0,
-        "avg_score": round(sum(r.get("score", 0) for r in data) / len(data), 1) if data else 0,
-        "week":      week,
-    }
+    # Convert all rows to typed dicts
+    all_picks = [_row_to_dict(row) for _, row in updated_df.iterrows()]
+    all_picks.reverse()   # newest first
+
+    # "Week picks" = signals from the last 14 days
+    cutoff = _now_ist().date() - timedelta(days=14)
+    week_picks = [
+        p for p in all_picks
+        if p.get("date") and _safe_date(p["date"]) >= cutoff
+    ]
+
+    # Summary stats
+    wins   = sum(1 for p in all_picks if p["status"] == "TARGET HIT")
+    losses = sum(1 for p in all_picks if p["status"] == "SL HIT")
+    opens  = sum(1 for p in all_picks if p["status"] == "OPEN")
+    closed = wins + losses
+    total  = len(all_picks)
+
+    scores = [p["score"] for p in all_picks if p["score"]]
+    avg_score = round(sum(scores) / len(scores), 2) if scores else 0
+
     return {
-        "week_picks":  week_picks,
-        "all_picks":   list(reversed(data))[:40],
-        "summary":     summary,
+        "week_picks":  week_picks[:10],
+        "all_picks":   all_picks[:50],
+        "summary": {
+            "total":     total,
+            "wins":      wins,
+            "losses":    losses,
+            "open":      opens,
+            "win_rate":  round(wins / closed * 100, 1) if closed > 0 else 0,
+            "avg_score": avg_score,
+            "week":      _week_key(),
+        },
     }
+
+
+def _safe_date(date_str: str):
+    try:
+        return datetime.strptime(date_str, "%Y-%m-%d").date()
+    except Exception:
+        return date(2000, 1, 1)
+
+
+# ── Legacy wrapper so old imports don't break ─────────────────────
+# run_swing used to export scan_swing() and get_swing_data()
+# Both are still exported above. SWING_WATCHLIST removed (live F&O now).
 
 
 # ── Entry point ───────────────────────────────────────────────────
 
 def main():
-    ist      = _now_ist()
-    week     = _week_key()
-    today    = _today_str()
+    ist          = _now_ist()
+    today        = _today_str()
+    force_scan   = os.environ.get("FORCE_SWING",  "0") == "1"
+    update_only  = os.environ.get("UPDATE_ONLY",  "0") == "1"
 
-    force_scan  = os.environ.get("FORCE_SWING",  "0") == "1"
-    update_only = os.environ.get("UPDATE_ONLY",  "0") == "1"
+    print(f"[SWING] {ist.strftime('%A %d %b %Y %H:%M IST')}")
 
-    print(f"[SWING] {ist.strftime('%A %d %b %Y %H:%M IST')}  {week}")
-
-    # ── Daily status update (always runs first) ───────────────────
-    updated_data = update_swing_statuses()
-    open_count   = sum(1 for r in updated_data if r.get("status") == "OPEN")
-    print(f"[SWING] {open_count} open position(s) after update")
+    # Always update open positions first
+    updated_df = update_swing_statuses()
+    open_count = int((updated_df["status"] == "OPEN").sum()) if not updated_df.empty else 0
+    print(f"[SWING] {open_count} open position(s) after status update")
 
     if update_only:
         send_eod_update()
         return
 
-    # ── Full scan EVERY market day — no Monday-only restriction ──
-    # Picks already found today won't be duplicated (date check below)
-    existing = _load_log()
-    already_scanned_today = any(r.get("scan_date") == today for r in existing)
+    # Check if already scanned today
+    if not updated_df.empty:
+        scanned_today = (updated_df["date"] == today).any()
+    else:
+        scanned_today = False
 
-    if already_scanned_today and not force_scan:
+    if scanned_today and not force_scan:
         print(f"[SWING] Already scanned today ({today}). Sending EOD update.")
         send_eod_update()
         return
 
+    # Full scan
     picks = scan_swing()
+
     if not picks:
         print("[SWING] No qualifying stocks today")
-        # Only send "no picks" message on Monday so we don't spam daily
-        if ist.weekday() == 0:
-            telegram_send(
-                f"📊 Swing Scan {today}: No qualifying stocks found.\n"
-                f"Market may be choppy — no swing trades today."
-            )
+        telegram_send(
+            f"📊 Swing Scan {today}: No qualifying stocks (score ≥ {SWING_MIN_SCORE}/10).\n"
+            f"Market may be choppy — skipping today."
+        )
         return
 
-        existing.extend(picks)
-        _save_log(existing)
-        print(f"[SWING] Saved {len(picks)} picks for {week}")
+    _add_signals_to_csv(picks, today)
 
-        ok = telegram_send(_format_monday_alert(picks))
-        print(f"[SWING] Monday alert: {'SENT' if ok else 'FAILED'}")
+    alert = _format_signal_alert(picks, today)
+    ok    = telegram_send(alert)
+    print(f"[SWING] Alert: {'SENT' if ok else 'FAILED'}")
 
-        print("\n── This week's picks ──")
-        for p in picks:
-            print(f"  #{p['rank']} {p['symbol']:<14} score={p['score']}/100  "
-                  f"entry=₹{p['entry']}  T2=₹{p['t2']}  SL=₹{p['sl']}")
+    print(f"\n── Today's picks ({today}) ──")
+    for p in picks:
+        print(f"  {p['symbol']:<14} score={p['score']}/10  "
+              f"entry=₹{p['entry']}  T2=₹{p['t2']}  SL=₹{p['sl']}")
 
 
 if __name__ == "__main__":
