@@ -340,21 +340,22 @@ def update_swing_statuses(silent: bool = False) -> pd.DataFrame:
         pnl_pts = round(price - entry, 2)
         prog    = _calc_progress(entry, t2, sl, price)
 
-        df.at[idx, "current_price"] = price
-        df.at[idx, "exit_price"]    = price
-        df.at[idx, "pnl_pct"]       = pnl_pct
-        df.at[idx, "pnl_pts"]       = pnl_pts
-        df.at[idx, "progress_pct"]  = prog["progress_pct"]
-        df.at[idx, "dist_sl_pct"]   = prog["dist_sl_pct"]
-        df.at[idx, "dist_t2_pct"]   = prog["dist_t2_pct"]
+        # CSV loaded as dtype=str — convert all values to str before writing back
+        df.at[idx, "current_price"] = str(round(price, 2))
+        df.at[idx, "exit_price"]    = str(round(price, 2))
+        df.at[idx, "pnl_pct"]       = str(pnl_pct)
+        df.at[idx, "pnl_pts"]       = str(pnl_pts)
+        df.at[idx, "progress_pct"]  = str(prog["progress_pct"])
+        df.at[idx, "dist_sl_pct"]   = str(prog["dist_sl_pct"])
+        df.at[idx, "dist_t2_pct"]   = str(prog["dist_t2_pct"])
         df.at[idx, "t1_hit"]        = str(price >= t1)
-        df.at[idx, "days_held"]     = days_held
+        df.at[idx, "days_held"]     = str(days_held)
         df.at[idx, "last_updated"]  = ist.strftime("%Y-%m-%d %H:%M IST")
 
         # Status transitions
         if price >= t2:
             df.at[idx, "status"]      = "TARGET HIT"
-            df.at[idx, "exit_price"]  = price
+            df.at[idx, "exit_price"]  = str(round(price, 2))
             df.at[idx, "exit_date"]   = today_str
             df.at[idx, "exit_reason"] = "T2 Hit"
             changed = True
@@ -362,7 +363,7 @@ def update_swing_statuses(silent: bool = False) -> pd.DataFrame:
                 print(f"  TARGET HIT {sym} @ ₹{price}  (+{pnl_pct}%)")
         elif price <= sl:
             df.at[idx, "status"]      = "SL HIT"
-            df.at[idx, "exit_price"]  = price
+            df.at[idx, "exit_price"]  = str(round(price, 2))
             df.at[idx, "exit_date"]   = today_str
             df.at[idx, "exit_reason"] = "SL Hit"
             changed = True
@@ -370,18 +371,18 @@ def update_swing_statuses(silent: bool = False) -> pd.DataFrame:
                 print(f"  SL HIT {sym} @ ₹{price}  ({pnl_pct}%)")
         elif days_held >= MAX_HOLD:
             df.at[idx, "status"]      = "EXPIRED"
-            df.at[idx, "exit_price"]  = price
+            df.at[idx, "exit_price"]  = str(round(price, 2))
             df.at[idx, "exit_date"]   = today_str
             df.at[idx, "exit_reason"] = f"Max hold ({MAX_HOLD}d)"
             changed = True
             if not silent:
                 print(f"  EXPIRED {sym}  {pnl_pct:+.2f}%")
         else:
-            arrow = "▲" if pnl_pct >= 0 else "▼"
+            arrow = "^" if pnl_pct >= 0 else "v"
             if not silent:
-                print(f"  {arrow} {sym:<14} ₹{price:<10}  "
+                print(f"  {arrow} {sym:<14} Rs{price:<10}  "
                       f"P&L {pnl_pct:+.2f}%  "
-                      f"→T2 {prog['dist_t2_pct']:.1f}%  "
+                      f"->T2 {prog['dist_t2_pct']:.1f}%  "
                       f"SL buffer {prog['dist_sl_pct']:.1f}%")
 
         time.sleep(0.15)
