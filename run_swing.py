@@ -11,6 +11,7 @@ Usage:
   FORCE_SWING=1 python run_swing.py   # force re-scan today
   UPDATE_ONLY=1 python run_swing.py   # status update only
 """
+from __future__ import annotations  # Python 3.9 compat — allows X|Y type hints
 import os, sys, time, traceback
 from datetime import datetime, timezone, timedelta, date
 
@@ -39,6 +40,8 @@ except ImportError:
 
 # ── CSV paths ─────────────────────────────────────────────────────
 TRADES_CSV = "swing_trades.csv"
+_BASE_RAW  = "https://raw.githubusercontent.com/lavakus/nse-intraday-bot/main"
+TRADES_CSV_URL = os.environ.get("SWING_CSV_URL", f"{_BASE_RAW}/swing_trades.csv")
 
 TRADES_COLS = [
     "id", "date", "symbol", "score", "signal_strength",
@@ -106,16 +109,32 @@ def _week_key(dt: datetime = None) -> str:
 # ── CSV helpers ───────────────────────────────────────────────────
 
 def _load_trades() -> pd.DataFrame:
+    # 1) Try local file
     if os.path.exists(TRADES_CSV):
         try:
             df = pd.read_csv(TRADES_CSV, dtype=str)
-            # Ensure all expected columns exist
             for col in TRADES_COLS:
                 if col not in df.columns:
                     df[col] = ""
             return df[TRADES_COLS]
         except Exception as e:
             print(f"[SWING] CSV load error: {e}")
+
+    # 2) Fallback: fetch from GitHub (for Render / remote dashboard)
+    try:
+        import requests as _req
+        import io
+        r = _req.get(TRADES_CSV_URL, timeout=10)
+        if r.status_code == 200:
+            print("[SWING] Loaded swing_trades.csv from GitHub fallback")
+            df = pd.read_csv(io.StringIO(r.text), dtype=str)
+            for col in TRADES_COLS:
+                if col not in df.columns:
+                    df[col] = ""
+            return df[TRADES_COLS]
+    except Exception as e:
+        print(f"[SWING] GitHub CSV fallback failed: {e}")
+
     return pd.DataFrame(columns=TRADES_COLS)
 
 
