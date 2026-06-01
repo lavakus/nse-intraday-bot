@@ -3,7 +3,7 @@ TELEGRAM_TOKEN   = "8856759442:AAFLBXDVV9OESxbiKj-HRIOfeGFtSWqOdRM"
 TELEGRAM_CHAT_ID = "8873804319"
 
 # ── STRATEGY  (ORB + VWAP + Breakout+Retest, 150-pt scale) ─────
-STRONG_SCORE   = 80     # minimum score to fire an alert  (out of 150)
+STRONG_SCORE   = 95     # minimum score to fire an alert  (out of 150) — ~9.5/10
 SCAN_WORKERS   = 6      # parallel threads
 SCAN_INTERVAL  = 5      # minutes between scans during market hours
 MAX_STOCKS     = 250    # scan top-N from live NSE list
@@ -17,7 +17,7 @@ MARKET_OPEN    = "09:15"
 MARKET_CLOSE   = "15:30"
 
 # ── SESSION LIMITS ──────────────────────────────────────────────
-MAX_TRADES_PER_SESSION  = 3    # hard cap per trading day
+MAX_TRADES_PER_SESSION  = 50   # effectively unlimited — alert ALL qualifying stocks each day
 DAILY_LOSS_LIMIT_PCT    = 0.02 # 2% daily loss limit → stop trading
 MAX_CONSECUTIVE_LOSSES  = 2    # block session after N losses in a row
 

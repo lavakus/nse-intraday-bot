@@ -91,7 +91,7 @@ def index():
     return render_template(
         "dashboard.html",
         # per-asset intraday
-        nse_signals=nse_signals[:30],
+        nse_signals=nse_signals,        # all signals — no day limit
         gold_signals=gold_signals[:30],
         btc_signals=btc_signals[:30],
         nse_summary=nse_summary,
