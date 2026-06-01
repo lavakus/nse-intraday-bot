@@ -65,12 +65,28 @@ def index():
     btc_summary  = get_summary(btc_signals)
     overall      = get_summary(nse_signals + gold_signals + btc_signals)
 
-    bot_state    = _load_bot_state()
-    now          = _ist_now()
-    swing_data   = get_swing_data()
-    options_data = get_options_data()
+    bot_state = _load_bot_state()
+    now       = _ist_now()
 
-    backtest_data = load_backtest_results()
+    try:
+        swing_data = get_swing_data()
+    except Exception as e:
+        print(f"[DASH] swing_data error: {e}")
+        swing_data = {"week_picks": [], "all_picks": [],
+                      "summary": {"total":0,"wins":0,"losses":0,"open":0,
+                                  "win_rate":0,"avg_score":0,"week":""}}
+
+    try:
+        options_data = get_options_data()
+    except Exception as e:
+        print(f"[DASH] options_data error: {e}")
+        options_data = {"active":[],"history":[],"summary":{},"market":{},"expiry":""}
+
+    try:
+        backtest_data = load_backtest_results()
+    except Exception as e:
+        print(f"[DASH] backtest error: {e}")
+        backtest_data = {}
 
     return render_template(
         "dashboard.html",

@@ -643,8 +643,13 @@ def get_swing_data() -> dict:
     dashboard-compatible dict.
 
     Called on every dashboard page load — keep it fast.
+    On Vercel / read-only hosts: skip live yfinance calls (would time out).
     """
-    updated_df = update_swing_statuses(silent=True)
+    _is_vercel = os.environ.get("VERCEL") or os.environ.get("VERCEL_ENV")
+    if _is_vercel:
+        updated_df = _load_trades()   # read-only, no live price fetch
+    else:
+        updated_df = update_swing_statuses(silent=True)
 
     if updated_df.empty:
         return {
