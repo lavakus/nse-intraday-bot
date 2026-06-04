@@ -795,7 +795,7 @@
       "Tight OR \u20b913.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1456.0,
+    "exit_price": 1469.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -986,10 +986,10 @@
       "PDL \u20b9463.3 \u2014 clear T2 target",
       "5min LH+LL structure aligns with SHORT"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 481.6499938964844,
+    "pnl_pts": -9.75,
+    "pnl_pct": -2.07
   },
   {
     "id": 22,
@@ -1033,7 +1033,7 @@
       "Kill Zone: KZ3 (+15 pts)"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1469.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   }
