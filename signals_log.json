@@ -1033,7 +1033,7 @@
       "Kill Zone: KZ3 (+15 pts)"
     ],
     "status": "OPEN",
-    "exit_price": 1477.0,
+    "exit_price": 1480.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -1082,10 +1082,10 @@
       "Round number level confluence",
       "Tight OR \u20b96.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1271.9000244140625,
+    "pnl_pts": 28.5,
+    "pnl_pct": 2.19
   },
   {
     "id": 24,
@@ -1129,9 +1129,9 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 52 \u2014 ideal short zone (35\u201360)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1148.0,
+    "pnl_pts": 20.5,
+    "pnl_pct": 1.75
   }
 ]
