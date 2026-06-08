@@ -1032,10 +1032,10 @@
       "Volume spike 3.1x average",
       "Kill Zone: KZ3 (+15 pts)"
     ],
-    "status": "OPEN",
-    "exit_price": 1474.199951171875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1463.0,
+    "pnl_pts": -7.0,
+    "pnl_pct": -0.48
   },
   {
     "id": 23,
@@ -1178,10 +1178,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b98.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 977.1500244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 981.25,
+    "pnl_pts": -7.85,
+    "pnl_pct": -0.81
   },
   {
     "id": 26,
@@ -1228,7 +1228,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1196.800048828125,
+    "exit_price": 1191.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -1276,10 +1276,10 @@
       "PDL \u20b9136.8 \u2014 clear T2 target",
       "Tight OR \u20b91.0 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 138.10000610351562,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 136.35000610351562,
+    "pnl_pts": 1.9,
+    "pnl_pct": 1.37
   },
   {
     "id": 28,
@@ -1325,10 +1325,10 @@
       "PDH \u20b9205.1 \u2014 clear T2 target",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": 197.82000732421875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 183.94000244140625,
+    "pnl_pts": -12.81,
+    "pnl_pct": -6.51
   },
   {
     "id": 29,
@@ -1374,10 +1374,10 @@
       "PDH \u20b9205.1 \u2014 clear T2 target",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": 197.82000732421875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 183.94000244140625,
+    "pnl_pts": -12.78,
+    "pnl_pct": -6.5
   },
   {
     "id": 30,
@@ -1470,10 +1470,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": 888.25,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 872.9500122070312,
+    "pnl_pts": -14.15,
+    "pnl_pct": -1.6
   },
   {
     "id": 32,
@@ -1520,7 +1520,7 @@
       "Tight OR \u20b94.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 745.7999877929688,
+    "exit_price": 736.3499755859375,
     "pnl_pts": null,
     "pnl_pct": null
   }
