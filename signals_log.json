@@ -1618,7 +1618,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 2970.0,
+    "exit_price": 2927.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -1714,7 +1714,7 @@
       "RSI 56 \u2014 ideal long zone (40\u201365)"
     ],
     "status": "OPEN",
-    "exit_price": 882.25,
+    "exit_price": 884.3499755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -1857,10 +1857,10 @@
       "Round number level confluence",
       "Tight OR \u20b917.4 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1732.0,
+    "pnl_pts": 14.2,
+    "pnl_pct": 0.81
   },
   {
     "id": 40,
@@ -1904,9 +1904,9 @@
       "Kill Zone: KZ3 (+15 pts)",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1510.199951171875,
+    "pnl_pts": -11.8,
+    "pnl_pct": -0.78
   }
 ]
