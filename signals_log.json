@@ -1765,5 +1765,52 @@
     "exit_price": 2181.699951171875,
     "pnl_pts": 50.6,
     "pnl_pct": 2.37
+  },
+  {
+    "id": 38,
+    "datetime": "2026-06-10 08:03",
+    "date": "2026-06-10",
+    "asset": "BAJFINANCE",
+    "symbol": "BAJFINANCE",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 98,
+    "score_pct": 65.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 23,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 892.0,
+    "t1": 899.98,
+    "target": 907.96,
+    "sl": 886.68,
+    "rr": 3.0,
+    "sl_pct": 0.6,
+    "rsi": 61.5,
+    "vwap": 890.24,
+    "vol_ratio": 1.51,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=1.5x",
+      "Price above VWAP \u20b9890.2",
+      "Volume spike 1.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 61 \u2014 ideal long zone (40\u201365)",
+      "Tight OR \u20b96.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
