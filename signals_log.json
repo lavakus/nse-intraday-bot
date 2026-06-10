@@ -1618,7 +1618,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 2982.0,
+    "exit_price": 2970.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -1714,7 +1714,7 @@
       "RSI 56 \u2014 ideal long zone (40\u201365)"
     ],
     "status": "OPEN",
-    "exit_price": 891.5999755859375,
+    "exit_price": 882.25,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -1807,6 +1807,102 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 61 \u2014 ideal long zone (40\u201365)",
       "Tight OR \u20b96.0 \u2014 clean structure"
+    ],
+    "status": "SL HIT",
+    "exit_price": 882.25,
+    "pnl_pts": -9.75,
+    "pnl_pct": -1.09
+  },
+  {
+    "id": 39,
+    "datetime": "2026-06-10 08:43",
+    "date": "2026-06-10",
+    "asset": "SBILIFE",
+    "symbol": "SBILIFE",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 128,
+    "score_pct": 85.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 23,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1746.2,
+    "t1": 1740.95,
+    "target": 1735.7,
+    "sl": 1749.7,
+    "rr": 3.0,
+    "sl_pct": 0.2,
+    "rsi": 37.6,
+    "vwap": 1761.76,
+    "vol_ratio": 1.73,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.7x",
+      "Price below VWAP \u20b91761.8",
+      "Below OR Low \u20b91749.6",
+      "Volume spike 1.7x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 38 \u2014 ideal short zone (35\u201360)",
+      "Round number level confluence",
+      "Tight OR \u20b917.4 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 40,
+    "datetime": "2026-06-10 08:43",
+    "date": "2026-06-10",
+    "asset": "PIDILITIND",
+    "symbol": "PIDILITIND",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 120,
+    "score_pct": 80.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1522.0,
+    "t1": 1532.86,
+    "target": 1543.72,
+    "sl": 1514.76,
+    "rr": 3.0,
+    "sl_pct": 0.48,
+    "rsi": 69.4,
+    "vwap": 1516.84,
+    "vol_ratio": 1.7,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.7x",
+      "Price above VWAP \u20b91516.8",
+      "Above OR High \u20b91512.3",
+      "Volume spike 1.7x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
     "exit_price": null,
