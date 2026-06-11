@@ -1618,7 +1618,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 2927.0,
+    "exit_price": 2926.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -1713,10 +1713,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 56 \u2014 ideal long zone (40\u201365)"
     ],
-    "status": "OPEN",
-    "exit_price": 884.3499755859375,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 872.6500244140625,
+    "pnl_pts": -11.4,
+    "pnl_pct": -1.29
   },
   {
     "id": 37,
