@@ -2147,7 +2147,7 @@
       "Tight OR \u20b93.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 405.8500061035156,
+    "exit_price": 405.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2195,10 +2195,10 @@
       "Round number level confluence",
       "Tight OR \u20b915.9 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 2743.10009765625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 2736.300048828125,
+    "pnl_pts": -8.5,
+    "pnl_pct": -0.31
   },
   {
     "id": 47,
@@ -2245,7 +2245,7 @@
       "Tight OR \u20b97.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 933.25,
+    "exit_price": 932.3499755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2293,7 +2293,7 @@
       "Tight OR \u20b93.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 405.8500061035156,
+    "exit_price": 405.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2341,7 +2341,7 @@
       "RSI 51 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 243.6999969482422,
+    "exit_price": 243.4499969482422,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2484,7 +2484,7 @@
       "Tight OR \u20b95.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 776.8499755859375,
+    "exit_price": 777.2000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2530,10 +2530,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 53 \u2014 ideal short zone (35\u201360)"
     ],
-    "status": "OPEN",
-    "exit_price": 444.3500061035156,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 445.04998779296875,
+    "pnl_pts": -3.0,
+    "pnl_pct": -0.68
   },
   {
     "id": 54,
@@ -2628,7 +2628,7 @@
       "Tight OR \u20b911.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1297.0,
+    "exit_price": 1295.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   }
