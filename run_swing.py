@@ -733,7 +733,9 @@ def _git_push_csv():
 
         _git("add", TRADES_CSV)
         _git("commit", "-m", f"chore: sync swing_trades.csv {_today_str()} [skip ci]")
-        _git("pull", "--rebase", "origin", "main")          # integrate remote first
+        # --autostash: local config.py (token) is always dirty; stash it
+        # around the rebase automatically so the pull never fails.
+        _git("pull", "--rebase", "--autostash", "origin", "main")
         push = _git("push", "origin", "main")
         if push.returncode == 0:
             print("[SWING] ✓ swing_trades.csv pushed — dashboard will update shortly.")
