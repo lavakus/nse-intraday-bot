@@ -344,6 +344,41 @@ def fetch_signals(asset: str) -> list:
     return []
 
 
+# Max gap between a signal's stored entry and the live price for the signal
+# to still count as "fresh". Old signals have prices far from the market.
+FRESH_ENTRY_BAND = 0.02   # 2 %
+
+
+def signal_tradeable(sig: dict, symbol: str) -> tuple:
+    """Return (ok, reason).
+
+    Only trade a signal that is still FRESH — its stored entry is near the
+    current price — AND whose SL/TP sit on the correct sides of the live
+    price. Stale signals (old prices) are skipped here instead of being
+    sent to MT5, which would reject them ('invalid stops') and spam alerts.
+    """
+    tick = mt5.symbol_info_tick(symbol)
+    if tick is None:
+        return False, "no live price"
+    px = (tick.ask + tick.bid) / 2.0
+
+    tp = sig.get("trade_params", {}) or {}
+    entry = float(tp.get("entry", sig.get("entry",  0)) or 0)
+    sl    = float(tp.get("sl",    sig.get("sl",     0)) or 0)
+    t2    = float(tp.get("t2",    sig.get("target", 0)) or 0)
+    direction = sig.get("direction", "LONG")
+
+    if not (entry and sl and t2):
+        return False, "missing price levels"
+    if abs(px - entry) / px > FRESH_ENTRY_BAND:
+        return False, f"stale (entry {entry} vs market {px:.2f})"
+    if direction == "LONG"  and not (sl < px < t2):
+        return False, "SL/TP invalid for LONG at current price"
+    if direction == "SHORT" and not (t2 < px < sl):
+        return False, "SL/TP invalid for SHORT at current price"
+    return True, "fresh"
+
+
 # ═══════════════════════════════════════════════════════════════════
 # MAIN LOOP
 # ═══════════════════════════════════════════════════════════════════
@@ -404,9 +439,23 @@ def main():
                 print(f"[{asset}] No new signals")
                 continue
 
-            # Take the highest-scored new signal
+            # Take the highest-scored signal that is still FRESH + valid.
+            # Stale signals are skipped and marked seen so we neither recheck
+            # them every cycle nor send rejected orders to MT5.
             new_signals.sort(key=lambda x: x.get("score", 0), reverse=True)
-            sig = new_signals[0]
+
+            sig = None
+            for cand in new_signals:
+                ok, why = signal_tradeable(cand, symbol)
+                if ok:
+                    sig = cand
+                    break
+                traded_ids.add(cand.get("id"))   # skip stale/invalid, don't retry
+                print(f"[{asset}] skip #{cand.get('id')}: {why}")
+
+            if sig is None:
+                print(f"[{asset}] No fresh tradeable signal")
+                continue
 
             sig_id = sig.get("id")
             score  = sig.get("score", 0)
