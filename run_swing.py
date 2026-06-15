@@ -13,6 +13,10 @@ Usage:
 """
 from __future__ import annotations  # Python 3.9 compat — allows X|Y type hints
 import os, sys, time, traceback
+
+# Force UTF-8 stdout on Windows so ₹ and other Unicode chars print without crashing
+if sys.stdout.encoding and sys.stdout.encoding.upper() not in ("UTF-8", "UTF8"):
+    sys.stdout = open(sys.stdout.fileno(), mode="w", encoding="utf-8", buffering=1)
 from datetime import datetime, timezone, timedelta, date
 
 import yfinance as yf

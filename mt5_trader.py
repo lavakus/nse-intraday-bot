@@ -102,22 +102,40 @@ def tg(text: str):
 # ═══════════════════════════════════════════════════════════════════
 
 def connect() -> bool:
-    """Connect to MT5 terminal. Returns True if successful."""
-    kwargs = {}
-    if CFG.get("path"):
-        kwargs["path"] = CFG["path"]
-    if CFG.get("login"):
-        kwargs["login"]    = int(CFG["login"])
-        kwargs["password"] = CFG["password"]
-        kwargs["server"]   = CFG["server"]
+    """Connect to MT5 terminal. Returns True if successful.
 
-    if not mt5.initialize(**kwargs):
-        print(f"[MT5] Initialize failed: {mt5.last_error()}")
-        return False
+    Strategy:
+      1) ATTACH to an already-running, logged-in terminal (no password
+         needed — recommended; just log in once inside MT5 and keep it open).
+      2) Fall back to logging in with the credentials in mt5_config.json.
+    """
+    path = CFG.get("path") or None
+
+    # ── 1) Attach to a running, logged-in terminal (no creds) ────────
+    if mt5.initialize(**({"path": path} if path else {})):
+        if mt5.account_info() is not None:
+            print("[MT5] Attached to running terminal (manual login).")
+        else:
+            mt5.shutdown()   # terminal up but no account — try explicit login
+    # ── 2) Fall back to explicit login with stored credentials ───────
+    if mt5.account_info() is None:
+        kwargs = {}
+        if path:
+            kwargs["path"] = path
+        if CFG.get("login"):
+            kwargs["login"]    = int(CFG["login"])
+            kwargs["password"] = CFG["password"]
+            kwargs["server"]   = CFG["server"]
+        if not mt5.initialize(**kwargs):
+            print(f"[MT5] Initialize failed: {mt5.last_error()}")
+            print( "[MT5] TIP: open MetaTrader 5, log in to your XM demo "
+                   "account, enable Algo Trading, and keep it open.")
+            return False
 
     info = mt5.account_info()
     if info is None:
         print(f"[MT5] Account info failed: {mt5.last_error()}")
+        print( "[MT5] TIP: log in inside the MT5 terminal first, then re-run.")
         return False
 
     print(f"[MT5] Connected — Account #{info.login}  "
