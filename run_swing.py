@@ -710,6 +710,40 @@ def _safe_date(date_str: str):
 # Both are still exported above. SWING_WATCHLIST removed (live F&O now).
 
 
+# ── Git auto-sync (PC = source of truth for the dashboard) ────────
+
+def _git_push_csv():
+    """Push swing_trades.csv to GitHub so the Render dashboard stays in
+    sync with local runs. Best-effort — never crashes the bot.
+    Only runs from the CLI entry point (never from the dashboard import)."""
+    import subprocess
+    repo = os.path.dirname(os.path.abspath(__file__))
+
+    def _git(*args):
+        return subprocess.run(
+            ["git", *args], cwd=repo,
+            capture_output=True, text=True, timeout=60,
+        )
+
+    try:
+        status = _git("status", "--porcelain", TRADES_CSV)
+        if not status.stdout.strip():
+            print("[SWING] CSV unchanged — nothing to push.")
+            return
+
+        _git("add", TRADES_CSV)
+        _git("commit", "-m", f"chore: sync swing_trades.csv {_today_str()} [skip ci]")
+        _git("pull", "--rebase", "origin", "main")          # integrate remote first
+        push = _git("push", "origin", "main")
+        if push.returncode == 0:
+            print("[SWING] ✓ swing_trades.csv pushed — dashboard will update shortly.")
+        else:
+            print(f"[SWING] git push failed (dashboard not updated): "
+                  f"{push.stderr.strip() or push.stdout.strip()}")
+    except Exception as e:
+        print(f"[SWING] git sync skipped: {e}")
+
+
 # ── Entry point ───────────────────────────────────────────────────
 
 def main():
@@ -765,3 +799,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    _git_push_csv()   # PC = source of truth → keep GitHub/dashboard in sync

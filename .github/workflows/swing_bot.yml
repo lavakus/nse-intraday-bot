@@ -1,12 +1,13 @@
 name: Swing Stock Tracker (Daily Mon–Fri)
 
 on:
-  schedule:
-    # Runs twice daily Mon–Fri:
-    # 1) 9:20 AM IST = 3:50 UTC  — morning scan for fresh picks
-    # 2) 3:35 PM IST = 10:05 UTC — EOD status update + Telegram summary
-    - cron: "50 3 * * 1-5"
-    - cron: "5 10 * * 1-5"
+  # NOTE: Scheduled scan DISABLED — the PC (run_bot.bat) is now the single
+  # source of truth and auto-pushes swing_trades.csv after each run.
+  # Running both here and locally caused divergent CSVs / merge conflicts.
+  # Re-enable the cron below only if you stop running the bot locally.
+  # schedule:
+  #   - cron: "50 3 * * 1-5"   # 9:20 AM IST — morning scan
+  #   - cron: "5 10 * * 1-5"   # 3:35 PM IST — EOD update
   workflow_dispatch:
     inputs:
       force_scan:
