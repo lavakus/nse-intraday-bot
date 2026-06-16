@@ -238,6 +238,17 @@ def place_order(signal: dict) -> bool:
         print(f"[ORDER] Invalid lot size for {symbol}")
         return False
 
+    # ── Faster-exit target ───────────────────────────────────────────
+    # Backtest showed a 2R target closes trades much sooner at ~the same
+    # efficiency as the far 3R/5R targets. Override the signal's far T2
+    # with a tp_r_multiple of the actual risk (entry->SL) from the live
+    # entry price. Set tp_r_multiple in mt5_config.json (0 = keep signal T2).
+    tp_r = float(CFG.get("tp_r_multiple", 2.0))
+    if tp_r > 0:
+        risk_dist = abs(price - sl_price)
+        t2_price = (price + tp_r * risk_dist) if direction == "LONG" \
+            else (price - tp_r * risk_dist)
+
     request = {
         "action":       mt5.TRADE_ACTION_DEAL,
         "symbol":       symbol,
