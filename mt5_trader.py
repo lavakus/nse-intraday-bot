@@ -451,6 +451,9 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
     price = tick.ask if direction == "LONG" else tick.bid
     cap = _SL_CAP.get(asset, 0.02)
 
+    # Dynamic target: aim for the next structure level (recent 50-bar extreme)
+    # for maximum reward; fall back to 3R if that level is too close (<1.5R).
+    DYN_LB = 50
     if direction == "LONG":
         sl = min(ob["low"] * 0.999, price * (1 - 0.0005))
         if (price - sl) / price > cap:
@@ -458,7 +461,8 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
         if sl >= price:
             return None
         risk = price - sl
-        target = price + 3 * risk
+        struct = float(df15["high"].iloc[-DYN_LB:].max())
+        target = struct if (struct - price) / risk >= 1.5 else price + 3 * risk
     else:
         sl = max(ob["high"] * 1.001, price * (1 + 0.0005))
         if (sl - price) / price > cap:
@@ -466,7 +470,8 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
         if sl <= price:
             return None
         risk = sl - price
-        target = price - 3 * risk
+        struct = float(df15["low"].iloc[-DYN_LB:].min())
+        target = struct if (price - struct) / risk >= 1.5 else price - 3 * risk
 
     return {
         "asset": asset, "direction": direction,
