@@ -418,30 +418,53 @@ def _mt5_df(symbol: str, timeframe, n: int = 160):
     return df[["open", "high", "low", "close", "volume"]].astype(float)
 
 
+# Per-asset timeframe + fixed stop (read from mt5_config.json "asset_config").
+_TF_MAP = {"M5": None, "M15": None, "M30": None, "H1": None}  # filled at runtime
+
+
+def _asset_cfg(asset: str) -> dict:
+    defaults = {
+        "GOLD": {"timeframe": "M5",  "fixed_sl_pct": 0.5},
+        "BTC":  {"timeframe": "M15", "fixed_sl_pct": 1.0},
+    }
+    a = CFG.get("asset_config", {}).get(asset, {})
+    d = defaults.get(asset, {"timeframe": "M15", "fixed_sl_pct": 1.0})
+    return {"timeframe": a.get("timeframe", d["timeframe"]),
+            "fixed_sl_pct": float(a.get("fixed_sl_pct", d["fixed_sl_pct"]))}
+
+
 def generate_local_signal(symbol: str, asset: str) -> dict | None:
     """
-    Detect a setup on the 15-minute chart (structure) with a tight stop
-    at the 15m order block, confirmed by FVG or liquidity sweep.
-    Entry at the current price; target = tp_r_multiple x risk (set in config).
-    Returns a place_order-compatible signal dict, or None.
+    Per-asset setup: detect structure on the asset's timeframe (Gold=M5,
+    BTC=M15 by default), confirmed by FVG or liquidity sweep.
+      Entry  : current price
+      Stop   : FIXED % of price (consistent risk -> protects capital)
+      Target : DYNAMIC -> next structure level (recent 50-bar extreme),
+               falling back to 3R if that level is < 1.5R away.
     """
     if not _SMC_OK:
         return None
-    df15 = _mt5_df(symbol, mt5.TIMEFRAME_M15, 160)
-    if df15 is None:
+    tf_map = {"M5": mt5.TIMEFRAME_M5, "M15": mt5.TIMEFRAME_M15,
+              "M30": mt5.TIMEFRAME_M30, "H1": mt5.TIMEFRAME_H1}
+    acfg = _asset_cfg(asset)
+    tf = tf_map.get(acfg["timeframe"], mt5.TIMEFRAME_M15)
+    sl_pct = acfg["fixed_sl_pct"] / 100.0
+
+    df = _mt5_df(symbol, tf, 160)
+    if df is None:
         return None
 
-    st = detect_bos_choch(df15, left=2, right=2)
+    st = detect_bos_choch(df, left=2, right=2)
     if not (st["bos"] or st["choch"]) or not st["direction"]:
         return None
     direction = st["direction"]
 
-    ob = detect_order_block(df15, direction)
+    ob = detect_order_block(df, direction)
     if not ob["valid"]:
         return None
 
-    fvg = detect_fvg(df15, direction)
-    swept, _lvl = detect_liquidity_sweep(df15, direction)
+    fvg = detect_fvg(df, direction)
+    swept, _lvl = detect_liquidity_sweep(df, direction)
     if not (fvg["valid"] or swept):          # quality filter
         return None
 
@@ -449,34 +472,23 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
     if tick is None:
         return None
     price = tick.ask if direction == "LONG" else tick.bid
-    cap = _SL_CAP.get(asset, 0.02)
 
-    # Dynamic target: aim for the next structure level (recent 50-bar extreme)
-    # for maximum reward; fall back to 3R if that level is too close (<1.5R).
     DYN_LB = 50
     if direction == "LONG":
-        sl = min(ob["low"] * 0.999, price * (1 - 0.0005))
-        if (price - sl) / price > cap:
-            sl = price * (1 - cap)
-        if sl >= price:
-            return None
+        sl = price * (1 - sl_pct)                       # FIXED risk
         risk = price - sl
-        struct = float(df15["high"].iloc[-DYN_LB:].max())
+        struct = float(df["high"].iloc[-DYN_LB:].max())
         target = struct if (struct - price) / risk >= 1.5 else price + 3 * risk
     else:
-        sl = max(ob["high"] * 1.001, price * (1 + 0.0005))
-        if (sl - price) / price > cap:
-            sl = price * (1 + cap)
-        if sl <= price:
-            return None
+        sl = price * (1 + sl_pct)                       # FIXED risk
         risk = sl - price
-        struct = float(df15["low"].iloc[-DYN_LB:].min())
+        struct = float(df["low"].iloc[-DYN_LB:].min())
         target = struct if (price - struct) / risk >= 1.5 else price - 3 * risk
 
     return {
         "asset": asset, "direction": direction,
         "entry": round(price, 2), "sl": round(sl, 2), "target": round(target, 2),
-        "id": f"{asset}-15m", "score": "15m",
+        "id": f"{asset}-{acfg['timeframe']}", "score": acfg["timeframe"],
         "trade_params": {},
     }
 
