@@ -15,7 +15,11 @@ from config       import (SCAN_INTERVAL, STRONG_SCORE,
                            MAX_TRADES_PER_SESSION, MAX_CONSECUTIVE_LOSSES)
 from notifier     import fire_alert, telegram_send
 from screener     import scan_market
-from telegram_bot import run_chatbot
+# telegram_bot (interactive chatbot) is optional — NSE alerts work without it
+try:
+    from telegram_bot import run_chatbot
+except Exception:
+    run_chatbot = None
 
 # ── LOGGING ────────────────────────────────────────────────────
 logging.basicConfig(
@@ -216,5 +220,9 @@ if __name__ == "__main__":
         f"Session blocked after {MAX_CONSECUTIVE_LOSSES} consecutive losses."
     )
 
-    threading.Thread(target=run_chatbot, daemon=True).start()
+    if run_chatbot is not None:
+        threading.Thread(target=run_chatbot, daemon=True).start()
+    else:
+        log.warning("telegram_bot module missing — interactive chatbot disabled "
+                    "(NSE scanning + alerts still active)")
     market_watcher()
