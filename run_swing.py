@@ -430,12 +430,14 @@ def send_eod_update():
     if not hits.empty:
         lines += ["", "✅ Target Hit"]
         for _, r in hits.iterrows():
-            lines.append(f"  ✓ {r['symbol']}  +{r.get('pnl_pct',0):.2f}%  @ ₹{r.get('exit_price','?')}")
+            pnl = float(r.get("pnl_pct") or 0)
+            lines.append(f"  ✓ {r['symbol']}  +{pnl:.2f}%  @ ₹{r.get('exit_price','?')}")
 
     if not sls.empty:
         lines += ["", "❌ SL Hit"]
         for _, r in sls.iterrows():
-            lines.append(f"  ✗ {r['symbol']}  {r.get('pnl_pct',0):.2f}%  @ ₹{r.get('exit_price','?')}")
+            pnl = float(r.get("pnl_pct") or 0)
+            lines.append(f"  ✗ {r['symbol']}  {pnl:.2f}%  @ ₹{r.get('exit_price','?')}")
 
     lines += ["", "⚠ Max hold 15 days. No overnight positions beyond MAX_HOLD."]
     telegram_send("\n".join(lines))
