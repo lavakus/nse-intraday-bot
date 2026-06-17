@@ -20,6 +20,7 @@ IMPORTANT: MT5 terminal must be OPEN and LOGGED IN while this runs.
 import os, json, time, math, sys
 from datetime import datetime, timezone, timedelta
 import requests
+import pandas as pd
 
 # ── MT5 Import ────────────────────────────────────────────────────
 try:
@@ -30,6 +31,16 @@ except ImportError:
     print("  Run:  pip install MetaTrader5")
     print("=" * 60)
     sys.exit(1)
+
+# ── SMC structure detectors (used for local 15m/5m signal mode) ────
+try:
+    from shared.smc_engine import (
+        detect_bos_choch, detect_order_block, detect_fvg, detect_liquidity_sweep,
+    )
+    _SMC_OK = True
+except Exception as _e:
+    print(f"[MT5] smc_engine import failed ({_e}); 15m mode unavailable.")
+    _SMC_OK = False
 
 # ── Load Config ───────────────────────────────────────────────────
 CONFIG_FILE = "mt5_config.json"
@@ -391,6 +402,106 @@ def signal_tradeable(sig: dict, symbol: str) -> tuple:
 
 
 # ═══════════════════════════════════════════════════════════════════
+# LOCAL 15m / 5m SIGNAL GENERATION  (user-requested fast strategy)
+# ═══════════════════════════════════════════════════════════════════
+
+# How tight the stop can be (cap), per asset
+_SL_CAP = {"GOLD": 0.01, "BTC": 0.02, "XAUUSD": 0.01, "BTCUSD": 0.02}
+
+
+def _mt5_df(symbol: str, timeframe, n: int = 160):
+    """Pull recent candles from MT5 as a lowercase OHLCV DataFrame."""
+    rates = mt5.copy_rates_from_pos(symbol, timeframe, 0, n)
+    if rates is None or len(rates) < 50:
+        return None
+    df = pd.DataFrame(rates).rename(columns={"tick_volume": "volume"})
+    return df[["open", "high", "low", "close", "volume"]].astype(float)
+
+
+def generate_local_signal(symbol: str, asset: str) -> dict | None:
+    """
+    Detect a setup on the 15-minute chart (structure) with a tight stop
+    at the 15m order block, confirmed by FVG or liquidity sweep.
+    Entry at the current price; target = tp_r_multiple x risk (set in config).
+    Returns a place_order-compatible signal dict, or None.
+    """
+    if not _SMC_OK:
+        return None
+    df15 = _mt5_df(symbol, mt5.TIMEFRAME_M15, 160)
+    if df15 is None:
+        return None
+
+    st = detect_bos_choch(df15, left=2, right=2)
+    if not (st["bos"] or st["choch"]) or not st["direction"]:
+        return None
+    direction = st["direction"]
+
+    ob = detect_order_block(df15, direction)
+    if not ob["valid"]:
+        return None
+
+    fvg = detect_fvg(df15, direction)
+    swept, _lvl = detect_liquidity_sweep(df15, direction)
+    if not (fvg["valid"] or swept):          # quality filter
+        return None
+
+    tick = mt5.symbol_info_tick(symbol)
+    if tick is None:
+        return None
+    price = tick.ask if direction == "LONG" else tick.bid
+    cap = _SL_CAP.get(asset, 0.02)
+
+    if direction == "LONG":
+        sl = min(ob["low"] * 0.999, price * (1 - 0.0005))
+        if (price - sl) / price > cap:
+            sl = price * (1 - cap)
+        if sl >= price:
+            return None
+        risk = price - sl
+        target = price + 3 * risk
+    else:
+        sl = max(ob["high"] * 1.001, price * (1 + 0.0005))
+        if (sl - price) / price > cap:
+            sl = price * (1 + cap)
+        if sl <= price:
+            return None
+        risk = sl - price
+        target = price - 3 * risk
+
+    return {
+        "asset": asset, "direction": direction,
+        "entry": round(price, 2), "sl": round(sl, 2), "target": round(target, 2),
+        "id": f"{asset}-15m", "score": "15m",
+        "trade_params": {},
+    }
+
+
+def close_expired_positions(symbol: str, max_hours: float):
+    """Force-close our positions older than max_hours (time-based exit)."""
+    pos = mt5.positions_get(symbol=symbol)
+    if not pos:
+        return
+    tick = mt5.symbol_info_tick(symbol)
+    now = tick.time if tick else int(time.time())
+    for p in pos:
+        if p.magic != MAGIC:
+            continue
+        age_h = (now - p.time) / 3600.0
+        if age_h < max_hours:
+            continue
+        otype = mt5.ORDER_TYPE_SELL if p.type == 0 else mt5.ORDER_TYPE_BUY
+        price = tick.bid if p.type == 0 else tick.ask
+        req = {"action": mt5.TRADE_ACTION_DEAL, "symbol": symbol, "volume": p.volume,
+               "type": otype, "position": p.ticket, "price": price, "deviation": 30,
+               "magic": MAGIC, "comment": "time-exit",
+               "type_time": mt5.ORDER_TIME_GTC, "type_filling": mt5.ORDER_FILLING_IOC}
+        r = mt5.order_send(req)
+        if r is not None and r.retcode == mt5.TRADE_RETCODE_DONE:
+            print(f"[TIME-EXIT] closed {symbol} after {age_h:.1f}h  P&L={p.profit:.2f}")
+            tg(f"⏱ Time-exit: closed {symbol} after {max_hours}h\nP&L: {p.profit:+.2f} USD")
+
+
+# ═══════════════════════════════════════════════════════════════════
 # MAIN LOOP
 # ═══════════════════════════════════════════════════════════════════
 
@@ -404,18 +515,20 @@ def main():
         print("[MT5] Could not connect. Is MT5 terminal open and logged in?")
         sys.exit(1)
 
-    traded_ids: set = set()    # signal IDs already traded this session
-    assets = CFG.get("assets", ["GOLD", "BTC"])
-    max_pos = CFG.get("max_positions_per_asset", 1)
+    traded_ids: set = set()    # signal IDs already traded this session (github mode)
+    assets   = CFG.get("assets", ["GOLD", "BTC"])
+    max_pos  = CFG.get("max_positions_per_asset", 1)
+    mode     = CFG.get("strategy_mode", "github")      # "local_15m" or "github"
+    max_hold = float(CFG.get("max_hold_hours", 4))      # time-based exit (hours)
 
     print(f"\n[BOT] Watching assets: {assets}")
-    print(f"[BOT] Risk per trade: {CFG.get('risk_pct', 1.0)}%")
-    print(f"[BOT] Max positions per asset: {max_pos}")
-    print(f"[BOT] Polling every {POLL_SEC}s\n")
+    print(f"[BOT] Strategy mode: {mode}  |  Max hold: {max_hold}h")
+    print(f"[BOT] Risk per trade: {CFG.get('risk_pct', 1.0)}%  |  TP: {CFG.get('tp_r_multiple',2.0)}R")
+    print(f"[BOT] Max positions per asset: {max_pos}  |  Polling every {POLL_SEC}s\n")
 
     while True:
         now = datetime.now(timezone(timedelta(hours=5, minutes=30)))
-        print(f"[{now.strftime('%H:%M:%S IST')}] Polling signals...")
+        print(f"[{now.strftime('%H:%M:%S IST')}] Polling ({mode})...")
 
         for asset in assets:
             symbol = SYMBOL_MAP.get(asset, asset)
@@ -427,64 +540,48 @@ def main():
                     time.sleep(30)
                     continue
 
-            # Check open position count
-            open_pos = count_open_positions(symbol)
-            if open_pos >= max_pos:
-                print(f"[{asset}] {open_pos} position(s) already open — skipping new entries")
+            # Time-based exit: close anything held longer than max_hold hours
+            if max_hold > 0:
+                close_expired_positions(symbol, max_hold)
+
+            # One position per asset
+            if count_open_positions(symbol) >= max_pos:
+                print(f"[{asset}] position already open — skip")
                 continue
 
-            # Fetch latest signals from GitHub
-            signals = fetch_signals(asset)
-            if not signals:
-                print(f"[{asset}] No signals found")
-                continue
-
-            # Find signals with OPEN status not yet traded
-            new_signals = [
-                s for s in signals
-                if s.get("status") == "OPEN"
-                and s.get("id") not in traded_ids
-            ]
-
-            if not new_signals:
-                print(f"[{asset}] No new signals")
-                continue
-
-            # Take the highest-scored signal that is still FRESH + valid.
-            # Stale signals are skipped and marked seen so we neither recheck
-            # them every cycle nor send rejected orders to MT5.
-            new_signals.sort(key=lambda x: x.get("score", 0), reverse=True)
-
-            sig = None
-            for cand in new_signals:
-                ok, why = signal_tradeable(cand, symbol)
-                if ok:
-                    sig = cand
-                    break
-                traded_ids.add(cand.get("id"))   # skip stale/invalid, don't retry
-                print(f"[{asset}] skip #{cand.get('id')}: {why}")
-
-            if sig is None:
-                print(f"[{asset}] No fresh tradeable signal")
-                continue
-
-            sig_id = sig.get("id")
-            score  = sig.get("score", 0)
-            print(f"[{asset}] NEW signal #{sig_id}  score={score}/150  "
-                  f"{sig.get('direction')}  entry={sig.get('trade_params',{}).get('entry','?')}")
-
-            # Place the order
-            success = place_order(sig)
-            traded_ids.add(sig_id)   # mark as processed (win or fail)
-
-            if success:
-                print(f"[{asset}] Trade placed for signal #{sig_id}")
+            # ── Signal selection ─────────────────────────────────────
+            if mode == "local_15m":
+                sig = generate_local_signal(symbol, asset)
+                if sig is None:
+                    print(f"[{asset}] no 15m setup")
+                    continue
             else:
-                print(f"[{asset}] Trade failed for signal #{sig_id}")
+                signals = fetch_signals(asset)
+                new_signals = [s for s in (signals or [])
+                               if s.get("status") == "OPEN" and s.get("id") not in traded_ids]
+                if not new_signals:
+                    print(f"[{asset}] no new signals")
+                    continue
+                new_signals.sort(key=lambda x: x.get("score", 0), reverse=True)
+                sig = None
+                for cand in new_signals:
+                    ok, why = signal_tradeable(cand, symbol)
+                    if ok:
+                        sig = cand; break
+                    traded_ids.add(cand.get("id"))
+                    print(f"[{asset}] skip #{cand.get('id')}: {why}")
+                if sig is None:
+                    print(f"[{asset}] no fresh tradeable signal")
+                    continue
+                traded_ids.add(sig.get("id"))
 
-        # Report any closed trades
+            print(f"[{asset}] SETUP {sig['direction']}  entry={sig.get('entry')}  sl={sig.get('sl')}")
+            if place_order(sig):
+                print(f"[{asset}] trade placed")
+            else:
+                print(f"[{asset}] trade failed")
+
         report_closed_trades()
-
         time.sleep(POLL_SEC)
 
 
