@@ -2147,7 +2147,7 @@
       "Tight OR \u20b93.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 408.1499938964844,
+    "exit_price": 403.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2244,10 +2244,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b97.3 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 925.75,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 938.25,
+    "pnl_pts": 28.05,
+    "pnl_pct": 3.08
   },
   {
     "id": 48,
@@ -2631,5 +2631,53 @@
     "exit_price": 1271.9000244140625,
     "pnl_pts": -26.1,
     "pnl_pct": -2.01
+  },
+  {
+    "id": 56,
+    "datetime": "2026-06-18 08:27",
+    "date": "2026-06-18",
+    "asset": "KOTAKBANK",
+    "symbol": "KOTAKBANK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 30,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 402.7,
+    "t1": 405.5,
+    "target": 408.75,
+    "sl": 400.83,
+    "rr": 3.24,
+    "sl_pct": 0.46,
+    "rsi": 52.5,
+    "vwap": 402.44,
+    "vol_ratio": 2.31,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=2.3x",
+      "Price above VWAP \u20b9402.4",
+      "Volume spike 2.3x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 53 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b9408.8 \u2014 clear T2 target",
+      "Tight OR \u20b91.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
