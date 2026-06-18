@@ -4123,5 +4123,51 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 89,
+    "datetime": "2026-06-18 19:30",
+    "date": "2026-06-18",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 78,
+    "score_pct": 52.0,
+    "signal_strength": "WEAK",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 12,
+      "pa_boosters": 6
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 62715.0,
+    "t1": 59892.84,
+    "target": 58011.4,
+    "sl": 63655.72,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 40.6,
+    "vwap": 64832.58,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 4H (SHORT)",
+      "Unmitigated OB 64241.55\u201364620.01",
+      "Liquidity sweep at 62732.75",
+      "Kill Zone NIGHT active (+0pts)",
+      "FVG 62732.75\u201363521.68",
+      "Weekly candle structure is bearish",
+      "RSI 41 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
