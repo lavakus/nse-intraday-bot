@@ -4215,5 +4215,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 91,
+    "datetime": "2026-06-19 00:09",
+    "date": "2026-06-19",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 23
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 62824.21,
+    "t1": 61557.22,
+    "target": 60712.56,
+    "sl": 63246.54,
+    "rr": 5.0,
+    "sl_pct": 0.672,
+    "rsi": 45.2,
+    "vwap": 64176.78,
+    "vol_ratio": 0.1,
+    "reasons": [
+      "CHOCH confirmed 4H (SHORT)",
+      "Unmitigated OB 62630.97\u201363023.90",
+      "Liquidity sweep at 62927.86",
+      "Kill Zone KZ-A active (+15pts)",
+      "FVG 62734.90\u201363522.67",
+      "Fear & Greed 14 \u2014 EXTREME (caution)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Weekly candle structure is bearish",
+      "RSI 45 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
