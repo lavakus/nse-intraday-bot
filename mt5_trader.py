@@ -422,23 +422,38 @@ def _mt5_df(symbol: str, timeframe, n: int = 160):
 _TF_MAP = {"M5": None, "M15": None, "M30": None, "H1": None}  # filled at runtime
 
 
+_HTF_MAP = {"M30": "M30", "H1": "H1", "H4": "H4"}
+
+
 def _asset_cfg(asset: str) -> dict:
     defaults = {
-        "GOLD": {"timeframe": "M5",  "fixed_sl_pct": 0.5},
-        "BTC":  {"timeframe": "M15", "fixed_sl_pct": 1.0},
+        "GOLD": {"timeframe": "M5",  "trend_tf": "H1"},
+        "BTC":  {"timeframe": "M15", "trend_tf": "H4"},
     }
     a = CFG.get("asset_config", {}).get(asset, {})
-    d = defaults.get(asset, {"timeframe": "M15", "fixed_sl_pct": 1.0})
+    d = defaults.get(asset, {"timeframe": "M15", "trend_tf": "H4"})
     return {"timeframe": a.get("timeframe", d["timeframe"]),
-            "fixed_sl_pct": float(a.get("fixed_sl_pct", d["fixed_sl_pct"]))}
+            "trend_tf":  a.get("trend_tf",  d["trend_tf"])}
+
+
+def _htf_trend_up(symbol: str, tf_name: str):
+    """Higher-timeframe trend via EMA50: True=up, False=down, None=unknown."""
+    tf_map = {"M30": mt5.TIMEFRAME_M30, "H1": mt5.TIMEFRAME_H1, "H4": mt5.TIMEFRAME_H4}
+    df = _mt5_df(symbol, tf_map.get(tf_name, mt5.TIMEFRAME_H1), 120)
+    if df is None or len(df) < 55:
+        return None
+    ema = df["close"].ewm(span=50, adjust=False).mean()
+    return float(df["close"].iloc[-1]) > float(ema.iloc[-1])
 
 
 def generate_local_signal(symbol: str, asset: str) -> dict | None:
     """
     Per-asset setup: detect structure on the asset's timeframe (Gold=M5,
-    BTC=M15 by default), confirmed by FVG or liquidity sweep.
+    BTC=M15), confirmed by FVG or liquidity sweep, and ALIGNED with the
+    higher-timeframe trend (Gold 1H / BTC 4H — backtested most profitable).
       Entry  : current price
-      Stop   : FIXED % of price (consistent risk -> protects capital)
+      Stop   : at the structure ORDER BLOCK (capped); risk per trade still
+               fixed at 2% of balance via lot sizing -> capital protected.
       Target : DYNAMIC -> next structure level (recent 50-bar extreme),
                falling back to 3R if that level is < 1.5R away.
     """
@@ -448,7 +463,7 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
               "M30": mt5.TIMEFRAME_M30, "H1": mt5.TIMEFRAME_H1}
     acfg = _asset_cfg(asset)
     tf = tf_map.get(acfg["timeframe"], mt5.TIMEFRAME_M15)
-    sl_pct = acfg["fixed_sl_pct"] / 100.0
+    cap = _SL_CAP.get(asset, 0.02)
 
     df = _mt5_df(symbol, tf, 160)
     if df is None:
@@ -458,6 +473,12 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
     if not (st["bos"] or st["choch"]) or not st["direction"]:
         return None
     direction = st["direction"]
+
+    # ── Higher-timeframe TREND FILTER (only trade with the bigger trend) ──
+    up = _htf_trend_up(symbol, acfg["trend_tf"])
+    if up is not None:
+        if (direction == "LONG" and not up) or (direction == "SHORT" and up):
+            return None
 
     ob = detect_order_block(df, direction)
     if not ob["valid"]:
@@ -475,12 +496,20 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
 
     DYN_LB = 50
     if direction == "LONG":
-        sl = price * (1 - sl_pct)                       # FIXED risk
+        sl = min(ob["low"] * 0.999, price * (1 - 0.0005))   # structure stop
+        if (price - sl) / price > cap:
+            sl = price * (1 - cap)
+        if sl >= price:
+            return None
         risk = price - sl
         struct = float(df["high"].iloc[-DYN_LB:].max())
         target = struct if (struct - price) / risk >= 1.5 else price + 3 * risk
     else:
-        sl = price * (1 + sl_pct)                       # FIXED risk
+        sl = max(ob["high"] * 1.001, price * (1 + 0.0005))  # structure stop
+        if (sl - price) / price > cap:
+            sl = price * (1 + cap)
+        if sl <= price:
+            return None
         risk = sl - price
         struct = float(df["low"].iloc[-DYN_LB:].min())
         target = struct if (price - struct) / risk >= 1.5 else price - 3 * risk
