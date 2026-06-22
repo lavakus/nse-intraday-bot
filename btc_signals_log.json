@@ -4402,5 +4402,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 95,
+    "datetime": "2026-06-22 14:43",
+    "date": "2026-06-22",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 106,
+    "score_pct": 70.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-NY",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 35,
+      "pa_boosters": 11
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 64883.3,
+    "t1": 67803.05,
+    "target": 69749.55,
+    "sl": 63910.05,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 56.2,
+    "vwap": 63792.23,
+    "vol_ratio": 0.9,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 63224.87\u201363697.34",
+      "Liquidity sweep at 64113.42",
+      "Kill Zone KZ-NY active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64699.00\u201364869.97",
+      "Round number $65,000",
+      "Weekly candle structure is bullish",
+      "RSI 56 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
