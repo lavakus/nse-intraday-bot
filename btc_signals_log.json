@@ -4354,5 +4354,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 94,
+    "datetime": "2026-06-22 02:03",
+    "date": "2026-06-22",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 79,
+    "score_pct": 52.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 6
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 64446.02,
+    "t1": 67346.09,
+    "target": 69279.47,
+    "sl": 63479.33,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 63.6,
+    "vwap": 64312.38,
+    "vol_ratio": 0.4,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 63724.91\u201364130.53",
+      "Liquidity sweep at 63868.11",
+      "Kill Zone DEAD active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64010.24\u201364446.02",
+      "Weekly candle structure is bullish",
+      "RSI 64 \u2014 ideal zone",
+      "CAUTION: Unfilled CME gap below entry"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
