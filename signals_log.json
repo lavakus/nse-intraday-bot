@@ -3069,5 +3069,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 65,
+    "datetime": "2026-06-23 07:43",
+    "date": "2026-06-23",
+    "asset": "TATACONSUM",
+    "symbol": "TATACONSUM",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 92,
+    "score_pct": 61.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 7,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1106.1,
+    "t1": 1091.09,
+    "target": 1076.07,
+    "sl": 1116.11,
+    "rr": 3.0,
+    "sl_pct": 0.9,
+    "rsi": 28.2,
+    "vwap": 1117.08,
+    "vol_ratio": 2.24,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=2.2x",
+      "Price below VWAP \u20b91117.1",
+      "Below OR Low \u20b91115.0",
+      "Volume spike 2.2x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDL \u20b91105.2 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b95.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
