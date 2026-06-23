@@ -2147,7 +2147,7 @@
       "Tight OR \u20b93.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 403.04998779296875,
+    "exit_price": 401.54998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2777,7 +2777,7 @@
       "Tight OR \u20b98.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1806.4000244140625,
+    "exit_price": 1784.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2969,10 +2969,10 @@
       "PDH \u20b92214.0 \u2014 clear T2 target",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": 2125.199951171875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 2063.5,
+    "pnl_pts": -25.6,
+    "pnl_pct": -1.23
   },
   {
     "id": 63,
@@ -3018,7 +3018,55 @@
       "Tight OR \u20b91.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 245.5,
+    "exit_price": 244.5,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 64,
+    "datetime": "2026-06-23 07:33",
+    "date": "2026-06-23",
+    "asset": "ITC",
+    "symbol": "ITC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 289.75,
+    "t1": 288.56,
+    "target": 287.38,
+    "sl": 290.54,
+    "rr": 3.0,
+    "sl_pct": 0.27,
+    "rsi": 27.8,
+    "vwap": 291.41,
+    "vol_ratio": 1.79,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.8x",
+      "Price below VWAP \u20b9291.4",
+      "Below OR Low \u20b9289.9",
+      "Volume spike 1.8x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b91.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
