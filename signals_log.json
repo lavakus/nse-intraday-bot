@@ -2147,7 +2147,7 @@
       "Tight OR \u20b93.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 401.54998779296875,
+    "exit_price": 402.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -2777,7 +2777,7 @@
       "Tight OR \u20b98.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1784.199951171875,
+    "exit_price": 1787.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3018,7 +3018,7 @@
       "Tight OR \u20b91.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 244.5,
+    "exit_price": 245.25,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3065,10 +3065,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b91.3 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 290.54998779296875,
+    "pnl_pts": -0.8,
+    "pnl_pct": -0.28
   },
   {
     "id": 65,
@@ -3115,7 +3115,7 @@
       "Tight OR \u20b95.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1103.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3163,7 +3163,7 @@
       "Tight OR \u20b911.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1774.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3209,10 +3209,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 40 \u2014 ideal short zone (35\u201360)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1037.199951171875,
+    "pnl_pts": -5.3,
+    "pnl_pct": -0.51
   },
   {
     "id": 68,
@@ -3260,7 +3260,7 @@
       "Tight OR \u20b95.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1349.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3309,7 +3309,7 @@
       "Tight OR \u20b99.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1315.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3354,6 +3354,102 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 41 \u2014 ideal short zone (35\u201360)",
       "5min LH+LL structure aligns with SHORT"
+    ],
+    "status": "OPEN",
+    "exit_price": 1116.9000244140625,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 71,
+    "datetime": "2026-06-23 08:58",
+    "date": "2026-06-23",
+    "asset": "SBILIFE",
+    "symbol": "SBILIFE",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 98,
+    "score_pct": 65.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 23,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1787.4,
+    "t1": 1761.91,
+    "target": 1736.43,
+    "sl": 1804.39,
+    "rr": 3.0,
+    "sl_pct": 0.95,
+    "rsi": 54.0,
+    "vwap": 1795.65,
+    "vol_ratio": 3.37,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=3.4x",
+      "Price below VWAP \u20b91795.7",
+      "Below OR Low \u20b91802.6",
+      "Volume spike 3.4x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 54 \u2014 ideal short zone (35\u201360)",
+      "Tight OR \u20b97.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 72,
+    "datetime": "2026-06-23 08:58",
+    "date": "2026-06-23",
+    "asset": "NTPC",
+    "symbol": "NTPC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 82,
+    "score_pct": 54.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 20,
+      "entry_quality": 22,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 364.8,
+    "t1": 360.66,
+    "target": 356.52,
+    "sl": 367.56,
+    "rr": 3.0,
+    "sl_pct": 0.76,
+    "rsi": 64.4,
+    "vwap": 364.58,
+    "vol_ratio": 1.6,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.6x",
+      "VWAP counter-trend (\u20b9364.6) \u2014 reduced confidence",
+      "Below OR Low \u20b9367.2",
+      "Volume spike 1.6x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "PDL \u20b9364.0 \u2014 clear T2 target",
+      "Tight OR \u20b91.9 \u2014 clean structure"
     ],
     "status": "OPEN",
     "exit_price": null,
