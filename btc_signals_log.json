@@ -4635,5 +4635,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 100,
+    "datetime": "2026-06-24 21:24",
+    "date": "2026-06-24",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 12,
+      "pa_boosters": 23
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 60724.68,
+    "t1": 59389.95,
+    "target": 58500.13,
+    "sl": 61169.59,
+    "rr": 5.0,
+    "sl_pct": 0.733,
+    "rsi": 56.5,
+    "vwap": 62896.35,
+    "vol_ratio": 0.4,
+    "reasons": [
+      "BOS confirmed 4H (SHORT)",
+      "Unmitigated OB 59870.63\u201360866.22",
+      "Liquidity sweep at 60813.89",
+      "Kill Zone NIGHT active (+0pts)",
+      "FVG 61048.93\u201361161.86",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Weekly candle structure is bearish",
+      "RSI 57 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
