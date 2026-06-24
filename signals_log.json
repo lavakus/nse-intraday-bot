@@ -2147,7 +2147,7 @@
       "Tight OR \u20b93.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 405.20001220703125,
+    "exit_price": 406.95001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3115,7 +3115,7 @@
       "Tight OR \u20b95.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1094.800048828125,
+    "exit_price": 1096.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3309,7 +3309,7 @@
       "Tight OR \u20b99.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1311.300048828125,
+    "exit_price": 1320.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3355,10 +3355,10 @@
       "RSI 41 \u2014 ideal short zone (35\u201360)",
       "5min LH+LL structure aligns with SHORT"
     ],
-    "status": "OPEN",
-    "exit_price": 1111.300048828125,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1120.199951171875,
+    "pnl_pts": -8.7,
+    "pnl_pct": -0.78
   },
   {
     "id": 71,
@@ -3404,7 +3404,7 @@
       "Tight OR \u20b97.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1753.9000244140625,
+    "exit_price": 1761.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3452,7 +3452,199 @@
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 358.20001220703125,
+    "exit_price": 360.54998779296875,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 73,
+    "datetime": "2026-06-24 08:18",
+    "date": "2026-06-24",
+    "asset": "TATACONSUM",
+    "symbol": "TATACONSUM",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 128,
+    "score_pct": 85.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 23,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1097.0,
+    "t1": 1090.85,
+    "target": 1084.7,
+    "sl": 1101.1,
+    "rr": 3.0,
+    "sl_pct": 0.37,
+    "rsi": 56.8,
+    "vwap": 1099.39,
+    "vol_ratio": 1.71,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.7x",
+      "Price below VWAP \u20b91099.4",
+      "Below OR Low \u20b91104.0",
+      "Volume spike 1.7x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 57 \u2014 ideal short zone (35\u201360)",
+      "Round number level confluence",
+      "Tight OR \u20b94.6 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 74,
+    "datetime": "2026-06-24 08:18",
+    "date": "2026-06-24",
+    "asset": "NTPC",
+    "symbol": "NTPC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 108,
+    "score_pct": 72.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 20,
+      "entry_quality": 23,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 360.5,
+    "t1": 358.07,
+    "target": 355.64,
+    "sl": 362.12,
+    "rr": 3.0,
+    "sl_pct": 0.45,
+    "rsi": 57.7,
+    "vwap": 359.41,
+    "vol_ratio": 1.53,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.5x",
+      "VWAP counter-trend (\u20b9359.4) \u2014 reduced confidence",
+      "Below OR Low \u20b9361.9",
+      "Volume spike 1.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 58 \u2014 ideal short zone (35\u201360)",
+      "Tight OR \u20b92.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 75,
+    "datetime": "2026-06-24 08:18",
+    "date": "2026-06-24",
+    "asset": "INFY",
+    "symbol": "INFY",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1055.5,
+    "t1": 1070.74,
+    "target": 1085.98,
+    "sl": 1045.34,
+    "rr": 3.0,
+    "sl_pct": 0.96,
+    "rsi": 66.4,
+    "vwap": 1046.76,
+    "vol_ratio": 2.06,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=2.1x",
+      "Price above VWAP \u20b91046.8",
+      "Above OR High \u20b91046.4",
+      "Volume spike 2.1x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b97.9 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 76,
+    "datetime": "2026-06-24 08:18",
+    "date": "2026-06-24",
+    "asset": "DRREDDY",
+    "symbol": "DRREDDY",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1341.6,
+    "t1": 1351.26,
+    "target": 1360.92,
+    "sl": 1335.16,
+    "rr": 3.0,
+    "sl_pct": 0.48,
+    "rsi": 71.9,
+    "vwap": 1334.08,
+    "vol_ratio": 2.72,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=2.7x",
+      "Price above VWAP \u20b91334.1",
+      "Above OR High \u20b91336.5",
+      "Volume spike 2.7x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
