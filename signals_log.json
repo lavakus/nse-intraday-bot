@@ -3647,5 +3647,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 77,
+    "datetime": "2026-06-24 08:52",
+    "date": "2026-06-24",
+    "asset": "BPCL",
+    "symbol": "BPCL",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 125,
+    "score_pct": 83.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 315.9,
+    "t1": 319.09,
+    "target": 322.29,
+    "sl": 313.77,
+    "rr": 3.0,
+    "sl_pct": 0.67,
+    "rsi": 81.5,
+    "vwap": 311.72,
+    "vol_ratio": 2.51,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=2.5x",
+      "Price above VWAP \u20b9311.7",
+      "Above OR High \u20b9310.6",
+      "Volume spike 2.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 81 extreme \u2014 use caution",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b92.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
