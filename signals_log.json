@@ -3114,10 +3114,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b95.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1115.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1120.4000244140625,
+    "pnl_pts": -14.3,
+    "pnl_pct": -1.29
   },
   {
     "id": 66,
@@ -3309,7 +3309,7 @@
       "Tight OR \u20b99.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1317.199951171875,
+    "exit_price": 1321.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3404,7 +3404,7 @@
       "Tight OR \u20b97.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1749.9000244140625,
+    "exit_price": 1754.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3597,7 +3597,7 @@
       "Tight OR \u20b97.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1049.199951171875,
+    "exit_price": 1047.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3644,7 +3644,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 1353.199951171875,
+    "exit_price": 1346.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3742,7 +3742,7 @@
       "Tight OR \u20b910.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1051.8499755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3790,7 +3790,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1754.5,
     "pnl_pts": null,
     "pnl_pct": null
   }
