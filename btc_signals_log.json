@@ -4825,5 +4825,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 104,
+    "datetime": "2026-06-27 23:34",
+    "date": "2026-06-27",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 90,
+    "score_pct": 60.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 12,
+      "pa_boosters": 25
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 59932.06,
+    "t1": 59082.52,
+    "target": 58516.16,
+    "sl": 60215.24,
+    "rr": 5.0,
+    "sl_pct": 0.473,
+    "rsi": 35.9,
+    "vwap": 61338.86,
+    "vol_ratio": 0.3,
+    "reasons": [
+      "BOS confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 60083.10\u201360135.01",
+      "Liquidity sweep at 60480.53",
+      "Kill Zone NIGHT active (+0pts)",
+      "FVG 60468.62\u201360575.73",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Round number $60,000",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
