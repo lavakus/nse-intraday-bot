@@ -5702,5 +5702,101 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 120,
+    "datetime": "2026-06-30 08:24",
+    "date": "2026-06-30",
+    "asset": "HCLTECH",
+    "symbol": "HCLTECH",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 113,
+    "score_pct": 75.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 30,
+      "entry_quality": 23,
+      "boosters": 0
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1081.1,
+    "t1": 1076.51,
+    "target": 1071.92,
+    "sl": 1084.16,
+    "rr": 3.0,
+    "sl_pct": 0.28,
+    "rsi": 49.7,
+    "vwap": 1083.65,
+    "vol_ratio": 1.47,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.5x",
+      "Price below VWAP \u20b91083.6",
+      "Below OR Low \u20b91093.3",
+      "Volume elevated 1.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 50 \u2014 ideal short zone (35\u201360)"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 121,
+    "datetime": "2026-06-30 08:24",
+    "date": "2026-06-30",
+    "asset": "BPCL",
+    "symbol": "BPCL",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 303.75,
+    "t1": 305.33,
+    "target": 309.0,
+    "sl": 302.7,
+    "rr": 5.0,
+    "sl_pct": 0.35,
+    "rsi": 63.0,
+    "vwap": 302.49,
+    "vol_ratio": 1.91,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=1.9x",
+      "Price above VWAP \u20b9302.5",
+      "Above OR High \u20b9303.4",
+      "Volume spike 1.9x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 63 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b9309.0 \u2014 clear T2 target",
+      "Tight OR \u20b91.8 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
