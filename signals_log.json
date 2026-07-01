@@ -3309,7 +3309,7 @@
       "Tight OR \u20b99.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1296.0999755859375,
+    "exit_price": 1308.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -3404,7 +3404,7 @@
       "Tight OR \u20b97.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1764.300048828125,
+    "exit_price": 1775.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -4270,10 +4270,10 @@
       "PDL \u20b91222.0 \u2014 clear T2 target",
       "Tight OR \u20b96.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1231.9000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1216.5,
+    "pnl_pts": 14.8,
+    "pnl_pct": 1.2
   },
   {
     "id": 90,
@@ -4651,10 +4651,10 @@
       "PDL \u20b91222.0 \u2014 clear T2 target",
       "Tight OR \u20b96.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1231.9000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1216.5,
+    "pnl_pts": 14.8,
+    "pnl_pct": 1.2
   },
   {
     "id": 98,
@@ -5032,10 +5032,10 @@
       "PDL \u20b91222.0 \u2014 clear T2 target",
       "Tight OR \u20b96.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1231.9000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1216.5,
+    "pnl_pts": 14.8,
+    "pnl_pct": 1.2
   },
   {
     "id": 106,
@@ -5508,10 +5508,10 @@
       "PDL \u20b91222.0 \u2014 clear T2 target",
       "Tight OR \u20b96.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1231.9000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1216.5,
+    "pnl_pts": 14.8,
+    "pnl_pct": 1.2
   },
   {
     "id": 116,
@@ -5699,7 +5699,7 @@
       "Tight OR \u20b915.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1775.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -5745,10 +5745,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 50 \u2014 ideal short zone (35\u201360)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1041.0999755859375,
+    "pnl_pts": 40.0,
+    "pnl_pct": 3.7
   },
   {
     "id": 121,
@@ -5795,7 +5795,7 @@
       "Tight OR \u20b91.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 303.04998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -5845,7 +5845,7 @@
       "Tight OR \u20b91.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 358.6000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -5891,6 +5891,106 @@
       "RSI 53 \u2014 ideal long zone (40\u201365)",
       "PDH \u20b9191.3 \u2014 clear T2 target",
       "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "SL HIT",
+    "exit_price": 186.4199981689453,
+    "pnl_pts": -2.45,
+    "pnl_pct": -1.3
+  },
+  {
+    "id": 124,
+    "datetime": "2026-07-01 07:59",
+    "date": "2026-07-01",
+    "asset": "WIPRO",
+    "symbol": "WIPRO",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 120,
+    "score_pct": 80.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 30,
+      "entry_quality": 15,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 170.15,
+    "t1": 169.59,
+    "target": 169.04,
+    "sl": 170.52,
+    "rr": 3.0,
+    "sl_pct": 0.22,
+    "rsi": 48.7,
+    "vwap": 170.49,
+    "vol_ratio": 1.33,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.3x",
+      "Price below VWAP \u20b9170.5",
+      "Below OR Low \u20b9170.3",
+      "Volume elevated 1.3x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 49 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b9170.1 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b91.6 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 125,
+    "datetime": "2026-07-01 07:59",
+    "date": "2026-07-01",
+    "asset": "WIPRO",
+    "symbol": "WIPRO",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 120,
+    "score_pct": 80.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 30,
+      "entry_quality": 15,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 170.18,
+    "t1": 169.67,
+    "target": 169.16,
+    "sl": 170.52,
+    "rr": 3.0,
+    "sl_pct": 0.2,
+    "rsi": 49.3,
+    "vwap": 170.49,
+    "vol_ratio": 1.33,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.3x",
+      "Price below VWAP \u20b9170.5",
+      "Below OR Low \u20b9170.3",
+      "Volume elevated 1.3x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 49 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b9170.1 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b91.6 \u2014 clean structure"
     ],
     "status": "OPEN",
     "exit_price": null,
