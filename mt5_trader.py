@@ -260,6 +260,18 @@ def place_order(signal: dict) -> bool:
         t2_price = (price + tp_r * risk_dist) if direction == "LONG" \
             else (price - tp_r * risk_dist)
 
+    # Auto-detect broker's supported filling mode (XM uses FOK, others use IOC)
+    sym_info2 = mt5.symbol_info(symbol)
+    filling = mt5.ORDER_FILLING_FOK
+    if sym_info2 is not None:
+        fm = sym_info2.filling_mode
+        if fm & 2:    # bit 1 = IOC supported
+            filling = mt5.ORDER_FILLING_IOC
+        elif fm & 1:  # bit 0 = FOK supported
+            filling = mt5.ORDER_FILLING_FOK
+        else:
+            filling = mt5.ORDER_FILLING_RETURN
+
     request = {
         "action":       mt5.TRADE_ACTION_DEAL,
         "symbol":       symbol,
@@ -272,7 +284,7 @@ def place_order(signal: dict) -> bool:
         "magic":        MAGIC,
         "comment":      f"BOT#{sig_id} score={score}",
         "type_time":    mt5.ORDER_TIME_GTC,
-        "type_filling": mt5.ORDER_FILLING_IOC,
+        "type_filling": filling,
     }
 
     result = mt5.order_send(request)
@@ -439,6 +451,7 @@ def _asset_cfg(asset: str) -> dict:
 def _htf_trend_up(symbol: str, tf_name: str):
     """Higher-timeframe trend via EMA50: True=up, False=down, None=unknown."""
     tf_map = {"M30": mt5.TIMEFRAME_M30, "H1": mt5.TIMEFRAME_H1, "H4": mt5.TIMEFRAME_H4}
+    mt5.symbol_select(symbol, True)
     df = _mt5_df(symbol, tf_map.get(tf_name, mt5.TIMEFRAME_H1), 120)
     if df is None or len(df) < 55:
         return None
@@ -465,12 +478,18 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
     tf = tf_map.get(acfg["timeframe"], mt5.TIMEFRAME_M15)
     cap = _SL_CAP.get(asset, 0.02)
 
+    # Ensure symbol is subscribed in Market Watch (silent fail otherwise)
+    mt5.symbol_select(symbol, True)
+
     df = _mt5_df(symbol, tf, 160)
     if df is None:
+        print(f"[{asset}] SKIP: no candles from MT5 ({symbol} {acfg['timeframe']}) — "
+              f"check symbol name & Market Watch")
         return None
 
     st = detect_bos_choch(df, left=2, right=2)
     if not (st["bos"] or st["choch"]) or not st["direction"]:
+        print(f"[{asset}] SKIP: no BOS/CHoCH on {acfg['timeframe']}")
         return None
     direction = st["direction"]
 
@@ -478,41 +497,52 @@ def generate_local_signal(symbol: str, asset: str) -> dict | None:
     up = _htf_trend_up(symbol, acfg["trend_tf"])
     if up is not None:
         if (direction == "LONG" and not up) or (direction == "SHORT" and up):
+            print(f"[{asset}] SKIP: {direction} blocked by {acfg['trend_tf']} trend "
+                  f"(EMA50 trend={'UP' if up else 'DOWN'})")
             return None
 
     ob = detect_order_block(df, direction)
     if not ob["valid"]:
+        print(f"[{asset}] SKIP: no unmitigated OB for {direction} on {acfg['timeframe']}")
         return None
 
     fvg = detect_fvg(df, direction)
     swept, _lvl = detect_liquidity_sweep(df, direction)
-    if not (fvg["valid"] or swept):          # quality filter
+    if not (fvg["valid"] or swept):
+        print(f"[{asset}] SKIP: no FVG or liquidity sweep for {direction}")
         return None
 
     tick = mt5.symbol_info_tick(symbol)
     if tick is None:
+        print(f"[{asset}] SKIP: no tick data for {symbol}")
         return None
     price = tick.ask if direction == "LONG" else tick.bid
+    # Minimum stop distance: at least 3x the live spread (stops placed
+    # inside/near a widened spread get rejected by the broker — this could
+    # silently kill GOLD entries at night) and never under 0.05% of price.
+    spread = max(tick.ask - tick.bid, 0.0)
+    min_dist = max(3.0 * spread, price * 0.0005)
 
     DYN_LB = 50
     if direction == "LONG":
-        sl = min(ob["low"] * 0.999, price * (1 - 0.0005))   # structure stop
+        sl = min(ob["low"] * 0.999, price - min_dist)       # structure stop
         if (price - sl) / price > cap:
             sl = price * (1 - cap)
-        if sl >= price:
-            return None
+        sl = min(sl, price - min_dist)
         risk = price - sl
         struct = float(df["high"].iloc[-DYN_LB:].max())
         target = struct if (struct - price) / risk >= 1.5 else price + 3 * risk
     else:
-        sl = max(ob["high"] * 1.001, price * (1 + 0.0005))  # structure stop
+        sl = max(ob["high"] * 1.001, price + min_dist)      # structure stop
         if (sl - price) / price > cap:
             sl = price * (1 + cap)
-        if sl <= price:
-            return None
+        sl = max(sl, price + min_dist)
         risk = sl - price
         struct = float(df["low"].iloc[-DYN_LB:].min())
         target = struct if (price - struct) / risk >= 1.5 else price - 3 * risk
+
+    if risk <= 0:
+        return None
 
     return {
         "asset": asset, "direction": direction,
@@ -551,7 +581,44 @@ def close_expired_positions(symbol: str, max_hours: float):
 # MAIN LOOP
 # ═══════════════════════════════════════════════════════════════════
 
+class _Tee:
+    """Mirror stdout to mt5_trader.log so the live loop is always inspectable."""
+    def __init__(self, stream, path="mt5_trader.log"):
+        self._s = stream
+        self._f = open(path, "a", encoding="utf-8", buffering=1)
+    def write(self, text):
+        self._s.write(text)
+        try:    self._f.write(text)
+        except Exception: pass
+    def flush(self):
+        self._s.flush()
+        try:    self._f.flush()
+        except Exception: pass
+
+
+def recent_loss_cooldown(symbol: str, cooldown_min: float) -> float:
+    """Minutes remaining in cooldown after the most recent losing close on
+    symbol (our magic only). 0 = free to trade. Stops rapid-fire re-entry
+    after a stop-out (29-Jun style bleed)."""
+    if cooldown_min <= 0:
+        return 0.0
+    now = datetime.now(timezone.utc)
+    deals = mt5.history_deals_get(now - timedelta(minutes=cooldown_min + 5), now)
+    if not deals:
+        return 0.0
+    last_loss = None
+    for d in deals:
+        if d.magic == MAGIC and d.symbol == symbol and d.entry == mt5.DEAL_ENTRY_OUT \
+                and (d.profit + d.swap + d.commission) < 0:
+            last_loss = max(last_loss or 0, d.time)
+    if not last_loss:
+        return 0.0
+    elapsed_min = (now.timestamp() - last_loss) / 60.0
+    return max(0.0, cooldown_min - elapsed_min)
+
+
 def main():
+    sys.stdout = _Tee(sys.stdout)
     print("=" * 60)
     print("  MT5 Auto-Trader — Gold + Bitcoin")
     print("  Press Ctrl+C to stop")
@@ -577,6 +644,7 @@ def main():
         print(f"[{now.strftime('%H:%M:%S IST')}] Polling ({mode})...")
 
         for asset in assets:
+          try:
             symbol = SYMBOL_MAP.get(asset, asset)
 
             # Check if MT5 is still connected
@@ -593,6 +661,12 @@ def main():
             # One position per asset
             if count_open_positions(symbol) >= max_pos:
                 print(f"[{asset}] position already open — skip")
+                continue
+
+            # Cooldown after a stop-loss: block immediate re-entry
+            cd = recent_loss_cooldown(symbol, float(CFG.get("loss_cooldown_min", 45)))
+            if cd > 0:
+                print(f"[{asset}] loss cooldown — {cd:.0f} min left")
                 continue
 
             # ── Signal selection ─────────────────────────────────────
@@ -626,6 +700,9 @@ def main():
                 print(f"[{asset}] trade placed")
             else:
                 print(f"[{asset}] trade failed")
+          except Exception as e:
+            # One asset's error must never silently kill the other's trading
+            print(f"[{asset}] LOOP ERROR: {e}")
 
         report_closed_trades()
         time.sleep(POLL_SEC)
