@@ -6043,5 +6043,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 127,
+    "datetime": "2026-07-03 08:48",
+    "date": "2026-07-03",
+    "asset": "JSWSTEEL",
+    "symbol": "JSWSTEEL",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 127,
+    "score_pct": 84.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 22,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1227.5,
+    "t1": 1223.06,
+    "target": 1217.1,
+    "sl": 1230.46,
+    "rr": 3.51,
+    "sl_pct": 0.24,
+    "rsi": 29.9,
+    "vwap": 1236.53,
+    "vol_ratio": 1.61,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.6x",
+      "Price below VWAP \u20b91236.5",
+      "Below OR Low \u20b91230.3",
+      "Volume spike 1.6x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "PDL \u20b91217.1 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
