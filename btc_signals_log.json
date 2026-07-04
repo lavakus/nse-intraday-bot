@@ -5207,5 +5207,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 112,
+    "datetime": "2026-07-04 00:06",
+    "date": "2026-07-04",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 86,
+    "score_pct": 57.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 45,
+      "ict_crypto_filters": 35,
+      "pa_boosters": 6
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": true
+    },
+    "entry": 62596.38,
+    "t1": 62775.51,
+    "target": 62894.93,
+    "sl": 62536.67,
+    "rr": 5.0,
+    "sl_pct": 0.095,
+    "rsi": 64.0,
+    "vwap": 60017.81,
+    "vol_ratio": 1.2,
+    "reasons": [
+      "BOS confirmed 4H (LONG)",
+      "Unmitigated OB 62601.85\u201362668.23",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone KZ-A active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 62256.04\u201362459.43",
+      "Weekly candle structure is bullish",
+      "RSI 64 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
