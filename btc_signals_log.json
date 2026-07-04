@@ -5302,5 +5302,55 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 114,
+    "datetime": "2026-07-04 07:22",
+    "date": "2026-07-04",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 103,
+    "score_pct": 68.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 23
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 62517.25,
+    "t1": 63433.33,
+    "target": 64044.05,
+    "sl": 62211.89,
+    "rr": 5.0,
+    "sl_pct": 0.488,
+    "rsi": 52.7,
+    "vwap": 60134.21,
+    "vol_ratio": 0.3,
+    "reasons": [
+      "BOS confirmed 4H (LONG)",
+      "Unmitigated OB 62434.82\u201362481.95",
+      "Liquidity sweep at 62381.07",
+      "Kill Zone DEAD active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 62256.04\u201362459.43",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Weekly candle structure is bullish",
+      "RSI 53 \u2014 ideal zone",
+      "CAUTION: Unfilled CME gap below entry"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
