@@ -5352,5 +5352,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 115,
+    "datetime": "2026-07-04 19:44",
+    "date": "2026-07-04",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 45,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 20
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": false
+    },
+    "entry": 63314.06,
+    "t1": 64309.31,
+    "target": 64972.81,
+    "sl": 62982.31,
+    "rr": 5.0,
+    "sl_pct": 0.524,
+    "rsi": 71.2,
+    "vwap": 60244.58,
+    "vol_ratio": 0.2,
+    "reasons": [
+      "BOS confirmed 4H (LONG)",
+      "Unmitigated OB 63113.34\u201363231.17",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 62917.72\u201363045.35",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Weekly candle structure is bullish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
