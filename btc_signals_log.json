@@ -5447,5 +5447,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 117,
+    "datetime": "2026-07-05 09:54",
+    "date": "2026-07-05",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 102,
+    "score_pct": 68.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-L",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 22
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 62528.14,
+    "t1": 61241.68,
+    "target": 60384.04,
+    "sl": 62956.96,
+    "rr": 5.0,
+    "sl_pct": 0.686,
+    "rsi": 36.8,
+    "vwap": 60407.76,
+    "vol_ratio": 3.9,
+    "reasons": [
+      "CHOCH confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 62641.03\u201362722.06",
+      "Liquidity sweep at 62879.01",
+      "Kill Zone KZ-L active (+15pts)",
+      "FVG 63086.46\u201363105.60",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Volume 3.9x spike at reaction zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
