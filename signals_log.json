@@ -3309,7 +3309,7 @@
       "Tight OR \u20b99.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1314.199951171875,
+    "exit_price": 1313.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -5844,10 +5844,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b91.8 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 355.8500061035156,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 354.75,
+    "pnl_pts": -2.3,
+    "pnl_pct": -0.64
   },
   {
     "id": 123,
@@ -6186,7 +6186,7 @@
       "Tight OR \u20b99.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1459.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6235,7 +6235,7 @@
       "Tight OR \u20b916.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1894.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6283,10 +6283,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1120.0,
+    "pnl_pts": -7.6,
+    "pnl_pct": -0.68
   },
   {
     "id": 132,
@@ -6332,7 +6332,7 @@
       "Tight OR \u20b98.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1248.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6380,7 +6380,7 @@
       "Tight OR \u20b916.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 2738.60009765625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6427,7 +6427,7 @@
       "PDL \u20b9189.2 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 189.33999633789062,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6475,7 +6475,7 @@
       "Tight OR \u20b910.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1927.5,
     "pnl_pts": null,
     "pnl_pct": null
   }
