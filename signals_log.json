@@ -3309,7 +3309,7 @@
       "Tight OR \u20b99.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1292.0999755859375,
+    "exit_price": 1293.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6186,7 +6186,7 @@
       "Tight OR \u20b99.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1460.5999755859375,
+    "exit_price": 1459.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6235,7 +6235,7 @@
       "Tight OR \u20b916.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1880.699951171875,
+    "exit_price": 1878.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6379,10 +6379,10 @@
       "PDL \u20b92730.0 \u2014 clear T2 target",
       "Tight OR \u20b916.8 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 2692.60009765625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 2683.199951171875,
+    "pnl_pts": 53.6,
+    "pnl_pct": 1.96
   },
   {
     "id": 134,
@@ -6427,7 +6427,7 @@
       "PDL \u20b9189.2 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": 189.4600067138672,
+    "exit_price": 189.6199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6523,9 +6523,9 @@
       "PDH \u20b91038.0 \u2014 clear T2 target",
       "Tight OR \u20b97.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1018.75,
+    "pnl_pts": -2.25,
+    "pnl_pct": -0.22
   }
 ]
