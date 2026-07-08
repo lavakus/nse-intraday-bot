@@ -3308,10 +3308,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b99.0 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1290.9000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1273.9000244140625,
+    "pnl_pts": 41.3,
+    "pnl_pct": 3.14
   },
   {
     "id": 70,
@@ -6234,10 +6234,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b916.8 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1882.4000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1843.300048828125,
+    "pnl_pts": -43.7,
+    "pnl_pct": -2.32
   },
   {
     "id": 131,
@@ -6427,7 +6427,7 @@
       "PDL \u20b9189.2 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": 189.14999389648438,
+    "exit_price": 186.99000549316406,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6572,10 +6572,10 @@
       "Round number level confluence",
       "Tight OR \u20b91.2 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 350.79998779296875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 348.70001220703125,
+    "pnl_pts": 2.25,
+    "pnl_pct": 0.64
   },
   {
     "id": 138,
@@ -6620,10 +6620,10 @@
       "PDL \u20b9563.1 \u2014 clear T2 target",
       "Tight OR \u20b94.0 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 566.5,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 553.8499755859375,
+    "pnl_pts": 16.2,
+    "pnl_pct": 2.84
   },
   {
     "id": 139,
@@ -6671,7 +6671,7 @@
       "Tight OR \u20b910.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1425.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6720,7 +6720,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 271.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   }
