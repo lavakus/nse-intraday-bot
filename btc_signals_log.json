@@ -5778,5 +5778,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 124,
+    "datetime": "2026-07-11 14:35",
+    "date": "2026-07-11",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 90,
+    "score_pct": 60.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ-NY",
+    "phase_scores": {
+      "smc_structure": 38,
+      "ict_crypto_filters": 42,
+      "pa_boosters": 10
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": true
+    },
+    "entry": 64364.87,
+    "t1": 65402.51,
+    "target": 66094.27,
+    "sl": 64018.99,
+    "rr": 5.0,
+    "sl_pct": 0.537,
+    "rsi": 71.0,
+    "vwap": 63071.07,
+    "vol_ratio": 0.2,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 64138.08\u201364167.42",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone KZ-NY active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64183.10\u201364195.03",
+      "Fear & Greed 26 \u2014 ideal zone (25\u201360)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Weekly candle structure is bullish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
