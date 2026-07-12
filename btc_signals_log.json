@@ -5826,5 +5826,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 125,
+    "datetime": "2026-07-12 17:00",
+    "date": "2026-07-12",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 86,
+    "score_pct": 57.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 6
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 64073.16,
+    "t1": 64249.2,
+    "target": 64366.56,
+    "sl": 64014.48,
+    "rr": 5.0,
+    "sl_pct": 0.092,
+    "rsi": 53.6,
+    "vwap": 63180.04,
+    "vol_ratio": 0.6,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 64136.52\u201364158.64",
+      "Liquidity sweep at 63785.62",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 63915.20\u201363929.32",
+      "Fear & Greed 26 \u2014 ideal zone (25\u201360)",
+      "Weekly candle structure is bullish",
+      "RSI 54 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
