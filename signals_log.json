@@ -7017,5 +7017,54 @@
     "exit_price": 1246.5,
     "pnl_pts": -2.9,
     "pnl_pct": -0.23
+  },
+  {
+    "id": 147,
+    "datetime": "2026-07-13 06:48",
+    "date": "2026-07-13",
+    "asset": "PIDILITIND",
+    "symbol": "PIDILITIND",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 117,
+    "score_pct": 78.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 7,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1580.5,
+    "t1": 1589.89,
+    "target": 1613.8,
+    "sl": 1574.24,
+    "rr": 5.32,
+    "sl_pct": 0.4,
+    "rsi": 71.6,
+    "vwap": 1572.46,
+    "vol_ratio": 2.75,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=2.8x",
+      "Price above VWAP \u20b91572.5",
+      "Above OR High \u20b91574.0",
+      "Volume spike 2.8x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDH \u20b91613.8 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b912.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
