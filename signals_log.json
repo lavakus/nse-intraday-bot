@@ -6720,7 +6720,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 269.20001220703125,
+    "exit_price": 269.3999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6768,10 +6768,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b92.1 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 378.29998779296875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 383.3999938964844,
+    "pnl_pts": 10.2,
+    "pnl_pct": 2.73
   },
   {
     "id": 142,
@@ -6819,7 +6819,7 @@
       "Tight OR \u20b96.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1006.75,
+    "exit_price": 1015.1500244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6867,7 +6867,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1853.4000244140625,
+    "exit_price": 1859.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6916,7 +6916,7 @@
       "Tight OR \u20b99.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1317.5999755859375,
+    "exit_price": 1318.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6965,7 +6965,7 @@
       "Tight OR \u20b96.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1006.75,
+    "exit_price": 1015.1500244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7061,6 +7061,102 @@
       "PDH \u20b91613.8 \u2014 clear T2 target",
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b912.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": 1581.0,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 148,
+    "datetime": "2026-07-13 08:47",
+    "date": "2026-07-13",
+    "asset": "SBILIFE",
+    "symbol": "SBILIFE",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 107,
+    "score_pct": 71.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 22,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1859.5,
+    "t1": 1881.04,
+    "target": 1902.58,
+    "sl": 1845.14,
+    "rr": 3.0,
+    "sl_pct": 0.77,
+    "rsi": 67.3,
+    "vwap": 1848.77,
+    "vol_ratio": 2.86,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=2.9x",
+      "Price above VWAP \u20b91848.8",
+      "Above OR High \u20b91847.0",
+      "Volume spike 2.9x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "PDH \u20b91866.0 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b914.9 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 149,
+    "datetime": "2026-07-13 08:47",
+    "date": "2026-07-13",
+    "asset": "POWERGRID",
+    "symbol": "POWERGRID",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 285.8,
+    "t1": 287.51,
+    "target": 289.22,
+    "sl": 284.66,
+    "rr": 3.0,
+    "sl_pct": 0.4,
+    "rsi": 69.6,
+    "vwap": 284.68,
+    "vol_ratio": 2.34,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=2.3x",
+      "Price above VWAP \u20b9284.7",
+      "Above OR High \u20b9284.9",
+      "Volume spike 2.3x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
     "exit_price": null,
