@@ -6298,5 +6298,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 135,
+    "datetime": "2026-07-14 10:48",
+    "date": "2026-07-14",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 92,
+    "score_pct": 61.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "WATCH",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 12,
+      "pa_boosters": 20
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 63560.94,
+    "t1": 60988.86,
+    "target": 59274.14,
+    "sl": 64418.3,
+    "rr": 5.0,
+    "sl_pct": 1.349,
+    "rsi": 39.1,
+    "vwap": 63236.99,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "BOS confirmed 4H (SHORT)",
+      "Unmitigated OB 63740.33\u201364024.78",
+      "Liquidity sweep at 64221.00",
+      "Kill Zone WATCH active (+0pts)",
+      "FVG 64053.76\u201364122.40",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
