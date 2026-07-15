@@ -6737,5 +6737,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 144,
+    "datetime": "2026-07-15 14:03",
+    "date": "2026-07-15",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 113,
+    "score_pct": 75.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-NY",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 42,
+      "pa_boosters": 11
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 65146.0,
+    "t1": 67463.41,
+    "target": 69008.35,
+    "sl": 64373.53,
+    "rr": 5.0,
+    "sl_pct": 1.186,
+    "rsi": 61.5,
+    "vwap": 63456.24,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 64603.97\u201364781.46",
+      "Liquidity sweep at 65096.98",
+      "Kill Zone KZ-NY active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64700.00\u201364824.54",
+      "Fear & Greed 25 \u2014 ideal zone (25\u201360)",
+      "Round number $65,000",
+      "Weekly candle structure is bullish",
+      "RSI 62 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
