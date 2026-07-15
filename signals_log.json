@@ -7357,5 +7357,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 154,
+    "datetime": "2026-07-15 07:07",
+    "date": "2026-07-15",
+    "asset": "TCS",
+    "symbol": "TCS",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 102,
+    "score_pct": 68.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 7,
+      "boosters": 0
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 2190.9,
+    "t1": 2201.52,
+    "target": 2215.85,
+    "sl": 2183.82,
+    "rr": 3.52,
+    "sl_pct": 0.32,
+    "rsi": 72.0,
+    "vwap": 2182.62,
+    "vol_ratio": 1.61,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.6x",
+      "Price above VWAP \u20b92182.6",
+      "Above OR High \u20b92184.7",
+      "Volume spike 1.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDH \u20b92215.9 \u2014 clear T2 target"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
