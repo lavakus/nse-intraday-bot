@@ -7081,5 +7081,51 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 151,
+    "datetime": "2026-07-16 09:35",
+    "date": "2026-07-16",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 94,
+    "score_pct": 62.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ-L",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 34,
+      "pa_boosters": 7
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 64035.98,
+    "t1": 61154.36,
+    "target": 59233.28,
+    "sl": 64996.52,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 33.7,
+    "vwap": 63725.43,
+    "vol_ratio": 0.4,
+    "reasons": [
+      "CHOCH confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 64592.22\u201364719.01",
+      "Liquidity sweep at 64900.00",
+      "Kill Zone KZ-L active (+15pts)",
+      "FVG 64301.29\u201364588.59",
+      "Fear & Greed 25 \u2014 ideal zone (25\u201360)",
+      "15min LH+LL aligns with 4H bearish bias"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
