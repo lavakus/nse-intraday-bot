@@ -6819,7 +6819,7 @@
       "Tight OR \u20b96.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1010.2000122070312,
+    "exit_price": 1013.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -6965,7 +6965,7 @@
       "Tight OR \u20b96.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1010.2000122070312,
+    "exit_price": 1013.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7354,7 +7354,7 @@
       "Tight OR \u20b913.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2096.0,
+    "exit_price": 2111.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7400,9 +7400,9 @@
       "Kill Zone: DEAD (+0 pts)",
       "PDH \u20b92215.9 \u2014 clear T2 target"
     ],
-    "status": "OPEN",
-    "exit_price": 2193.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 2215.89990234375,
+    "pnl_pts": 25.0,
+    "pnl_pct": 1.14
   }
 ]
