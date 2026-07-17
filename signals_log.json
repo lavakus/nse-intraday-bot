@@ -6964,10 +6964,10 @@
       "PDL \u20b9989.8 \u2014 clear T2 target",
       "Tight OR \u20b96.3 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1020.2999877929688,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1020.4500122070312,
+    "pnl_pts": -3.65,
+    "pnl_pct": -0.36
   },
   {
     "id": 146,
@@ -7551,5 +7551,54 @@
     "exit_price": 1852.800048828125,
     "pnl_pts": -13.1,
     "pnl_pct": -0.71
+  },
+  {
+    "id": 158,
+    "datetime": "2026-07-17 06:11",
+    "date": "2026-07-17",
+    "asset": "JSWSTEEL",
+    "symbol": "JSWSTEEL",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ2",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 25,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1225.1,
+    "t1": 1211.46,
+    "target": 1197.83,
+    "sl": 1234.19,
+    "rr": 3.0,
+    "sl_pct": 0.74,
+    "rsi": 37.1,
+    "vwap": 1229.27,
+    "vol_ratio": 3.4,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=3.4x",
+      "Price below VWAP \u20b91229.3",
+      "Volume spike 3.4x average",
+      "Kill Zone: KZ2 (+10 pts)",
+      "RSI 37 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91224.9 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b99.4 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
