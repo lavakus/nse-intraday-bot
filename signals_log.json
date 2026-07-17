@@ -7596,10 +7596,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1238.0,
+    "pnl_pts": -12.9,
+    "pnl_pct": -1.05
   },
   {
     "id": 159,
@@ -7644,7 +7644,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 2143.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7692,7 +7692,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 252.89999389648438,
     "pnl_pts": null,
     "pnl_pct": null
   }
