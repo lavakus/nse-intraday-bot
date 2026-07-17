@@ -7600,5 +7600,100 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 159,
+    "datetime": "2026-07-17 07:11",
+    "date": "2026-07-17",
+    "asset": "HINDUNILVR",
+    "symbol": "HINDUNILVR",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 90,
+    "score_pct": 60.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 2140.0,
+    "t1": 2167.48,
+    "target": 2194.96,
+    "sl": 2121.68,
+    "rr": 3.0,
+    "sl_pct": 0.86,
+    "rsi": 68.9,
+    "vwap": 2130.21,
+    "vol_ratio": 1.69,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=1.7x",
+      "Price above VWAP \u20b92130.2",
+      "Above OR High \u20b92125.5",
+      "Volume spike 1.7x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 160,
+    "datetime": "2026-07-17 07:11",
+    "date": "2026-07-17",
+    "asset": "VEDL",
+    "symbol": "VEDL",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 80,
+    "score_pct": 53.3,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 252.5,
+    "t1": 248.83,
+    "target": 245.15,
+    "sl": 254.95,
+    "rr": 3.0,
+    "sl_pct": 0.97,
+    "rsi": 17.8,
+    "vwap": 255.42,
+    "vol_ratio": 1.53,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.5x",
+      "Price below VWAP \u20b9255.4",
+      "Below OR Low \u20b9254.7",
+      "Volume spike 1.5x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 18 extreme \u2014 use caution",
+      "5min LH+LL structure aligns with SHORT"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
