@@ -7175,5 +7175,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 153,
+    "datetime": "2026-07-17 00:05",
+    "date": "2026-07-17",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 97,
+    "score_pct": 64.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 34,
+      "pa_boosters": 10
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 63729.62,
+    "t1": 62160.98,
+    "target": 61115.22,
+    "sl": 64252.5,
+    "rr": 5.0,
+    "sl_pct": 0.82,
+    "rsi": 32.8,
+    "vwap": 63709.4,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "BOS confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 64063.81\u201364151.27",
+      "Liquidity sweep at 64158.58",
+      "Kill Zone KZ-A active (+15pts)",
+      "FVG 63796.08\u201364060.48",
+      "Fear & Greed 27 \u2014 ideal zone (25\u201360)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
