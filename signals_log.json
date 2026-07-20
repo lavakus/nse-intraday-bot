@@ -7644,7 +7644,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 2138.39990234375,
+    "exit_price": 2141.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7740,7 +7740,7 @@
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 288.95001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7788,7 +7788,7 @@
       "RSI 49 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1257.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7836,7 +7836,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 176.42999267578125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7884,7 +7884,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 176.42999267578125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7932,7 +7932,7 @@
       "PDH \u20b91223.5 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1221.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7981,7 +7981,7 @@
       "Tight OR \u20b92.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 317.25,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8028,10 +8028,10 @@
       "RSI 50 \u2014 ideal short zone (35\u201360)",
       "Tight OR \u20b910.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1825.0,
+    "pnl_pts": -15.2,
+    "pnl_pct": -0.84
   },
   {
     "id": 168,
@@ -8077,7 +8077,7 @@
       "Tight OR \u20b92.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 347.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8124,7 +8124,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1060.0,
     "pnl_pts": null,
     "pnl_pct": null
   }
