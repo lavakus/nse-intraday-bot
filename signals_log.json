@@ -7695,5 +7695,53 @@
     "exit_price": 259.6000061035156,
     "pnl_pts": -7.1,
     "pnl_pct": -2.81
+  },
+  {
+    "id": 161,
+    "datetime": "2026-07-20 06:41",
+    "date": "2026-07-20",
+    "asset": "POWERGRID",
+    "symbol": "POWERGRID",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 93,
+    "score_pct": 62.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 20,
+      "entry_quality": 8,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 286.35,
+    "t1": 287.82,
+    "target": 289.29,
+    "sl": 285.37,
+    "rr": 3.0,
+    "sl_pct": 0.34,
+    "rsi": 62.3,
+    "vwap": 286.65,
+    "vol_ratio": 2.42,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=2.4x",
+      "VWAP counter-trend (\u20b9286.7) \u2014 reduced confidence",
+      "Above OR High \u20b9284.9",
+      "Volume spike 2.4x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 62 \u2014 ideal long zone (40\u201365)",
+      "Tight OR \u20b91.4 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
