@@ -7644,7 +7644,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 2143.300048828125,
+    "exit_price": 2138.39990234375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7691,9 +7691,9 @@
       "RSI 18 extreme \u2014 use caution",
       "5min LH+LL structure aligns with SHORT"
     ],
-    "status": "OPEN",
-    "exit_price": 252.89999389648438,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 259.6000061035156,
+    "pnl_pts": -7.1,
+    "pnl_pct": -2.81
   }
 ]
