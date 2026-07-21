@@ -8175,5 +8175,101 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 171,
+    "datetime": "2026-07-21 06:24",
+    "date": "2026-07-21",
+    "asset": "BHARTIARTL",
+    "symbol": "BHARTIARTL",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 15,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1944.3,
+    "t1": 1930.3,
+    "target": 1902.7,
+    "sl": 1953.63,
+    "rr": 4.46,
+    "sl_pct": 0.48,
+    "rsi": 50.2,
+    "vwap": 1945.85,
+    "vol_ratio": 2.16,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=2.2x",
+      "Price below VWAP \u20b91945.9",
+      "Volume spike 2.2x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 50 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91902.7 \u2014 clear T2 target",
+      "Round number level confluence",
+      "Tight OR \u20b98.1 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 172,
+    "datetime": "2026-07-21 06:24",
+    "date": "2026-07-21",
+    "asset": "HCLTECH",
+    "symbol": "HCLTECH",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 90,
+    "score_pct": 60.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1234.3,
+    "t1": 1251.12,
+    "target": 1267.93,
+    "sl": 1223.09,
+    "rr": 3.0,
+    "sl_pct": 0.91,
+    "rsi": 77.4,
+    "vwap": 1228.01,
+    "vol_ratio": 2.69,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=2.7x",
+      "Price above VWAP \u20b91228.0",
+      "Above OR High \u20b91231.9",
+      "Volume spike 2.7x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
