@@ -7644,7 +7644,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 2130.199951171875,
+    "exit_price": 2142.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7739,10 +7739,10 @@
       "RSI 62 \u2014 ideal long zone (40\u201365)",
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 286.3999938964844,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 284.95001220703125,
+    "pnl_pts": -1.4,
+    "pnl_pct": -0.49
   },
   {
     "id": 162,
@@ -7788,7 +7788,7 @@
       "RSI 49 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1254.5999755859375,
+    "exit_price": 1252.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7836,7 +7836,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 174.97000122070312,
+    "exit_price": 174.77999877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7884,7 +7884,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 174.97000122070312,
+    "exit_price": 174.77999877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7981,7 +7981,7 @@
       "Tight OR \u20b92.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 318.79998779296875,
+    "exit_price": 318.8999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8076,10 +8076,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b92.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 346.6000061035156,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 344.79998779296875,
+    "pnl_pts": -2.2,
+    "pnl_pct": -0.63
   },
   {
     "id": 169,
@@ -8172,7 +8172,7 @@
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 249.22999572753906,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8221,7 +8221,7 @@
       "Tight OR \u20b98.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1945.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8266,6 +8266,152 @@
       "Volume spike 2.7x average",
       "Kill Zone: DEAD (+0 pts)",
       "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "OPEN",
+    "exit_price": 1235.0,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 173,
+    "datetime": "2026-07-21 07:28",
+    "date": "2026-07-21",
+    "asset": "NESTLEIND",
+    "symbol": "NESTLEIND",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 15,
+      "boosters": 20
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1450.6,
+    "t1": 1433.51,
+    "target": 1405.1,
+    "sl": 1461.99,
+    "rr": 3.99,
+    "sl_pct": 0.79,
+    "rsi": 37.4,
+    "vwap": 1456.17,
+    "vol_ratio": 3.3,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=3.3x",
+      "Price below VWAP \u20b91456.2",
+      "Volume spike 3.3x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 37 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91405.1 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Round number level confluence",
+      "Tight OR \u20b911.9 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 174,
+    "datetime": "2026-07-21 07:28",
+    "date": "2026-07-21",
+    "asset": "TATACONSUM",
+    "symbol": "TATACONSUM",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1082.7,
+    "t1": 1078.11,
+    "target": 1073.52,
+    "sl": 1085.76,
+    "rr": 3.0,
+    "sl_pct": 0.28,
+    "rsi": 29.1,
+    "vwap": 1087.92,
+    "vol_ratio": 4.04,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=4.0x",
+      "Price below VWAP \u20b91087.9",
+      "Below OR Low \u20b91090.7",
+      "Volume spike 4.0x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "Tight OR \u20b95.8 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 175,
+    "datetime": "2026-07-21 07:28",
+    "date": "2026-07-21",
+    "asset": "KOTAKBANK",
+    "symbol": "KOTAKBANK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 88,
+    "score_pct": 58.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 30,
+      "entry_quality": 8,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 386.2,
+    "t1": 389.49,
+    "target": 392.77,
+    "sl": 384.01,
+    "rr": 3.0,
+    "sl_pct": 0.57,
+    "rsi": 57.9,
+    "vwap": 383.78,
+    "vol_ratio": 1.47,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=1.5x",
+      "Price above VWAP \u20b9383.8",
+      "Above OR High \u20b9384.4",
+      "Volume elevated 1.5x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 58 \u2014 ideal long zone (40\u201365)",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b91.8 \u2014 clean structure"
     ],
     "status": "OPEN",
     "exit_price": null,
