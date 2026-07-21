@@ -7644,7 +7644,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 2141.199951171875,
+    "exit_price": 2130.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7740,7 +7740,7 @@
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 288.95001220703125,
+    "exit_price": 286.3999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7788,7 +7788,7 @@
       "RSI 49 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1257.199951171875,
+    "exit_price": 1254.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7836,7 +7836,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 176.42999267578125,
+    "exit_price": 174.97000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7884,7 +7884,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 176.42999267578125,
+    "exit_price": 174.97000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7931,10 +7931,10 @@
       "RSI 57 \u2014 ideal long zone (40\u201365)",
       "PDH \u20b91223.5 \u2014 clear T2 target"
     ],
-    "status": "OPEN",
-    "exit_price": 1221.699951171875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1231.0,
+    "pnl_pts": 15.4,
+    "pnl_pct": 1.27
   },
   {
     "id": 166,
@@ -7981,7 +7981,7 @@
       "Tight OR \u20b92.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 317.25,
+    "exit_price": 318.79998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8077,7 +8077,7 @@
       "Tight OR \u20b92.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 347.0,
+    "exit_price": 346.6000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8123,8 +8123,56 @@
       "Kill Zone: KZ3 (+15 pts)",
       "5min HH+HL structure aligns with LONG"
     ],
+    "status": "SL HIT",
+    "exit_price": 1050.199951171875,
+    "pnl_pts": -7.7,
+    "pnl_pct": -0.73
+  },
+  {
+    "id": 170,
+    "datetime": "2026-07-21 06:17",
+    "date": "2026-07-21",
+    "asset": "ONGC",
+    "symbol": "ONGC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 107,
+    "score_pct": 71.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 7,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 249.17,
+    "t1": 247.68,
+    "target": 246.2,
+    "sl": 250.16,
+    "rr": 3.0,
+    "sl_pct": 0.4,
+    "rsi": 24.3,
+    "vwap": 250.3,
+    "vol_ratio": 2.42,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=2.4x",
+      "Price below VWAP \u20b9250.3",
+      "Below OR Low \u20b9250.0",
+      "Volume spike 2.4x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDL \u20b9248.1 \u2014 clear T2 target",
+      "Tight OR \u20b91.4 \u2014 clean structure"
+    ],
     "status": "OPEN",
-    "exit_price": 1060.0,
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
