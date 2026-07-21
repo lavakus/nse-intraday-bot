@@ -8417,5 +8417,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 176,
+    "datetime": "2026-07-21 08:06",
+    "date": "2026-07-21",
+    "asset": "HDFCLIFE",
+    "symbol": "HDFCLIFE",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 115,
+    "score_pct": 76.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 560.8,
+    "t1": 559.12,
+    "target": 557.44,
+    "sl": 561.92,
+    "rr": 3.0,
+    "sl_pct": 0.2,
+    "rsi": 61.8,
+    "vwap": 560.91,
+    "vol_ratio": 3.36,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=3.4x",
+      "Price below VWAP \u20b9560.9",
+      "Below OR Low \u20b9560.9",
+      "Volume spike 3.4x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "Tight OR \u20b93.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
