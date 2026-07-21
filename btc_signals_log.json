@@ -7909,5 +7909,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 168,
+    "datetime": "2026-07-21 20:45",
+    "date": "2026-07-21",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 13
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 66416.33,
+    "t1": 67651.91,
+    "target": 68475.63,
+    "sl": 66004.47,
+    "rr": 5.0,
+    "sl_pct": 0.62,
+    "rsi": 51.5,
+    "vwap": 64633.94,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 66282.01\u201366804.40",
+      "Liquidity sweep at 66378.46",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 65946.81\u201366086.23",
+      "Fear & Greed 25 \u2014 ideal zone (25\u201360)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Weekly candle structure is bullish",
+      "RSI 52 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
