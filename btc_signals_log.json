@@ -8286,5 +8286,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 176,
+    "datetime": "2026-07-23 21:07",
+    "date": "2026-07-23",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 72,
+    "score_pct": 48.0,
+    "signal_strength": "WEAK",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 45,
+      "ict_crypto_filters": 19,
+      "pa_boosters": 8
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": false
+    },
+    "entry": 65085.05,
+    "t1": 62156.21,
+    "target": 60203.65,
+    "sl": 66061.33,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 57.7,
+    "vwap": 64980.87,
+    "vol_ratio": 0.1,
+    "reasons": [
+      "BOS confirmed 4H (SHORT)",
+      "Unmitigated OB 66138.80\u201366809.72",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone NIGHT active (+0pts)",
+      "FVG 65184.63\u201365505.51",
+      "Fear & Greed 31 \u2014 ideal zone (25\u201360)",
+      "Round number $65,000",
+      "RSI 58 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
