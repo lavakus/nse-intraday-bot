@@ -8147,5 +8147,51 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 173,
+    "datetime": "2026-07-23 16:58",
+    "date": "2026-07-23",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 86,
+    "score_pct": 57.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 19,
+      "pa_boosters": 7
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 64744.12,
+    "t1": 61830.64,
+    "target": 59888.32,
+    "sl": 65715.28,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 35.1,
+    "vwap": 64986.9,
+    "vol_ratio": 0.3,
+    "reasons": [
+      "BOS confirmed 4H (SHORT)",
+      "Unmitigated OB 66138.80\u201366809.72",
+      "Liquidity sweep at 65040.47",
+      "Kill Zone NIGHT active (+0pts)",
+      "FVG 65184.63\u201365505.51",
+      "Fear & Greed 31 \u2014 ideal zone (25\u201360)",
+      "15min LH+LL aligns with 4H bearish bias"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
