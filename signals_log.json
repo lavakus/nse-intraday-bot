@@ -7644,7 +7644,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 2156.10009765625,
+    "exit_price": 2144.89990234375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7836,7 +7836,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 174.39999389648438,
+    "exit_price": 174.72000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -7884,7 +7884,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 174.39999389648438,
+    "exit_price": 174.72000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8268,7 +8268,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 1240.5999755859375,
+    "exit_price": 1249.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8556,10 +8556,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1043.800048828125,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1021.2000122070312,
+    "pnl_pts": 37.7,
+    "pnl_pct": 3.56
   },
   {
     "id": 179,
@@ -8652,7 +8652,7 @@
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1043.800048828125,
+    "exit_price": 1021.2000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8748,7 +8748,7 @@
       "Tight OR \u20b92.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 383.0,
+    "exit_price": 383.6499938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8843,10 +8843,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b95.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1008.7999877929688,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1003.9000244140625,
+    "pnl_pts": 10.6,
+    "pnl_pct": 1.04
   },
   {
     "id": 185,
@@ -8891,10 +8891,10 @@
       "Round number level confluence",
       "Tight OR \u20b96.4 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1048.5999755859375,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1007.2999877929688,
+    "pnl_pts": 44.2,
+    "pnl_pct": 4.2
   },
   {
     "id": 186,
@@ -8940,7 +8940,249 @@
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 349.8999938964844,
+    "exit_price": 347.70001220703125,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 187,
+    "datetime": "2026-07-24 06:14",
+    "date": "2026-07-24",
+    "asset": "HINDUNILVR",
+    "symbol": "HINDUNILVR",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 130,
+    "score_pct": 86.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ2",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 25,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 2144.9,
+    "t1": 2136.82,
+    "target": 2128.73,
+    "sl": 2150.29,
+    "rr": 3.0,
+    "sl_pct": 0.25,
+    "rsi": 56.7,
+    "vwap": 2147.04,
+    "vol_ratio": 4.11,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=4.1x",
+      "Price below VWAP \u20b92147.0",
+      "Below OR Low \u20b92147.1",
+      "Volume spike 4.1x average",
+      "Kill Zone: KZ2 (+10 pts)",
+      "RSI 57 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b92139.9 \u2014 clear T2 target",
+      "Round number level confluence",
+      "Tight OR \u20b911.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 188,
+    "datetime": "2026-07-24 06:14",
+    "date": "2026-07-24",
+    "asset": "HDFCLIFE",
+    "symbol": "HDFCLIFE",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ2",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 10,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 554.9,
+    "t1": 562.77,
+    "target": 570.65,
+    "sl": 549.65,
+    "rr": 3.0,
+    "sl_pct": 0.95,
+    "rsi": 77.1,
+    "vwap": 551.85,
+    "vol_ratio": 3.18,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=3.2x",
+      "Price above VWAP \u20b9551.9",
+      "Above OR High \u20b9553.7",
+      "Volume spike 3.2x average",
+      "Kill Zone: KZ2 (+10 pts)",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b95.5 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 189,
+    "datetime": "2026-07-24 06:14",
+    "date": "2026-07-24",
+    "asset": "IOC",
+    "symbol": "IOC",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 102,
+    "score_pct": 68.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ2",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 17,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 138.18,
+    "t1": 139.89,
+    "target": 142.33,
+    "sl": 137.04,
+    "rr": 3.64,
+    "sl_pct": 0.83,
+    "rsi": 68.3,
+    "vwap": 137.6,
+    "vol_ratio": 1.86,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=1.9x",
+      "Price above VWAP \u20b9137.6",
+      "Volume spike 1.9x average",
+      "Kill Zone: KZ2 (+10 pts)",
+      "PDH \u20b9142.3 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b91.2 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 190,
+    "datetime": "2026-07-24 06:14",
+    "date": "2026-07-24",
+    "asset": "BHARTIARTL",
+    "symbol": "BHARTIARTL",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ2",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 25,
+      "entry_quality": 10,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1893.1,
+    "t1": 1884.58,
+    "target": 1876.06,
+    "sl": 1898.78,
+    "rr": 3.0,
+    "sl_pct": 0.3,
+    "rsi": 71.3,
+    "vwap": 1887.07,
+    "vol_ratio": 4.04,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=4.0x",
+      "VWAP counter-trend (\u20b91887.1) \u2014 reduced confidence",
+      "Below OR Low \u20b91896.1",
+      "Volume spike 4.0x average",
+      "Opening gap 2.4% supports SHORT",
+      "Kill Zone: KZ2 (+10 pts)",
+      "Tight OR \u20b98.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 191,
+    "datetime": "2026-07-24 06:14",
+    "date": "2026-07-24",
+    "asset": "INDUSINDBK",
+    "symbol": "INDUSINDBK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ2",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 25,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 998.15,
+    "t1": 1012.52,
+    "target": 1042.2,
+    "sl": 988.57,
+    "rr": 4.6,
+    "sl_pct": 0.96,
+    "rsi": 48.8,
+    "vwap": 992.55,
+    "vol_ratio": 1.6,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=1.6x",
+      "Price above VWAP \u20b9992.6",
+      "Volume spike 1.6x average",
+      "Kill Zone: KZ2 (+10 pts)",
+      "RSI 49 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b91042.2 \u2014 clear T2 target",
+      "Round number level confluence"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
