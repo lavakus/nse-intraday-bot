@@ -8712,5 +8712,51 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 185,
+    "datetime": "2026-07-25 07:19",
+    "date": "2026-07-25",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 75,
+    "score_pct": 50.0,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 19,
+      "pa_boosters": 3
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 63937.25,
+    "t1": 61060.07,
+    "target": 59141.95,
+    "sl": 64896.31,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 39.7,
+    "vwap": 65250.81,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 66147.14\u201366808.71",
+      "Liquidity sweep at 63961.99",
+      "Kill Zone DEAD active (+0pts)",
+      "FVG 64002.23\u201364021.41",
+      "Fear & Greed 27 \u2014 ideal zone (25\u201360)",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
