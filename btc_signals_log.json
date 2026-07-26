@@ -8804,5 +8804,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 187,
+    "datetime": "2026-07-26 01:07",
+    "date": "2026-07-26",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 42,
+      "pa_boosters": 10
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 64424.23,
+    "t1": 65307.55,
+    "target": 65896.43,
+    "sl": 64129.79,
+    "rr": 5.0,
+    "sl_pct": 0.457,
+    "rsi": 63.5,
+    "vwap": 65235.47,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 64352.27\u201364361.91",
+      "Liquidity sweep at 64323.31",
+      "Kill Zone KZ-A active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64366.47\u201364409.45",
+      "Fear & Greed 26 \u2014 ideal zone (25\u201360)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "RSI 63 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
