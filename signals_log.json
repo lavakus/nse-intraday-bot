@@ -9233,5 +9233,102 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 193,
+    "datetime": "2026-07-27 06:57",
+    "date": "2026-07-27",
+    "asset": "JSWSTEEL",
+    "symbol": "JSWSTEEL",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 115,
+    "score_pct": 76.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1237.6,
+    "t1": 1233.28,
+    "target": 1228.1,
+    "sl": 1240.48,
+    "rr": 3.3,
+    "sl_pct": 0.23,
+    "rsi": 36.5,
+    "vwap": 1241.16,
+    "vol_ratio": 2.72,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=2.7x",
+      "Price below VWAP \u20b91241.2",
+      "Below OR Low \u20b91242.6",
+      "Volume spike 2.7x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 37 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91228.1 \u2014 clear T2 target",
+      "Tight OR \u20b94.8 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 194,
+    "datetime": "2026-07-27 06:57",
+    "date": "2026-07-27",
+    "asset": "HDFCLIFE",
+    "symbol": "HDFCLIFE",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 107,
+    "score_pct": 71.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 7,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 551.95,
+    "t1": 548.88,
+    "target": 547.2,
+    "sl": 554.0,
+    "rr": 2.32,
+    "sl_pct": 0.37,
+    "rsi": 32.1,
+    "vwap": 554.51,
+    "vol_ratio": 2.63,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=2.6x",
+      "Price below VWAP \u20b9554.5",
+      "Below OR Low \u20b9554.8",
+      "Volume spike 2.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDL \u20b9547.2 \u2014 clear T2 target",
+      "Tight OR \u20b93.2 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
