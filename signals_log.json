@@ -7644,7 +7644,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 2145.89990234375,
+    "exit_price": 2176.60009765625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8651,10 +8651,10 @@
       "Round number level confluence",
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1035.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1078.300048828125,
+    "pnl_pts": -29.1,
+    "pnl_pct": -2.77
   },
   {
     "id": 181,
@@ -8748,7 +8748,7 @@
       "Tight OR \u20b92.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 384.45001220703125,
+    "exit_price": 385.04998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8940,7 +8940,7 @@
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 347.3999938964844,
+    "exit_price": 351.04998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8989,10 +8989,10 @@
       "Round number level confluence",
       "Tight OR \u20b911.3 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 2145.89990234375,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 2176.60009765625,
+    "pnl_pts": -31.7,
+    "pnl_pct": -1.48
   },
   {
     "id": 188,
@@ -9038,7 +9038,7 @@
       "Tight OR \u20b95.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 555.3499755859375,
+    "exit_price": 552.5499877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9086,7 +9086,7 @@
       "Tight OR \u20b91.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 138.4600067138672,
+    "exit_price": 140.58999633789062,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9133,10 +9133,10 @@
       "Kill Zone: KZ2 (+10 pts)",
       "Tight OR \u20b98.0 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1893.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1904.9000244140625,
+    "pnl_pts": -11.8,
+    "pnl_pct": -0.62
   },
   {
     "id": 191,
@@ -9182,7 +9182,55 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 997.7999877929688,
+    "exit_price": 1006.9500122070312,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 192,
+    "datetime": "2026-07-27 06:52",
+    "date": "2026-07-27",
+    "asset": "TATACONSUM",
+    "symbol": "TATACONSUM",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 92,
+    "score_pct": 61.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 30,
+      "entry_quality": 7,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1106.6,
+    "t1": 1114.26,
+    "target": 1117.1,
+    "sl": 1101.49,
+    "rr": 2.05,
+    "sl_pct": 0.46,
+    "rsi": 37.5,
+    "vwap": 1105.92,
+    "vol_ratio": 1.59,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=1.6x",
+      "Price above VWAP \u20b91105.9",
+      "Volume spike 1.6x average",
+      "Opening gap 2.26% supports LONG",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDH \u20b91117.1 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
