@@ -7643,10 +7643,10 @@
       "Kill Zone: DEAD (+0 pts)",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": 2175.699951171875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 2074.0,
+    "pnl_pts": -66.0,
+    "pnl_pct": -3.08
   },
   {
     "id": 160,
@@ -8748,7 +8748,7 @@
       "Tight OR \u20b92.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 383.95001220703125,
+    "exit_price": 386.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -8939,10 +8939,10 @@
       "PDH \u20b9349.1 \u2014 clear T2 target",
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 350.70001220703125,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 344.1000061035156,
+    "pnl_pts": -3.95,
+    "pnl_pct": -1.13
   },
   {
     "id": 187,
@@ -9038,7 +9038,7 @@
       "Tight OR \u20b95.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 551.5499877929688,
+    "exit_price": 555.3499755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9086,7 +9086,7 @@
       "Tight OR \u20b91.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 140.19000244140625,
+    "exit_price": 141.97999572753906,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1001.5499877929688,
+    "exit_price": 1001.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9229,10 +9229,10 @@
       "PDH \u20b91117.1 \u2014 clear T2 target",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": 1106.0999755859375,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1090.4000244140625,
+    "pnl_pts": -16.2,
+    "pnl_pct": -1.46
   },
   {
     "id": 193,
@@ -9326,10 +9326,10 @@
       "PDL \u20b9547.2 \u2014 clear T2 target",
       "Tight OR \u20b93.2 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 551.5499877929688,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 555.3499755859375,
+    "pnl_pts": -3.4,
+    "pnl_pct": -0.62
   },
   {
     "id": 195,
@@ -9375,10 +9375,10 @@
       "PDL \u20b9378.6 \u2014 clear T2 target",
       "Tight OR \u20b93.2 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 386.70001220703125,
+    "pnl_pts": -2.75,
+    "pnl_pct": -0.72
   },
   {
     "id": 196,
@@ -9420,6 +9420,54 @@
       "Volume spike 4.4x average",
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 47 \u2014 ideal long zone (40\u201365)"
+    ],
+    "status": "SL HIT",
+    "exit_price": 415.1499938964844,
+    "pnl_pts": -14.6,
+    "pnl_pct": -3.4
+  },
+  {
+    "id": 197,
+    "datetime": "2026-07-28 06:14",
+    "date": "2026-07-28",
+    "asset": "AXISBANK",
+    "symbol": "AXISBANK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ2",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 25,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1229.7,
+    "t1": 1239.77,
+    "target": 1249.83,
+    "sl": 1222.99,
+    "rr": 3.0,
+    "sl_pct": 0.55,
+    "rsi": 41.0,
+    "vwap": 1227.9,
+    "vol_ratio": 3.24,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=3.2x",
+      "Price above VWAP \u20b91227.9",
+      "Volume spike 3.2x average",
+      "Kill Zone: KZ2 (+10 pts)",
+      "RSI 41 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b91233.9 \u2014 clear T2 target",
+      "Tight OR \u20b98.7 \u2014 clean structure"
     ],
     "status": "OPEN",
     "exit_price": null,
