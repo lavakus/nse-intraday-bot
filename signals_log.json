@@ -10048,5 +10048,103 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 210,
+    "datetime": "2026-07-29 08:19",
+    "date": "2026-07-29",
+    "asset": "PIDILITIND",
+    "symbol": "PIDILITIND",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 20,
+      "entry_quality": 30,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1625.2,
+    "t1": 1648.36,
+    "target": 1671.52,
+    "sl": 1609.76,
+    "rr": 3.0,
+    "sl_pct": 0.95,
+    "rsi": 64.9,
+    "vwap": 1616.24,
+    "vol_ratio": 1.37,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=1.4x",
+      "Price above VWAP \u20b91616.2",
+      "Volume elevated 1.4x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 65 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b91632.7 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b97.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 211,
+    "datetime": "2026-07-29 08:19",
+    "date": "2026-07-29",
+    "asset": "BHARTIARTL",
+    "symbol": "BHARTIARTL",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 108,
+    "score_pct": 72.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 23,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1951.0,
+    "t1": 1974.32,
+    "target": 1997.65,
+    "sl": 1935.45,
+    "rr": 3.0,
+    "sl_pct": 0.8,
+    "rsi": 62.6,
+    "vwap": 1942.22,
+    "vol_ratio": 1.54,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=1.5x",
+      "Price above VWAP \u20b91942.2",
+      "Above OR High \u20b91937.4",
+      "Volume spike 1.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 63 \u2014 ideal long zone (40\u201365)",
+      "5min HH+HL structure aligns with LONG",
+      "Round number level confluence"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
