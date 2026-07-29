@@ -8748,7 +8748,7 @@
       "Tight OR \u20b92.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 386.70001220703125,
+    "exit_price": 388.20001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9038,7 +9038,7 @@
       "Tight OR \u20b95.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 555.3499755859375,
+    "exit_price": 558.25,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9086,7 +9086,7 @@
       "Tight OR \u20b91.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 141.97999572753906,
+    "exit_price": 140.42999267578125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1001.0,
+    "exit_price": 1009.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9470,7 +9470,7 @@
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1223.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9519,7 +9519,7 @@
       "Tight OR \u20b92.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 558.25,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9568,10 +9568,10 @@
       "Round number level confluence",
       "Tight OR \u20b98.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1276.5,
+    "pnl_pts": -27.6,
+    "pnl_pct": -2.21
   },
   {
     "id": 200,
@@ -9615,10 +9615,10 @@
       "Kill Zone: DEAD (+0 pts)",
       "RSI 54 \u2014 ideal long zone (40\u201365)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1652.800048828125,
+    "pnl_pts": 25.4,
+    "pnl_pct": 1.56
   },
   {
     "id": 201,
@@ -9662,10 +9662,10 @@
       "Kill Zone: DEAD (+0 pts)",
       "RSI 51 \u2014 ideal short zone (35\u201360)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 287.45001220703125,
+    "pnl_pts": -3.9,
+    "pnl_pct": -1.38
   },
   {
     "id": 202,
@@ -9710,6 +9710,242 @@
       "PDL \u20b91210.6 \u2014 clear T2 target",
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b98.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": 1223.5,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 203,
+    "datetime": "2026-07-29 06:19",
+    "date": "2026-07-29",
+    "asset": "INFY",
+    "symbol": "INFY",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 40,
+      "entry_quality": 0,
+      "boosters": 0
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1157.2,
+    "t1": 1163.68,
+    "target": 1170.16,
+    "sl": 1152.88,
+    "rr": 3.0,
+    "sl_pct": 0.37,
+    "rsi": 39.2,
+    "vwap": 1150.14,
+    "vol_ratio": 1.67,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.7x",
+      "Price above VWAP \u20b91150.1",
+      "Above OR High \u20b91151.8",
+      "Volume spike 1.7x average",
+      "Opening gap 3.67% supports LONG",
+      "Kill Zone: DEAD (+0 pts)"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 204,
+    "datetime": "2026-07-29 06:19",
+    "date": "2026-07-29",
+    "asset": "ASIANPAINT",
+    "symbol": "ASIANPAINT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 40,
+      "entry_quality": 0,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 2771.8,
+    "t1": 2811.66,
+    "target": 2851.51,
+    "sl": 2745.23,
+    "rr": 3.0,
+    "sl_pct": 0.96,
+    "rsi": 76.6,
+    "vwap": 2754.13,
+    "vol_ratio": 3.03,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=3.0x",
+      "Price above VWAP \u20b92754.1",
+      "Above OR High \u20b92748.0",
+      "Volume spike 3.0x average",
+      "Opening gap 2.0% supports LONG",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 205,
+    "datetime": "2026-07-29 06:19",
+    "date": "2026-07-29",
+    "asset": "INDUSINDBK",
+    "symbol": "INDUSINDBK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1008.85,
+    "t1": 1022.59,
+    "target": 1036.33,
+    "sl": 999.69,
+    "rr": 3.0,
+    "sl_pct": 0.91,
+    "rsi": 68.3,
+    "vwap": 1002.79,
+    "vol_ratio": 1.73,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=1.7x",
+      "Price above VWAP \u20b91002.8",
+      "Above OR High \u20b91000.7",
+      "Volume spike 1.7x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b94.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 206,
+    "datetime": "2026-07-29 06:19",
+    "date": "2026-07-29",
+    "asset": "TECHM",
+    "symbol": "TECHM",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 82,
+    "score_pct": 54.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 7,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1653.0,
+    "t1": 1636.38,
+    "target": 1595.8,
+    "sl": 1664.08,
+    "rr": 5.16,
+    "sl_pct": 0.67,
+    "rsi": 29.1,
+    "vwap": 1657.46,
+    "vol_ratio": 1.5,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=1.5x",
+      "Price below VWAP \u20b91657.5",
+      "Volume spike 1.5x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDL \u20b91595.8 \u2014 clear T2 target",
+      "Round number level confluence"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 207,
+    "datetime": "2026-07-29 06:19",
+    "date": "2026-07-29",
+    "asset": "NESTLEIND",
+    "symbol": "NESTLEIND",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 80,
+    "score_pct": 53.3,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 0,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1509.0,
+    "t1": 1525.82,
+    "target": 1542.63,
+    "sl": 1497.79,
+    "rr": 3.0,
+    "sl_pct": 0.74,
+    "rsi": 77.5,
+    "vwap": 1503.81,
+    "vol_ratio": 3.66,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=3.7x",
+      "Price above VWAP \u20b91503.8",
+      "Volume spike 3.7x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
     "exit_price": null,
