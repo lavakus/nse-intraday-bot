@@ -9469,5 +9469,51 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 201,
+    "datetime": "2026-07-30 12:45",
+    "date": "2026-07-30",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 87,
+    "score_pct": 58.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "WATCH",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 0
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 64764.23,
+    "t1": 67678.61,
+    "target": 69621.53,
+    "sl": 63792.77,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 68.8,
+    "vwap": 64336.47,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 63586.23\u201363902.98",
+      "Liquidity sweep at 64366.25",
+      "Kill Zone WATCH active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64546.92\u201364697.76",
+      "Fear & Greed 28 \u2014 ideal zone (25\u201360)"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
