@@ -9562,5 +9562,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 203,
+    "datetime": "2026-07-30 20:02",
+    "date": "2026-07-30",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 8
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 64862.76,
+    "t1": 67781.58,
+    "target": 69727.46,
+    "sl": 63889.82,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 57.2,
+    "vwap": 64351.35,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 63586.23\u201363902.98",
+      "Liquidity sweep at 64656.08",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64262.25\u201364472.29",
+      "Fear & Greed 28 \u2014 ideal zone (25\u201360)",
+      "Round number $65,000",
+      "RSI 57 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
