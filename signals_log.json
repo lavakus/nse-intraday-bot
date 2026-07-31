@@ -10483,5 +10483,101 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 219,
+    "datetime": "2026-07-31 06:39",
+    "date": "2026-07-31",
+    "asset": "HDFCLIFE",
+    "symbol": "HDFCLIFE",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 544.5,
+    "t1": 539.54,
+    "target": 534.57,
+    "sl": 547.81,
+    "rr": 3.0,
+    "sl_pct": 0.61,
+    "rsi": 29.3,
+    "vwap": 545.63,
+    "vol_ratio": 10.93,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=10.9x",
+      "Price below VWAP \u20b9545.6",
+      "Below OR Low \u20b9545.0",
+      "Volume spike 10.9x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b93.1 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 220,
+    "datetime": "2026-07-31 06:39",
+    "date": "2026-07-31",
+    "asset": "ITC",
+    "symbol": "ITC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 281.35,
+    "t1": 277.93,
+    "target": 274.51,
+    "sl": 283.63,
+    "rr": 3.0,
+    "sl_pct": 0.81,
+    "rsi": 32.4,
+    "vwap": 282.25,
+    "vol_ratio": 2.94,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=2.9x",
+      "Price below VWAP \u20b9282.2",
+      "Below OR Low \u20b9283.4",
+      "Volume spike 2.9x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b92.4 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
