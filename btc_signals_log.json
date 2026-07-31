@@ -9658,5 +9658,56 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 205,
+    "datetime": "2026-07-31 01:05",
+    "date": "2026-07-31",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 120,
+    "score_pct": 80.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 42,
+      "pa_boosters": 25
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 64905.79,
+    "t1": 65929.48,
+    "target": 66611.94,
+    "sl": 64564.56,
+    "rr": 5.0,
+    "sl_pct": 0.526,
+    "rsi": 59.8,
+    "vwap": 64288.71,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "BOS confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 64677.12\u201364737.86",
+      "Liquidity sweep at 64691.90",
+      "Kill Zone KZ-A active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64266.00\u201364472.29",
+      "Fear & Greed 25 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Round number $65,000",
+      "RSI 60 \u2014 ideal zone",
+      "CAUTION: Unfilled CME gap below entry"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
