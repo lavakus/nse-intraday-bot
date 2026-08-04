@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1016.9000244140625,
+    "exit_price": 1019.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1016.9000244140625,
+    "exit_price": 1019.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9947,10 +9947,10 @@
       "Kill Zone: DEAD (+0 pts)",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": 1515.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1458.199951171875,
+    "pnl_pts": -50.8,
+    "pnl_pct": -3.37
   },
   {
     "id": 208,
@@ -9996,7 +9996,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 414.1000061035156,
+    "exit_price": 415.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10094,7 +10094,7 @@
       "Tight OR \u20b97.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1627.0,
+    "exit_price": 1628.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10143,7 +10143,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1958.300048828125,
+    "exit_price": 1954.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10384,7 +10384,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1447.699951171875,
+    "exit_price": 1433.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10480,7 +10480,7 @@
       "Tight OR \u20b92.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 392.6499938964844,
+    "exit_price": 392.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10674,10 +10674,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b96.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1097.5,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1087.199951171875,
+    "pnl_pts": -6.0,
+    "pnl_pct": -0.55
   },
   {
     "id": 223,
@@ -10724,10 +10724,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b96.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1097.5,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1087.199951171875,
+    "pnl_pts": -7.3,
+    "pnl_pct": -0.67
   },
   {
     "id": 224,
@@ -10822,7 +10822,7 @@
       "Tight OR \u20b94.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1016.9000244140625,
+    "exit_price": 1019.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10871,7 +10871,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 283.04998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   }
