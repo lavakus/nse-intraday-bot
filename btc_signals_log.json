@@ -10722,5 +10722,55 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 227,
+    "datetime": "2026-08-05 05:47",
+    "date": "2026-08-05",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 103,
+    "score_pct": 68.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 16
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 64313.36,
+    "t1": 65339.9,
+    "target": 66024.26,
+    "sl": 63971.18,
+    "rr": 5.0,
+    "sl_pct": 0.532,
+    "rsi": 56.6,
+    "vwap": 63629.21,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 64113.97\u201364128.00",
+      "Liquidity sweep at 64042.03",
+      "Kill Zone DEAD active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 63536.82\u201363644.79",
+      "Fear & Greed 27 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "Weekly candle structure is bullish",
+      "RSI 57 \u2014 ideal zone",
+      "CAUTION: Unfilled CME gap below entry"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
