@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1019.4000244140625,
+    "exit_price": 1024.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1019.4000244140625,
+    "exit_price": 1024.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9996,7 +9996,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": 415.70001220703125,
+    "exit_price": 412.8500061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10094,7 +10094,7 @@
       "Tight OR \u20b97.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1628.199951171875,
+    "exit_price": 1636.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10143,7 +10143,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1954.4000244140625,
+    "exit_price": 1969.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10384,7 +10384,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1433.800048828125,
+    "exit_price": 1444.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10480,7 +10480,7 @@
       "Tight OR \u20b92.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 392.5,
+    "exit_price": 395.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10822,7 +10822,7 @@
       "Tight OR \u20b94.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1019.4000244140625,
+    "exit_price": 1024.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10871,7 +10871,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 283.04998779296875,
+    "exit_price": 282.20001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -10917,9 +10917,9 @@
       "PDH \u20b9271.9 \u2014 clear T2 target",
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 268.3500061035156,
+    "pnl_pts": -1.35,
+    "pnl_pct": -0.5
   }
 ]
