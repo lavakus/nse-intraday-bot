@@ -10772,5 +10772,56 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 228,
+    "datetime": "2026-08-05 08:38",
+    "date": "2026-08-05",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 120,
+    "score_pct": 80.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-L",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 42,
+      "pa_boosters": 18
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 64184.24,
+    "t1": 64943.15,
+    "target": 65449.09,
+    "sl": 63931.27,
+    "rr": 5.0,
+    "sl_pct": 0.394,
+    "rsi": 51.1,
+    "vwap": 63650.23,
+    "vol_ratio": 1.7,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 64199.31\u201364315.95",
+      "Liquidity sweep at 64102.89",
+      "Kill Zone KZ-L active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64030.36\u201364077.86",
+      "Fear & Greed 27 \u2014 ideal zone (25\u201360)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Volume 1.7x spike at reaction zone",
+      "Weekly candle structure is bullish",
+      "RSI 51 \u2014 ideal zone",
+      "CAUTION: Unfilled CME gap below entry"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
