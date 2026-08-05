@@ -10921,5 +10921,100 @@
     "exit_price": 268.3500061035156,
     "pnl_pts": -1.35,
     "pnl_pct": -0.5
+  },
+  {
+    "id": 228,
+    "datetime": "2026-08-05 07:33",
+    "date": "2026-08-05",
+    "asset": "JSWSTEEL",
+    "symbol": "JSWSTEEL",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1305.2,
+    "t1": 1313.91,
+    "target": 1322.63,
+    "sl": 1299.39,
+    "rr": 3.0,
+    "sl_pct": 0.45,
+    "rsi": 67.1,
+    "vwap": 1297.79,
+    "vol_ratio": 1.78,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.8x",
+      "Price above VWAP \u20b91297.8",
+      "Above OR High \u20b91300.9",
+      "Volume spike 1.8x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "Tight OR \u20b96.2 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 229,
+    "datetime": "2026-08-05 07:33",
+    "date": "2026-08-05",
+    "asset": "TCS",
+    "symbol": "TCS",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 2417.8,
+    "t1": 2385.52,
+    "target": 2353.24,
+    "sl": 2439.32,
+    "rr": 3.0,
+    "sl_pct": 0.89,
+    "rsi": 33.1,
+    "vwap": 2432.9,
+    "vol_ratio": 2.07,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=2.1x",
+      "Price below VWAP \u20b92432.9",
+      "Below OR Low \u20b92436.9",
+      "Volume spike 2.1x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b923.1 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
