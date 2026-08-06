@@ -11065,5 +11065,102 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 231,
+    "datetime": "2026-08-06 07:34",
+    "date": "2026-08-06",
+    "asset": "ICICIBANK",
+    "symbol": "ICICIBANK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 103,
+    "score_pct": 68.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 8,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1458.6,
+    "t1": 1472.8,
+    "target": 1487.01,
+    "sl": 1449.13,
+    "rr": 3.0,
+    "sl_pct": 0.65,
+    "rsi": 62.4,
+    "vwap": 1454.95,
+    "vol_ratio": 2.36,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=2.4x",
+      "Price above VWAP \u20b91455.0",
+      "Above OR High \u20b91455.7",
+      "Volume spike 2.4x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 62 \u2014 ideal long zone (40\u201365)",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b97.1 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 232,
+    "datetime": "2026-08-06 07:34",
+    "date": "2026-08-06",
+    "asset": "BHARTIARTL",
+    "symbol": "BHARTIARTL",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 90,
+    "score_pct": 60.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 15,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1966.4,
+    "t1": 1983.49,
+    "target": 2031.0,
+    "sl": 1955.01,
+    "rr": 5.67,
+    "sl_pct": 0.58,
+    "rsi": 56.1,
+    "vwap": 1962.87,
+    "vol_ratio": 1.86,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=1.9x",
+      "Price above VWAP \u20b91962.9",
+      "Volume spike 1.9x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 56 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b92031.0 \u2014 clear T2 target",
+      "Tight OR \u20b912.8 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
