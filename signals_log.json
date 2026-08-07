@@ -11695,5 +11695,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 244,
+    "datetime": "2026-08-07 06:05",
+    "date": "2026-08-07",
+    "asset": "POWERGRID",
+    "symbol": "POWERGRID",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 97,
+    "score_pct": 64.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ2",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 17,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 272.1,
+    "t1": 273.33,
+    "target": 281.0,
+    "sl": 271.28,
+    "rr": 10.85,
+    "sl_pct": 0.3,
+    "rsi": 68.9,
+    "vwap": 271.05,
+    "vol_ratio": 2.35,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=2.4x",
+      "Price above VWAP \u20b9271.1",
+      "Above OR High \u20b9271.6",
+      "Volume spike 2.4x average",
+      "Kill Zone: KZ2 (+10 pts)",
+      "PDH \u20b9281.0 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
