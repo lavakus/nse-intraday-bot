@@ -12281,5 +12281,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 259,
+    "datetime": "2026-08-10 21:42",
+    "date": "2026-08-10",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 99,
+    "score_pct": 66.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 19,
+      "pa_boosters": 20
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 63972.79,
+    "t1": 63319.39,
+    "target": 62883.79,
+    "sl": 64190.59,
+    "rr": 5.0,
+    "sl_pct": 0.34,
+    "rsi": 39.4,
+    "vwap": 64494.34,
+    "vol_ratio": 0.3,
+    "reasons": [
+      "CHOCH confirmed 4H (SHORT)",
+      "Unmitigated OB 63978.66\u201364096.86",
+      "Liquidity sweep at 64033.03",
+      "Kill Zone NIGHT active (+0pts)",
+      "FVG 63948.95\u201364145.99",
+      "Fear & Greed 30 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
