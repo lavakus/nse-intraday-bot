@@ -12568,5 +12568,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 265,
+    "datetime": "2026-08-11 12:09",
+    "date": "2026-08-11",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 72,
+    "score_pct": 48.0,
+    "signal_strength": "WEAK",
+    "kill_zone": "WATCH",
+    "phase_scores": {
+      "smc_structure": 38,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 7
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": false
+    },
+    "entry": 64391.21,
+    "t1": 65333.18,
+    "target": 65961.16,
+    "sl": 64077.22,
+    "rr": 5.0,
+    "sl_pct": 0.488,
+    "rsi": 70.6,
+    "vwap": 64556.43,
+    "vol_ratio": 0.5,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 64171.17\u201364244.21",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone WATCH active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64253.02\u201364324.24",
+      "Fear & Greed 29 \u2014 ideal zone (25\u201360)",
+      "15min HH+HL aligns with 4H bullish bias"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
