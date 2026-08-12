@@ -12714,5 +12714,53 @@
     "exit_price": 1824.5,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 265,
+    "datetime": "2026-08-12 05:19",
+    "date": "2026-08-12",
+    "asset": "KOTAKBANK",
+    "symbol": "KOTAKBANK",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 92,
+    "score_pct": 61.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 7,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 389.5,
+    "t1": 386.65,
+    "target": 386.5,
+    "sl": 391.4,
+    "rr": 1.58,
+    "sl_pct": 0.49,
+    "rsi": 63.3,
+    "vwap": 389.84,
+    "vol_ratio": 1.87,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=1.9x",
+      "Price below VWAP \u20b9389.8",
+      "Volume spike 1.9x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDL \u20b9386.5 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b92.5 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
