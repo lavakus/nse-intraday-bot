@@ -13148,5 +13148,55 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 274,
+    "datetime": "2026-08-13 08:13",
+    "date": "2026-08-13",
+    "asset": "ASIANPAINT",
+    "symbol": "ASIANPAINT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 137,
+    "score_pct": 91.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 22,
+      "boosters": 20
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 2745.4,
+    "t1": 2756.94,
+    "target": 2768.47,
+    "sl": 2737.71,
+    "rr": 3.0,
+    "sl_pct": 0.28,
+    "rsi": 66.4,
+    "vwap": 2734.85,
+    "vol_ratio": 1.87,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.9x",
+      "Price above VWAP \u20b92734.8",
+      "Above OR High \u20b92740.0",
+      "Volume spike 1.9x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "PDH \u20b92747.6 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG",
+      "Round number level confluence",
+      "Tight OR \u20b920.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
