@@ -13039,5 +13039,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 275,
+    "datetime": "2026-08-13 22:43",
+    "date": "2026-08-13",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 15
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 63502.06,
+    "t1": 65849.92,
+    "target": 67415.16,
+    "sl": 62719.44,
+    "rr": 5.0,
+    "sl_pct": 1.232,
+    "rsi": 57.4,
+    "vwap": 64203.1,
+    "vol_ratio": 2.5,
+    "reasons": [
+      "BOS confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 63235.84\u201363822.23",
+      "Liquidity sweep at 63251.11",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 63230.80\u201363239.99",
+      "Fear & Greed 29 \u2014 ideal zone (25\u201360)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Volume 2.5x spike at reaction zone",
+      "RSI 57 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
