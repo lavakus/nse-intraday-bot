@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1018.0,
+    "exit_price": 1020.2000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1018.0,
+    "exit_price": 1020.2000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -11596,7 +11596,7 @@
       "Tight OR \u20b92.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.75,
+    "exit_price": 406.8999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12131,7 +12131,7 @@
       "Tight OR \u20b92.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 537.0,
+    "exit_price": 537.75,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12518,7 +12518,7 @@
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1410.5,
+    "exit_price": 1410.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12664,7 +12664,7 @@
       "Tight OR \u20b910.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1077.0,
+    "exit_price": 1069.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12711,7 +12711,7 @@
       "RSI 48 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1807.0,
+    "exit_price": 1795.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12900,7 +12900,7 @@
       "Tight OR \u20b91.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.75,
+    "exit_price": 406.8999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12949,7 +12949,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1094.0,
+    "exit_price": 1088.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12996,7 +12996,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 270.6000061035156,
+    "exit_price": 267.3500061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13045,7 +13045,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1094.0,
+    "exit_price": 1088.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13094,10 +13094,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 342.8999938964844,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 339.5,
+    "pnl_pts": -1.75,
+    "pnl_pct": -0.51
   },
   {
     "id": 273,
@@ -13145,7 +13145,7 @@
       "Tight OR \u20b97.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2088.0,
+    "exit_price": 2080.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13243,7 +13243,7 @@
       "Tight OR \u20b917.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 2712.60009765625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13289,6 +13289,154 @@
       "RSI 52 \u2014 ideal short zone (35\u201360)",
       "PDL \u20b91495.3 \u2014 clear T2 target",
       "Tight OR \u20b94.4 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": 1506.5999755859375,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 277,
+    "datetime": "2026-08-14 05:27",
+    "date": "2026-08-14",
+    "asset": "BPCL",
+    "symbol": "BPCL",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 318.15,
+    "t1": 320.31,
+    "target": 322.47,
+    "sl": 316.71,
+    "rr": 3.0,
+    "sl_pct": 0.45,
+    "rsi": 88.8,
+    "vwap": 316.79,
+    "vol_ratio": 3.08,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=3.1x",
+      "Price above VWAP \u20b9316.8",
+      "Above OR High \u20b9316.4",
+      "Volume spike 3.1x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 89 extreme \u2014 use caution",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b92.4 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 278,
+    "datetime": "2026-08-14 05:27",
+    "date": "2026-08-14",
+    "asset": "BHARTIARTL",
+    "symbol": "BHARTIARTL",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 30,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1981.6,
+    "t1": 1996.24,
+    "target": 2010.88,
+    "sl": 1971.84,
+    "rr": 3.0,
+    "sl_pct": 0.49,
+    "rsi": 93.1,
+    "vwap": 1957.23,
+    "vol_ratio": 1.38,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.4x",
+      "Price above VWAP \u20b91957.2",
+      "Above OR High \u20b91942.5",
+      "Volume elevated 1.4x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 93 extreme \u2014 use caution",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b99.2 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 279,
+    "datetime": "2026-08-14 05:27",
+    "date": "2026-08-14",
+    "asset": "NTPC",
+    "symbol": "NTPC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 102,
+    "score_pct": 68.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 7,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 339.55,
+    "t1": 335.51,
+    "target": 331.48,
+    "sl": 342.24,
+    "rr": 3.0,
+    "sl_pct": 0.79,
+    "rsi": 14.9,
+    "vwap": 340.88,
+    "vol_ratio": 3.77,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=3.8x",
+      "Price below VWAP \u20b9340.9",
+      "Below OR Low \u20b9342.1",
+      "Volume spike 3.8x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 15 extreme \u2014 use caution",
+      "PDL \u20b9338.0 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
     "exit_price": null,
