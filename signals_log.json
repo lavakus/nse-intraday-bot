@@ -13198,5 +13198,101 @@
     "exit_price": 2734.89990234375,
     "pnl_pts": -10.5,
     "pnl_pct": -0.38
+  },
+  {
+    "id": 275,
+    "datetime": "2026-08-14 05:19",
+    "date": "2026-08-14",
+    "asset": "ASIANPAINT",
+    "symbol": "ASIANPAINT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 2713.3,
+    "t1": 2692.56,
+    "target": 2671.81,
+    "sl": 2727.13,
+    "rr": 3.0,
+    "sl_pct": 0.51,
+    "rsi": 27.2,
+    "vwap": 2730.39,
+    "vol_ratio": 1.62,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.6x",
+      "Price below VWAP \u20b92730.4",
+      "Below OR Low \u20b92730.5",
+      "Volume spike 1.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b917.6 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 276,
+    "datetime": "2026-08-14 05:19",
+    "date": "2026-08-14",
+    "asset": "NESTLEIND",
+    "symbol": "NESTLEIND",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 90,
+    "score_pct": 60.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 15,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1508.0,
+    "t1": 1498.62,
+    "target": 1495.3,
+    "sl": 1514.25,
+    "rr": 2.03,
+    "sl_pct": 0.41,
+    "rsi": 52.0,
+    "vwap": 1508.21,
+    "vol_ratio": 1.69,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=1.7x",
+      "Price below VWAP \u20b91508.2",
+      "Volume spike 1.7x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 52 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91495.3 \u2014 clear T2 target",
+      "Tight OR \u20b94.4 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
