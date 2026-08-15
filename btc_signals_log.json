@@ -13184,5 +13184,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 278,
+    "datetime": "2026-08-15 10:23",
+    "date": "2026-08-15",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 77,
+    "score_pct": 51.3,
+    "signal_strength": "WEAK",
+    "kill_zone": "WATCH",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 11,
+      "pa_boosters": 13
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 62951.17,
+    "t1": 62676.16,
+    "target": 62492.82,
+    "sl": 63042.84,
+    "rr": 5.0,
+    "sl_pct": 0.146,
+    "rsi": 46.8,
+    "vwap": 63808.54,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "BOS confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 62872.83\u201362957.64",
+      "Liquidity sweep at 63072.08",
+      "Kill Zone WATCH active (+0pts)",
+      "Fear & Greed 34 \u2014 ideal zone (25\u201360)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Weekly candle structure is bearish",
+      "RSI 47 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
