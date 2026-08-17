@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1007.0,
+    "exit_price": 1007.2000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1007.0,
+    "exit_price": 1007.2000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -11596,7 +11596,7 @@
       "Tight OR \u20b92.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.04998779296875,
+    "exit_price": 407.29998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12130,10 +12130,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b92.1 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 540.9500122070312,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 542.7000122070312,
+    "pnl_pts": -3.3,
+    "pnl_pct": -0.61
   },
   {
     "id": 253,
@@ -12518,7 +12518,7 @@
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1409.9000244140625,
+    "exit_price": 1409.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12711,7 +12711,7 @@
       "RSI 48 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1784.699951171875,
+    "exit_price": 1788.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12900,7 +12900,7 @@
       "Tight OR \u20b91.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.04998779296875,
+    "exit_price": 407.29998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12949,7 +12949,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1075.5,
+    "exit_price": 1075.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12996,7 +12996,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 268.75,
+    "exit_price": 269.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13045,7 +13045,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1075.5,
+    "exit_price": 1075.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13145,7 +13145,7 @@
       "Tight OR \u20b97.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2061.699951171875,
+    "exit_price": 2061.10009765625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13243,7 +13243,7 @@
       "Tight OR \u20b917.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2696.5,
+    "exit_price": 2697.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13389,7 +13389,7 @@
       "Tight OR \u20b99.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1986.0,
+    "exit_price": 1986.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13439,7 +13439,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 339.04998779296875,
+    "exit_price": 339.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13585,7 +13585,7 @@
       "Tight OR \u20b913.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2013.4000244140625,
+    "exit_price": 2014.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13681,7 +13681,7 @@
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 392.04998779296875,
+    "exit_price": 392.3500061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13729,7 +13729,7 @@
       "Tight OR \u20b91.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.04998779296875,
+    "exit_price": 407.29998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13829,5 +13829,54 @@
     "exit_price": 1215.699951171875,
     "pnl_pts": -9.7,
     "pnl_pct": -0.79
+  },
+  {
+    "id": 288,
+    "datetime": "2026-08-17 05:27",
+    "date": "2026-08-17",
+    "asset": "NESTLEIND",
+    "symbol": "NESTLEIND",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1482.2,
+    "t1": 1472.65,
+    "target": 1463.09,
+    "sl": 1488.57,
+    "rr": 3.0,
+    "sl_pct": 0.43,
+    "rsi": 17.9,
+    "vwap": 1489.73,
+    "vol_ratio": 1.87,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.9x",
+      "Price below VWAP \u20b91489.7",
+      "Below OR Low \u20b91489.9",
+      "Volume spike 1.9x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 18 extreme \u2014 use caution",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b912.9 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
