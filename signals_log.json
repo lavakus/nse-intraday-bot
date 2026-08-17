@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1011.7000122070312,
+    "exit_price": 1016.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1011.7000122070312,
+    "exit_price": 1016.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -11596,7 +11596,7 @@
       "Tight OR \u20b92.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.20001220703125,
+    "exit_price": 407.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12518,7 +12518,7 @@
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1418.5,
+    "exit_price": 1422.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12711,7 +12711,7 @@
       "RSI 48 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1788.199951171875,
+    "exit_price": 1790.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12900,7 +12900,7 @@
       "Tight OR \u20b91.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.20001220703125,
+    "exit_price": 407.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12949,7 +12949,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1077.0,
+    "exit_price": 1076.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12996,7 +12996,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 269.5,
+    "exit_price": 269.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13045,7 +13045,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1077.0,
+    "exit_price": 1076.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13145,7 +13145,7 @@
       "Tight OR \u20b97.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2067.10009765625,
+    "exit_price": 2069.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13243,7 +13243,7 @@
       "Tight OR \u20b917.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2704.300048828125,
+    "exit_price": 2702.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13389,7 +13389,7 @@
       "Tight OR \u20b99.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1982.300048828125,
+    "exit_price": 1983.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13439,7 +13439,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 336.8500061035156,
+    "exit_price": 336.75,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13584,10 +13584,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b913.0 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 2008.699951171875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 2004.4000244140625,
+    "pnl_pts": 17.0,
+    "pnl_pct": 0.84
   },
   {
     "id": 283,
@@ -13681,7 +13681,7 @@
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 395.45001220703125,
+    "exit_price": 395.79998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13729,7 +13729,7 @@
       "Tight OR \u20b91.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.20001220703125,
+    "exit_price": 407.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13875,7 +13875,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1474.300048828125,
+    "exit_price": 1473.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14069,7 +14069,7 @@
       "Tight OR \u20b91.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 181.97999572753906,
+    "exit_price": 182.07000732421875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1474.300048828125,
+    "exit_price": 1473.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14261,7 +14261,7 @@
       "Tight OR \u20b93.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 728.4000244140625,
+    "exit_price": 729.4500122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14308,10 +14308,10 @@
       "PDH \u20b91205.9 \u2014 clear T2 target",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": 1190.4000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1184.9000244140625,
+    "pnl_pts": -8.0,
+    "pnl_pct": -0.67
   },
   {
     "id": 298,
@@ -14357,7 +14357,7 @@
       "Tight OR \u20b93.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 543.3499755859375,
+    "exit_price": 543.5499877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14407,7 +14407,7 @@
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 269.5,
+    "exit_price": 269.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14454,7 +14454,7 @@
       "RSI 44 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1610.0999755859375,
+    "exit_price": 1606.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14503,7 +14503,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 407.20001220703125,
+    "exit_price": 407.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14552,7 +14552,7 @@
       "Tight OR \u20b91.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 266.95001220703125,
+    "exit_price": 267.45001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   }
