@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1015.9000244140625,
+    "exit_price": 1011.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1015.9000244140625,
+    "exit_price": 1011.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12518,7 +12518,7 @@
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1419.4000244140625,
+    "exit_price": 1418.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12711,7 +12711,7 @@
       "RSI 48 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1788.9000244140625,
+    "exit_price": 1789.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12949,7 +12949,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1073.5999755859375,
+    "exit_price": 1072.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12996,7 +12996,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 269.45001220703125,
+    "exit_price": 269.79998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13045,7 +13045,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1073.5999755859375,
+    "exit_price": 1072.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13145,7 +13145,7 @@
       "Tight OR \u20b97.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2064.0,
+    "exit_price": 2065.10009765625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13243,7 +13243,7 @@
       "Tight OR \u20b917.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2706.0,
+    "exit_price": 2704.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13389,7 +13389,7 @@
       "Tight OR \u20b99.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1981.800048828125,
+    "exit_price": 1982.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13439,7 +13439,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 338.54998779296875,
+    "exit_price": 337.95001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13585,7 +13585,7 @@
       "Tight OR \u20b913.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2023.9000244140625,
+    "exit_price": 2019.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13681,7 +13681,7 @@
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 394.8500061035156,
+    "exit_price": 394.45001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13875,7 +13875,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1476.9000244140625,
+    "exit_price": 1474.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13973,7 +13973,7 @@
       "Tight OR \u20b95.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1073.5999755859375,
+    "exit_price": 1072.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14020,10 +14020,10 @@
       "RSI 42 \u2014 ideal short zone (35\u201360)",
       "Tight OR \u20b91.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 181.8000030517578,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 182.13999938964844,
+    "pnl_pts": -0.44,
+    "pnl_pct": -0.24
   },
   {
     "id": 292,
@@ -14069,7 +14069,7 @@
       "Tight OR \u20b91.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 181.8000030517578,
+    "exit_price": 182.13999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1476.9000244140625,
+    "exit_price": 1474.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14212,7 +14212,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1276.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14261,7 +14261,7 @@
       "Tight OR \u20b93.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 728.2000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14309,7 +14309,7 @@
       "5min HH+HL structure aligns with LONG"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1194.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14357,7 +14357,7 @@
       "Tight OR \u20b93.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 542.7999877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14407,7 +14407,7 @@
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 269.79998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14454,7 +14454,7 @@
       "RSI 44 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1607.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14503,7 +14503,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 407.1000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14552,7 +14552,7 @@
       "Tight OR \u20b91.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 267.04998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   }
