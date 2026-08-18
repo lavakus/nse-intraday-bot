@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1013.2000122070312,
+    "exit_price": 1012.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1013.2000122070312,
+    "exit_price": 1012.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -11596,7 +11596,7 @@
       "Tight OR \u20b92.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 408.3999938964844,
+    "exit_price": 408.8999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12518,7 +12518,7 @@
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1408.0,
+    "exit_price": 1407.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12711,7 +12711,7 @@
       "RSI 48 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1783.4000244140625,
+    "exit_price": 1781.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12949,7 +12949,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1069.300048828125,
+    "exit_price": 1072.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13045,7 +13045,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1069.300048828125,
+    "exit_price": 1072.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13439,7 +13439,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 338.1499938964844,
+    "exit_price": 337.75,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13681,7 +13681,7 @@
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 391.3999938964844,
+    "exit_price": 392.04998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13875,7 +13875,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1470.4000244140625,
+    "exit_price": 1470.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1470.4000244140625,
+    "exit_price": 1470.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14261,7 +14261,7 @@
       "Tight OR \u20b93.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 724.0,
+    "exit_price": 725.2000122070312,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14601,7 +14601,7 @@
       "Tight OR \u20b95.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1431.199951171875,
+    "exit_price": 1434.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14650,7 +14650,7 @@
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 184.85000610351562,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14698,7 +14698,7 @@
       "Tight OR \u20b90.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 271.6000061035156,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14748,7 +14748,7 @@
       "Tight OR \u20b96.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1407.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14794,10 +14794,10 @@
       "Kill Zone: KZ2 (+10 pts)",
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 267.3999938964844,
+    "pnl_pts": -1.45,
+    "pnl_pct": -0.55
   },
   {
     "id": 308,
@@ -14844,7 +14844,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1072.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14889,6 +14889,155 @@
       "Kill Zone: KZ2 (+10 pts)",
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b98.6 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": 1662.0999755859375,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 310,
+    "datetime": "2026-08-18 06:24",
+    "date": "2026-08-18",
+    "asset": "NESTLEIND",
+    "symbol": "NESTLEIND",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1470.1,
+    "t1": 1458.43,
+    "target": 1446.76,
+    "sl": 1477.88,
+    "rr": 3.0,
+    "sl_pct": 0.53,
+    "rsi": 39.4,
+    "vwap": 1472.0,
+    "vol_ratio": 9.61,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=9.6x",
+      "Price below VWAP \u20b91472.0",
+      "Below OR Low \u20b91472.0",
+      "Volume spike 9.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 39 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91468.5 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b97.5 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 311,
+    "datetime": "2026-08-18 06:24",
+    "date": "2026-08-18",
+    "asset": "SUNPHARMA",
+    "symbol": "SUNPHARMA",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1881.8,
+    "t1": 1876.16,
+    "target": 1870.52,
+    "sl": 1885.56,
+    "rr": 3.0,
+    "sl_pct": 0.2,
+    "rsi": 55.3,
+    "vwap": 1889.34,
+    "vol_ratio": 1.64,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.6x",
+      "Price below VWAP \u20b91889.3",
+      "Below OR Low \u20b91882.8",
+      "Volume spike 1.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 55 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91880.4 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b912.5 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 312,
+    "datetime": "2026-08-18 06:24",
+    "date": "2026-08-18",
+    "asset": "SBILIFE",
+    "symbol": "SBILIFE",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 93,
+    "score_pct": 62.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 8,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1781.0,
+    "t1": 1774.43,
+    "target": 1767.86,
+    "sl": 1785.38,
+    "rr": 3.0,
+    "sl_pct": 0.25,
+    "rsi": 35.0,
+    "vwap": 1782.9,
+    "vol_ratio": 9.96,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=10.0x",
+      "Price below VWAP \u20b91782.9",
+      "Below OR Low \u20b91781.1",
+      "Volume spike 10.0x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 35 \u2014 ideal short zone (35\u201360)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b914.7 \u2014 clean structure"
     ],
     "status": "OPEN",
     "exit_price": null,
