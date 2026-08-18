@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1014.7000122070312,
+    "exit_price": 1012.2999877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1014.7000122070312,
+    "exit_price": 1012.2999877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -11596,7 +11596,7 @@
       "Tight OR \u20b92.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 408.29998779296875,
+    "exit_price": 407.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12518,7 +12518,7 @@
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1412.5999755859375,
+    "exit_price": 1412.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12711,7 +12711,7 @@
       "RSI 48 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1780.5,
+    "exit_price": 1780.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13439,7 +13439,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 337.95001220703125,
+    "exit_price": 337.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1461.5,
+    "exit_price": 1458.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14260,10 +14260,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b93.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 724.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 723.25,
+    "pnl_pts": -4.95,
+    "pnl_pct": -0.68
   },
   {
     "id": 297,
@@ -14601,7 +14601,7 @@
       "Tight OR \u20b95.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1433.4000244140625,
+    "exit_price": 1431.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14650,7 +14650,7 @@
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 184.97999572753906,
+    "exit_price": 185.07000732421875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14844,7 +14844,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1064.699951171875,
+    "exit_price": 1063.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14891,7 +14891,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1667.4000244140625,
+    "exit_price": 1665.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14941,7 +14941,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1461.5,
+    "exit_price": 1458.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14991,7 +14991,7 @@
       "Tight OR \u20b912.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1876.5999755859375,
+    "exit_price": 1881.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15040,7 +15040,7 @@
       "Tight OR \u20b914.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1780.5,
+    "exit_price": 1780.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15089,7 +15089,7 @@
       "Tight OR \u20b91.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 337.95001220703125,
+    "exit_price": 337.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15138,7 +15138,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1064.699951171875,
+    "exit_price": 1063.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15187,7 +15187,7 @@
       "Tight OR \u20b96.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1056.0,
+    "exit_price": 1055.0,
     "pnl_pts": null,
     "pnl_pct": null
   }
