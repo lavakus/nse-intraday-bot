@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1012.0,
+    "exit_price": 1012.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1012.0,
+    "exit_price": 1012.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -11596,7 +11596,7 @@
       "Tight OR \u20b92.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 408.8999938964844,
+    "exit_price": 408.20001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12518,7 +12518,7 @@
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1407.9000244140625,
+    "exit_price": 1409.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12711,7 +12711,7 @@
       "RSI 48 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
-    "exit_price": 1781.0,
+    "exit_price": 1784.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12949,7 +12949,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1072.800048828125,
+    "exit_price": 1067.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13045,7 +13045,7 @@
       "Tight OR \u20b97.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1072.800048828125,
+    "exit_price": 1067.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13439,7 +13439,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 337.75,
+    "exit_price": 338.79998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13680,10 +13680,10 @@
       "RSI 60 \u2014 ideal long zone (40\u201365)",
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 392.04998779296875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 390.0,
+    "pnl_pts": -2.45,
+    "pnl_pct": -0.62
   },
   {
     "id": 285,
@@ -13875,7 +13875,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1470.0999755859375,
+    "exit_price": 1465.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1470.0999755859375,
+    "exit_price": 1465.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14261,7 +14261,7 @@
       "Tight OR \u20b93.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 725.2000122070312,
+    "exit_price": 725.1500244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14601,7 +14601,7 @@
       "Tight OR \u20b95.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1434.9000244140625,
+    "exit_price": 1433.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14650,7 +14650,7 @@
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 184.85000610351562,
+    "exit_price": 184.64999389648438,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14698,7 +14698,7 @@
       "Tight OR \u20b90.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 271.6000061035156,
+    "exit_price": 270.3999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14748,7 +14748,7 @@
       "Tight OR \u20b96.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1407.9000244140625,
+    "exit_price": 1409.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14844,7 +14844,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1072.800048828125,
+    "exit_price": 1067.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14891,7 +14891,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1662.0999755859375,
+    "exit_price": 1669.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14941,7 +14941,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1465.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14991,7 +14991,7 @@
       "Tight OR \u20b912.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1878.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15038,6 +15038,55 @@
       "RSI 35 \u2014 ideal short zone (35\u201360)",
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b914.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": 1784.4000244140625,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 313,
+    "datetime": "2026-08-18 08:06",
+    "date": "2026-08-18",
+    "asset": "NTPC",
+    "symbol": "NTPC",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 125,
+    "score_pct": 83.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 30,
+      "entry_quality": 30,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 338.75,
+    "t1": 340.37,
+    "target": 341.99,
+    "sl": 337.67,
+    "rr": 3.0,
+    "sl_pct": 0.32,
+    "rsi": 54.5,
+    "vwap": 338.28,
+    "vol_ratio": 1.48,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.5x",
+      "Price above VWAP \u20b9338.3",
+      "Above OR High \u20b9338.4",
+      "Volume elevated 1.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 55 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b9340.3 \u2014 clear T2 target",
+      "Tight OR \u20b91.1 \u2014 clean structure"
     ],
     "status": "OPEN",
     "exit_price": null,
