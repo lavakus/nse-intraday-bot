@@ -14391,5 +14391,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 303,
+    "datetime": "2026-08-18 04:36",
+    "date": "2026-08-18",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 68,
+    "score_pct": 45.3,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 38,
+      "ict_crypto_filters": 19,
+      "pa_boosters": 11
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": false
+    },
+    "entry": 64173.53,
+    "t1": 64143.44,
+    "target": 64123.38,
+    "sl": 64183.56,
+    "rr": 5.0,
+    "sl_pct": 0.016,
+    "rsi": 50.3,
+    "vwap": 63486.14,
+    "vol_ratio": 0.3,
+    "reasons": [
+      "CHOCH confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 64043.40\u201364117.21",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone DEAD active (+0pts)",
+      "FVG 64217.99\u201364300.53",
+      "Fear & Greed 41 \u2014 ideal zone (25\u201360)",
+      "CME gap target below at $63,653",
+      "Weekly candle structure is bearish",
+      "RSI 50 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
