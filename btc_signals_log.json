@@ -14439,5 +14439,55 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 304,
+    "datetime": "2026-08-18 14:35",
+    "date": "2026-08-18",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 127,
+    "score_pct": 84.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-NY",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 42,
+      "pa_boosters": 25
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 64766.25,
+    "t1": 67174.83,
+    "target": 68780.55,
+    "sl": 63963.39,
+    "rr": 5.0,
+    "sl_pct": 1.24,
+    "rsi": 68.5,
+    "vwap": 63536.94,
+    "vol_ratio": 8.6,
+    "reasons": [
+      "BOS confirmed 4H (LONG)",
+      "Unmitigated OB 64134.54\u201364266.41",
+      "Liquidity sweep at 64124.80",
+      "Kill Zone KZ-NY active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64318.61\u201364732.41",
+      "Fear & Greed 41 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Volume 8.6x spike at reaction zone",
+      "Weekly candle structure is bullish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
