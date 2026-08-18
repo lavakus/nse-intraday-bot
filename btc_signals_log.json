@@ -14343,5 +14343,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 302,
+    "datetime": "2026-08-18 01:17",
+    "date": "2026-08-18",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 42,
+      "pa_boosters": 3
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 64265.33,
+    "t1": 64352.63,
+    "target": 64410.83,
+    "sl": 64236.23,
+    "rr": 5.0,
+    "sl_pct": 0.045,
+    "rsi": 54.0,
+    "vwap": 63436.44,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 64327.45\u201364484.53",
+      "Liquidity sweep at 64247.70",
+      "Kill Zone KZ-A active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 64157.79\u201364229.00",
+      "Fear & Greed 41 \u2014 ideal zone (25\u201360)",
+      "RSI 54 \u2014 ideal zone",
+      "CAUTION: Unfilled CME gap below entry"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
