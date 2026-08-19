@@ -15432,5 +15432,102 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 321,
+    "datetime": "2026-08-19 06:25",
+    "date": "2026-08-19",
+    "asset": "ICICIBANK",
+    "symbol": "ICICIBANK",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 113,
+    "score_pct": 75.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 8,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1401.8,
+    "t1": 1397.3,
+    "target": 1392.8,
+    "sl": 1404.8,
+    "rr": 3.0,
+    "sl_pct": 0.21,
+    "rsi": 42.9,
+    "vwap": 1403.08,
+    "vol_ratio": 1.57,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.6x",
+      "Price below VWAP \u20b91403.1",
+      "Below OR Low \u20b91407.5",
+      "Volume spike 1.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 43 \u2014 ideal short zone (35\u201360)",
+      "Round number level confluence",
+      "Tight OR \u20b97.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 322,
+    "datetime": "2026-08-19 06:25",
+    "date": "2026-08-19",
+    "asset": "ASIANPAINT",
+    "symbol": "ASIANPAINT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 88,
+    "score_pct": 58.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 20,
+      "entry_quality": 8,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 2609.2,
+    "t1": 2584.66,
+    "target": 2560.12,
+    "sl": 2625.56,
+    "rr": 3.0,
+    "sl_pct": 0.63,
+    "rsi": 39.8,
+    "vwap": 2615.11,
+    "vol_ratio": 1.4,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=1.4x",
+      "Price below VWAP \u20b92615.1",
+      "Volume elevated 1.4x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 40 \u2014 ideal short zone (35\u201360)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b917.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
