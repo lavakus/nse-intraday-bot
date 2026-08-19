@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1009.0,
+    "exit_price": 1008.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1009.0,
+    "exit_price": 1008.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1460.0,
+    "exit_price": 1460.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14650,7 +14650,7 @@
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 183.6999969482422,
+    "exit_price": 183.8699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14844,7 +14844,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1065.800048828125,
+    "exit_price": 1066.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14891,7 +14891,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1658.300048828125,
+    "exit_price": 1656.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14941,7 +14941,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1460.0,
+    "exit_price": 1460.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15138,7 +15138,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1065.800048828125,
+    "exit_price": 1066.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15187,7 +15187,7 @@
       "Tight OR \u20b96.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1048.0,
+    "exit_price": 1050.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15234,10 +15234,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b915.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1658.300048828125,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1656.0999755859375,
+    "pnl_pts": -9.8,
+    "pnl_pct": -0.59
   },
   {
     "id": 317,
@@ -15333,7 +15333,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 1119.5,
+    "exit_price": 1118.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15429,7 +15429,7 @@
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 306.3999938964844,
+    "exit_price": 307.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15478,7 +15478,7 @@
       "Tight OR \u20b97.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1394.4000244140625,
+    "exit_price": 1392.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15526,7 +15526,56 @@
       "Tight OR \u20b917.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2605.10009765625,
+    "exit_price": 2603.60009765625,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 323,
+    "datetime": "2026-08-19 07:32",
+    "date": "2026-08-19",
+    "asset": "KOTAKBANK",
+    "symbol": "KOTAKBANK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 115,
+    "score_pct": 76.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 389.3,
+    "t1": 390.47,
+    "target": 392.9,
+    "sl": 388.52,
+    "rr": 4.62,
+    "sl_pct": 0.2,
+    "rsi": 48.6,
+    "vwap": 389.17,
+    "vol_ratio": 1.77,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.8x",
+      "Price above VWAP \u20b9389.2",
+      "Above OR High \u20b9388.6",
+      "Volume spike 1.8x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 49 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b9392.9 \u2014 clear T2 target",
+      "Tight OR \u20b91.4 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
