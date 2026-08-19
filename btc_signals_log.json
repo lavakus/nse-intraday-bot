@@ -14734,5 +14734,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 310,
+    "datetime": "2026-08-19 18:37",
+    "date": "2026-08-19",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 107,
+    "score_pct": 71.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 20
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 68255.67,
+    "t1": 69819.06,
+    "target": 70861.32,
+    "sl": 67734.54,
+    "rr": 5.0,
+    "sl_pct": 0.763,
+    "rsi": 73.8,
+    "vwap": 64639.53,
+    "vol_ratio": 0.1,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 68168.31\u201368444.32",
+      "Liquidity sweep at 64513.91",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 65930.83\u201368403.97",
+      "Fear & Greed 46 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Weekly candle structure is bullish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
