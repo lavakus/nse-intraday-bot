@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1011.7000122070312,
+    "exit_price": 1011.2999877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -9855,7 +9855,7 @@
       "Tight OR \u20b94.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1011.7000122070312,
+    "exit_price": 1011.2999877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -12518,7 +12518,7 @@
       "Tight OR \u20b99.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1405.9000244140625,
+    "exit_price": 1403.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13439,7 +13439,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 336.79998779296875,
+    "exit_price": 334.70001220703125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1475.5999755859375,
+    "exit_price": 1465.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14650,7 +14650,7 @@
       "Tight OR \u20b91.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 183.25,
+    "exit_price": 184.27000427246094,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14697,10 +14697,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b90.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 270.29998779296875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 268.6000061035156,
+    "pnl_pts": 3.1,
+    "pnl_pct": 1.14
   },
   {
     "id": 306,
@@ -14844,7 +14844,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1068.4000244140625,
+    "exit_price": 1063.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14891,7 +14891,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1665.9000244140625,
+    "exit_price": 1670.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14941,7 +14941,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1475.5999755859375,
+    "exit_price": 1465.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15138,7 +15138,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1068.4000244140625,
+    "exit_price": 1063.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15187,7 +15187,7 @@
       "Tight OR \u20b96.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1052.800048828125,
+    "exit_price": 1048.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15233,6 +15233,104 @@
       "PDH \u20b91700.0 \u2014 clear T2 target",
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b915.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": 1670.0,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 317,
+    "datetime": "2026-08-19 05:04",
+    "date": "2026-08-19",
+    "asset": "PIDILITIND",
+    "symbol": "PIDILITIND",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 90,
+    "score_pct": 60.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1670.0,
+    "t1": 1677.61,
+    "target": 1700.0,
+    "sl": 1664.93,
+    "rr": 5.92,
+    "sl_pct": 0.3,
+    "rsi": 40.3,
+    "vwap": 1665.37,
+    "vol_ratio": 1.63,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=1.6x",
+      "Price above VWAP \u20b91665.4",
+      "Above OR High \u20b91669.9",
+      "Volume spike 1.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 40 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b91700.0 \u2014 clear T2 target",
+      "Tight OR \u20b915.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 318,
+    "datetime": "2026-08-19 05:04",
+    "date": "2026-08-19",
+    "asset": "INFY",
+    "symbol": "INFY",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 82,
+    "score_pct": 54.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 30,
+      "entry_quality": 7,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1117.0,
+    "t1": 1106.17,
+    "target": 1095.34,
+    "sl": 1124.22,
+    "rr": 3.0,
+    "sl_pct": 0.65,
+    "rsi": 14.4,
+    "vwap": 1124.08,
+    "vol_ratio": 1.32,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.3x",
+      "Price below VWAP \u20b91124.1",
+      "Below OR Low \u20b91123.1",
+      "Volume elevated 1.3x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 14 extreme \u2014 use caution",
+      "PDL \u20b91112.5 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
     "exit_price": null,
