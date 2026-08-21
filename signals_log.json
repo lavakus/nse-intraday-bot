@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 999.5999755859375,
+    "exit_price": 1000.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13439,7 +13439,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 338.5,
+    "exit_price": 342.1499938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1458.300048828125,
+    "exit_price": 1458.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14891,7 +14891,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1649.5999755859375,
+    "exit_price": 1652.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14941,7 +14941,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1458.300048828125,
+    "exit_price": 1458.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15187,7 +15187,7 @@
       "Tight OR \u20b96.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1053.199951171875,
+    "exit_price": 1049.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15770,7 +15770,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 2287.5,
+    "exit_price": 2295.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15819,10 +15819,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b92.1 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 338.5,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 342.1499938964844,
+    "pnl_pts": 4.35,
+    "pnl_pct": 1.29
   },
   {
     "id": 329,
@@ -15964,7 +15964,7 @@
       "Tight OR \u20b910.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1458.300048828125,
+    "exit_price": 1458.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -16111,7 +16111,7 @@
       "Tight OR \u20b91.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 181.13999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   }
