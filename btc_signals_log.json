@@ -15688,5 +15688,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 330,
+    "datetime": "2026-08-21 03:51",
+    "date": "2026-08-21",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 25
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 74792.8,
+    "t1": 76317.7,
+    "target": 77334.3,
+    "sl": 74284.5,
+    "rr": 5.0,
+    "sl_pct": 0.68,
+    "rsi": 69.1,
+    "vwap": 68705.29,
+    "vol_ratio": 0.1,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 74409.71\u201375107.13",
+      "Liquidity sweep at 74591.67",
+      "Kill Zone DEAD active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 73945.18\u201374358.86",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Round number $75,000",
+      "Weekly candle structure is bullish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
