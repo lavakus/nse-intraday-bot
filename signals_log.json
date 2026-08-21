@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1000.5,
+    "exit_price": 1003.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -13438,10 +13438,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 342.1499938964844,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 342.54998779296875,
+    "pnl_pts": -3.0,
+    "pnl_pct": -0.88
   },
   {
     "id": 280,
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1458.5,
+    "exit_price": 1457.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14891,7 +14891,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1652.0,
+    "exit_price": 1649.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14941,7 +14941,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1458.5,
+    "exit_price": 1457.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15770,7 +15770,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 2295.300048828125,
+    "exit_price": 2294.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15964,7 +15964,7 @@
       "Tight OR \u20b910.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1458.5,
+    "exit_price": 1457.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -16013,7 +16013,7 @@
       "Tight OR \u20b912.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 2020.300048828125,
+    "exit_price": 2021.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -16111,7 +16111,7 @@
       "Tight OR \u20b91.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 181.13999938964844,
+    "exit_price": 181.07000732421875,
     "pnl_pts": null,
     "pnl_pct": null
   }
