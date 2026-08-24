@@ -16835,5 +16835,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 354,
+    "datetime": "2026-08-24 22:55",
+    "date": "2026-08-24",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 86,
+    "score_pct": 57.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 6
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 78759.26,
+    "t1": 79865.21,
+    "target": 80602.51,
+    "sl": 78390.61,
+    "rr": 5.0,
+    "sl_pct": 0.468,
+    "rsi": 46.6,
+    "vwap": 74112.96,
+    "vol_ratio": 0.4,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 78926.49\u201379486.10",
+      "Liquidity sweep at 78740.33",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 77397.97\u201377523.56",
+      "Weekly candle structure is bullish",
+      "RSI 47 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
