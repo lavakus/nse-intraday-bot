@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1002.7999877929688,
+    "exit_price": 1011.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1471.699951171875,
+    "exit_price": 1460.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14891,7 +14891,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1646.9000244140625,
+    "exit_price": 1644.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14941,7 +14941,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1471.699951171875,
+    "exit_price": 1460.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15187,7 +15187,7 @@
       "Tight OR \u20b96.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1043.300048828125,
+    "exit_price": 1035.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15770,7 +15770,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 2293.10009765625,
+    "exit_price": 2297.10009765625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -16161,7 +16161,7 @@
       "Tight OR \u20b914.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1646.9000244140625,
+    "exit_price": 1644.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -16208,10 +16208,10 @@
       "RSI 45 \u2014 ideal long zone (40\u201365)",
       "Tight OR \u20b92.9 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 402.20001220703125,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 400.1000061035156,
+    "pnl_pts": -2.5,
+    "pnl_pct": -0.62
   },
   {
     "id": 337,
@@ -16257,7 +16257,106 @@
       "Tight OR \u20b95.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1418.800048828125,
+    "exit_price": 1415.9000244140625,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 338,
+    "datetime": "2026-08-24 06:23",
+    "date": "2026-08-24",
+    "asset": "INDUSINDBK",
+    "symbol": "INDUSINDBK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 118,
+    "score_pct": 78.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 8,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1011.9,
+    "t1": 1017.48,
+    "target": 1023.06,
+    "sl": 1008.18,
+    "rr": 3.0,
+    "sl_pct": 0.37,
+    "rsi": 54.7,
+    "vwap": 1010.27,
+    "vol_ratio": 2.79,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=2.8x",
+      "Price above VWAP \u20b91010.3",
+      "Above OR High \u20b91010.3",
+      "Volume spike 2.8x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 55 \u2014 ideal long zone (40\u201365)",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b95.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 339,
+    "datetime": "2026-08-24 06:23",
+    "date": "2026-08-24",
+    "asset": "TATACONSUM",
+    "symbol": "TATACONSUM",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 97,
+    "score_pct": 64.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 7,
+      "boosters": 20
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1050.6,
+    "t1": 1053.75,
+    "target": 1062.0,
+    "sl": 1048.5,
+    "rr": 5.43,
+    "sl_pct": 0.2,
+    "rsi": 69.2,
+    "vwap": 1046.04,
+    "vol_ratio": 2.84,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=2.8x",
+      "Price above VWAP \u20b91046.0",
+      "Above OR High \u20b91049.8",
+      "Volume spike 2.8x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "PDH \u20b91062.0 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG",
+      "Round number level confluence",
+      "Tight OR \u20b95.1 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
