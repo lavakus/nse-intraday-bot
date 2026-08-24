@@ -9182,7 +9182,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1011.9000244140625,
+    "exit_price": 1011.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14164,7 +14164,7 @@
       "Tight OR \u20b912.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1460.699951171875,
+    "exit_price": 1459.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14891,7 +14891,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1644.0999755859375,
+    "exit_price": 1642.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -14941,7 +14941,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1460.699951171875,
+    "exit_price": 1459.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -15770,7 +15770,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 2297.10009765625,
+    "exit_price": 2295.89990234375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -16161,7 +16161,7 @@
       "Tight OR \u20b914.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1644.0999755859375,
+    "exit_price": 1642.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -16256,10 +16256,10 @@
       "RSI 53 \u2014 ideal long zone (40\u201365)",
       "Tight OR \u20b95.3 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1415.9000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1414.5,
+    "pnl_pts": -4.2,
+    "pnl_pct": -0.3
   },
   {
     "id": 338,
@@ -16306,7 +16306,7 @@
       "Tight OR \u20b95.3 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1011.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -16356,7 +16356,7 @@
       "Tight OR \u20b95.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1051.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   }
