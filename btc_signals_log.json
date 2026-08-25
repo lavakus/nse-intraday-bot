@@ -17028,5 +17028,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 358,
+    "datetime": "2026-08-25 02:39",
+    "date": "2026-08-25",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 80,
+    "score_pct": 53.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 45,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 15
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": false
+    },
+    "entry": 80961.65,
+    "t1": 84604.91,
+    "target": 87033.75,
+    "sl": 79747.23,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 75.7,
+    "vwap": 74679.97,
+    "vol_ratio": 1.5,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 78868.01\u201378935.08",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone DEAD active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 79036.85\u201379481.82",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Volume 1.5x spike at reaction zone",
+      "Weekly candle structure is bullish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
