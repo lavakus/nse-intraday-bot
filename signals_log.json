@@ -17087,5 +17087,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 355,
+    "datetime": "2026-08-25 07:38",
+    "date": "2026-08-25",
+    "asset": "PIDILITIND",
+    "symbol": "PIDILITIND",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 15,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 1651.8,
+    "t1": 1640.76,
+    "target": 1638.0,
+    "sl": 1659.16,
+    "rr": 1.87,
+    "sl_pct": 0.45,
+    "rsi": 59.1,
+    "vwap": 1652.55,
+    "vol_ratio": 12.29,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=12.3x",
+      "Price below VWAP \u20b91652.5",
+      "Volume spike 12.3x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "RSI 59 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91638.0 \u2014 clear T2 target",
+      "Round number level confluence",
+      "Tight OR \u20b97.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
