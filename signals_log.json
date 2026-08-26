@@ -17523,5 +17523,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 364,
+    "datetime": "2026-08-26 08:22",
+    "date": "2026-08-26",
+    "asset": "COALINDIA",
+    "symbol": "COALINDIA",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 102,
+    "score_pct": 68.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 30,
+      "entry_quality": 22,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 405.2,
+    "t1": 406.41,
+    "target": 408.0,
+    "sl": 404.39,
+    "rr": 3.46,
+    "sl_pct": 0.2,
+    "rsi": 75.1,
+    "vwap": 403.32,
+    "vol_ratio": 1.32,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=1.3x",
+      "Price above VWAP \u20b9403.3",
+      "Above OR High \u20b9404.9",
+      "Volume elevated 1.3x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "PDH \u20b9408.0 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b92.1 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
