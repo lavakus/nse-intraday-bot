@@ -17379,5 +17379,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 361,
+    "datetime": "2026-08-26 06:29",
+    "date": "2026-08-26",
+    "asset": "HDFCBANK",
+    "symbol": "HDFCBANK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 0,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": false,
+      "rr_valid": true
+    },
+    "entry": 729.0,
+    "t1": 732.04,
+    "target": 735.09,
+    "sl": 726.97,
+    "rr": 3.0,
+    "sl_pct": 0.28,
+    "rsi": 74.0,
+    "vwap": 726.91,
+    "vol_ratio": 1.58,
+    "reasons": [
+      "Setup: ORB (LONG)  Vol=1.6x",
+      "Price above VWAP \u20b9726.9",
+      "Above OR High \u20b9728.0",
+      "Volume spike 1.6x average",
+      "Kill Zone: DEAD (+0 pts)",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b92.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
