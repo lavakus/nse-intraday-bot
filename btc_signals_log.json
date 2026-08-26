@@ -17220,5 +17220,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 362,
+    "datetime": "2026-08-26 02:48",
+    "date": "2026-08-26",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 89,
+    "score_pct": 59.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 16
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 79132.37,
+    "t1": 82693.34,
+    "target": 85067.32,
+    "sl": 77945.38,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 57.2,
+    "vwap": 76232.2,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "BOS confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 78823.53\u201379120.81",
+      "Liquidity sweep at 78779.76",
+      "Kill Zone DEAD active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 78707.68\u201378743.35",
+      "Strong rejection at 4H OB (1H candle)",
+      "Weekly candle structure is bullish",
+      "RSI 57 \u2014 ideal zone",
+      "CAUTION: Unfilled CME gap below entry"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
