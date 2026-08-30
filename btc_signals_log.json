@@ -17455,5 +17455,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 367,
+    "datetime": "2026-08-30 01:29",
+    "date": "2026-08-30",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 102,
+    "score_pct": 68.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 22
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 78008.34,
+    "t1": 76795.05,
+    "target": 75986.19,
+    "sl": 78412.77,
+    "rr": 5.0,
+    "sl_pct": 0.518,
+    "rsi": 38.9,
+    "vwap": 78968.35,
+    "vol_ratio": 3.4,
+    "reasons": [
+      "BOS confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 78153.00\u201378221.86",
+      "Liquidity sweep at 78255.00",
+      "Kill Zone KZ-A active (+15pts)",
+      "FVG 78179.52\u201378187.30",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Volume 3.4x spike at reaction zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
