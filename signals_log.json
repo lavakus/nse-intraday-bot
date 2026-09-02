@@ -17572,5 +17572,54 @@
     "exit_price": 404.0,
     "pnl_pts": -1.2,
     "pnl_pct": -0.3
+  },
+  {
+    "id": 365,
+    "datetime": "2026-09-02 08:18",
+    "date": "2026-09-02",
+    "asset": "ICICIBANK",
+    "symbol": "ICICIBANK",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 130,
+    "score_pct": 86.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1422.0,
+    "t1": 1415.79,
+    "target": 1409.58,
+    "sl": 1426.14,
+    "rr": 3.0,
+    "sl_pct": 0.29,
+    "rsi": 42.6,
+    "vwap": 1427.27,
+    "vol_ratio": 2.48,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=2.5x",
+      "Price below VWAP \u20b91427.3",
+      "Below OR Low \u20b91424.6",
+      "Volume spike 2.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 43 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91419.0 \u2014 clear T2 target",
+      "Tight OR \u20b99.9 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
