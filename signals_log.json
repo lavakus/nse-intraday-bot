@@ -16647,7 +16647,7 @@
       "Tight OR \u20b911.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1917.9000244140625,
+    "exit_price": 1916.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17472,7 +17472,7 @@
       "PDL \u20b9311.1 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": 319.04998779296875,
+    "exit_price": 319.75,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17520,7 +17520,7 @@
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1273.199951171875,
+    "exit_price": 1273.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17668,7 +17668,7 @@
       "Tight OR \u20b98.6 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1047.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17715,10 +17715,10 @@
       "RSI 52 \u2014 ideal short zone (35\u201360)",
       "Tight OR \u20b94.2 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1633.5,
+    "pnl_pts": -4.7,
+    "pnl_pct": -0.29
   },
   {
     "id": 368,
@@ -17765,7 +17765,7 @@
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1983.4000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   }
