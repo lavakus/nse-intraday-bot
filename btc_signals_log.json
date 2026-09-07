@@ -18023,5 +18023,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 379,
+    "datetime": "2026-09-07 20:45",
+    "date": "2026-09-07",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 12,
+      "pa_boosters": 28
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 79186.53,
+    "t1": 78791.7,
+    "target": 78528.48,
+    "sl": 79318.14,
+    "rr": 5.0,
+    "sl_pct": 0.166,
+    "rsi": 49.4,
+    "vwap": 79218.98,
+    "vol_ratio": 2.9,
+    "reasons": [
+      "CHOCH confirmed 4H (SHORT)",
+      "Unmitigated OB 79179.00\u201379195.02",
+      "Liquidity sweep at 79238.90",
+      "Kill Zone NIGHT active (+0pts)",
+      "FVG 79393.43\u201379395.02",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Volume 2.9x spike at reaction zone",
+      "Weekly candle structure is bearish",
+      "RSI 49 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
