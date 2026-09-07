@@ -17472,7 +17472,7 @@
       "PDL \u20b9311.1 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": 318.1499938964844,
+    "exit_price": 311.8999938964844,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17520,7 +17520,7 @@
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1277.5999755859375,
+    "exit_price": 1264.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17764,10 +17764,10 @@
       "PDL \u20b91960.1 \u2014 clear T2 target",
       "Tight OR \u20b97.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1977.0999755859375,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1953.300048828125,
+    "pnl_pts": 27.7,
+    "pnl_pct": 1.4
   },
   {
     "id": 369,
@@ -17813,10 +17813,10 @@
       "PDL \u20b9317.2 \u2014 clear T2 target",
       "Tight OR \u20b91.9 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 311.8999938964844,
+    "pnl_pts": 6.4,
+    "pnl_pct": 2.01
   },
   {
     "id": 370,
@@ -17863,7 +17863,7 @@
       "Tight OR \u20b98.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1847.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17910,10 +17910,10 @@
       "RSI 56 \u2014 ideal long zone (40\u201365)",
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 709.25,
+    "pnl_pts": -6.05,
+    "pnl_pct": -0.85
   },
   {
     "id": 372,
@@ -17957,10 +17957,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "PDL \u20b91122.5 \u2014 clear T2 target"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1088.4000244140625,
+    "pnl_pts": 40.8,
+    "pnl_pct": 3.61
   },
   {
     "id": 373,
@@ -18005,10 +18005,10 @@
       "RSI 47 \u2014 ideal long zone (40\u201365)",
       "5min HH+HL structure aligns with LONG"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 539.1500244140625,
+    "pnl_pts": -4.9,
+    "pnl_pct": -0.9
   },
   {
     "id": 374,
@@ -18054,7 +18054,7 @@
       "Tight OR \u20b911.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1968.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18101,10 +18101,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b97.0 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1264.5,
+    "pnl_pts": -13.3,
+    "pnl_pct": -1.04
   },
   {
     "id": 376,
@@ -18151,7 +18151,7 @@
       "Tight OR \u20b97.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1060.300048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18198,10 +18198,10 @@
       "RSI 49 \u2014 ideal long zone (40\u201365)",
       "Tight OR \u20b92.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 709.25,
+    "pnl_pts": -5.5,
+    "pnl_pct": -0.77
   },
   {
     "id": 378,
@@ -18247,10 +18247,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b91.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 268.0,
+    "pnl_pts": -2.55,
+    "pnl_pct": -0.96
   },
   {
     "id": 379,
@@ -18294,6 +18294,104 @@
       "Kill Zone: KZ3 (+15 pts)",
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b96.5 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": 1309.4000244140625,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 380,
+    "datetime": "2026-09-07 08:39",
+    "date": "2026-09-07",
+    "asset": "HINDALCO",
+    "symbol": "HINDALCO",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 133,
+    "score_pct": 88.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 23,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1003.2,
+    "t1": 999.15,
+    "target": 995.1,
+    "sl": 1005.9,
+    "rr": 3.0,
+    "sl_pct": 0.27,
+    "rsi": 45.6,
+    "vwap": 1004.38,
+    "vol_ratio": 2.55,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=2.5x",
+      "Price below VWAP \u20b91004.4",
+      "Below OR Low \u20b91006.7",
+      "Volume spike 2.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 46 \u2014 ideal short zone (35\u201360)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b97.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 381,
+    "datetime": "2026-09-07 08:39",
+    "date": "2026-09-07",
+    "asset": "TATASTEEL",
+    "symbol": "TATASTEEL",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 120,
+    "score_pct": 80.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 185.41,
+    "t1": 184.0,
+    "target": 182.84,
+    "sl": 186.35,
+    "rr": 2.73,
+    "sl_pct": 0.51,
+    "rsi": 53.0,
+    "vwap": 185.6,
+    "vol_ratio": 1.82,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=1.8x",
+      "Price below VWAP \u20b9185.6",
+      "Below OR Low \u20b9186.6",
+      "Volume spike 1.8x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 53 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b9182.8 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
     "exit_price": null,
