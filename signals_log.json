@@ -18397,5 +18397,97 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 382,
+    "datetime": "2026-09-07 08:49",
+    "date": "2026-09-07",
+    "asset": "WIPRO",
+    "symbol": "WIPRO",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 0
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 172.8,
+    "t1": 171.21,
+    "target": 169.62,
+    "sl": 173.86,
+    "rr": 3.0,
+    "sl_pct": 0.61,
+    "rsi": 26.9,
+    "vwap": 173.72,
+    "vol_ratio": 1.71,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.7x",
+      "Price below VWAP \u20b9173.7",
+      "Below OR Low \u20b9173.7",
+      "Volume spike 1.7x average",
+      "Kill Zone: KZ3 (+15 pts)"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 383,
+    "datetime": "2026-09-07 08:49",
+    "date": "2026-09-07",
+    "asset": "WIPRO",
+    "symbol": "WIPRO",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 85,
+    "score_pct": 56.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 0
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 172.85,
+    "t1": 171.33,
+    "target": 169.82,
+    "sl": 173.86,
+    "rr": 3.0,
+    "sl_pct": 0.58,
+    "rsi": 28.2,
+    "vwap": 173.72,
+    "vol_ratio": 1.71,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.7x",
+      "Price below VWAP \u20b9173.7",
+      "Below OR Low \u20b9173.7",
+      "Volume spike 1.7x average",
+      "Kill Zone: KZ3 (+15 pts)"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
