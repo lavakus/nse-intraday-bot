@@ -17472,7 +17472,7 @@
       "PDL \u20b9311.1 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": 311.8999938964844,
+    "exit_price": 312.04998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17520,7 +17520,7 @@
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1264.5,
+    "exit_price": 1266.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -17863,7 +17863,7 @@
       "Tight OR \u20b98.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1847.5999755859375,
+    "exit_price": 1847.199951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18054,7 +18054,7 @@
       "Tight OR \u20b911.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1968.800048828125,
+    "exit_price": 1967.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18151,7 +18151,7 @@
       "Tight OR \u20b97.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1060.300048828125,
+    "exit_price": 1060.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18295,10 +18295,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b96.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1309.4000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1301.5,
+    "pnl_pts": -16.7,
+    "pnl_pct": -1.27
   },
   {
     "id": 380,
@@ -18344,10 +18344,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b97.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1006.5999755859375,
+    "pnl_pts": -3.4,
+    "pnl_pct": -0.34
   },
   {
     "id": 381,
@@ -18394,7 +18394,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 185.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18440,7 +18440,7 @@
       "Kill Zone: KZ3 (+15 pts)"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 173.05999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18486,7 +18486,7 @@
       "Kill Zone: KZ3 (+15 pts)"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 173.05999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   }
