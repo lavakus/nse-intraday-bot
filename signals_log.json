@@ -17471,10 +17471,10 @@
       "RSI 55 \u2014 ideal short zone (35\u201360)",
       "PDL \u20b9311.1 \u2014 clear T2 target"
     ],
-    "status": "OPEN",
-    "exit_price": 312.04998779296875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 302.5,
+    "pnl_pts": 17.65,
+    "pnl_pct": 5.51
   },
   {
     "id": 363,
@@ -17519,10 +17519,10 @@
       "5min HH+HL structure aligns with LONG",
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1266.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1242.0999755859375,
+    "pnl_pts": -15.0,
+    "pnl_pct": -1.19
   },
   {
     "id": 364,
@@ -17862,10 +17862,10 @@
       "Round number level confluence",
       "Tight OR \u20b98.8 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1847.199951171875,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1835.0,
+    "pnl_pts": 18.4,
+    "pnl_pct": 0.99
   },
   {
     "id": 371,
@@ -18054,7 +18054,7 @@
       "Tight OR \u20b911.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1967.5,
+    "exit_price": 1983.800048828125,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18150,10 +18150,10 @@
       "PDH \u20b91059.7 \u2014 clear T2 target",
       "Tight OR \u20b97.4 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1060.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1054.800048828125,
+    "pnl_pts": -4.8,
+    "pnl_pct": -0.45
   },
   {
     "id": 377,
@@ -18394,7 +18394,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": 185.0,
+    "exit_price": 184.14999389648438,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18440,7 +18440,7 @@
       "Kill Zone: KZ3 (+15 pts)"
     ],
     "status": "OPEN",
-    "exit_price": 173.05999755859375,
+    "exit_price": 171.47999572753906,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18486,7 +18486,56 @@
       "Kill Zone: KZ3 (+15 pts)"
     ],
     "status": "OPEN",
-    "exit_price": 173.05999755859375,
+    "exit_price": 171.47999572753906,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 384,
+    "datetime": "2026-09-08 08:21",
+    "date": "2026-09-08",
+    "asset": "IOC",
+    "symbol": "IOC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 133.42,
+    "t1": 131.88,
+    "target": 130.33,
+    "sl": 134.45,
+    "rr": 3.0,
+    "sl_pct": 0.77,
+    "rsi": 14.3,
+    "vwap": 134.53,
+    "vol_ratio": 2.21,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=2.2x",
+      "Price below VWAP \u20b9134.5",
+      "Below OR Low \u20b9134.3",
+      "Volume spike 2.2x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 14 extreme \u2014 use caution",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b91.3 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
