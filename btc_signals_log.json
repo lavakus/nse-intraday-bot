@@ -18166,5 +18166,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 382,
+    "datetime": "2026-09-09 05:04",
+    "date": "2026-09-09",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 76,
+    "score_pct": 50.7,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 3
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 79071.57,
+    "t1": 80910.54,
+    "target": 82136.52,
+    "sl": 78458.58,
+    "rr": 5.0,
+    "sl_pct": 0.775,
+    "rsi": 64.5,
+    "vwap": 79577.11,
+    "vol_ratio": 1.2,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 78619.71\u201378713.14",
+      "Liquidity sweep at 78684.93",
+      "Kill Zone DEAD active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 78713.14\u201379044.77",
+      "RSI 64 \u2014 ideal zone",
+      "CAUTION: Unfilled CME gap below entry"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
