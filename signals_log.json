@@ -19412,5 +19412,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 403,
+    "datetime": "2026-09-11 08:29",
+    "date": "2026-09-11",
+    "asset": "INDUSINDBK",
+    "symbol": "INDUSINDBK",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 100,
+    "score_pct": 66.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 15,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 973.7,
+    "t1": 962.5,
+    "target": 951.29,
+    "sl": 981.17,
+    "rr": 3.0,
+    "sl_pct": 0.77,
+    "rsi": 34.0,
+    "vwap": 977.68,
+    "vol_ratio": 2.03,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=2.0x",
+      "Price below VWAP \u20b9977.7",
+      "Below OR Low \u20b9980.2",
+      "Volume spike 2.0x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b96.9 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
