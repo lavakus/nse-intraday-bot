@@ -18728,7 +18728,7 @@
       "Tight OR \u20b910.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1371.9000244140625,
+    "exit_price": 1363.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -18919,10 +18919,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b97.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1272.5,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1255.5,
+    "pnl_pts": 33.1,
+    "pnl_pct": 2.57
   },
   {
     "id": 393,
@@ -19018,7 +19018,7 @@
       "Tight OR \u20b99.1 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1244.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19067,10 +19067,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b94.1 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1269.300048828125,
+    "pnl_pts": 26.7,
+    "pnl_pct": 2.06
   },
   {
     "id": 396,
@@ -19117,7 +19117,7 @@
       "Tight OR \u20b94.4 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 995.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19164,6 +19164,249 @@
       "RSI 49 \u2014 ideal long zone (40\u201365)",
       "PDH \u20b91739.9 \u2014 clear T2 target",
       "Tight OR \u20b99.0 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": 1691.800048828125,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 398,
+    "datetime": "2026-09-11 08:19",
+    "date": "2026-09-11",
+    "asset": "HINDALCO",
+    "symbol": "HINDALCO",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 135,
+    "score_pct": 90.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 989.5,
+    "t1": 994.27,
+    "target": 1029.5,
+    "sl": 986.32,
+    "rr": 12.58,
+    "sl_pct": 0.32,
+    "rsi": 61.0,
+    "vwap": 983.97,
+    "vol_ratio": 1.89,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.9x",
+      "Price above VWAP \u20b9984.0",
+      "Above OR High \u20b9986.0",
+      "Volume spike 1.9x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 61 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b91029.5 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 399,
+    "datetime": "2026-09-11 08:19",
+    "date": "2026-09-11",
+    "asset": "AXISBANK",
+    "symbol": "AXISBANK",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 130,
+    "score_pct": 86.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1244.6,
+    "t1": 1250.27,
+    "target": 1255.2,
+    "sl": 1240.82,
+    "rr": 2.8,
+    "sl_pct": 0.3,
+    "rsi": 42.8,
+    "vwap": 1243.52,
+    "vol_ratio": 1.87,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (LONG)  Vol=1.9x",
+      "Price above VWAP \u20b91243.5",
+      "Above OR High \u20b91241.0",
+      "Volume spike 1.9x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 43 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b91255.2 \u2014 clear T2 target",
+      "Tight OR \u20b911.1 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 400,
+    "datetime": "2026-09-11 08:19",
+    "date": "2026-09-11",
+    "asset": "INFY",
+    "symbol": "INFY",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 30,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1039.3,
+    "t1": 1031.21,
+    "target": 1027.3,
+    "sl": 1044.69,
+    "rr": 2.23,
+    "sl_pct": 0.52,
+    "rsi": 38.5,
+    "vwap": 1040.53,
+    "vol_ratio": 2.68,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=2.7x",
+      "Price below VWAP \u20b91040.5",
+      "Volume spike 2.7x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 39 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91027.3 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 401,
+    "datetime": "2026-09-11 08:19",
+    "date": "2026-09-11",
+    "asset": "INDUSINDBK",
+    "symbol": "INDUSINDBK",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 108,
+    "score_pct": 72.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 23,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 974.0,
+    "t1": 963.25,
+    "target": 952.49,
+    "sl": 981.17,
+    "rr": 3.0,
+    "sl_pct": 0.74,
+    "rsi": 35.3,
+    "vwap": 978.03,
+    "vol_ratio": 2.44,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=2.4x",
+      "Price below VWAP \u20b9978.0",
+      "Below OR Low \u20b9980.2",
+      "Volume spike 2.4x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 35 \u2014 ideal short zone (35\u201360)",
+      "5min LH+LL structure aligns with SHORT",
+      "Tight OR \u20b96.9 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 402,
+    "datetime": "2026-09-11 08:19",
+    "date": "2026-09-11",
+    "asset": "ASIANPAINT",
+    "symbol": "ASIANPAINT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 105,
+    "score_pct": 70.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 30,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 2463.7,
+    "t1": 2486.26,
+    "target": 2489.0,
+    "sl": 2448.66,
+    "rr": 1.68,
+    "sl_pct": 0.61,
+    "rsi": 51.9,
+    "vwap": 2458.49,
+    "vol_ratio": 2.02,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=2.0x",
+      "Price above VWAP \u20b92458.5",
+      "Volume spike 2.0x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 52 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b92489.0 \u2014 clear T2 target",
+      "Tight OR \u20b918.6 \u2014 clean structure"
     ],
     "status": "OPEN",
     "exit_price": null,
