@@ -18642,5 +18642,49 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 392,
+    "datetime": "2026-09-15 07:21",
+    "date": "2026-09-15",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 65,
+    "score_pct": 43.3,
+    "signal_strength": "WEAK",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 12,
+      "pa_boosters": 0
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 77285.03,
+    "t1": 74903.12,
+    "target": 73315.18,
+    "sl": 78079.0,
+    "rr": 5.0,
+    "sl_pct": 1.027,
+    "rsi": 33.6,
+    "vwap": 77733.31,
+    "vol_ratio": 0.3,
+    "reasons": [
+      "CHOCH confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 77890.48\u201377890.65",
+      "Liquidity sweep at 77419.05",
+      "Kill Zone DEAD active (+0pts)",
+      "FVG 77724.42\u201377768.82"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
