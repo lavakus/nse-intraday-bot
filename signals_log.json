@@ -18728,7 +18728,7 @@
       "Tight OR \u20b910.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1366.0,
+    "exit_price": 1353.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19017,10 +19017,10 @@
       "Round number level confluence",
       "Tight OR \u20b99.1 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1246.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1227.300048828125,
+    "pnl_pts": 19.9,
+    "pnl_pct": 1.6
   },
   {
     "id": 395,
@@ -19165,10 +19165,10 @@
       "PDH \u20b91739.9 \u2014 clear T2 target",
       "Tight OR \u20b99.0 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1684.7,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1655.0,
+    "pnl_pts": -38.6,
+    "pnl_pct": -2.28
   },
   {
     "id": 398,
@@ -19263,10 +19263,10 @@
       "PDH \u20b91255.2 \u2014 clear T2 target",
       "Tight OR \u20b911.1 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1246.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1227.300048828125,
+    "pnl_pts": -17.3,
+    "pnl_pct": -1.39
   },
   {
     "id": 400,
@@ -19311,10 +19311,10 @@
       "PDL \u20b91027.3 \u2014 clear T2 target",
       "5min LH+LL structure aligns with SHORT"
     ],
-    "status": "OPEN",
-    "exit_price": 1037.7,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1075.300048828125,
+    "pnl_pts": -36.0,
+    "pnl_pct": -3.46
   },
   {
     "id": 401,
@@ -19361,7 +19361,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 978.2,
+    "exit_price": 959.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19408,10 +19408,10 @@
       "PDH \u20b92489.0 \u2014 clear T2 target",
       "Tight OR \u20b918.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 2472.5,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 2415.699951171875,
+    "pnl_pts": -48.0,
+    "pnl_pct": -1.95
   },
   {
     "id": 403,
@@ -19457,7 +19457,152 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 978.2,
+    "exit_price": 959.5999755859375,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 404,
+    "datetime": "2026-09-15 08:59",
+    "date": "2026-09-15",
+    "asset": "NESTLEIND",
+    "symbol": "NESTLEIND",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 123,
+    "score_pct": 82.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 23,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1371.1,
+    "t1": 1366.39,
+    "target": 1361.68,
+    "sl": 1374.24,
+    "rr": 3.0,
+    "sl_pct": 0.23,
+    "rsi": 48.5,
+    "vwap": 1376.83,
+    "vol_ratio": 3.94,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=3.9x",
+      "Price below VWAP \u20b91376.8",
+      "Below OR Low \u20b91383.9",
+      "Volume spike 3.9x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 48 \u2014 ideal short zone (35\u201360)",
+      "Tight OR \u20b910.5 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 405,
+    "datetime": "2026-09-15 08:59",
+    "date": "2026-09-15",
+    "asset": "HINDALCO",
+    "symbol": "HINDALCO",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 115,
+    "score_pct": 76.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 30,
+      "entry_quality": 15,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 962.0,
+    "t1": 954.31,
+    "target": 946.61,
+    "sl": 967.13,
+    "rr": 3.0,
+    "sl_pct": 0.53,
+    "rsi": 23.2,
+    "vwap": 970.63,
+    "vol_ratio": 1.46,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=1.5x",
+      "Price below VWAP \u20b9970.6",
+      "Below OR Low \u20b9966.8",
+      "Volume elevated 1.5x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "5min LH+LL structure aligns with SHORT"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 406,
+    "datetime": "2026-09-15 08:59",
+    "date": "2026-09-15",
+    "asset": "DRREDDY",
+    "symbol": "DRREDDY",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 110,
+    "score_pct": 73.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 35,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1150.4,
+    "t1": 1136.83,
+    "target": 1130.0,
+    "sl": 1159.45,
+    "rr": 2.25,
+    "sl_pct": 0.79,
+    "rsi": 44.7,
+    "vwap": 1158.28,
+    "vol_ratio": 1.63,
+    "reasons": [
+      "Setup: ORB (SHORT)  Vol=1.6x",
+      "Price below VWAP \u20b91158.3",
+      "Below OR Low \u20b91158.3",
+      "Volume spike 1.6x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 45 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91130.0 \u2014 clear T2 target",
+      "Round number level confluence",
+      "Tight OR \u20b97.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
   }
