@@ -18728,7 +18728,7 @@
       "Tight OR \u20b910.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1353.0999755859375,
+    "exit_price": 1355.0999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19361,7 +19361,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 959.5999755859375,
+    "exit_price": 961.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19457,7 +19457,7 @@
       "Tight OR \u20b96.9 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 959.5999755859375,
+    "exit_price": 961.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19504,10 +19504,10 @@
       "RSI 48 \u2014 ideal short zone (35\u201360)",
       "Tight OR \u20b910.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1374.4000244140625,
+    "pnl_pts": -3.3,
+    "pnl_pct": -0.24
   },
   {
     "id": 405,
@@ -19552,7 +19552,7 @@
       "5min LH+LL structure aligns with SHORT"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 962.7999877929688,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19602,7 +19602,7 @@
       "Tight OR \u20b97.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1148.5,
     "pnl_pts": null,
     "pnl_pct": null
   }
