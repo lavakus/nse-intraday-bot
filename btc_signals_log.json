@@ -18778,5 +18778,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 395,
+    "datetime": "2026-09-16 01:35",
+    "date": "2026-09-16",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 102,
+    "score_pct": 68.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 26,
+      "pa_boosters": 16
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 75631.44,
+    "t1": 74715.87,
+    "target": 74105.49,
+    "sl": 75936.63,
+    "rr": 5.0,
+    "sl_pct": 0.404,
+    "rsi": 43.9,
+    "vwap": 77326.13,
+    "vol_ratio": 0.2,
+    "reasons": [
+      "CHOCH confirmed 4H (SHORT)",
+      "Unmitigated OB 75594.45\u201375712.21",
+      "Liquidity sweep at 75823.84",
+      "Kill Zone KZ-A active (+15pts)",
+      "Fear & Greed 51 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "Weekly candle structure is bearish",
+      "RSI 44 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
