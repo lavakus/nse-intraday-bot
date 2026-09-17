@@ -19601,10 +19601,10 @@
       "Round number level confluence",
       "Tight OR \u20b97.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1147.4000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1169.5,
+    "pnl_pts": -19.1,
+    "pnl_pct": -1.66
   },
   {
     "id": 407,
@@ -19652,7 +19652,7 @@
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1250.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19702,7 +19702,7 @@
       "Tight OR \u20b99.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1861.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19751,10 +19751,10 @@
       "Round number level confluence",
       "Tight OR \u20b96.8 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 956.7999877929688,
+    "pnl_pts": -7.1,
+    "pnl_pct": -0.75
   },
   {
     "id": 410,
@@ -19802,7 +19802,7 @@
       "Tight OR \u20b99.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1861.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19852,7 +19852,7 @@
       "Tight OR \u20b91.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 263.79998779296875,
     "pnl_pts": null,
     "pnl_pct": null
   }
