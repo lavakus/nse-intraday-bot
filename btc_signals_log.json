@@ -18922,5 +18922,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 398,
+    "datetime": "2026-09-21 00:53",
+    "date": "2026-09-21",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 108,
+    "score_pct": 72.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-A",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 35,
+      "pa_boosters": 20
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 81624.28,
+    "t1": 83410.45,
+    "target": 84601.23,
+    "sl": 81028.89,
+    "rr": 5.0,
+    "sl_pct": 0.729,
+    "rsi": 66.4,
+    "vwap": 78037.24,
+    "vol_ratio": 1.3,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 81159.52\u201381184.14",
+      "Liquidity sweep at 80814.94",
+      "Kill Zone KZ-A active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 81075.10\u201381110.00",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Weekly candle structure is bullish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
