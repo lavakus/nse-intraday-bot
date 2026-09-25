@@ -19702,7 +19702,7 @@
       "Tight OR \u20b99.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1852.300048828125,
+    "exit_price": 1850.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19802,7 +19802,7 @@
       "Tight OR \u20b99.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1852.300048828125,
+    "exit_price": 1850.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19899,10 +19899,10 @@
       "RSI 47 \u2014 ideal short zone (35\u201360)",
       "Tight OR \u20b912.6 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1334.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1325.4000244140625,
+    "pnl_pts": 17.1,
+    "pnl_pct": 1.27
   },
   {
     "id": 413,
@@ -21015,7 +21015,7 @@
       "Tight OR \u20b91.0 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 236.10000610351562,
+    "exit_price": 235.6999969482422,
     "pnl_pts": null,
     "pnl_pct": null
   }
