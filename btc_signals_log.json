@@ -19248,5 +19248,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 405,
+    "datetime": "2026-09-26 22:27",
+    "date": "2026-09-26",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 91,
+    "score_pct": 60.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 18
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 84268.82,
+    "t1": 85428.02,
+    "target": 86200.82,
+    "sl": 83882.42,
+    "rr": 5.0,
+    "sl_pct": 0.459,
+    "rsi": 62.1,
+    "vwap": 84545.02,
+    "vol_ratio": 7.8,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 83994.61\u201384014.56",
+      "Liquidity sweep at 84153.04",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 84080.40\u201384137.62",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Volume 7.8x spike at reaction zone",
+      "Weekly candle structure is bullish",
+      "RSI 62 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
