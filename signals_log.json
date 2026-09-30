@@ -19702,7 +19702,7 @@
       "Tight OR \u20b99.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1850.0,
+    "exit_price": 1847.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -19802,7 +19802,7 @@
       "Tight OR \u20b99.8 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1850.0,
+    "exit_price": 1847.9000244140625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -21014,9 +21014,9 @@
       "RSI 58 \u2014 ideal long zone (40\u201365)",
       "Tight OR \u20b91.0 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 235.6999969482422,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 223.60000610351562,
+    "pnl_pts": -12.82,
+    "pnl_pct": -5.42
   }
 ]
