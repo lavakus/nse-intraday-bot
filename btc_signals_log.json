@@ -19342,5 +19342,51 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 407,
+    "datetime": "2026-09-30 10:58",
+    "date": "2026-09-30",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 80,
+    "score_pct": 53.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "WATCH",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 7
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 83902.14,
+    "t1": 87067.38,
+    "target": 89177.54,
+    "sl": 82847.06,
+    "rr": 5.0,
+    "sl_pct": 1.258,
+    "rsi": 70.5,
+    "vwap": 83800.87,
+    "vol_ratio": 0.4,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 83005.88\u201383352.70",
+      "Liquidity sweep at 83247.71",
+      "Kill Zone WATCH active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 83288.05\u201383600.12",
+      "15min HH+HL aligns with 4H bullish bias"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
