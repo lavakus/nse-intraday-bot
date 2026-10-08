@@ -19667,5 +19667,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 414,
+    "datetime": "2026-10-08 06:29",
+    "date": "2026-10-08",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 95,
+    "score_pct": 63.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 12,
+      "pa_boosters": 23
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 82564.24,
+    "t1": 81083.65,
+    "target": 80096.59,
+    "sl": 83057.77,
+    "rr": 5.0,
+    "sl_pct": 0.598,
+    "rsi": 40.2,
+    "vwap": 84946.79,
+    "vol_ratio": 0.8,
+    "reasons": [
+      "BOS confirmed 4H (SHORT)",
+      "Unmitigated OB 82585.28\u201382624.90",
+      "Liquidity sweep at 82718.78",
+      "Kill Zone DEAD active (+0pts)",
+      "FVG 82962.66\u201383059.36",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Weekly candle structure is bearish",
+      "RSI 40 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
