@@ -19701,10 +19701,10 @@
       "Round number level confluence",
       "Tight OR \u20b99.8 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1847.9000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1729.800048828125,
+    "pnl_pts": -125.1,
+    "pnl_pct": -6.74
   },
   {
     "id": 409,
@@ -19801,10 +19801,10 @@
       "Round number level confluence",
       "Tight OR \u20b99.8 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 1847.9000244140625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1729.800048828125,
+    "pnl_pts": -124.1,
+    "pnl_pct": -6.69
   },
   {
     "id": 411,
