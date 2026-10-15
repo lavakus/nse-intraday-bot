@@ -21065,10 +21065,10 @@
       "Round number level confluence",
       "Tight OR \u20b914.8 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 2889.10009765625,
+    "pnl_pts": -18.0,
+    "pnl_pct": -0.62
   },
   {
     "id": 437,
@@ -21112,10 +21112,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 57 \u2014 ideal long zone (40\u201365)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 175.8000030517578,
+    "pnl_pts": -0.75,
+    "pnl_pct": -0.42
   },
   {
     "id": 438,
@@ -21161,7 +21161,7 @@
       "Tight OR \u20b921.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 2353.60009765625,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -21208,7 +21208,7 @@
       "PDH \u20b9253.9 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 245.64999389648438,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -21257,7 +21257,7 @@
       "Tight OR \u20b95.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 883.0,
     "pnl_pts": null,
     "pnl_pct": null
   }
