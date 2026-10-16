@@ -21160,10 +21160,10 @@
       "5min LH+LL structure aligns with SHORT",
       "Tight OR \u20b921.7 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 2353.60009765625,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 2335.10009765625,
+    "pnl_pts": 36.7,
+    "pnl_pct": 1.55
   },
   {
     "id": 439,
@@ -21208,7 +21208,7 @@
       "PDH \u20b9253.9 \u2014 clear T2 target"
     ],
     "status": "OPEN",
-    "exit_price": 245.64999389648438,
+    "exit_price": 248.6999969482422,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -21257,7 +21257,7 @@
       "Tight OR \u20b95.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 883.0,
+    "exit_price": 878.0,
     "pnl_pts": null,
     "pnl_pct": null
   }
