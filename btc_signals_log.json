@@ -20002,5 +20002,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 421,
+    "datetime": "2026-10-17 21:37",
+    "date": "2026-10-17",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 97,
+    "score_pct": 64.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 19,
+      "pa_boosters": 25
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 80975.03,
+    "t1": 78999.5,
+    "target": 77682.48,
+    "sl": 81633.54,
+    "rr": 5.0,
+    "sl_pct": 0.813,
+    "rsi": 27.5,
+    "vwap": 82323.2,
+    "vol_ratio": 7.8,
+    "reasons": [
+      "BOS confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 81486.94\u201381535.18",
+      "Liquidity sweep at 81545.72",
+      "Kill Zone NIGHT active (+0pts)",
+      "FVG 81147.83\u201381512.34",
+      "Fear & Greed 55 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Volume 7.8x spike at reaction zone",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
