@@ -20051,5 +20051,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 422,
+    "datetime": "2026-10-18 03:32",
+    "date": "2026-10-18",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 83,
+    "score_pct": 55.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 53,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 3
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 81716.12,
+    "t1": 84946.64,
+    "target": 87100.32,
+    "sl": 80639.28,
+    "rr": 5.0,
+    "sl_pct": 1.318,
+    "rsi": 60.9,
+    "vwap": 82220.87,
+    "vol_ratio": 0.1,
+    "reasons": [
+      "CHOCH confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 81041.38\u201381546.82",
+      "Liquidity sweep at 81341.48",
+      "Kill Zone DEAD active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 81396.85\u201381418.35",
+      "Fear & Greed 53 \u2014 ideal zone (25\u201360)",
+      "RSI 61 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
