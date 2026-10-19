@@ -21207,10 +21207,10 @@
       "RSI 47 \u2014 ideal long zone (40\u201365)",
       "PDH \u20b9253.9 \u2014 clear T2 target"
     ],
-    "status": "OPEN",
-    "exit_price": 248.6999969482422,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 244.1999969482422,
+    "pnl_pts": -1.65,
+    "pnl_pct": -0.67
   },
   {
     "id": 440,
@@ -21256,9 +21256,9 @@
       "PDH \u20b9883.0 \u2014 clear T2 target",
       "Tight OR \u20b95.5 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 878.0,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 862.75,
+    "pnl_pts": -19.35,
+    "pnl_pct": -2.19
   }
 ]
