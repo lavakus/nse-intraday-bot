@@ -20289,5 +20289,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 427,
+    "datetime": "2026-10-21 21:22",
+    "date": "2026-10-21",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 86,
+    "score_pct": 57.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 20,
+      "pa_boosters": 6
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 84658.49,
+    "t1": 86004.5,
+    "target": 86901.84,
+    "sl": 84209.82,
+    "rr": 5.0,
+    "sl_pct": 0.53,
+    "rsi": 63.3,
+    "vwap": 82115.74,
+    "vol_ratio": 0.3,
+    "reasons": [
+      "BOS confirmed 4H (LONG)",
+      "Unmitigated OB 84346.13\u201384540.73",
+      "Liquidity sweep at 84591.72",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 84552.16\u201384577.65",
+      "Weekly candle structure is bullish",
+      "RSI 63 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
