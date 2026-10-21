@@ -21305,10 +21305,10 @@
       "PDL \u20b9247.1 \u2014 clear T2 target",
       "Round number level confluence"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 246.9499969482422,
+    "pnl_pts": 3.4,
+    "pnl_pct": 1.36
   },
   {
     "id": 442,
@@ -21353,10 +21353,10 @@
       "RSI 54 \u2014 ideal short zone (35\u201360)",
       "PDL \u20b91122.0 \u2014 clear T2 target"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "SL HIT",
+    "exit_price": 1162.75,
+    "pnl_pts": -32.05,
+    "pnl_pct": -2.83
   },
   {
     "id": 443,
@@ -21402,7 +21402,7 @@
       "Tight OR \u20b92.2 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 260.5,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -21449,10 +21449,10 @@
       "RSI 49 \u2014 ideal short zone (35\u201360)",
       "Round number level confluence"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1666.5,
+    "pnl_pts": 33.5,
+    "pnl_pct": 1.97
   },
   {
     "id": 445,
@@ -21496,10 +21496,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "5min LH+LL structure aligns with SHORT"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 404.6000061035156,
+    "pnl_pts": 7.1,
+    "pnl_pct": 1.72
   },
   {
     "id": 446,
@@ -21543,10 +21543,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 57 \u2014 ideal short zone (35\u201360)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 700.0,
+    "pnl_pts": 12.0,
+    "pnl_pct": 1.69
   },
   {
     "id": 447,
@@ -21590,10 +21590,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 40 \u2014 ideal short zone (35\u201360)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 920.0,
+    "pnl_pts": 37.35,
+    "pnl_pct": 3.9
   },
   {
     "id": 448,
@@ -21637,10 +21637,10 @@
       "Kill Zone: KZ3 (+15 pts)",
       "RSI 56 \u2014 ideal short zone (35\u201360)"
     ],
-    "status": "OPEN",
-    "exit_price": null,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 1723.5999755859375,
+    "pnl_pts": 19.4,
+    "pnl_pct": 1.11
   },
   {
     "id": 449,
@@ -21687,7 +21687,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": null,
+    "exit_price": 1834.5999755859375,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -21734,6 +21734,200 @@
       "RSI 42 \u2014 ideal short zone (35\u201360)",
       "PDL \u20b9892.3 \u2014 clear T2 target",
       "Round number level confluence"
+    ],
+    "status": "TARGET HIT",
+    "exit_price": 887.3499755859375,
+    "pnl_pts": 13.1,
+    "pnl_pct": 1.45
+  },
+  {
+    "id": 451,
+    "datetime": "2026-10-21 08:53",
+    "date": "2026-10-21",
+    "asset": "ITC",
+    "symbol": "ITC",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 135,
+    "score_pct": 90.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 10
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 260.5,
+    "t1": 259.64,
+    "target": 258.79,
+    "sl": 261.07,
+    "rr": 3.0,
+    "sl_pct": 0.22,
+    "rsi": 38.8,
+    "vwap": 262.77,
+    "vol_ratio": 2.62,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=2.6x",
+      "Price below VWAP \u20b9262.8",
+      "Below OR Low \u20b9261.4",
+      "Volume spike 2.6x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 39 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b9260.0 \u2014 clear T2 target",
+      "5min LH+LL structure aligns with SHORT"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 452,
+    "datetime": "2026-10-21 08:53",
+    "date": "2026-10-21",
+    "asset": "DRREDDY",
+    "symbol": "DRREDDY",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 130,
+    "score_pct": 86.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 60,
+      "trend_filters": 35,
+      "entry_quality": 30,
+      "boosters": 5
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 1239.6,
+    "t1": 1235.28,
+    "target": 1227.0,
+    "sl": 1242.48,
+    "rr": 4.37,
+    "sl_pct": 0.23,
+    "rsi": 57.9,
+    "vwap": 1241.5,
+    "vol_ratio": 2.0,
+    "reasons": [
+      "Setup: BREAKOUT_RETEST (SHORT)  Vol=2.0x",
+      "Price below VWAP \u20b91241.5",
+      "Below OR Low \u20b91241.6",
+      "Volume spike 2.0x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 58 \u2014 ideal short zone (35\u201360)",
+      "PDL \u20b91227.0 \u2014 clear T2 target",
+      "Tight OR \u20b98.7 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 453,
+    "datetime": "2026-10-21 08:53",
+    "date": "2026-10-21",
+    "asset": "ONGC",
+    "symbol": "ONGC",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 115,
+    "score_pct": 76.7,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 25,
+      "entry_quality": 30,
+      "boosters": 15
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 225.57,
+    "t1": 227.17,
+    "target": 228.78,
+    "sl": 224.5,
+    "rr": 3.0,
+    "sl_pct": 0.47,
+    "rsi": 57.3,
+    "vwap": 225.4,
+    "vol_ratio": 2.04,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (LONG)  Vol=2.0x",
+      "Price above VWAP \u20b9225.4",
+      "Volume spike 2.0x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 57 \u2014 ideal long zone (40\u201365)",
+      "PDH \u20b9226.2 \u2014 clear T2 target",
+      "5min HH+HL structure aligns with LONG",
+      "Tight OR \u20b91.5 \u2014 clean structure"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
+  },
+  {
+    "id": 454,
+    "datetime": "2026-10-21 08:53",
+    "date": "2026-10-21",
+    "asset": "INDUSINDBK",
+    "symbol": "INDUSINDBK",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 103,
+    "score_pct": 68.7,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ3",
+    "phase_scores": {
+      "setup_quality": 45,
+      "trend_filters": 35,
+      "entry_quality": 23,
+      "boosters": 0
+    },
+    "must_have_checklist": {
+      "setup_detected": true,
+      "vwap_aligned": true,
+      "volume_confirmed": true,
+      "inside_kill_zone": true,
+      "rr_valid": true
+    },
+    "entry": 840.75,
+    "t1": 833.78,
+    "target": 826.8,
+    "sl": 845.4,
+    "rr": 3.0,
+    "sl_pct": 0.55,
+    "rsi": 57.7,
+    "vwap": 842.03,
+    "vol_ratio": 3.56,
+    "reasons": [
+      "Setup: VWAP_PULLBACK (SHORT)  Vol=3.6x",
+      "Price below VWAP \u20b9842.0",
+      "Below OR Low \u20b9859.6",
+      "Volume spike 3.6x average",
+      "Kill Zone: KZ3 (+15 pts)",
+      "RSI 58 \u2014 ideal short zone (35\u201360)"
     ],
     "status": "OPEN",
     "exit_price": null,
