@@ -21401,10 +21401,10 @@
       "RSI 45 \u2014 ideal short zone (35\u201360)",
       "Tight OR \u20b92.2 \u2014 clean structure"
     ],
-    "status": "OPEN",
-    "exit_price": 261.1000061035156,
-    "pnl_pts": null,
-    "pnl_pct": null
+    "status": "TARGET HIT",
+    "exit_price": 257.95001220703125,
+    "pnl_pts": 2.85,
+    "pnl_pct": 1.09
   },
   {
     "id": 444,
@@ -21687,7 +21687,7 @@
       "Round number level confluence"
     ],
     "status": "OPEN",
-    "exit_price": 1845.0,
+    "exit_price": 1817.0,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -21834,7 +21834,7 @@
       "Tight OR \u20b98.7 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 1239.4000244140625,
+    "exit_price": 1233.699951171875,
     "pnl_pts": null,
     "pnl_pct": null
   },
@@ -21883,7 +21883,7 @@
       "Tight OR \u20b91.5 \u2014 clean structure"
     ],
     "status": "OPEN",
-    "exit_price": 225.32000732421875,
+    "exit_price": 225.1999969482422,
     "pnl_pts": null,
     "pnl_pct": null
   },
