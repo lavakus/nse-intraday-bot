@@ -20581,5 +20581,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 433,
+    "datetime": "2026-10-26 13:58",
+    "date": "2026-10-26",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 119,
+    "score_pct": 79.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-NY",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 34,
+      "pa_boosters": 25
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 79377.22,
+    "t1": 75879.16,
+    "target": 73547.12,
+    "sl": 80543.24,
+    "rr": 5.0,
+    "sl_pct": 1.469,
+    "rsi": 27.8,
+    "vwap": 81765.49,
+    "vol_ratio": 5.5,
+    "reasons": [
+      "BOS confirmed 4H (SHORT)",
+      "Unmitigated OB 79995.52\u201380239.82",
+      "Liquidity sweep at 80412.51",
+      "Kill Zone KZ-NY active (+15pts)",
+      "FVG 80576.89\u201380623.51",
+      "Fear & Greed 50 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min LH+LL aligns with 4H bearish bias",
+      "Volume 5.5x spike at reaction zone",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
