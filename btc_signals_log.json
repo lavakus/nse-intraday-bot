@@ -20630,5 +20630,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 434,
+    "datetime": "2026-10-28 11:12",
+    "date": "2026-10-28",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 83,
+    "score_pct": 55.3,
+    "signal_strength": "GOOD",
+    "kill_zone": "WATCH",
+    "phase_scores": {
+      "smc_structure": 45,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 11
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": false
+    },
+    "entry": 81270.0,
+    "t1": 83117.67,
+    "target": 84349.45,
+    "sl": 80654.11,
+    "rr": 5.0,
+    "sl_pct": 0.758,
+    "rsi": 55.5,
+    "vwap": 80745.75,
+    "vol_ratio": 3.5,
+    "reasons": [
+      "CHOCH confirmed 4H (LONG)",
+      "Unmitigated OB 80738.03\u201380814.20",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone WATCH active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 80975.89\u201381230.11",
+      "Fear & Greed 51 \u2014 ideal zone (25\u201360)",
+      "Volume 3.5x spike at reaction zone",
+      "Weekly candle structure is bullish",
+      "RSI 55 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
