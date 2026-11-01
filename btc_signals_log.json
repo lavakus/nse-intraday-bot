@@ -20824,5 +20824,53 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 438,
+    "datetime": "2026-11-01 23:47",
+    "date": "2026-11-01",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 104,
+    "score_pct": 69.3,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "NIGHT",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 17
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 78181.2,
+    "t1": 80387.43,
+    "target": 81858.25,
+    "sl": 77445.79,
+    "rr": 5.0,
+    "sl_pct": 0.941,
+    "rsi": 65.4,
+    "vwap": 78683.61,
+    "vol_ratio": 0.8,
+    "reasons": [
+      "BOS confirmed 4H (LONG)",
+      "Unmitigated OB 77704.09\u201377765.51",
+      "Liquidity sweep at 77688.59",
+      "Kill Zone NIGHT active (+0pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 78064.36\u201378156.04",
+      "Fear & Greed 34 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
