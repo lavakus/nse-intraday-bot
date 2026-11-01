@@ -20775,5 +20775,54 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 437,
+    "datetime": "2026-11-01 08:57",
+    "date": "2026-11-01",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "LONG",
+    "signal": "BUY",
+    "score": 102,
+    "score_pct": 68.0,
+    "signal_strength": "EXCELLENT",
+    "kill_zone": "KZ-L",
+    "phase_scores": {
+      "smc_structure": 38,
+      "ict_crypto_filters": 42,
+      "pa_boosters": 22
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": true
+    },
+    "entry": 78029.0,
+    "t1": 79283.27,
+    "target": 80119.45,
+    "sl": 77610.91,
+    "rr": 5.0,
+    "sl_pct": 0.536,
+    "rsi": 68.7,
+    "vwap": 78700.6,
+    "vol_ratio": 3.1,
+    "reasons": [
+      "BOS confirmed 1H (LONG) \u2014 4H pending",
+      "Unmitigated OB 77815.47\u201377849.95",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone KZ-L active (+15pts)",
+      "Funding 0.000% \u2014 favourable for longs",
+      "FVG 77445.49\u201377503.98",
+      "Fear & Greed 34 \u2014 ideal zone (25\u201360)",
+      "Strong rejection at 4H OB (1H candle)",
+      "15min HH+HL aligns with 4H bullish bias",
+      "Volume 3.1x spike at reaction zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
