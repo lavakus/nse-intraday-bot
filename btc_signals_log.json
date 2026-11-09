@@ -21018,5 +21018,52 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 442,
+    "datetime": "2026-11-09 02:53",
+    "date": "2026-11-09",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 87,
+    "score_pct": 58.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "DEAD",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 19,
+      "pa_boosters": 8
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": false
+    },
+    "entry": 75163.19,
+    "t1": 73353.62,
+    "target": 72147.24,
+    "sl": 75766.38,
+    "rr": 5.0,
+    "sl_pct": 0.803,
+    "rsi": 44.5,
+    "vwap": 77371.22,
+    "vol_ratio": 0.7,
+    "reasons": [
+      "CHOCH confirmed 4H (SHORT)",
+      "Unmitigated OB 75671.57\u201375676.44",
+      "Liquidity sweep at 75811.86",
+      "Kill Zone DEAD active (+0pts)",
+      "FVG 75398.19\u201375584.01",
+      "Fear & Greed 29 \u2014 ideal zone (25\u201360)",
+      "Round number $75,000",
+      "RSI 45 \u2014 ideal zone"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
