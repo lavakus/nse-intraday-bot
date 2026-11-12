@@ -21114,5 +21114,51 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 444,
+    "datetime": "2026-11-12 12:17",
+    "date": "2026-11-12",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 60,
+    "score_pct": 40.0,
+    "signal_strength": "WEAK",
+    "kill_zone": "WATCH",
+    "phase_scores": {
+      "smc_structure": 38,
+      "ict_crypto_filters": 19,
+      "pa_boosters": 3
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": false,
+      "inside_kill_zone": false
+    },
+    "entry": 72899.23,
+    "t1": 69618.76,
+    "target": 67431.78,
+    "sl": 73992.72,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 33.1,
+    "vwap": 74514.44,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "BOS confirmed 1H (SHORT) \u2014 4H pending",
+      "Unmitigated OB 73922.75\u201373993.98",
+      "No liquidity sweep \u2014 structure + OB entry",
+      "Kill Zone WATCH active (+0pts)",
+      "FVG 73049.22\u201373282.51",
+      "Fear & Greed 28 \u2014 ideal zone (25\u201360)",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
