@@ -21253,5 +21253,50 @@
     "exit_price": null,
     "pnl_pts": null,
     "pnl_pct": null
+  },
+  {
+    "id": 447,
+    "datetime": "2026-11-13 08:33",
+    "date": "2026-11-13",
+    "asset": "BTC",
+    "symbol": "BTCUSDT",
+    "direction": "SHORT",
+    "signal": "SELL",
+    "score": 90,
+    "score_pct": 60.0,
+    "signal_strength": "GOOD",
+    "kill_zone": "KZ-L",
+    "phase_scores": {
+      "smc_structure": 60,
+      "ict_crypto_filters": 27,
+      "pa_boosters": 3
+    },
+    "must_have_checklist": {
+      "bos_or_choch_4h": true,
+      "order_block_valid": true,
+      "liquidity_sweep": true,
+      "inside_kill_zone": true
+    },
+    "entry": 68645.26,
+    "t1": 65556.22,
+    "target": 63496.86,
+    "sl": 69674.94,
+    "rr": 5.0,
+    "sl_pct": 1.5,
+    "rsi": 38.4,
+    "vwap": 73374.33,
+    "vol_ratio": 0.0,
+    "reasons": [
+      "CHOCH confirmed 4H (SHORT)",
+      "Unmitigated OB 71360.21\u201371461.82",
+      "Liquidity sweep at 69075.05",
+      "Kill Zone KZ-L active (+15pts)",
+      "FVG 69075.05\u201369864.83",
+      "Weekly candle structure is bearish"
+    ],
+    "status": "OPEN",
+    "exit_price": null,
+    "pnl_pts": null,
+    "pnl_pct": null
   }
 ]
